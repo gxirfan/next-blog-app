@@ -1,4 +1,29 @@
+============================================================
+Project: next-blog-app
+Copyright (C) 2026 gxirfan
+
+ATTRIBUTION NOTICE:
+If you use, redistribute, or modify this software, you must
+retain this attribution and provide a visible link to the
+original source code in your application's interface.
+============================================================
+
+## License
+
+This project is licensed under the **GNU AGPL-3.0**.
+
+### Attribution & Transparency Requirements
+
+If you use this source code (in its original form or modified), you **must** comply with the following:
+
+1.  **Preserve Notices:** You must keep the original copyright notice and the license text intact in all copies of the code.
+2.  **Visible Attribution:** You must provide a prominent notice and a clear link back to this original repository in your user interface, documentation, or "About" section.
+3.  **Network Users' Rights (SaaS):** According to the AGPL-3.0, if you run this software on a server and let users interact with it over a network (even if you haven't modified a single line of code), you **must** provide a prominent way for those users to access the complete source code of the version you are running.
+4.  **Share Alike:** Any modifications or derivative works you create must also be licensed under the same AGPL-3.0 license and made publicly available.
+
 This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+
+============================================================
 
 ## Getting Started
 
