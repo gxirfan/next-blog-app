@@ -2,13 +2,35 @@ import { Metadata } from "next";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import BackButton from "../components/BackButton";
+import {
+  getSeoAuthors,
+  getSeoCreator,
+  getSeoDescription,
+  getSeoKeywords,
+  getSeoOpenGraphDescription,
+} from "../constants/seo";
 
 export const metadata: Metadata = {
   title: {
     default: "Home",
     template: `%s | ${process.env.NEXT_PUBLIC_PROJECT_NAME || "Blog App"}`,
   },
-  description: "Blog App | NestJS + NextJS + TailwindCSS",
+  description: getSeoDescription(),
+  authors: getSeoAuthors().map((name) => ({ name })),
+  creator: getSeoCreator(),
+  keywords: getSeoKeywords(),
+
+  openGraph: {
+    type: "website",
+    locale: "en_US",
+    url: process.env.NEXT_PUBLIC_SITE_URL || "https://example.com",
+    description: getSeoOpenGraphDescription(),
+    siteName: process.env.NEXT_PUBLIC_PROJECT_NAME || "Blog App",
+  },
+  robots: {
+    index: true,
+    follow: true,
+  },
 };
 
 export default function blogLayout({
