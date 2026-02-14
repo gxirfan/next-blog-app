@@ -1,10 +1,10 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-    // 1. GÖRSEL KAYNAĞI GÜVENLİK AYARI (remotePatterns)
-    images: {
-        unoptimized: true,
-    },
+  output: "standalone",
+  images: {
+    unoptimized: true,
+  },
 };
 
 export default nextConfig;
