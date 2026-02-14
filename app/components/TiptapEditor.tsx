@@ -235,7 +235,7 @@ const TiptapEditor: React.FC<TiptapEditorProps> = ({
 
   useEffect(() => {
     if (editor && initialContent !== editor.getHTML()) {
-      editor.commands.setContent(initialContent, false);
+      editor.commands.setContent(initialContent);
     }
   }, [initialContent, editor]);
 

@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from "react";
 import api from "@/api/axios";
-import { useRouter, useSearchParams } from "next/navigation";
+import { useRouter } from "next/navigation";
 import { useAuth, UserProfile } from "@/app/context/AuthContext";
 import Link from "next/link";
 import {
@@ -14,13 +14,16 @@ import {
   ArrowRight,
 } from "lucide-react";
 
-export default function LoginPage() {
+export default function LoginPage({
+  searchParams,
+}: {
+  searchParams: { redirect?: string };
+}) {
   const router = useRouter();
   const { login, user, isLoading } = useAuth();
   const [formData, setFormData] = useState({ username: "", password: "" });
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
-  const searchParams = useSearchParams();
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -28,7 +31,7 @@ export default function LoginPage() {
   };
 
   useEffect(() => {
-    const redirectPath = searchParams.get("redirect");
+    const redirectPath = searchParams.redirect;
     if (user && !isLoading) {
       if (user.status !== "active") {
         router.push("/restricted");

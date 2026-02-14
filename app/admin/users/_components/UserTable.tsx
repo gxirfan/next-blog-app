@@ -237,10 +237,10 @@ export default function UserTable({
         </table>
       </div>
 
-      {selectedUser && (
+      {authUser.user && selectedUser && (
         <UserEditModal
           key={selectedUser.id}
-          authUser={authUser}
+          authUser={authUser.user}
           user={selectedUser}
           isOpen={isEditModalOpen}
           onClose={() => setSelectedUser(null)}
