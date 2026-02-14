@@ -14,6 +14,13 @@ import { CookieConsentModal } from "./components/CookieConsentModal";
 import NextTopLoader from "nextjs-toploader";
 import ScrollToTopButton from "./components/ScrollToTopButton";
 import StatusGuard from "./components/StatusGuard"; // Yeni ekledik
+import {
+  getSeoDescription,
+  getSeoCreator,
+  getSeoAuthors,
+  getSeoKeywords,
+  getSeoOpenGraphDescription,
+} from "./constants/seo";
 
 const inter = Inter({ subsets: ["latin"], variable: "--font-inter" });
 const spaceMono = Space_Mono({
@@ -47,7 +54,22 @@ export const metadata: Metadata = {
     default: process.env.NEXT_PUBLIC_PROJECT_NAME || "Blog App",
     template: `%s | ${process.env.NEXT_PUBLIC_PROJECT_NAME || "Blog App"}`,
   },
-  description: "Blog App | NestJS + NextJS + TailwindCSS",
+  description: getSeoDescription(),
+  authors: getSeoAuthors().map((name) => ({ name })),
+  creator: getSeoCreator(),
+  keywords: getSeoKeywords(),
+
+  openGraph: {
+    type: "website",
+    locale: "en_US",
+    url: process.env.NEXT_PUBLIC_SITE_URL || "https://example.com",
+    description: getSeoOpenGraphDescription(),
+    siteName: process.env.NEXT_PUBLIC_PROJECT_NAME || "Blog App",
+  },
+  robots: {
+    index: true,
+    follow: true,
+  },
 };
 
 export default function RootLayout({
