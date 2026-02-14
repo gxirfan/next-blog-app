@@ -129,7 +129,7 @@ export default function RegisterPage() {
       );
 
       // Instead of direct redirect, show recovery codes
-      setRecoveryData(response.data.data);
+      setRecoveryData(response.data);
     } catch (err: any) {
       const message = err.response?.data?.message || "Registration failed.";
       setError(Array.isArray(message) ? message[0] : message);

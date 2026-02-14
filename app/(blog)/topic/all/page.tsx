@@ -20,7 +20,7 @@ async function fetchTopics(
   try {
     const url = `${API_BASE_URL}/topics/all?page=${page}&limit=${limit}`;
 
-    const response = await fetch(url, { cache: "no-store" });
+    const response = await fetch(url);
 
     if (!response.ok) {
       console.error(`Failed to fetch topics: ${response.status}`);

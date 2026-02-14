@@ -15,7 +15,7 @@ async function fetchTags(
   try {
     const url = `${API_URL}/tags/all?page=${page}&limit=${limit}`;
 
-    const response = await fetch(url, { cache: "no-store" });
+    const response = await fetch(url);
 
     if (!response.ok) {
       console.error(`Tags could not be loaded: ${response.status}`);

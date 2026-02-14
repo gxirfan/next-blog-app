@@ -121,7 +121,7 @@ export default function UserEditModal({
     "w-full bg-[#0a0a0a] border border-neutral-800 rounded-xl px-4 py-2.5 text-[13px] text-white font-medium placeholder-neutral-700 focus:outline-none focus:border-cyan-500/50 transition-all";
   const LABEL_STYLE =
     "text-[10px] font-black text-neutral-500 uppercase tracking-[0.2em] mb-2 block";
-  const authUserRole = authUser.user?.role;
+  const authUserRole = authUser.role;
   return (
     <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 overflow-hidden">
       {/* Background Overlay */}
