@@ -43,3 +43,8 @@ next-env.d.ts
 /public
 .public
 public
+
+/app/favicon.ico
+/app/favicon2.ico
+app/favicon.ico
+app/favicon2.ico
