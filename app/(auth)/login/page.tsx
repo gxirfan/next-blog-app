@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, use } from "react";
 import api from "@/api/axios";
 import { useRouter } from "next/navigation";
 import { useAuth, UserProfile } from "@/app/context/AuthContext";
@@ -17,7 +17,7 @@ import {
 export default function LoginPage({
   searchParams,
 }: {
-  searchParams: { redirect?: string };
+  searchParams: Promise<{ redirect?: string }>;
 }) {
   const router = useRouter();
   const { login, user, isLoading } = useAuth();
@@ -30,8 +30,10 @@ export default function LoginPage({
     setError("");
   };
 
+  const resolvedSearchParams = use(searchParams);
+  const redirectPath = resolvedSearchParams.redirect;
+
   useEffect(() => {
-    const redirectPath = searchParams.redirect;
     if (user && !isLoading) {
       if (user.status !== "active") {
         router.push("/restricted");
@@ -44,7 +46,7 @@ export default function LoginPage({
         router.push(redirectPath);
       else router.push("/");
     }
-  }, [user, isLoading, router, searchParams]);
+  }, [user, isLoading, router, redirectPath]);
 
   if (isLoading || user) {
     return (

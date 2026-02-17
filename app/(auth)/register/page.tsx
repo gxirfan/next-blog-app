@@ -123,13 +123,10 @@ export default function RegisterPage() {
         gender: formData.gender === "" ? undefined : formData.gender,
       };
 
-      const response = await api.post<UserResponseWithRecoveryCodesDto>(
-        "/auth/register",
-        submissionData,
-      );
+      const response = await api.post("/auth/register", submissionData);
 
       // Instead of direct redirect, show recovery codes
-      setRecoveryData(response.data);
+      setRecoveryData(response.data.data);
     } catch (err: any) {
       const message = err.response?.data?.message || "Registration failed.";
       setError(Array.isArray(message) ? message[0] : message);
