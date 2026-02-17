@@ -125,7 +125,8 @@ const Navbar = () => {
         </div>
 
         {/* RIGHT SECTION: User Actions */}
-        <div className="flex items-center gap-4">
+        <div className="flex items-center gap-2 sm:gap-4">
+          {" "}
           {user ? (
             <>
               <div className="hidden md:flex flex-col items-end leading-none">
@@ -137,33 +138,33 @@ const Navbar = () => {
                 </p>
               </div>
 
-              <div className="h-8 w-[1px] bg-neutral-800/50 mx-1 hidden sm:block" />
+              <div className="h-8 w-px bg-neutral-800/50 mx-1 hidden md:block" />
 
               <NotificationDropdown />
 
               <button
                 onClick={() => setIsModalOpen(true)}
-                className="flex items-center gap-2.5 pl-2 pr-4 py-1.5 bg-neutral-900/40 border border-white/5 rounded-full hover:border-cyan-500/30 transition-all cursor-pointer group active:scale-95"
+                className="flex items-center gap-2 pl-1.5 pr-1.5 md:pl-2 md:pr-4 py-1.5 bg-neutral-900/40 border border-white/5 rounded-full hover:border-cyan-500/30 transition-all cursor-pointer group active:scale-95"
               >
-                <div className="w-8 h-8 bg-gradient-to-tr from-cyan-600 to-cyan-400 rounded-full flex items-center justify-center transition-all">
+                <div className="w-8 h-8 bg-linear-to-tr from-cyan-600 to-cyan-400 rounded-full flex items-center justify-center transition-all">
                   <User size={15} className="text-black font-bold" />
                 </div>
-                <span className="text-sm font-bold text-neutral-200 group-hover:text-white transition-colors">
+                <span className="text-sm font-bold text-neutral-200 group-hover:text-white transition-colors hidden md:block">
                   {user.nickname}
                 </span>
                 <ChevronDown
                   size={14}
-                  className="text-neutral-600 group-hover:text-cyan-400 transition-transform group-hover:translate-y-0.5"
+                  className="text-neutral-600 group-hover:text-cyan-400 transition-transform group-hover:translate-y-0.5 hidden sm:block"
                 />
               </button>
             </>
           ) : (
             <Link
               href="/login"
-              className="flex items-center gap-2 px-6 py-2.5 bg-white text-black rounded-full text-[11px] font-black uppercase tracking-widest hover:bg-cyan-400 transition-all active:scale-95"
+              className="flex items-center gap-2 px-4 py-2 sm:px-6 sm:py-2.5 bg-white text-black rounded-full text-[10px] sm:text-[11px] font-black uppercase tracking-widest hover:bg-cyan-400 transition-all active:scale-95"
             >
               <LogIn size={14} />
-              Sign In
+              <span className="hidden xs:block">Sign In</span>
             </Link>
           )}
         </div>
