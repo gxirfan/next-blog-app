@@ -3,10 +3,9 @@
 import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { Settings, CheckCircle, XCircle, ArrowRight } from "lucide-react";
+import { Settings, CheckCircle } from "lucide-react";
 
 interface CookieConsentProps {
-  blogName: string;
   isExternalSettingsModalOpen: boolean;
   onCloseExternalSettingsModal: () => void;
 }
@@ -44,11 +43,10 @@ const COOKIE_CATEGORIES = [
   },
 ];
 
-export const CookieSettingsModal: React.FC<CookieConsentProps> = ({
-  blogName,
+export const CookieSettingsModal = ({
   isExternalSettingsModalOpen,
   onCloseExternalSettingsModal,
-}) => {
+}: CookieConsentProps) => {
   const [isBlockingModalVisible, setIsBlockingModalVisible] = useState(false);
   const [isInternalSettingsVisible, setIsInternalSettingsVisible] =
     useState(false);
@@ -103,6 +101,7 @@ export const CookieSettingsModal: React.FC<CookieConsentProps> = ({
     isExternalSettingsModalOpen,
     isInternalSettingsVisible,
     currentModalVisible,
+    isSettingsModalActive,
   ]);
 
   const handleToggle = (

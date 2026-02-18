@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import { useState } from "react";
 import { ITopicResponse } from "@/app/types/topic";
 import { useAuth } from "@/app/context/AuthContext";
 import api from "@/api/axios";
@@ -12,9 +12,7 @@ interface TopicManagementActionsProps {
   topic: ITopicResponse;
 }
 
-const TopicManagementActions: React.FC<TopicManagementActionsProps> = ({
-  topic,
-}) => {
+const TopicManagementActions = ({ topic }: TopicManagementActionsProps) => {
   const { user } = useAuth();
   const router = useRouter();
 
@@ -22,7 +20,6 @@ const TopicManagementActions: React.FC<TopicManagementActionsProps> = ({
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
-  // Yetki Kontrolü: Admin, Moderatör veya İçerik Sahibi
   const canManage =
     user &&
     (topic.userId === user.id ||
@@ -39,7 +36,7 @@ const TopicManagementActions: React.FC<TopicManagementActionsProps> = ({
       const newStatus = !isCurrentlyActive;
       await api.patch(`/topics/${topic.id}`, { status: newStatus });
       router.refresh();
-    } catch (err: any) {
+    } catch (err) {
       setError("Update failed");
       setTimeout(() => setError(null), 3000);
     } finally {
@@ -49,7 +46,6 @@ const TopicManagementActions: React.FC<TopicManagementActionsProps> = ({
 
   return (
     <div className="flex flex-wrap items-center justify-end gap-3 mb-6 animate-in fade-in slide-in-from-right-2 duration-300">
-      {/* Hata Bildirimi */}
       {error && (
         <div className="flex items-center gap-2 px-3 py-1.5 bg-red-500/10 border border-red-500/20 rounded-full text-[10px] uppercase tracking-widest text-red-500">
           <AlertCircle size={14} />
@@ -57,7 +53,6 @@ const TopicManagementActions: React.FC<TopicManagementActionsProps> = ({
         </div>
       )}
 
-      {/* Görünürlük Kontrol Butonu */}
       <button
         onClick={handleToggleStatus}
         disabled={loading}
@@ -85,7 +80,6 @@ const TopicManagementActions: React.FC<TopicManagementActionsProps> = ({
         </span>
       </button>
 
-      {/* Düzenleme Butonu */}
       <button
         onClick={() => setIsModalOpen(true)}
         disabled={loading}

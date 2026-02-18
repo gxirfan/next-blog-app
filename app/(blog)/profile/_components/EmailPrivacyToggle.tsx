@@ -1,8 +1,6 @@
-// app/profile/_components/EmailPrivacyToggle.tsx
-
 "use client";
 
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { Mail, Loader, CheckCircle, XCircle } from "lucide-react";
 import api from "@/api/axios";
 
@@ -11,10 +9,10 @@ interface EmailPrivacyToggleProps {
   onUpdateSuccess: () => void;
 }
 
-const EmailPrivacyToggle: React.FC<EmailPrivacyToggleProps> = ({
+const EmailPrivacyToggle = ({
   initialStatus,
   onUpdateSuccess,
-}) => {
+}: EmailPrivacyToggleProps) => {
   const [isPublic, setIsPublic] = useState(initialStatus);
   const [loading, setLoading] = useState(false);
   const [statusMessage, setStatusMessage] = useState("");
@@ -22,10 +20,8 @@ const EmailPrivacyToggle: React.FC<EmailPrivacyToggleProps> = ({
   const ACCENT_COLOR = "text-cyan-400";
   const TEXT_SUCCESS = "text-green-400";
   const TEXT_DANGER = "text-red-400";
-  // const BORDER_COLOR = 'border-neutral-700'; // Bu bileşen içinde kullanılmıyor
 
   useEffect(() => {
-    // Statik başarı/hata mesajını 3 saniye sonra temizle
     if (statusMessage) {
       const timer = setTimeout(() => setStatusMessage(""), 3000);
       return () => clearTimeout(timer);
@@ -42,23 +38,19 @@ const EmailPrivacyToggle: React.FC<EmailPrivacyToggleProps> = ({
     try {
       const payload = { isEmailPublic: newValue };
 
-      // 🎯 API YOLU KULLANIMI: Önceki bileşenlerle tutarlı olan /user/update kullanıldı.
-
       await api.patch("/user/update", payload);
 
       setIsPublic(newValue);
-      onUpdateSuccess(); // Parent'ı (ProfilePage) global durumu yenilemesi için bilgilendir
+      onUpdateSuccess();
       setStatusMessage(
-        `Visibility successfully changed to ${newValue ? "PUBLIC" : "PRIVATE"}.`
+        `Visibility successfully changed to ${newValue ? "PUBLIC" : "PRIVATE"}.`,
       );
     } catch (err: any) {
-      // Hata mesajını kullanıcıya göster
       const errorMessage =
         err.response?.data?.message || "Update failed. Check API path/method.";
 
-      // Hata durumunda değeri eski haline döndür
       setIsPublic(isPublic);
-      setStatusMessage(errorMessage.toString().substring(0, 80)); // Mesajı kısalt
+      setStatusMessage(errorMessage.toString().substring(0, 80));
     } finally {
       setLoading(false);
     }
@@ -74,13 +66,11 @@ const EmailPrivacyToggle: React.FC<EmailPrivacyToggleProps> = ({
           <Mail size={18} className={ACCENT_COLOR} />
           <span className="text-white font-medium">Email Visibility</span>
 
-          {/* Yükleme Durumu */}
           {loading && (
             <Loader size={16} className={`${ACCENT_COLOR} animate-spin ml-2`} />
           )}
         </div>
 
-        {/* 🎯 Toggle Switch ve Durum Gösterimi */}
         <label className="relative inline-flex items-center cursor-pointer">
           <input
             type="checkbox"
@@ -89,7 +79,6 @@ const EmailPrivacyToggle: React.FC<EmailPrivacyToggleProps> = ({
             disabled={loading}
             className="sr-only peer"
           />
-          {/* Toggle Switch Design (Cyan Accent) */}
           <div
             className={`w-11 h-6 bg-neutral-800 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-neutral-900 after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border after:border-neutral-700 after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-cyan-600`}
           ></div>
@@ -99,7 +88,6 @@ const EmailPrivacyToggle: React.FC<EmailPrivacyToggleProps> = ({
         </label>
       </div>
 
-      {/* Mesaj Kutusu */}
       {statusMessage && (
         <p
           className={`text-xs mt-2 font-medium flex items-center space-x-1 ${

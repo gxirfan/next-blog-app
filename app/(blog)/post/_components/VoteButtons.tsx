@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useEffect, useTransition } from "react";
+import { useState, useEffect, useTransition } from "react";
 import { useRouter } from "next/navigation";
 import { ArrowBigUp, ArrowBigDown, X, Loader2 } from "lucide-react";
 import api from "@/api/axios";
@@ -12,11 +12,11 @@ interface VoteButtonProps {
   userCurrentVoteDirection: number | null;
 }
 
-const VoteButtons: React.FC<VoteButtonProps> = ({
+const VoteButtons = ({
   postId,
   score,
   userCurrentVoteDirection,
-}) => {
+}: VoteButtonProps) => {
   const router = useRouter();
   const { user } = useAuth();
 
@@ -72,7 +72,6 @@ const VoteButtons: React.FC<VoteButtonProps> = ({
 
   return (
     <div className="relative flex flex-col items-center">
-      {/* 1. TOAST NOTIFICATION: Small & Floating */}
       {error && (
         <div className="absolute -top-10 left-1/2 -translate-x-1/2 flex items-center gap-2 px-3 py-1 bg-red-500 text-white text-[10px] uppercase tracking-widest rounded-full animate-in slide-in-from-bottom-2 duration-300 z-50">
           <span>{error}</span>

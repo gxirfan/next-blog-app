@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import { useState } from "react";
 import { IPostResponse } from "@/app/types/post";
 import { useAuth } from "@/app/context/AuthContext";
 import api from "@/api/axios";
@@ -12,9 +12,7 @@ interface PostManagementActionsProps {
   post: IPostResponse;
 }
 
-const PostManagementActions: React.FC<PostManagementActionsProps> = ({
-  post,
-}) => {
+const PostManagementActions = ({ post }: PostManagementActionsProps) => {
   const { user } = useAuth();
   const router = useRouter();
 
@@ -38,7 +36,7 @@ const PostManagementActions: React.FC<PostManagementActionsProps> = ({
       const newStatus = !isCurrentlyActive;
       await api.patch(`/posts/${post.id}`, { status: newStatus });
       router.refresh();
-    } catch (err: any) {
+    } catch (err) {
       setError("Update failed");
     } finally {
       setLoading(false);

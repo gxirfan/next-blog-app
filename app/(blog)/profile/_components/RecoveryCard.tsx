@@ -9,7 +9,7 @@ import {
   AlertCircle,
 } from "lucide-react";
 
-const RecoveryCard: React.FC = () => {
+const RecoveryCard = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [newCodes, setNewCodes] = useState<string[] | null>(null);
@@ -42,7 +42,6 @@ const RecoveryCard: React.FC = () => {
   return (
     <>
       <div className="bg-neutral-950 p-8 md:p-10 rounded-[2.5rem] border border-neutral-800 relative overflow-hidden">
-        {/* Background Subtle Detail: Zero Shadow, just a thin border or icon */}
         <div className="flex flex-col md:flex-row md:items-center justify-between gap-8">
           <div className="flex-1 space-y-4">
             <div className="flex items-center gap-3">

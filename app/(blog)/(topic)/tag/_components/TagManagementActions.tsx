@@ -12,7 +12,7 @@ interface TagManagementActionsProps {
   tag: ITagResponse;
 }
 
-const TagManagementActions: React.FC<TagManagementActionsProps> = ({ tag }) => {
+const TagManagementActions = ({ tag }: TagManagementActionsProps) => {
   const { user } = useAuth();
   const router = useRouter();
 
@@ -20,7 +20,6 @@ const TagManagementActions: React.FC<TagManagementActionsProps> = ({ tag }) => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
-  // Yetki kontrolü
   const canManage =
     user &&
     (tag.userId === user.id ||
@@ -37,7 +36,7 @@ const TagManagementActions: React.FC<TagManagementActionsProps> = ({ tag }) => {
       const newStatus = !isCurrentlyActive;
       await api.patch(`/tags/${tag.id}`, { status: newStatus });
       router.refresh();
-    } catch (err: any) {
+    } catch (err) {
       setError("Update failed");
       setTimeout(() => setError(null), 3000);
     } finally {

@@ -1,9 +1,9 @@
 "use client";
 
-import React, { useState } from "react";
+import { useState } from "react";
 import { CookieSettingsModal } from "./CookieSettingsModal";
 
-export const CookieSettingsButton: React.FC = () => {
+export const CookieSettingsButton = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   return (
@@ -19,7 +19,6 @@ export const CookieSettingsButton: React.FC = () => {
         <CookieSettingsModal
           isExternalSettingsModalOpen={isModalOpen}
           onCloseExternalSettingsModal={() => setIsModalOpen(false)}
-          blogName="Blog App"
         />
       )}
     </>

@@ -3,13 +3,12 @@
 import { useState } from "react";
 import { useAuth } from "@/app/context/AuthContext";
 import CreateTagCard from "./CreateTagCard";
-import { Tag, Plus, X, ShieldCheck } from "lucide-react";
+import { Plus, X, ShieldCheck } from "lucide-react";
 
-const TagManagementHeader: React.FC = () => {
+const TagManagementHeader = () => {
   const { user, isLoading } = useAuth();
   const [isFormVisible, setIsFormVisible] = useState(false);
 
-  // Yetki kontrolü: Sadece admin ve moderator
   const isAuthorized =
     user && (user.role === "admin" || user.role === "moderator");
 
@@ -20,7 +19,7 @@ const TagManagementHeader: React.FC = () => {
   return (
     <div className="mb-12 space-y-6">
       {/* Action Bar */}
-      <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 p-6 bg-neutral-950 border border-neutral-900 rounded-[2rem]">
+      <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 p-6 bg-neutral-950 border border-neutral-900 rounded-4xl">
         <div className="flex items-center gap-4">
           <div className="p-3 bg-neutral-900 border border-neutral-800 rounded-2xl text-cyan-500">
             <ShieldCheck size={20} />
@@ -64,7 +63,7 @@ const TagManagementHeader: React.FC = () => {
         <div className="animate-in fade-in slide-in-from-top-4 duration-500 ease-out">
           <div className="relative">
             {/* Decorative Connection Line */}
-            <div className="absolute -top-6 left-1/2 -translate-x-1/2 w-px h-6 bg-gradient-to-b from-neutral-900 to-cyan-500/30" />
+            <div className="absolute -top-6 left-1/2 -translate-x-1/2 w-px h-6 bg-linear-to-b from-neutral-900 to-cyan-500/30" />
             <CreateTagCard />
           </div>
         </div>

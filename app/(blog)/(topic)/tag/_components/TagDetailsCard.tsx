@@ -1,6 +1,5 @@
 "use client";
 
-import React from "react";
 import { ITagResponse } from "@/app/types/tag";
 import { BookOpen, Calendar, Info, Tag } from "lucide-react";
 import AuthorBlock from "@/app/components/AuthorBlock";
@@ -11,14 +10,14 @@ interface TagDetailsCardProps {
   topicCount: number;
 }
 
-const TagDetailsCard: React.FC<TagDetailsCardProps> = ({ tag, topicCount }) => {
+const TagDetailsCard = ({ tag, topicCount }: TagDetailsCardProps) => {
   return (
     <div className="w-full mb-12 animate-in fade-in duration-700">
       {/* 1. Header Section: Title & Icon */}
       <div className="flex flex-col gap-4 mb-8">
         <div className="flex items-center gap-3 text-[10px] uppercase tracking-[0.3em] text-cyan-500">
           <Info size={14} />
-          <span>Category Overview</span>
+          <span>Tag Overview</span>
         </div>
 
         <h1 className="text-4xl md:text-6xl sm:text-5xl text-white tracking-tighter leading-tight flex items-center gap-4">
@@ -30,7 +29,7 @@ const TagDetailsCard: React.FC<TagDetailsCardProps> = ({ tag, topicCount }) => {
 
         <p className="text-neutral-400 text-lg md:text-xl leading-relaxed max-w-3xl font-medium">
           {tag.description ||
-            "Discover the latest discussions and insights in this category."}
+            "Discover the latest discussions and insights in this tag."}
         </p>
       </div>
 

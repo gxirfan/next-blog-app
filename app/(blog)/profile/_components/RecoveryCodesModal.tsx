@@ -1,16 +1,12 @@
 "use client";
-import React from "react";
-import { ShieldAlert, Download, X, Copy, CheckCircle2 } from "lucide-react";
+import { ShieldAlert, X, Copy, CheckCircle2 } from "lucide-react";
 
 interface RecoveryCodesModalProps {
   codes: string[];
   onClose: () => void;
 }
 
-const RecoveryCodesModal: React.FC<RecoveryCodesModalProps> = ({
-  codes,
-  onClose,
-}) => {
+const RecoveryCodesModal = ({ codes, onClose }: RecoveryCodesModalProps) => {
   // Logic for copying to clipboard (Added to improve UX)
   const copyToClipboard = () => {
     const text = codes.join("\n");
@@ -20,7 +16,7 @@ const RecoveryCodesModal: React.FC<RecoveryCodesModalProps> = ({
 
   return (
     <div
-      className="fixed inset-0 bg-black/90 backdrop-blur-sm flex justify-center items-center z-[110] px-4"
+      className="fixed inset-0 bg-black/90 backdrop-blur-sm flex justify-center items-center z-110 px-4"
       onClick={onClose}
     >
       <div

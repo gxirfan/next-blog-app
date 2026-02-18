@@ -1,4 +1,3 @@
-import React from "react";
 import Link from "next/link";
 import { ITopicResponse } from "@/app/types/topic";
 import { getRelativeTime } from "@/app/utils/date";
@@ -7,7 +6,7 @@ interface TopicListProps {
   topics: ITopicResponse[];
 }
 
-const TopicList: React.FC<TopicListProps> = ({ topics }) => {
+const TopicList = ({ topics }: TopicListProps) => {
   const ACCENT_COLOR = "text-[#00bcd4]";
 
   if (topics.length === 0) {

@@ -5,14 +5,14 @@ import api from "@/api/axios";
 import { useRouter } from "next/navigation";
 import { ITopicResponse } from "@/app/types/topic";
 import TiptapEditor from "@/app/components/TiptapEditor";
-import { X, Save, AlertCircle, Loader2, Sparkles } from "lucide-react";
+import { X, Save, AlertCircle, Loader2 } from "lucide-react";
 
 interface TopicEditModalProps {
   topic: ITopicResponse;
   onClose: () => void;
 }
 
-const TopicEditModal: React.FC<TopicEditModalProps> = ({ topic, onClose }) => {
+const TopicEditModal = ({ topic, onClose }: TopicEditModalProps) => {
   const router = useRouter();
 
   const [loading, setLoading] = useState(false);
@@ -23,7 +23,7 @@ const TopicEditModal: React.FC<TopicEditModalProps> = ({ topic, onClose }) => {
   });
 
   const handleChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
   ) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
     if (error) setError(null);
@@ -63,7 +63,7 @@ const TopicEditModal: React.FC<TopicEditModalProps> = ({ topic, onClose }) => {
 
   return (
     <div
-      className="fixed inset-0 z-[200] flex items-center justify-center p-4 bg-black/80 backdrop-blur-md animate-in fade-in duration-300"
+      className="fixed inset-0 z-200 flex items-center justify-center p-4 bg-black/80 backdrop-blur-md animate-in fade-in duration-300"
       onClick={onClose}
     >
       <div

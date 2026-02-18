@@ -1,6 +1,5 @@
 "use client";
 
-import React from "react";
 import Link from "next/link";
 import { ITopicResponse } from "@/app/types/topic";
 import { Eye, MessageSquare, Clock, Tag } from "lucide-react";
@@ -11,9 +10,7 @@ interface TopicDetailsCardProps {
   topicDetails: ITopicResponse;
 }
 
-const TopicDetailsCard: React.FC<TopicDetailsCardProps> = ({
-  topicDetails,
-}) => {
+const TopicDetailsCard = ({ topicDetails }: TopicDetailsCardProps) => {
   return (
     <div className="w-full max-w-4xl mx-auto space-y-10">
       <div className="flex items-center gap-3 animate-in fade-in duration-500">

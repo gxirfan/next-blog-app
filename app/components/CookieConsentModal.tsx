@@ -2,7 +2,7 @@
 
 "use client";
 
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 
@@ -12,9 +12,7 @@ interface CookieConsentProps {
 
 const LEGAL_PATHS = ["/privacy-policy", "/terms-of-use", "/cookie-policy"];
 
-export const CookieConsentModal: React.FC<CookieConsentProps> = ({
-  blogName,
-}) => {
+export const CookieConsentModal = ({ blogName }: CookieConsentProps) => {
   const [isVisible, setIsVisible] = useState(false);
   const pathname = usePathname();
 
@@ -34,7 +32,7 @@ export const CookieConsentModal: React.FC<CookieConsentProps> = ({
     return () => {
       document.body.style.overflow = "unset";
     };
-  }, []);
+  }, [pathname]);
 
   const handleConsent = (status: "accepted" | "declined") => {
     localStorage.setItem("cookieConsent", status);

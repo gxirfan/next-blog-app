@@ -7,7 +7,7 @@ import { Tag, Plus, Loader2, ShieldCheck, Sparkles, X } from "lucide-react";
 
 const MIN_LENGTH = 3;
 
-const CreateTagCard: React.FC = () => {
+const CreateTagCard = () => {
   const { user, isLoading } = useAuth();
   const [isOpen, setIsOpen] = useState(false); // Modal State
   const [formData, setFormData] = useState({ title: "", description: "" });
@@ -28,7 +28,7 @@ const CreateTagCard: React.FC = () => {
 
   const handleClose = () => {
     setIsOpen(false);
-    // Modal kapanırken form verilerini sıfırlamak opsiyoneldir
+
     // setFormData({ title: "", description: "" });
   };
 
@@ -120,7 +120,7 @@ const CreateTagCard: React.FC = () => {
 
       {/* 3. Modal Architecture */}
       {isOpen && (
-        <div className="fixed inset-0 z-[250] h-screen flex items-center justify-center p-4 md:p-6 animate-in fade-in duration-300">
+        <div className="fixed inset-0 z-250 h-screen flex items-center justify-center p-4 md:p-6 animate-in fade-in duration-300">
           <div
             className="absolute inset-0 bg-neutral-950/80 backdrop-blur-md"
             onClick={handleClose}

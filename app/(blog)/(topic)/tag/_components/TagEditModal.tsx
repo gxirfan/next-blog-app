@@ -16,7 +16,7 @@ interface UpdateTagDto {
   description?: string;
 }
 
-const TagEditModal: React.FC<TagEditModalProps> = ({ tag, onClose }) => {
+const TagEditModal = ({ tag, onClose }: TagEditModalProps) => {
   const router = useRouter();
 
   const [loading, setLoading] = useState(false);
@@ -27,7 +27,7 @@ const TagEditModal: React.FC<TagEditModalProps> = ({ tag, onClose }) => {
   });
 
   const handleChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
   ) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
     setError(null);
@@ -59,7 +59,7 @@ const TagEditModal: React.FC<TagEditModalProps> = ({ tag, onClose }) => {
 
   return (
     <div
-      className="fixed inset-0 z-[150] flex items-center justify-center p-4 bg-black/80 backdrop-blur-md animate-in fade-in duration-300"
+      className="fixed inset-0 z-150 flex items-center justify-center p-4 bg-black/80 backdrop-blur-md animate-in fade-in duration-300"
       onClick={onClose}
     >
       <div

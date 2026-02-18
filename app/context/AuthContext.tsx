@@ -40,11 +40,13 @@ interface AuthContextType {
   logout: () => Promise<void>;
 }
 
+interface AuthProviderProps {
+  children: React.ReactNode;
+}
+
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
-export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
-  children,
-}) => {
+export const AuthProvider = ({ children }: AuthProviderProps) => {
   const [user, setUser] = useState<UserProfile | null>(null);
   const [isLoading, setIsLoading] = useState(true);
 

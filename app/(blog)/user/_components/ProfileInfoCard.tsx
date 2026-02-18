@@ -1,15 +1,6 @@
 "use client";
 
-import React from "react";
-import {
-  Mail,
-  Calendar,
-  Info,
-  Globe,
-  MapPin,
-  User,
-  Shield,
-} from "lucide-react";
+import { Calendar, Info, Globe, MapPin, User, Shield } from "lucide-react";
 import { IUserResponse } from "@/app/types/user-response.dto";
 import { getRelativeTime } from "@/app/utils/date";
 
@@ -17,7 +8,7 @@ interface ProfileInfoCardProps {
   user: IUserResponse;
 }
 
-const ProfileInfoCard: React.FC<ProfileInfoCardProps> = ({ user }) => {
+const ProfileInfoCard = ({ user }: ProfileInfoCardProps) => {
   return (
     <div className="mx-auto w-full animate-in fade-in slide-in-from-bottom-4 duration-700 px-4 md:px-0 mb-12">
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16">

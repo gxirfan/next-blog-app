@@ -12,7 +12,7 @@ const TiptapEditor = dynamic(
   {
     ssr: false,
     loading: () => (
-      <div className="p-12 bg-neutral-900/50 rounded-[2rem] text-neutral-600 text-[10px] uppercase tracking-widest text-center border border-neutral-800">
+      <div className="p-12 bg-neutral-900/50 rounded-4xl text-neutral-600 text-[10px] uppercase tracking-widest text-center border border-neutral-800">
         Initializing Editor...
       </div>
     ),
@@ -28,10 +28,10 @@ interface TopicCreationWrapperProps {
   tagTitle: string;
 }
 
-const TopicCreationWrapper: React.FC<TopicCreationWrapperProps> = ({
+const TopicCreationWrapper = ({
   tagId,
   tagTitle,
-}) => {
+}: TopicCreationWrapperProps) => {
   const router = useRouter();
   const { user, isLoading: isAuthLoading } = useAuth();
   const [isPending, startTransition] = useTransition();
@@ -52,7 +52,6 @@ const TopicCreationWrapper: React.FC<TopicCreationWrapperProps> = ({
     e.preventDefault();
     setError(null);
 
-    // 1. Frontend Validasyon Kontrolleri
     const contentPlainText = formData.contentHTML
       .replace(/<[^>]*>/g, "")
       .trim();
@@ -74,7 +73,6 @@ const TopicCreationWrapper: React.FC<TopicCreationWrapperProps> = ({
       return;
     }
 
-    // 2. API İsteği
     setLoading(true);
     try {
       await api.post("/topics", {
@@ -83,7 +81,6 @@ const TopicCreationWrapper: React.FC<TopicCreationWrapperProps> = ({
         tagId,
       });
 
-      // Başarılı: Formu temizle ve kapat
       setIsModalOpen(false);
       setFormData({ title: "", contentHTML: "" });
 
@@ -145,11 +142,11 @@ const TopicCreationWrapper: React.FC<TopicCreationWrapperProps> = ({
 
         {isModalOpen && (
           <div
-            className="fixed inset-0 z-[200] flex items-center justify-center p-4 bg-black/80 backdrop-blur-md animate-in fade-in duration-300"
+            className="fixed inset-0 z-200 flex items-center justify-center p-4 bg-black/80 backdrop-blur-md animate-in fade-in duration-300"
             onClick={() => setIsModalOpen(false)}
           >
             <div
-              className="relative w-full max-w-3xl bg-neutral-950 border border-neutral-800 rounded-[2.5rem] overflow-hidden animate-in zoom-in-95 duration-200"
+              className="relative w-full max-w-3xl bg-neutral-950 border border-neutral-800 rounded-4xl overflow-hidden animate-in zoom-in-95 duration-200"
               onClick={(e) => e.stopPropagation()}
             >
               {/* Modal Header */}
@@ -171,7 +168,6 @@ const TopicCreationWrapper: React.FC<TopicCreationWrapperProps> = ({
               </div>
 
               <form onSubmit={handleSubmit} className="p-8 pt-6">
-                {/* Dinamik Hata Alanı */}
                 {error && (
                   <div className="mb-6 p-4 rounded-2xl bg-red-500/10 border border-red-500/20 text-red-500 text-[10px] uppercase tracking-widest flex items-center gap-3 animate-in shake duration-300">
                     <AlertCircle size={16} />
@@ -204,7 +200,7 @@ const TopicCreationWrapper: React.FC<TopicCreationWrapperProps> = ({
                     <label className="text-[10px] uppercase tracking-widest text-neutral-700 ml-4">
                       Discussion Content
                     </label>
-                    <div className="bg-neutral-900/30 rounded-[2rem] border border-neutral-800 overflow-hidden">
+                    <div className="bg-neutral-900/30 rounded-4xl border border-neutral-800 overflow-hidden">
                       <TiptapEditor
                         initialContent={formData.contentHTML}
                         onUpdate={handleEditorUpdate}
