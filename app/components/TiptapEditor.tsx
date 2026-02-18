@@ -4,7 +4,7 @@ import React, { useEffect, useCallback } from "react";
 import { useEditor, EditorContent, Editor } from "@tiptap/react";
 import StarterKit from "@tiptap/starter-kit";
 import Image from "@tiptap/extension-image";
-import Link from "@tiptap/extension-link"; // Yeni paket
+import Link from "@tiptap/extension-link";
 import {
   ImageIcon,
   Bold,
@@ -30,6 +30,33 @@ const TiptapToolbar = ({
   editor: Editor | null;
   showImageOption?: boolean;
 }) => {
+  const [isLinkModalOpen, setIsLinkModalOpen] = React.useState(false);
+  const [linkUrl, setLinkUrl] = React.useState("");
+
+  const openLinkModal = useCallback(() => {
+    if (!editor) return;
+    const previousUrl = editor.getAttributes("link").href || "";
+    setLinkUrl(previousUrl);
+    setIsLinkModalOpen(true);
+  }, [editor]);
+
+  const saveLink = useCallback(() => {
+    if (!editor) return;
+
+    if (linkUrl === "") {
+      editor.chain().focus().extendMarkRange("link").unsetLink().run();
+    } else {
+      editor
+        .chain()
+        .focus()
+        .extendMarkRange("link")
+        .setLink({ href: linkUrl })
+        .run();
+    }
+    setIsLinkModalOpen(false);
+  }, [editor, linkUrl]);
+
+  // Early return is only allowed AFTER all hooks (like useCallback)
   if (!editor) return null;
 
   const ToolbarButtonClass =
@@ -37,20 +64,6 @@ const TiptapToolbar = ({
   const ActiveClass = "bg-neutral-200 text-black scale-95";
   const InactiveClass =
     "text-neutral-500 hover:bg-neutral-900 hover:text-white";
-
-  // Link Ekleme Fonksiyonu
-  const setLink = useCallback(() => {
-    const previousUrl = editor.getAttributes("link").href;
-    const url = window.prompt("URL_ENDPOINT_ADDR:", previousUrl);
-
-    if (url === null) return;
-    if (url === "") {
-      editor.chain().focus().extendMarkRange("link").unsetLink().run();
-      return;
-    }
-
-    editor.chain().focus().extendMarkRange("link").setLink({ href: url }).run();
-  }, [editor]);
 
   const addImage = (e: React.MouseEvent) => {
     e.preventDefault();
@@ -72,7 +85,8 @@ const TiptapToolbar = ({
   };
 
   return (
-    <div className="flex flex-wrap items-center gap-1.5 p-3 bg-neutral-950 border border-neutral-800 border-b-0 rounded-t-[2rem]">
+    <div className="flex flex-wrap items-center gap-1.5 p-3 bg-neutral-950 border border-neutral-800 border-b-0 rounded-t-4xl">
+      {/* Paragraph and Headings */}
       <button
         type="button"
         onClick={(e) => {
@@ -106,12 +120,12 @@ const TiptapToolbar = ({
 
       <div className="w-px h-5 bg-neutral-800 mx-1" />
 
-      {/* Link Butonları */}
+      {/* Link Management */}
       <button
         type="button"
         onClick={(e) => {
           e.preventDefault();
-          setLink();
+          openLinkModal();
         }}
         className={`${ToolbarButtonClass} ${editor.isActive("link") ? ActiveClass : InactiveClass}`}
       >
@@ -133,6 +147,7 @@ const TiptapToolbar = ({
 
       <div className="w-px h-5 bg-neutral-800 mx-1" />
 
+      {/* Basic Formatting */}
       <button
         type="button"
         onClick={(e) => {
@@ -163,6 +178,8 @@ const TiptapToolbar = ({
       >
         <List size={16} />
       </button>
+
+      {/* Optional Image Support */}
       {showImageOption && (
         <>
           <div className="w-px h-5 bg-neutral-800 mx-1" />
@@ -175,15 +192,75 @@ const TiptapToolbar = ({
           </button>
         </>
       )}
+
+      {/* --- CUSTOM LINK MODAL --- */}
+      {isLinkModalOpen && (
+        <div className="fixed inset-0 z-100 flex items-center justify-center p-4">
+          <div
+            className="absolute inset-0 bg-black/60 backdrop-blur-sm animate-in fade-in duration-300"
+            onClick={() => setIsLinkModalOpen(false)}
+          />
+
+          {/* Modal Content */}
+          <div className="relative w-full max-w-xs p-6 bg-neutral-900 border border-neutral-800 rounded-[2.5rem] shadow-[0_0_50px_-12px_rgba(6,182,212,0.2)] animate-in zoom-in-95 duration-300">
+            <div className="space-y-4">
+              <div className="flex items-center gap-3 mb-2">
+                <div className="p-2 bg-cyan-500/10 rounded-lg text-cyan-500">
+                  <LinkIcon size={18} />
+                </div>
+                <h4 className="text-[11px] uppercase tracking-[0.3em] text-white font-black">
+                  Inject Link
+                </h4>
+              </div>
+
+              <div className="space-y-2">
+                <label className="text-[9px] uppercase tracking-widest text-neutral-500 ml-2 font-bold">
+                  Target URL Address
+                </label>
+                <input
+                  autoFocus
+                  type="text"
+                  value={linkUrl}
+                  onChange={(e) => setLinkUrl(e.target.value)}
+                  placeholder="https://example.com"
+                  className="w-full h-12 px-4 bg-black border border-neutral-800 rounded-2xl text-sm text-white focus:outline-none focus:border-cyan-500/50 transition-all font-mono"
+                  onKeyDown={(e) => {
+                    if (e.key === "Enter") {
+                      e.preventDefault();
+                      saveLink();
+                    }
+                    if (e.key === "Escape") setIsLinkModalOpen(false);
+                  }}
+                />
+              </div>
+
+              <div className="flex gap-2 pt-2">
+                <button
+                  onClick={saveLink}
+                  className="flex-1 h-11 bg-white text-black text-[11px] font-black uppercase tracking-widest rounded-xl hover:bg-cyan-400 active:scale-95 transition-all"
+                >
+                  Apply Protocol
+                </button>
+                <button
+                  onClick={() => setIsLinkModalOpen(false)}
+                  className="px-4 h-11 bg-neutral-800 text-neutral-400 text-[11px] font-black uppercase rounded-xl hover:bg-red-500/20 hover:text-red-500 transition-all"
+                >
+                  Cancel
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 };
 
-const TiptapEditor: React.FC<TiptapEditorProps> = ({
+const TiptapEditor = ({
   initialContent,
   onUpdate,
   showImageOption = false,
-}) => {
+}: TiptapEditorProps) => {
   const editor = useEditor({
     extensions: [
       StarterKit,
@@ -216,6 +293,7 @@ const TiptapEditor: React.FC<TiptapEditorProps> = ({
     },
   });
 
+  // Inject custom ProseMirror styles dynamically
   useEffect(() => {
     if (editor) {
       const style = document.createElement("style");
@@ -233,6 +311,7 @@ const TiptapEditor: React.FC<TiptapEditorProps> = ({
     }
   }, [editor]);
 
+  // Sync external content changes with the editor
   useEffect(() => {
     if (editor && initialContent !== editor.getHTML()) {
       editor.commands.setContent(initialContent);
