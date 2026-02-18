@@ -19,6 +19,7 @@ import {
 } from "lucide-react";
 import api from "@/api/axios";
 import { useAuth } from "@/app/context/AuthContext";
+import { ENV } from "@/config/env.config";
 
 // DTO Interface for local use
 interface UserResponseWithRecoveryCodesDto {
@@ -318,12 +319,15 @@ export default function RegisterPage() {
                   className="text-[10px] text-neutral-500 uppercase tracking-widest leading-relaxed cursor-pointer select-none"
                 >
                   I acknowledge the{" "}
-                  <Link href="/terms" className="text-cyan-500 hover:underline">
+                  <Link
+                    href="/terms-of-use"
+                    className="text-cyan-500 hover:underline"
+                  >
                     Terms of Use
                   </Link>{" "}
                   and the{" "}
                   <Link
-                    href="/privacy"
+                    href="/privacy-policy"
                     className="text-cyan-500 hover:underline"
                   >
                     Privacy Policy
@@ -396,8 +400,7 @@ export default function RegisterPage() {
                     Account initialization is complete. If you lose access to
                     your <span className="text-white">Network Mail</span> and
                     these <span className="text-white">Recovery Codes</span>,
-                    {process.env.NEXT_PUBLIC_PROJECT_NAME} cannot restore your
-                    node.{" "}
+                    {ENV.PROJECT_NAME} cannot restore your node.{" "}
                     <span className="text-red-500 font-bold underline">
                       This is your only backup.
                     </span>
