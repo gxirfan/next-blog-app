@@ -5,17 +5,10 @@ import api from "@/api/axios";
 import { useRouter } from "next/navigation";
 import { IPostResponse } from "@/app/types/post";
 import dynamic from "next/dynamic";
-import {
-  X,
-  Save,
-  AlertCircle,
-  Loader2,
-  Plus,
-  PenBox,
-  ImageIcon,
-} from "lucide-react";
+import { X, Save, AlertCircle, Loader2, Plus, PenBox } from "lucide-react";
 import Image from "next/image";
 import { prepareContentForImage } from "@/app/types/prepareContentForImage";
+import { ENV } from "@/config/env.config";
 
 const TiptapEditor = dynamic(() => import("@/app/components/TiptapEditor"), {
   ssr: false,
@@ -32,7 +25,7 @@ interface UpdatePostDto {
   mainImage?: string | null;
 }
 
-const PostEditModal: React.FC<PostEditModalProps> = ({ post, onClose }) => {
+const PostEditModal = ({ post, onClose }: PostEditModalProps) => {
   const router = useRouter();
 
   const [loading, setLoading] = useState(false);
@@ -41,7 +34,7 @@ const PostEditModal: React.FC<PostEditModalProps> = ({ post, onClose }) => {
 
   // Başlangıçta mevcut görseli tam URL olarak alıyoruz
   const initialImage = post.mainImage
-    ? `${process.env.NEXT_PUBLIC_API_IMAGE_URL}${post.mainImage}`
+    ? `${ENV.API_IMAGE_URL}${post.mainImage}`
     : null;
 
   const [formData, setFormData] = useState<UpdatePostDto>({
@@ -80,7 +73,7 @@ const PostEditModal: React.FC<PostEditModalProps> = ({ post, onClose }) => {
 
     try {
       let finalMainImage = formData.mainImage;
-      const apiUrl = process.env.NEXT_PUBLIC_API_IMAGE_URL || "";
+      const apiUrl = ENV.API_IMAGE_URL || "";
 
       if (finalMainImage && finalMainImage.startsWith(apiUrl)) {
         finalMainImage = finalMainImage.replace(apiUrl, "");
@@ -105,14 +98,13 @@ const PostEditModal: React.FC<PostEditModalProps> = ({ post, onClose }) => {
 
   return (
     <div
-      className="fixed inset-0 z-[200] flex items-center justify-center p-4 bg-black/80 backdrop-blur-md animate-in fade-in duration-300"
+      className="fixed inset-0 z-200 flex items-center justify-center p-4 bg-black/80 backdrop-blur-md animate-in fade-in duration-300"
       onClick={onClose}
     >
       <div
         className="relative w-full max-w-4xl bg-neutral-950 border border-neutral-800 rounded-[2.5rem] overflow-hidden animate-in zoom-in-95 duration-300 max-h-[90vh] flex flex-col"
         onClick={(e) => e.stopPropagation()}
       >
-        {/* Header Section */}
         <div className="p-8 pb-4 flex items-center justify-between border-b border-neutral-900">
           <div className="flex items-center gap-4">
             <div className="p-3 bg-neutral-900 rounded-2xl text-cyan-500 border border-neutral-800">
@@ -147,9 +139,7 @@ const PostEditModal: React.FC<PostEditModalProps> = ({ post, onClose }) => {
           )}
 
           <div className="space-y-8">
-            {/* Image Section */}
             <div className="space-y-4">
-              {/* Header & Minimalist Toggle Button */}
               <div className="flex items-center justify-between px-4">
                 <label className="font-mono text-[10px] uppercase tracking-[0.4em] text-neutral-500">
                   Featured_Media
@@ -172,9 +162,8 @@ const PostEditModal: React.FC<PostEditModalProps> = ({ post, onClose }) => {
                 )}
               </div>
 
-              {/* Image Upload Area */}
               {(showImageUpload || formData.mainImage) && (
-                <div className="relative h-64 w-full bg-neutral-900/40 border border-neutral-800 rounded-[2rem] flex items-center justify-center overflow-hidden group/img animate-in zoom-in-95 duration-500">
+                <div className="relative h-64 w-full bg-neutral-900/40 border border-neutral-800 rounded-4xl flex items-center justify-center overflow-hidden group/img animate-in zoom-in-95 duration-500">
                   {formData.mainImage ? (
                     <>
                       <Image
@@ -183,7 +172,6 @@ const PostEditModal: React.FC<PostEditModalProps> = ({ post, onClose }) => {
                         fill
                         className="object-cover transition-transform duration-700 group-hover/img:scale-105"
                       />
-                      {/* Subtle Overlay on Hover */}
                       <div className="absolute inset-0 bg-neutral-950/40 backdrop-blur-[2px] opacity-0 group-hover/img:opacity-100 transition-all duration-300 flex items-center justify-center">
                         <button
                           type="button"
@@ -195,10 +183,10 @@ const PostEditModal: React.FC<PostEditModalProps> = ({ post, onClose }) => {
                             setShowImageUpload(false);
                           }}
                           className="
-                flex items-center gap-2 px-6 py-3 bg-neutral-950 text-red-400 
-                border border-red-900/30 rounded-xl text-[10px] font-bold uppercase tracking-[0.2em]
-                hover:bg-red-500/10 hover:border-red-500/50 transition-all cursor-pointer
-              "
+                          flex items-center gap-2 px-6 py-3 bg-neutral-950 text-red-400 
+                          border border-red-900/30 rounded-xl text-[10px] font-bold uppercase tracking-[0.2em]
+                          hover:bg-red-500/10 hover:border-red-500/50 transition-all cursor-pointer
+                        "
                         >
                           <X size={16} />
                           <span>Remove_Media</span>
@@ -208,7 +196,6 @@ const PostEditModal: React.FC<PostEditModalProps> = ({ post, onClose }) => {
                   ) : (
                     <div className="relative w-full h-full flex items-center justify-center">
                       <label className="w-full h-full flex flex-col items-center justify-center cursor-pointer gap-5 group/label transition-colors">
-                        {/* Minimalist Icon Box */}
                         <div className="w-16 h-16 bg-neutral-950 rounded-2xl border border-neutral-800 flex items-center justify-center group-hover/label:border-cyan-500/50 transition-all duration-500">
                           <Plus size={24} className="text-cyan-500" />
                         </div>
@@ -230,7 +217,6 @@ const PostEditModal: React.FC<PostEditModalProps> = ({ post, onClose }) => {
                         />
                       </label>
 
-                      {/* Abort Upload - Sade X butonu */}
                       <button
                         type="button"
                         onClick={() => setShowImageUpload(false)}
@@ -244,7 +230,6 @@ const PostEditModal: React.FC<PostEditModalProps> = ({ post, onClose }) => {
               )}
             </div>
 
-            {/* Title Section */}
             <div className="space-y-3">
               <label className="text-[10px] font-mono uppercase tracking-[0.3em] text-neutral-500 ml-4">
                 Subject_Identifier
@@ -261,12 +246,11 @@ const PostEditModal: React.FC<PostEditModalProps> = ({ post, onClose }) => {
               />
             </div>
 
-            {/* Editor Section */}
             <div className="space-y-3">
               <label className="text-[10px] font-mono uppercase tracking-[0.3em] text-neutral-500 ml-4">
                 Content_Stream
               </label>
-              <div className="bg-neutral-900/30 rounded-[2rem] border border-neutral-800 overflow-hidden focus-within:border-cyan-500/30 transition-all">
+              <div className="bg-neutral-900/30 rounded-4xl border border-neutral-800 overflow-hidden focus-within:border-cyan-500/30 transition-all">
                 <TiptapEditor
                   initialContent={prepareContentForImage(
                     formData.content || "",
@@ -283,7 +267,6 @@ const PostEditModal: React.FC<PostEditModalProps> = ({ post, onClose }) => {
             </div>
           </div>
 
-          {/* Footer Actions */}
           <div className="flex items-center justify-end gap-4 mt-12 pb-4">
             <button
               type="button"

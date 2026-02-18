@@ -1,11 +1,10 @@
-import axios from 'axios';
-
-const API_URL = process.env.NEXT_PUBLIC_API_URL;
+import axios from "axios";
+import { ENV } from "@/config/env.config";
 
 const api = axios.create({
-    baseURL: API_URL,
-    timeout: 5000,
-    withCredentials: true,
+  baseURL: ENV.API_URL,
+  timeout: 5000,
+  withCredentials: true,
 });
 
 export default api;

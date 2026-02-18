@@ -10,6 +10,7 @@ import {
   Image as ImageIcon,
 } from "lucide-react";
 import api from "@/api/axios";
+import { ENV } from "@/config/env.config";
 
 interface MediaPreviewProps {
   avatarUrl: string;
@@ -18,12 +19,12 @@ interface MediaPreviewProps {
   onUploadSuccess: () => void;
 }
 
-const ProfileMediaPreview: React.FC<MediaPreviewProps> = ({
+const ProfileMediaPreview = ({
   avatarUrl,
   coverUrl,
   username,
   onUploadSuccess,
-}) => {
+}: MediaPreviewProps) => {
   const [selectedAvatar, setSelectedAvatar] = useState<File | null>(null);
   const [selectedCover, setSelectedCover] = useState<File | null>(null);
   const [loading, setLoading] = useState(false);
@@ -38,11 +39,9 @@ const ProfileMediaPreview: React.FC<MediaPreviewProps> = ({
   const coverInputRef = useRef<HTMLInputElement>(null);
 
   const DEFAULT_COVER =
-    process.env.NEXT_PUBLIC_API_IMAGE_URL +
-    "/images/user/covers/default-cover.png";
+    ENV.API_IMAGE_URL + "/images/user/covers/default-cover.png";
   const DEFAULT_AVATAR =
-    process.env.NEXT_PUBLIC_API_IMAGE_URL +
-    "/images/user/avatars/default-avatar.png";
+    ENV.API_IMAGE_URL + "/images/user/avatars/default-avatar.png";
 
   const finalCoverUrl = selectedCover
     ? URL.createObjectURL(selectedCover)
@@ -56,7 +55,7 @@ const ProfileMediaPreview: React.FC<MediaPreviewProps> = ({
       setPreviewUrls({ avatar: avatarUrl, cover: coverUrl });
       setIsParentRefreshing(false);
     }
-  }, [avatarUrl, coverUrl]);
+  }, [avatarUrl, coverUrl, previewUrls.avatar, previewUrls.cover]);
 
   const handleFileChange = (
     e: React.ChangeEvent<HTMLInputElement>,
@@ -65,7 +64,8 @@ const ProfileMediaPreview: React.FC<MediaPreviewProps> = ({
     const file = e.target.files ? e.target.files[0] : null;
     setError(null);
     if (file) {
-      type === "avatar" ? setSelectedAvatar(file) : setSelectedCover(file);
+      if (type === "avatar") setSelectedAvatar(file);
+      else setSelectedCover(file);
     }
   };
 
@@ -120,7 +120,6 @@ const ProfileMediaPreview: React.FC<MediaPreviewProps> = ({
         className="hidden"
       />
 
-      {/* 1. COVER PREVIEW: Large border-radius to match profile page */}
       <div className="relative w-full h-48 md:h-64 bg-neutral-900 rounded-2rem overflow-hidden group border border-neutral-800/50">
         <Image
           src={finalCoverUrl}
@@ -133,7 +132,6 @@ const ProfileMediaPreview: React.FC<MediaPreviewProps> = ({
           }`}
         />
 
-        {/* Overlay Action */}
         <div
           onClick={() => !isImageUpdating && coverInputRef.current?.click()}
           className={`absolute inset-0 flex items-center justify-center transition-all duration-300 ${
@@ -153,10 +151,8 @@ const ProfileMediaPreview: React.FC<MediaPreviewProps> = ({
         </div>
       </div>
 
-      {/* 2. AVATAR & ACTIONS SECTION */}
       <div className="flex flex-col md:flex-row md:items-end justify-between px-4 gap-6">
         <div className="flex items-end space-x-6">
-          {/* Circular Avatar Preview */}
           <div className="relative -mt-12 md:-mt-16 z-10">
             <div className="w-28 h-28 md:w-36 md:h-36 rounded-full border-[6px] border-neutral-950 bg-neutral-900 overflow-hidden relative group">
               <Image
@@ -194,7 +190,6 @@ const ProfileMediaPreview: React.FC<MediaPreviewProps> = ({
           </div>
         </div>
 
-        {/* 3. UPLOAD ACTIONS: Minimalist Pill Buttons */}
         <div className="flex items-center gap-4 pb-2">
           {error && (
             <span className="text-red-400 text-xs flex items-center gap-1 animate-pulse">

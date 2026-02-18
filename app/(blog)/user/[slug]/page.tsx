@@ -7,9 +7,7 @@ import { IUserResponse } from "@/app/types/user-response.dto";
 import { Suspense } from "react";
 import { Loader } from "lucide-react";
 import PostsSection from "../_components/PostsSection";
-
-const API_BASE_URL =
-  process.env.NEXT_PUBLIC_API_BASE_URL || "http://localhost:3000/api";
+import { ENV } from "@/config/env.config";
 
 async function fetchUserProfile(
   username: string,
@@ -18,7 +16,7 @@ async function fetchUserProfile(
   const cookieHeader = headersList.get("cookie");
 
   try {
-    const url = `${API_BASE_URL}/user/public-profile/${username}`;
+    const url = `${ENV.API_URL}/user/public-profile/${username}`;
     const response = await fetch(url, {
       headers: {
         ...(cookieHeader && { Cookie: cookieHeader }),
@@ -33,7 +31,7 @@ async function fetchUserProfile(
     const result = await response.json();
     return result as IBaseResponse<IUserResponse>;
   } catch (error) {
-    console.error(`Profile fetching error: ${error}`);
+    // console.error(`Profile fetching error: ${error}`);
     return null;
   }
 }
@@ -89,8 +87,7 @@ export default async function PublicProfilePage({
   const username = userSlug;
   const nickname = userProfile.data.nickname;
 
-  const imageApiUrl =
-    process.env.NEXT_PUBLIC_API_IMAGE_URL || "http://localhost:3000";
+  const imageApiUrl = ENV.API_IMAGE_URL;
   const DEFAULT_COVER = imageApiUrl + "/images/user/covers/default-cover.png";
   const coverUrl = userProfile.data.cover
     ? imageApiUrl + userProfile.data.cover

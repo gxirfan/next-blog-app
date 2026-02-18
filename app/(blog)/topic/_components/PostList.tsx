@@ -17,6 +17,7 @@ import AuthorBlock from "@/app/components/AuthorBlock";
 import { prepareContentForImage } from "@/app/types/prepareContentForImage";
 import Image from "next/image";
 import { getRelativeTime } from "@/app/utils/date";
+import { ENV } from "@/config/env.config";
 
 interface PostListProps {
   posts: IPostResponse[];
@@ -85,7 +86,7 @@ const PostList = ({ posts }: PostListProps) => {
               <div className="mt-4 relative w-full h-72 shrink-0 overflow-hidden rounded-[1.8rem] bg-neutral-900 border border-neutral-800">
                 <Link href={`/post/${post.slug}`}>
                   <Image
-                    src={process.env.NEXT_PUBLIC_API_IMAGE_URL + post.mainImage}
+                    src={ENV.API_IMAGE_URL + post.mainImage}
                     alt={post.title}
                     fill
                     className="object-cover transition-transform duration-500 group-hover:scale-105"

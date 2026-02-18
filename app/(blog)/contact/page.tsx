@@ -13,6 +13,7 @@ import {
   Globe,
   MessageSquare,
 } from "lucide-react";
+import { ENV } from "@/config/env.config";
 
 export default function ContactPage() {
   const [formData, setFormData] = useState({
@@ -219,10 +220,10 @@ export default function ContactPage() {
         <div className="flex items-center gap-3 px-6 py-3 bg-neutral-950 border border-neutral-800 rounded-full group hover:border-cyan-500/30 transition-all">
           <Mail size={16} className="text-cyan-500" />
           <a
-            href={`mailto:${process.env.NEXT_PUBLIC_CONTACT_EMAIL}`}
+            href={`mailto:${ENV.CONTACT_EMAIL}`}
             className="text-xs font-bold text-neutral-400 group-hover:text-white transition-colors"
           >
-            {process.env.NEXT_PUBLIC_CONTACT_EMAIL}
+            {ENV.CONTACT_EMAIL}
           </a>
         </div>
       </div>

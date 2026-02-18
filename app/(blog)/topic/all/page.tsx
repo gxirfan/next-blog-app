@@ -1,12 +1,9 @@
 import { ITopicResponse } from "@/app/types/topic";
 import { IBaseResponse, IMeta } from "@/app/types/common";
 import TopicList from "../_components/TopicList";
-import PaginationControls from "@/app/components/PaginationControls";
 import AllTopicsHeader from "../_components/AllTopicsHeader";
 import AllTopicsFooter from "../_components/AllTopicsFooter";
-
-const API_BASE_URL =
-  process.env.NEXT_PUBLIC_API_BASE_URL || "http://localhost:3000/api";
+import { ENV } from "@/config/env.config";
 
 interface TopicListResponse {
   data: ITopicResponse[];
@@ -18,7 +15,7 @@ async function fetchTopics(
   limit: number,
 ): Promise<IBaseResponse<TopicListResponse>> {
   try {
-    const url = `${API_BASE_URL}/topics/all?page=${page}&limit=${limit}`;
+    const url = `${ENV.API_URL}/topics/all?page=${page}&limit=${limit}`;
 
     const response = await fetch(url);
 

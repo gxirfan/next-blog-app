@@ -15,6 +15,7 @@ import {
 import PaginationControls from "@/app/components/PaginationControls";
 import { IBaseResponse } from "@/app/types/common";
 import { getRelativeTime } from "@/app/utils/date";
+import { ENV } from "@/config/env.config";
 
 export const metadata: Metadata = {
   title: "My Posts | Content Library",
@@ -29,7 +30,7 @@ interface MyPostsPageProps {
  */
 async function getCurrentUser() {
   const headersList = await headers();
-  const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/auth/status`, {
+  const res = await fetch(`${ENV.API_URL}/auth/status`, {
     cache: "no-store",
     headers: {
       Cookie: headersList.get("cookie") || "",
@@ -48,7 +49,7 @@ async function getMyPosts(
 ): Promise<IBaseResponse<any>> {
   const headersList = await headers();
   const res = await fetch(
-    `${process.env.NEXT_PUBLIC_API_URL}/posts/all/library/my-posts?page=${page}&limit=${limit}`,
+    `${ENV.API_URL}/posts/all/library/my-posts?page=${page}&limit=${limit}`,
     {
       cache: "no-store",
       headers: {
@@ -56,7 +57,11 @@ async function getMyPosts(
       },
     },
   );
-  if (!res.ok) return { success: false, data: { data: [], meta: null } } as any;
+  if (!res.ok)
+    return {
+      success: false,
+      data: { data: [], meta: null },
+    } as IBaseResponse<any>;
   return await res.json();
 }
 
@@ -121,7 +126,7 @@ export default async function MyPostsPage({ searchParams }: MyPostsPageProps) {
               return (
                 <div
                   key={post.id}
-                  className="group relative p-6 md:p-8 bg-neutral-950 border border-neutral-800 rounded-[2rem] hover:border-cyan-500/30 transition-all duration-300 flex flex-col md:flex-row justify-between items-start md:items-center gap-6"
+                  className="group relative p-6 md:p-8 bg-neutral-950 border border-neutral-800 rounded-4xl hover:border-cyan-500/30 transition-all duration-300 flex flex-col md:flex-row justify-between items-start md:items-center gap-6"
                 >
                   <div className="flex-1 min-w-0 space-y-4">
                     <div className="flex items-center gap-3">

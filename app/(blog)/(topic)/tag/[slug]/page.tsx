@@ -6,15 +6,13 @@ import { ITopicResponse } from "@/app/types/topic";
 import { ITagResponse } from "@/app/types/tag";
 import PaginationControls from "@/app/components/PaginationControls";
 import TagManagementActions from "../_components/TagManagementActions";
-
-const API_BASE_URL =
-  process.env.NEXT_PUBLIC_API_BASE_URL || "http://localhost:3000/api";
+import { ENV } from "@/config/env.config";
 
 async function fetchTagDetails(
-  slug: string
+  slug: string,
 ): Promise<IBaseResponse<ITagResponse> | null> {
   try {
-    const url = `${API_BASE_URL}/tags/${slug}`;
+    const url = `${ENV.API_URL}/tags/${slug}`;
     const response = await fetch(url);
     if (response.status === 404) return null;
     if (!response.ok) throw new Error(`Error: ${response.status}`);
@@ -27,10 +25,10 @@ async function fetchTagDetails(
 async function fetchTopicsByTagId(
   tagId: string,
   page: number,
-  limit: number
+  limit: number,
 ): Promise<IBaseResponse<{ data: ITopicResponse[]; meta: IMeta }>> {
   try {
-    const url = `${API_BASE_URL}/topics/all/${tagId}?page=${page}&limit=${limit}`;
+    const url = `${ENV.API_URL}/topics/all/${tagId}?page=${page}&limit=${limit}`;
     const response = await fetch(url);
     if (!response.ok) throw new Error(`Error: ${response.status}`);
     const result = await response.json();
@@ -67,7 +65,7 @@ export const generateMetadata = async ({
   }
 
   return {
-    title: `${tagDetails.data.title} | blog`,
+    title: `${tagDetails.data.title}`,
     description: tagDetails.data.description,
     robots: {
       index: true,
@@ -101,7 +99,7 @@ export default async function TagTopicsPage({
   const topicsData = await fetchTopicsByTagId(
     tagDetails.data.id,
     currentPage,
-    currentLimit
+    currentLimit,
   );
   const topics: ITopicResponse[] = topicsData.data.data || [];
   const meta: IMeta = topicsData.data.meta || {

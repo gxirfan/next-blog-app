@@ -1,51 +1,63 @@
-import { IPostResponse } from '@/app/types/post';
-import { IBaseResponse, IMeta } from '@/app/types/common';
-import PostList from '../_components/PostList';
-import PaginationControls from '@/app/components/PaginationControls';
+import { IPostResponse } from "@/app/types/post";
+import { IBaseResponse, IMeta } from "@/app/types/common";
+import PostList from "../_components/PostList";
+import PaginationControls from "@/app/components/PaginationControls";
+import { ENV } from "@/config/env.config";
 
-const API_BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL || 'http://localhost:3000/api';
-
-async function fetchTopicPosts(topicId: string, page: number, limit: number): Promise<IBaseResponse<{data: IPostResponse[], meta: IMeta}>> {
-    try {
-        const url = `${API_BASE_URL}/posts/all/topic/${topicId}?page=${page}&limit=${limit}`;        
-        const response = await fetch(url, {
-            cache: 'no-store',
-        });
-        if (!response.ok) {
-            throw new Error(`Failed to fetch topic posts: ${response.status}`);
-        }
-        const result = await response.json();
-        return result;
-    } catch (error) {
-        console.error(`Topic posts fetching error: ${error}`);
-        return { success: false, message: "Failed to fetch topic posts", statusCode: 500, data: {data: [], meta: {total: 0, page: 1, limit: 10, totalPages: 0}} };
+async function fetchTopicPosts(
+  topicId: string,
+  page: number,
+  limit: number,
+): Promise<IBaseResponse<{ data: IPostResponse[]; meta: IMeta }>> {
+  try {
+    const url = `${ENV.API_URL}/posts/all/topic/${topicId}?page=${page}&limit=${limit}`;
+    const response = await fetch(url, {
+      cache: "no-store",
+    });
+    if (!response.ok) {
+      throw new Error(`Failed to fetch topic posts: ${response.status}`);
     }
+    const result = await response.json();
+    return result;
+  } catch (error) {
+    console.error(`Topic posts fetching error: ${error}`);
+    return {
+      success: false,
+      message: "Failed to fetch topic posts",
+      statusCode: 500,
+      data: { data: [], meta: { total: 0, page: 1, limit: 10, totalPages: 0 } },
+    };
+  }
 }
 
 interface TopicPostsSectionProps {
-    topicId: string;
-    page: number;
-    limit: number;
+  topicId: string;
+  page: number;
+  limit: number;
 }
 
-export default async function TopicPostsSection({ topicId, page, limit }: TopicPostsSectionProps) {
-    const topicPostsData = await fetchTopicPosts(topicId, page, limit);
-    const topicPosts = topicPostsData.data.data;
-    const meta = topicPostsData.data.meta;
-    
-    return (
-        <>
-            <h2 className="text-xl font-bold text-white mb-4 border-b border-neutral-700 pb-2">
-                Posts ({meta.total})
-            </h2>
-            
-            <PostList posts={topicPosts || []} />
+export default async function TopicPostsSection({
+  topicId,
+  page,
+  limit,
+}: TopicPostsSectionProps) {
+  const topicPostsData = await fetchTopicPosts(topicId, page, limit);
+  const topicPosts = topicPostsData.data.data;
+  const meta = topicPostsData.data.meta;
 
-            {meta && (
-                <div className="pt-4">
-                    <PaginationControls meta={meta} />
-                </div>
-            )}
-        </>
-    );
+  return (
+    <>
+      <h2 className="text-xl font-bold text-white mb-4 border-b border-neutral-700 pb-2">
+        Posts ({meta.total})
+      </h2>
+
+      <PostList posts={topicPosts || []} />
+
+      {meta && (
+        <div className="pt-4">
+          <PaginationControls meta={meta} />
+        </div>
+      )}
+    </>
+  );
 }

@@ -4,16 +4,14 @@ import PostList from "@/app/(blog)/topic/_components/PostList";
 import PaginationControls from "@/app/components/PaginationControls";
 import Link from "next/link";
 import { ArrowRight, BookOpen, Flame, Tag, Zap } from "lucide-react";
+import { ENV } from "@/config/env.config";
 
 async function fetchPosts(
   page: number,
   limit: number,
 ): Promise<IBaseResponse<{ data: IPostResponse[]; meta: IMeta }>> {
-  const API_URL =
-    process.env.NEXT_PUBLIC_API_BASE_URL || "http://localhost:3000/api";
-
   try {
-    const url = `${API_URL}/posts/all/view-count?page=${page}&limit=${limit}`;
+    const url = `${ENV.API_URL}/posts/all/view-count?page=${page}&limit=${limit}`;
 
     const response = await fetch(url, { cache: "no-store" });
 
@@ -38,28 +36,6 @@ async function fetchPosts(
     };
   }
 }
-
-// async function fetchTopics(page: number, limit: number): Promise<IBaseResponse<{data: ITopicResponse[], meta: IMeta}>> {
-//     const API_BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL || 'http://localhost:3000/api';
-//     try {
-//         const url = `${API_BASE_URL}/topics/all?page=${page}&limit=${limit}`;
-
-//         const response = await fetch(url, { next: { revalidate: 60 } });
-
-//         if (!response.ok) {
-//             console.error(`Failed to fetch topics: ${response.status}`);
-//             return { data: {data: [], meta: { total: 0, page, limit, totalPages: 0 }}, success: false, message: "Failed to fetch topics", statusCode: 500 };
-//         }
-
-//         const result = await response.json();
-//         console.log(result.data.meta);
-//         return result || { data: {data: [], meta: { total: 0, page, limit, totalPages: 0 }}, success: false, message: "Failed to fetch topics", statusCode: 500 };
-
-//     } catch (error) {
-//         console.error("Topic fetching error:", error);
-//         return { data: {data: [], meta: { total: 0, page, limit, totalPages: 0 }}, success: false, message: "Failed to fetch topics", statusCode: 500 };
-//     }
-// }
 
 export default async function blogHomePage({
   searchParams,

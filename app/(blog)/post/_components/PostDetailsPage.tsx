@@ -1,4 +1,3 @@
-import React from "react";
 import { IPostResponse } from "@/app/types/post";
 import { Clock } from "lucide-react";
 import { headers } from "next/headers";
@@ -8,6 +7,7 @@ import { prepareContentForImage } from "@/app/types/prepareContentForImage";
 import Image from "next/image";
 import PostDetailsFooter from "./PostDetailsFooter";
 import PostDetailsHeader from "./PostDetailsHeader";
+import { ENV } from "@/config/env.config";
 
 interface PostDetailsCardProps {
   postDetails: IPostResponse;
@@ -19,9 +19,7 @@ async function fetchUserVoteDirection(postId: string): Promise<number | null> {
   if (!cookieHeader) return null;
 
   try {
-    const API_BASE_URL =
-      process.env.NEXT_PUBLIC_API_BASE_URL || "http://localhost:3000/api";
-    const url = `${API_BASE_URL}/vote?postId=${postId}&type=post`;
+    const url = `${ENV.API_URL}/vote?postId=${postId}&type=post`;
 
     const response = await fetch(url, {
       headers: { Cookie: cookieHeader, "Content-Type": "application/json" },
@@ -39,9 +37,7 @@ async function fetchUserVoteDirection(postId: string): Promise<number | null> {
   }
 }
 
-const PostDetailsCard: React.FC<PostDetailsCardProps> = async ({
-  postDetails,
-}) => {
+const PostDetailsCard = async ({ postDetails }: PostDetailsCardProps) => {
   const userCurrentVoteDirection = await fetchUserVoteDirection(postDetails.id);
 
   return (
@@ -56,7 +52,7 @@ const PostDetailsCard: React.FC<PostDetailsCardProps> = async ({
       {postDetails.mainImage && (
         <div className="relative w-full overflow-hidden rounded-[2.5rem] bg-neutral-900 border border-neutral-800 mb-8">
           <Image
-            src={process.env.NEXT_PUBLIC_API_IMAGE_URL + postDetails.mainImage}
+            src={ENV.API_IMAGE_URL + postDetails.mainImage}
             alt={postDetails.title}
             width={1200}
             height={675}

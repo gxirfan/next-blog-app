@@ -2,21 +2,19 @@ import PostList from "../../topic/_components/PostList";
 import PaginationControls from "@/app/components/PaginationControls";
 import { IBaseResponse, IMeta } from "@/app/types/common";
 import { IPostResponse } from "@/app/types/post";
+import { ENV } from "@/config/env.config";
 import { headers } from "next/headers";
-
-const API_BASE_URL =
-  process.env.NEXT_PUBLIC_API_BASE_URL || "http://localhost:3000/api";
 
 async function fetchUserPosts(
   username: string,
   page: number,
-  limit: number
+  limit: number,
 ): Promise<IBaseResponse<{ data: IPostResponse[]; meta: IMeta }> | null> {
   const headersList = await headers();
   const cookieHeader = headersList.get("cookie");
 
   try {
-    const url = `${API_BASE_URL}/posts/all/username/${username}?page=${page}&limit=${limit}`;
+    const url = `${ENV.API_URL}/posts/all/username/${username}?page=${page}&limit=${limit}`;
     const response = await fetch(url, {
       cache: "no-store",
       headers: {

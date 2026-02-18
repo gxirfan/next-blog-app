@@ -2,6 +2,7 @@ import { MessageSquare, Activity } from "lucide-react";
 import { getRelativeTime } from "@/app/utils/date";
 import { IPostResponse } from "@/app/types/post";
 import CopyPermalink from "./CopyPermaLink";
+import { ENV } from "@/config/env.config";
 
 export default function PostDetailsFooter({
   postDetails,
@@ -47,7 +48,7 @@ export default function PostDetailsFooter({
 
       <div className="flex flex-col md:flex-row justify-between items-center py-6 border-t border-neutral-900 gap-4 opacity-50">
         <div className="text-[10px] text-neutral-600 font-medium uppercase tracking-[0.4em]">
-          {process.env.NEXT_PUBLIC_PROJECT_NAME || "Project"} Protocol v2.6
+          {ENV.PROJECT_NAME} Protocol v2.6
         </div>
       </div>
     </div>

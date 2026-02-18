@@ -1,3 +1,5 @@
+import { ENV } from "@/config/env.config";
+
 interface AllTopicsHeaderProps {
   totalTopics: number;
 }
@@ -21,7 +23,7 @@ export default function AllTopicsHeader({ totalTopics }: AllTopicsHeaderProps) {
           <p className="text-neutral-500 font-medium max-w-md text-sm mt-3">
             Explore the categorized data streams. Each node represents a
             distinct collection of shared intelligence within the{" "}
-            {process.env.NEXT_PUBLIC_PROJECT_NAME} grid.
+            {ENV.PROJECT_NAME} grid.
           </p>
         </div>
 

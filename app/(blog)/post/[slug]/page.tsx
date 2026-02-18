@@ -8,15 +8,13 @@ import { Suspense } from "react";
 import PostDetailsCard from "../_components/PostDetailsPage";
 import { RepliesSection } from "./RepliesSection";
 import PostManagementActions from "../_components/PostManagementActions";
-
-const API_BASE_URL =
-  process.env.NEXT_PUBLIC_API_BASE_URL || "http://localhost:3000/api";
+import { ENV } from "@/config/env.config";
 
 async function fetchPostDetail(slug: string): Promise<IPostResponse | null> {
   const headersList = await headers();
   const cookieHeader = headersList.get("cookie");
   try {
-    const url = `${API_BASE_URL}/posts/${slug}`;
+    const url = `${ENV.API_URL}/posts/${slug}`;
     const response = await fetch(url, {
       headers: {
         ...(cookieHeader && { Cookie: cookieHeader }),
@@ -34,10 +32,6 @@ async function fetchPostDetail(slug: string): Promise<IPostResponse | null> {
   }
 }
 
-/**
- * Generates SEO metadata using existing post fields.
- * Includes keywords derived from topic and title automatically.
- */
 export async function generateMetadata({
   params,
 }: {
@@ -48,9 +42,7 @@ export async function generateMetadata({
 
   if (!postDetails) {
     return {
-      title:
-        "Content Not Found | " +
-        (process.env.NEXT_PUBLIC_PROJECT_NAME || "Project"),
+      title: "Content Not Found | " + ENV.PROJECT_NAME,
       description:
         "The requested data node could not be retrieved from the network.",
       robots: { index: false, follow: false },
@@ -66,7 +58,7 @@ export async function generateMetadata({
       .toLowerCase()
       .split(/\s+/)
       .filter((word) => word.length > 3),
-    process.env.NEXT_PUBLIC_PROJECT_NAME || "Project",
+    ENV.PROJECT_NAME,
     "software development",
   ];
 
@@ -76,14 +68,10 @@ export async function generateMetadata({
     .substring(0, 160) // Standard SEO length
     .trim();
 
-  const siteUrl =
-    process.env.SITE_URL || process.env.NEXT_PUBLIC_SITE_URL || "";
-  const apiImageUrl = process.env.NEXT_PUBLIC_API_IMAGE_URL || "";
-
   // Construct the full image URL
   const coverImage = postDetails.mainImage
-    ? `${apiImageUrl}${postDetails.mainImage}`
-    : `${siteUrl}/default-og-image.png`;
+    ? `${ENV.API_IMAGE_URL}${postDetails.mainImage}`
+    : `${ENV.SITE_URL}/default-og-image.png`;
 
   const fullTitle = `${postDetails.title} | ${postDetails.topicTitle}`;
 
@@ -97,8 +85,8 @@ export async function generateMetadata({
     openGraph: {
       title: fullTitle,
       description: cleanDescription,
-      url: `${siteUrl}/post/${postDetails.slug}`,
-      siteName: process.env.NEXT_PUBLIC_PROJECT_NAME || "Project",
+      url: `${ENV.SITE_URL}/post/${postDetails.slug}`,
+      siteName: ENV.PROJECT_NAME,
       type: "article",
       publishedTime: new Date(postDetails.createdAt).toISOString(),
       section: postDetails.topicTitle,

@@ -1,4 +1,3 @@
-import React, { ElementType } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { INotification } from "@/app/types/notification";
@@ -9,6 +8,8 @@ import {
   ListChecks,
 } from "lucide-react";
 import { getRelativeTime } from "@/app/utils/date";
+import { ENV } from "@/config/env.config";
+import { ElementType } from "react";
 
 interface NotificationListItemProps {
   notification: INotification;
@@ -29,14 +30,12 @@ const getNotificationIcon = (
   }
 };
 
-const NotificationListItem: React.FC<NotificationListItemProps> = ({
-  notification,
-}) => {
+const NotificationListItem = ({ notification }: NotificationListItemProps) => {
   const { Icon, color } = getNotificationIcon(notification.type);
 
   const avatarUrl = notification.senderAvatar
-    ? process.env.NEXT_PUBLIC_API_IMAGE_URL + notification.senderAvatar
-    : "http://localhost:3000/images/user/avatars/default-avatar.png";
+    ? ENV.API_IMAGE_URL + notification.senderAvatar
+    : ENV.API_IMAGE_URL + "/images/user/avatars/default-avatar.png";
 
   return (
     <Link

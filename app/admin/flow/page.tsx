@@ -5,6 +5,7 @@ import FlowFooter from "./_components/FlowFooter";
 import { IBaseResponse } from "@/app/types/common";
 import { IPaginationResponse } from "@/app/types/pagination-response";
 import { IFlow } from "@/app/types/flow";
+import { ENV } from "@/config/env.config";
 
 async function fetchFlows(
   page: number = 1,
@@ -12,11 +13,10 @@ async function fetchFlows(
 ): Promise<IBaseResponse<IPaginationResponse<IFlow>>> {
   const headerList = await headers();
   const cookie = headerList.get("cookie");
-  const API_URL = process.env.NEXT_PUBLIC_API_URL;
 
   try {
     const response = await fetch(
-      `${API_URL}/admin/get-flow-posts?page=${page}&limit=${limit}`,
+      `${ENV.API_URL}/admin/get-flow-posts?page=${page}&limit=${limit}`,
       {
         headers: {
           Cookie: cookie || "",

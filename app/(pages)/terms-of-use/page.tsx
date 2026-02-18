@@ -1,10 +1,10 @@
 import TermsOfUse from "@/app/components/Legal/TermsOfUse";
 import type { Metadata } from "next";
+import { ENV } from "@/config/env.config";
 
-const BLOG_NAME = process.env.NEXT_PUBLIC_PROJECT_NAME || "Blog Project";
+const BLOG_NAME = ENV.PROJECT_NAME;
 const LAST_UPDATED = "November 24, 2025";
 
-// Sayfa meta verileri (SEO)
 export const metadata: Metadata = {
   title: `Terms of Use - ${BLOG_NAME}`,
   description: `Read the Terms of Use for ${BLOG_NAME}. Last updated ${LAST_UPDATED}.`,

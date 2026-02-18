@@ -1,3 +1,5 @@
+import { ENV } from "@/config/env.config";
+
 interface AllPostsHeaderProps {
   totalRecords: number;
 }
@@ -20,7 +22,7 @@ export default function AllPostsHeader({ totalRecords }: AllPostsHeaderProps) {
           </h1>
           <p className="text-neutral-500 font-medium max-w-md">
             Complete archive of system logs and shared insights across the
-            {process.env.NEXT_PUBLIC_PROJECT_NAME || "Project"} network.
+            {ENV.PROJECT_NAME} network.
           </p>
         </div>
 

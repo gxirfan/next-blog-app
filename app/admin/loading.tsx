@@ -1,5 +1,6 @@
 "use client";
 
+import { ENV } from "@/config/env.config";
 import { Loader2, Terminal } from "lucide-react";
 
 export default function AdminLoading() {
@@ -21,7 +22,7 @@ export default function AdminLoading() {
         </div>
 
         <p className="text-[9px] font-mono text-neutral-700 uppercase tracking-widest">
-          {process.env.NEXT_PUBLIC_PROJECT_NAME || "Blog"} Protocol v1.0.4
+          {ENV.PROJECT_NAME} Protocol v1.0.4
         </p>
       </div>
 

@@ -3,13 +3,14 @@ import { headers } from "next/headers";
 import TagHeader from "./_components/TagHeader";
 import TagFooter from "./_components/TagFooter";
 import TagTableClient from "./_components/TagTableClient";
+import { ENV } from "@/config/env.config";
 
 async function fetchTags(): Promise<ITagResponse[]> {
   const headerList = await headers();
   const cookie = headerList.get("cookie");
 
   try {
-    const url = `${process.env.NEXT_PUBLIC_API_URL}/admin/get-tags`;
+    const url = `${ENV.API_URL}/admin/get-tags`;
     const response = await fetch(url, {
       headers: {
         Cookie: cookie || "",
@@ -36,7 +37,7 @@ export default async function AdminTagsListPage() {
 
       {/* 2. İçerik / Tablo Kısmı */}
       {tags.length === 0 ? (
-        <div className="py-32 text-center bg-[#0d0d0d] border border-neutral-900 rounded-[2.5rem]">
+        <div className="py-32 text-center bg-[#0d0d0d] border border-neutral-900 rounded-4xl">
           <p className="text-neutral-600 text-sm font-light font-mono uppercase tracking-widest">
             Null_Data_Partition: No tags detected.
           </p>

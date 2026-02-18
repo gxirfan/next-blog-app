@@ -3,17 +3,15 @@ import { IPostResponse } from "@/app/types/post";
 import { MessageSquare } from "lucide-react";
 import PostList from "../../topic/_components/PostList";
 import PaginationControls from "@/app/components/PaginationControls";
-
-const API_BASE_URL =
-  process.env.NEXT_PUBLIC_API_BASE_URL || "http://localhost:3000/api";
+import { ENV } from "@/config/env.config";
 
 async function fetchLevel2Posts(
   parentId: string,
   page: number,
-  limit: number
+  limit: number,
 ): Promise<IBaseResponse<{ data: IPostResponse[]; meta: IMeta }>> {
   try {
-    const url = `${API_BASE_URL}/posts/all/parent/${parentId}?page=${page}&limit=${limit}`;
+    const url = `${ENV.API_URL}/posts/all/parent/${parentId}?page=${page}&limit=${limit}`;
     const response = await fetch(url);
     if (!response.ok)
       throw new Error(`Failed to fetch level 2 posts: ${response.status}`);

@@ -16,6 +16,7 @@ import {
 import PaginationControls from "@/app/components/PaginationControls";
 import { IBaseResponse } from "@/app/types/common";
 import { getRelativeTime } from "@/app/utils/date";
+import { ENV } from "@/config/env.config";
 
 export const metadata: Metadata = {
   title: "My Topics | Content Library",
@@ -30,7 +31,7 @@ interface MyTopicsPageProps {
  */
 async function getCurrentUser() {
   const headersList = await headers();
-  const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/auth/status`, {
+  const res = await fetch(`${ENV.API_URL}/auth/status`, {
     cache: "no-store",
     headers: {
       Cookie: headersList.get("cookie") || "",
@@ -49,7 +50,7 @@ async function getMyTopics(
 ): Promise<IBaseResponse<any>> {
   const headersList = await headers();
   const res = await fetch(
-    `${process.env.NEXT_PUBLIC_API_URL}/topics/all/library/my-topics?page=${page}&limit=${limit}`,
+    `${ENV.API_URL}/topics/all/library/my-topics?page=${page}&limit=${limit}`,
     {
       cache: "no-store",
       headers: {
@@ -57,7 +58,11 @@ async function getMyTopics(
       },
     },
   );
-  if (!res.ok) return { success: false, data: { data: [], meta: null } } as any;
+  if (!res.ok)
+    return {
+      success: false,
+      data: { data: [], meta: null },
+    } as IBaseResponse<any>;
   return await res.json();
 }
 

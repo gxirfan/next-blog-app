@@ -4,8 +4,9 @@ import React from "react";
 import Link from "next/link";
 import { CookieSettingsButton } from "./CookieSettingsButton";
 import { Cpu, ShieldCheck, Globe, Info } from "lucide-react";
+import { ENV } from "@/config/env.config";
 
-const Footer: React.FC = () => {
+const Footer = () => {
   const currentYear = new Date().getFullYear();
 
   return (
@@ -20,9 +21,7 @@ const Footer: React.FC = () => {
               </div>
               <div className="flex flex-col">
                 <span className="text-sm font-black uppercase tracking-[0.3em] text-white">
-                  <span className="text-cyan-500">
-                    {process.env.NEXT_PUBLIC_PROJECT_NAME || "Project"}
-                  </span>
+                  <span className="text-cyan-500">{ENV.PROJECT_NAME}</span>
                 </span>
                 <span className="text-[9px] font-mono text-neutral-600 uppercase tracking-widest">
                   Content_Node_System
@@ -34,7 +33,7 @@ const Footer: React.FC = () => {
               <p className="text-[10px] font-mono font-bold text-neutral-500 uppercase tracking-[0.2em]">
                 &copy; {currentYear} All Rights Reserved_
               </p>
-              <div className="flex items-center gap-3 text-[9px] font-mono uppercase tracking-[0.1em] text-neutral-700">
+              <div className="flex items-center gap-3 text-[9px] font-mono uppercase tracking-widest text-neutral-700">
                 <span className="flex items-center gap-1.5">
                   <div className="w-1 h-1 bg-cyan-900 rounded-full animate-pulse" />
                   V1.2.4_Stable
@@ -105,7 +104,6 @@ const Footer: React.FC = () => {
   );
 };
 
-// Internal Link Component with English Comments
 const FooterLink = ({
   href,
   label,

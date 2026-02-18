@@ -16,6 +16,7 @@ import Image from "next/image";
 import { INotification } from "@/app/types/notification";
 import { IBaseResponse } from "../types/common";
 import { getRelativeTime } from "../utils/date";
+import { ENV } from "@/config/env.config";
 
 interface IPaginationResponse<T> {
   data: T[];
@@ -177,8 +178,7 @@ const NotificationDropdown = () => {
                   notification.type,
                 );
                 const avatarUrl = notification.senderAvatar
-                  ? process.env.NEXT_PUBLIC_API_IMAGE_URL +
-                    notification.senderAvatar
+                  ? ENV.API_IMAGE_URL + notification.senderAvatar
                   : "http://localhost:3000/images/user/avatars/default-avatar.png";
 
                 return (
@@ -187,11 +187,7 @@ const NotificationDropdown = () => {
                     href={notification.targetUrl}
                     onClick={() => handleNotificationClick(notification)}
                     className={`flex items-center gap-4 p-4 transition-all duration-300 border-b border-neutral-900/50 hover:bg-neutral-900/40 relative group
-                                ${
-                                  !notification.isRead
-                                    ? "bg-cyan-500/[0.03]"
-                                    : ""
-                                }`}
+                                ${!notification.isRead ? "bg-cyan-500/3" : ""}`}
                   >
                     {/* Avatar & Icon Badge */}
                     <div className="shrink-0 relative">
@@ -213,7 +209,7 @@ const NotificationDropdown = () => {
                     {/* Content */}
                     <div className="flex-1 min-w-0">
                       <p
-                        className={`text-[13px] leading-snug break-words ${
+                        className={`text-[13px] leading-snug wrap-break-word ${
                           !notification.isRead
                             ? "text-neutral-100 font-bold"
                             : "text-neutral-400"

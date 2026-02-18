@@ -8,15 +8,13 @@ import { ITopicResponse } from "@/app/types/topic";
 import { Metadata } from "next";
 import { Loader } from "lucide-react";
 import TopicDetailsCard from "../_components/TopicDetailsCard";
-
-const API_BASE_URL =
-  process.env.NEXT_PUBLIC_API_BASE_URL || "http://localhost:3000/api";
+import { ENV } from "@/config/env.config";
 
 async function fetchTopicDetails(slug: string): Promise<ITopicResponse | null> {
   const headersList = await headers();
   const cookieHeader = headersList.get("cookie");
   try {
-    const url = `${API_BASE_URL}/topics/${slug}`;
+    const url = `${ENV.API_URL}/topics/${slug}`;
     const response = await fetch(url, {
       headers: {
         ...(cookieHeader && { Cookie: cookieHeader }),
@@ -60,7 +58,7 @@ export async function generateMetadata({
   }
 
   return {
-    title: `${topicDetails.title} | blog`,
+    title: `${topicDetails.title}`,
     description: topicDetails.content.substring(0, 150) + "...",
     robots: {
       index: true,

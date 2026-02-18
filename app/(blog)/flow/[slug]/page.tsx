@@ -3,9 +3,10 @@ import { notFound } from "next/navigation";
 
 import { IBaseResponse, IMeta } from "@/app/types/common";
 import { IFlow } from "@/app/types/flow";
-import FlowReplySection from "./_components/FlowReplySection"; // 🎯 Yeni Client Component
+import FlowReplySection from "./_components/FlowReplySection";
 import FlowDetailClient from "./_components/FlowDetailClient";
 import PaginationControls from "@/app/components/PaginationControls";
+import { ENV } from "@/config/env.config";
 
 // --- Fetchers ---
 
@@ -16,7 +17,7 @@ async function getFlowDetail(
   const cookieHeader = headersList.get("cookie");
 
   try {
-    const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/flow/${slug}`, {
+    const res = await fetch(`${ENV.API_URL}/flow/${slug}`, {
       cache: "no-store",
       headers: { Cookie: cookieHeader || "" },
     });
@@ -38,7 +39,7 @@ async function getReplies(
 
   try {
     const res = await fetch(
-      `${process.env.NEXT_PUBLIC_API_URL}/flow/${slug}/replies?page=${page}&limit=10`,
+      `${ENV.API_URL}/flow/${slug}/replies?page=${page}&limit=10`,
       {
         cache: "no-store",
         headers: { Cookie: cookieHeader || "" },

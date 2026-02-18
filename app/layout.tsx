@@ -21,6 +21,7 @@ import {
   getSeoKeywords,
   getSeoOpenGraphDescription,
 } from "./constants/seo";
+import { ENV } from "@/config/env.config";
 
 const inter = Inter({ subsets: ["latin"], variable: "--font-inter" });
 const spaceMono = Space_Mono({
@@ -51,8 +52,8 @@ const poppins = Poppins({
 
 export const metadata: Metadata = {
   title: {
-    default: process.env.NEXT_PUBLIC_PROJECT_NAME || "Blog App",
-    template: `%s | ${process.env.NEXT_PUBLIC_PROJECT_NAME || "Blog App"}`,
+    default: ENV.PROJECT_NAME,
+    template: `%s | ${ENV.PROJECT_NAME}`,
   },
   description: getSeoDescription(),
   authors: getSeoAuthors().map((name) => ({ name })),
@@ -62,9 +63,9 @@ export const metadata: Metadata = {
   openGraph: {
     type: "website",
     locale: "en_US",
-    url: process.env.NEXT_PUBLIC_SITE_URL || "https://example.com",
+    url: ENV.SITE_URL,
     description: getSeoOpenGraphDescription(),
-    siteName: process.env.NEXT_PUBLIC_PROJECT_NAME || "Blog App",
+    siteName: ENV.PROJECT_NAME,
   },
   robots: {
     index: true,
@@ -88,9 +89,7 @@ export default function RootLayout({
         <AuthProvider>
           <StatusGuard>{children}</StatusGuard>
         </AuthProvider>
-        <CookieConsentModal
-          blogName={process.env.NEXT_PUBLIC_PROJECT_NAME || "Blog App"}
-        />
+        <CookieConsentModal blogName={ENV.PROJECT_NAME} />
         <ScrollToTopButton />
       </body>
     </html>

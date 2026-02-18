@@ -7,6 +7,7 @@ import { headers } from "next/headers";
 import { IBaseResponse } from "@/app/types/common";
 import PaginationControls from "@/app/components/PaginationControls";
 import { getRelativeTime } from "@/app/utils/date";
+import { ENV } from "@/config/env.config";
 
 export const metadata: Metadata = {
   title: "My Flows | Content Library",
@@ -19,7 +20,7 @@ interface MyFlowsPageProps {
 // Logic remained exactly as you provided
 async function getCurrentUser() {
   const headersList = await headers();
-  const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/auth/status`, {
+  const res = await fetch(`${ENV.API_URL}/auth/status`, {
     cache: "no-store",
     headers: {
       Cookie: headersList.get("cookie") || "",
@@ -36,7 +37,7 @@ async function getFlowsByUsername(
 ): Promise<IBaseResponse<any>> {
   const headersList = await headers();
   const res = await fetch(
-    `${process.env.NEXT_PUBLIC_API_URL}/flow/username/${username}?page=${page}&limit=10`,
+    `${ENV.API_URL}/flow/username/${username}?page=${page}&limit=10`,
     {
       cache: "no-store",
       headers: {
@@ -44,7 +45,11 @@ async function getFlowsByUsername(
       },
     },
   );
-  if (!res.ok) return { success: false, data: { data: [], meta: null } } as any;
+  if (!res.ok)
+    return {
+      success: false,
+      data: { data: [], meta: null },
+    } as IBaseResponse<any>;
   return await res.json();
 }
 
@@ -67,7 +72,6 @@ export default async function MyFlowsPage({ searchParams }: MyFlowsPageProps) {
 
   return (
     <div className="mx-auto space-y-10  animate-in fade-in duration-700">
-      {/* 1. HEADER SECTION - Styled but original content kept */}
       <div className="border-b border-neutral-900 pb-8">
         <div className="flex items-center space-x-4 mb-3">
           <div className="p-3 bg-neutral-900 border border-neutral-800 rounded-2xl text-cyan-500">
@@ -82,13 +86,12 @@ export default async function MyFlowsPage({ searchParams }: MyFlowsPageProps) {
         </p>
       </div>
 
-      {/* 2. FLOW LIST - Stark Minimalist & Zero Shadow */}
       <div className="space-y-6">
         {flows.length > 0 ? (
           flows.map((flow: any) => (
             <div
               key={flow.id}
-              className="group block p-6 md:p-8 bg-neutral-950 border border-neutral-800 rounded-[2rem] hover:border-cyan-500/30 transition-all duration-300"
+              className="group block p-6 md:p-8 bg-neutral-950 border border-neutral-800 rounded-4xl hover:border-cyan-500/30 transition-all duration-300"
             >
               <div className="flex justify-between items-center mb-6">
                 <AuthorBlock
@@ -127,7 +130,6 @@ export default async function MyFlowsPage({ searchParams }: MyFlowsPageProps) {
             </div>
           ))
         ) : (
-          /* 3. EMPTY STATE - Corrected UI */
           <div className="flex flex-col items-center justify-center py-24 bg-neutral-950 border border-dashed border-neutral-800 rounded-[2.5rem]">
             <div className="p-6 bg-neutral-900 rounded-full mb-6 text-neutral-700">
               <MessageSquareOff size={40} />
@@ -145,7 +147,6 @@ export default async function MyFlowsPage({ searchParams }: MyFlowsPageProps) {
         )}
       </div>
 
-      {/* 4. PAGINATION */}
       {meta && meta.totalPages > 1 && (
         <div className="pt-10 flex justify-center">
           <PaginationControls meta={meta} />

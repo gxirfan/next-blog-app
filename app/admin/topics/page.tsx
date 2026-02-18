@@ -3,15 +3,13 @@ import { headers } from "next/headers";
 import TopicHeader from "./_components/TopicHeader";
 import TopicTableClient from "./_components/TopicTableClient";
 import TopicFooter from "./_components/TopicFooter";
-
-const API_BASE_URL =
-  process.env.NEXT_PUBLIC_API_BASE_URL || "http://localhost:3000/api";
+import { ENV } from "@/config/env.config";
 
 async function fetchTopics(): Promise<ITopicResponse[]> {
   const headerList = await headers();
   const cookie = headerList.get("cookie");
   try {
-    const response = await fetch(`${API_BASE_URL}/admin/get-topics`, {
+    const response = await fetch(`${ENV.API_URL}/admin/get-topics`, {
       headers: { Cookie: cookie || "", Accept: "application/json" },
       next: { revalidate: 0 },
     });
@@ -31,7 +29,7 @@ export default async function AdminTopicsListPage() {
       <TopicHeader count={topics.length} />
 
       {topics.length === 0 ? (
-        <div className="bg-[#0d0d0d] border border-neutral-800/60 py-20 text-center rounded-[2rem]">
+        <div className="bg-[#0d0d0d] border border-neutral-800/60 py-20 text-center rounded-4xl">
           <p className="text-neutral-600 text-xs font-mono tracking-widest uppercase font-bold">
             Null_Data_Detected
           </p>

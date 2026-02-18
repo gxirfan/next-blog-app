@@ -3,14 +3,13 @@ import UserTable from "./_components/UserTable";
 import UserHeader from "./_components/UserHeader";
 import UserFooter from "./_components/UserFooter";
 import { IUserResponse } from "@/app/types/user-response.dto";
-
-const API_URL = process.env.NEXT_PUBLIC_API_URL;
+import { ENV } from "@/config/env.config";
 
 async function getUsers(): Promise<IUserResponse[]> {
   const headerList = await headers();
   const cookie = headerList.get("cookie");
   try {
-    const res = await fetch(`${API_URL}/admin/get-users`, {
+    const res = await fetch(`${ENV.API_URL}/admin/get-users`, {
       method: "GET",
       cache: "no-store",
       headers: {
@@ -35,10 +34,8 @@ export default async function UserManagementPage() {
 
   return (
     <div className="space-y-10 animate-in fade-in duration-700">
-      {/* 1. Modüler Header */}
       <UserHeader count={users.length} />
 
-      {/* 2. Etkileşimli Tablo (Client Component) */}
       <div className="min-h-[400px]">
         {users.length === 0 ? (
           <div className="py-32 text-center bg-[#0d0d0d] border border-neutral-900 rounded-[2.5rem]">
@@ -51,7 +48,6 @@ export default async function UserManagementPage() {
         )}
       </div>
 
-      {/* 3. Modüler Footer */}
       <UserFooter />
     </div>
   );

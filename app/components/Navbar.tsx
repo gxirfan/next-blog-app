@@ -17,6 +17,7 @@ import {
   Tag,
 } from "lucide-react";
 import NotificationDropdown from "./NotificationDropdown";
+import { ENV } from "@/config/env.config";
 
 const Navbar = () => {
   const { user, isLoading } = useAuth();
@@ -109,13 +110,13 @@ const Navbar = () => {
 
           <Link href="/" className="group flex items-center">
             <span className="text-xl font-black tracking-tighter text-cyan-500 group-hover:text-cyan-400 transition-all duration-300 flex">
-              {process.env.NEXT_PUBLIC_PROJECT_NAME || "Blog"}
-              {process.env.NEXT_PUBLIC_VERSION_TEST === "alpha" && (
+              {ENV.PROJECT_NAME}
+              {ENV.VERSION === "alpha" && (
                 <span className="text-sm font-extrabold text-red-500 flex items-start justify-end">
                   Alpha
                 </span>
               )}
-              {process.env.NEXT_PUBLIC_VERSION_TEST === "beta" && (
+              {ENV.VERSION === "beta" && (
                 <span className="text-sm font-extrabold text-yellow-500 flex items-start justify-end">
                   Beta
                 </span>

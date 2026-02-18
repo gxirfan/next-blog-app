@@ -1,18 +1,17 @@
-const globalSeoKeywords: string[] =
-  process.env.NEXT_PUBLIC_SEO_KEYWORDS?.split(",") || [];
+import { ENV } from "@/config/env.config";
 
-const globalSeoCreator: string =
-  process.env.NEXT_PUBLIC_SEO_CREATOR || "Blog App";
+const globalSeoKeywords: string[] = ENV.SEO_KEYWORDS?.split(",") || [];
+
+const globalSeoCreator: string = ENV.SEO_CREATORS || "Blog App";
 
 const globalSeoDescription: string =
-  process.env.NEXT_PUBLIC_SEO_DESCRIPTION ||
+  ENV.SEO_DESCRIPTION ||
   "A modern blog application for sharing ideas and thoughts";
 
-const globalSeoAuthors: string[] =
-  process.env.NEXT_PUBLIC_SEO_AUTHOR?.split(",") || [];
+const globalSeoAuthors: string[] = ENV.SEO_AUTHORS?.split(",") || [];
 
 const globalSeoOpenGraphDescription: string =
-  process.env.NEXT_PUBLIC_SEO_OPENGRAPH_DESCRIPTION ||
+  ENV.SEO_OPENGRAPH_DESCRIPTION ||
   "A modern blog application for sharing ideas and thoughts.";
 
 // functions

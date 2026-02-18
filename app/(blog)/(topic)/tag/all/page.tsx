@@ -4,16 +4,14 @@ import { IBaseResponse, IMeta } from "@/app/types/common";
 import AllTagsHeader from "../_components/AllTagsHeader";
 import AllTagsFooter from "../_components/AllTagsFooter";
 import CreateTagCard from "../_components/CreateTagCard";
+import { ENV } from "@/config/env.config";
 
 async function fetchTags(
   page: number,
   limit: number,
 ): Promise<IBaseResponse<{ data: ITagResponse[]; meta: IMeta }>> {
-  const API_URL =
-    process.env.NEXT_PUBLIC_API_BASE_URL || "http://localhost:3000/api";
-
   try {
-    const url = `${API_URL}/tags/all?page=${page}&limit=${limit}`;
+    const url = `${ENV.API_URL}/tags/all?page=${page}&limit=${limit}`;
 
     const response = await fetch(url);
 

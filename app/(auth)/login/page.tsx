@@ -13,6 +13,7 @@ import {
   ShieldCheck,
   ArrowRight,
 } from "lucide-react";
+import { ENV } from "@/config/env.config";
 
 export default function LoginPage({
   searchParams,
@@ -88,7 +89,7 @@ export default function LoginPage({
               <div className="flex items-center justify-center gap-2">
                 <div className="h-px w-4 bg-neutral-800" />
                 <p className="font-mono text-[9px] uppercase tracking-[0.4em] text-neutral-400 font-bold">
-                  {process.env.NEXT_PUBLIC_PROJECT_NAME || "Blog"} Protocol
+                  {ENV.PROJECT_NAME} Protocol
                 </p>
                 <div className="h-px w-4 bg-neutral-800" />
               </div>

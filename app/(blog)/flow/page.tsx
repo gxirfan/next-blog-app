@@ -5,22 +5,20 @@ import { IBaseResponse } from "@/app/types/common";
 import { IFlow } from "@/app/types/flow";
 import { IPaginationResponse } from "@/app/types/pagination-response";
 import FlowFeed from "./_components/FlowFeed";
+import { ENV } from "@/config/env.config";
 
 async function getFlows(
   page: number,
-  limit: number
+  limit: number,
 ): Promise<IBaseResponse<IPaginationResponse<IFlow>>> {
   const headersList = await headers();
   const cookieHeader = headersList.get("cookie");
 
   try {
-    const res = await fetch(
-      `${process.env.NEXT_PUBLIC_API_URL}/flow?page=${page}&limit=${limit}`,
-      {
-        cache: "no-store",
-        headers: { Cookie: cookieHeader || "" },
-      }
-    );
+    const res = await fetch(`${ENV.API_URL}/flow?page=${page}&limit=${limit}`, {
+      cache: "no-store",
+      headers: { Cookie: cookieHeader || "" },
+    });
 
     if (!res.ok) {
       return {

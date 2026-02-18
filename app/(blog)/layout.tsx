@@ -9,11 +9,12 @@ import {
   getSeoKeywords,
   getSeoOpenGraphDescription,
 } from "../constants/seo";
+import { ENV } from "@/config/env.config";
 
 export const metadata: Metadata = {
   title: {
     default: "Home",
-    template: `%s | ${process.env.NEXT_PUBLIC_PROJECT_NAME || "Blog App"}`,
+    template: `%s | ${ENV.PROJECT_NAME}`,
   },
   description: getSeoDescription(),
   authors: getSeoAuthors().map((name) => ({ name })),
@@ -23,9 +24,9 @@ export const metadata: Metadata = {
   openGraph: {
     type: "website",
     locale: "en_US",
-    url: process.env.NEXT_PUBLIC_SITE_URL || "https://example.com",
+    url: ENV.SITE_URL,
     description: getSeoOpenGraphDescription(),
-    siteName: process.env.NEXT_PUBLIC_PROJECT_NAME || "Blog App",
+    siteName: ENV.PROJECT_NAME,
   },
   robots: {
     index: true,

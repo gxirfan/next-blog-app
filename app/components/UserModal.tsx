@@ -10,10 +10,10 @@ import {
   LayoutDashboard,
   X,
   BookOpen,
-  Crown,
   ChevronRight,
   Shield,
 } from "lucide-react";
+import { ENV } from "@/config/env.config";
 
 interface UserModalProps {
   onClose: () => void;
@@ -40,14 +40,12 @@ const UserModal = ({ onClose }: UserModalProps) => {
   };
 
   const avatarUrl = user.avatar
-    ? process.env.NEXT_PUBLIC_API_IMAGE_URL + user.avatar
+    ? ENV.API_IMAGE_URL + user.avatar
     : "http://localhost:3000/images/user/avatars/default-avatar.png";
 
   return (
-    /* 🎯 TEKNİK ÇÖZÜM: fixed inset-0 ve z-[9999] ile Header'dan bağımsızlaştırıldı */
-    /* bg-black/90 ve backdrop-blur tüm ekranı kaplar */
     <div
-      className="fixed inset-0 w-screen h-screen bg-black/90 backdrop-blur-md z-[9999] flex items-center justify-center p-4 animate-in fade-in duration-300"
+      className="fixed inset-0 w-screen h-screen bg-black/90 backdrop-blur-md z-9999 flex items-center justify-center p-4 animate-in fade-in duration-300"
       onClick={onClose}
     >
       <div

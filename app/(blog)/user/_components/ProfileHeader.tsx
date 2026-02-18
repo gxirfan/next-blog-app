@@ -1,17 +1,16 @@
 "use client";
 
-import React from "react";
 import Image from "next/image";
 import { IUserResponse } from "@/app/types/user-response.dto";
 import { getRelativeTime } from "@/app/utils/date";
+import { ENV } from "@/config/env.config";
 
 interface ProfileHeaderProps {
   user: IUserResponse;
 }
 
-const ProfileHeader: React.FC<ProfileHeaderProps> = ({ user }) => {
-  const apiUrl =
-    process.env.NEXT_PUBLIC_API_IMAGE_URL || "http://localhost:3000";
+const ProfileHeader = ({ user }: ProfileHeaderProps) => {
+  const apiUrl = ENV.API_IMAGE_URL;
 
   const DEFAULT_COVER = apiUrl + "/images/user/covers/default-cover.png";
   const DEFAULT_AVATAR = apiUrl + "/images/user/avatars/default-avatar.png";
@@ -31,7 +30,7 @@ const ProfileHeader: React.FC<ProfileHeaderProps> = ({ user }) => {
       {/* 1. COVER IMAGE: Modern Rounded-3xl corners */}
       <div
         onContextMenu={(e) => e.preventDefault()}
-        className="relative w-full h-[200px] md:h-[300px] bg-neutral-900 rounded-[2rem] overflow-hidden border border-neutral-800/30 select-none"
+        className="relative w-full h-[200px] md:h-[300px] bg-neutral-900 rounded-4xl overflow-hidden border border-neutral-800/30 select-none"
       >
         <Image
           src={coverUrl}

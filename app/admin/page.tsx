@@ -9,6 +9,7 @@ import {
   Activity,
   Mail,
 } from "lucide-react";
+import { ENV } from "@/config/env.config";
 
 export default function AdminPage() {
   const BORDER_STYLE = "border border-neutral-800/60";
@@ -61,8 +62,8 @@ export default function AdminPage() {
             <span className="text-neutral-500 font-light text-3xl">Hub</span>
           </h1>
           <p className="text-sm text-neutral-500 max-w-md mt-2">
-            Centralized administrative terminal for{" "}
-            {process.env.NEXT_PUBLIC_PROJECT_NAME || "Blog"} core modules.
+            Centralized administrative terminal for {ENV.PROJECT_NAME} core
+            modules.
           </p>
         </div>
 
@@ -143,7 +144,7 @@ export default function AdminPage() {
 
       {/* System Footer */}
       <footer className="flex justify-between items-center text-[10px] font-mono text-neutral-700 uppercase tracking-[0.4em] px-4">
-        <p>{process.env.NEXT_PUBLIC_PROJECT_NAME || "Blog"}_Terminal_v1.0.4</p>
+        <p>{ENV.PROJECT_NAME}_Terminal_v1.0.4</p>
         <div className="flex items-center gap-4">
           <p>Auth: Admin_Privileges</p>
           <div className="h-3 w-px bg-neutral-800" />

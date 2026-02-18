@@ -19,6 +19,7 @@ import {
 import EmailPrivacyToggle from "./_components/EmailPrivacyToggle";
 import ProfileMediaPreview from "./_components/ProfileMediaPreview";
 import { getRelativeTime } from "@/app/utils/date";
+import { ENV } from "@/config/env.config";
 
 export default function ProfilePage() {
   const { user, isLoading, checkAuthStatus } = useAuth();
@@ -52,7 +53,7 @@ export default function ProfilePage() {
     ? new Date(user.birthDate).toISOString().split("T")[0]
     : "";
 
-  const apiUrl = process.env.NEXT_PUBLIC_API_IMAGE_URL;
+  const apiUrl = ENV.API_IMAGE_URL;
   const avatarUrl = user.avatar
     ? apiUrl + user.avatar
     : apiUrl + "/images/user/avatars/default-avatar.png";

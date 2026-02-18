@@ -1,5 +1,6 @@
 import Link from "next/link";
 import Image from "next/image";
+import { ENV } from "@/config/env.config";
 
 interface AuthorBlockProps {
   username: string;
@@ -22,9 +23,8 @@ const AuthorBlock = ({
   avatarUrl,
 }: AuthorBlockProps) => {
   const avatarUrlFinal = avatarUrl
-    ? process.env.NEXT_PUBLIC_API_IMAGE_URL + avatarUrl
-    : process.env.NEXT_PUBLIC_API_IMAGE_URL +
-      "/images/user/avatars/default-avatar.png";
+    ? ENV.API_IMAGE_URL + avatarUrl
+    : ENV.API_IMAGE_URL + "/images/user/avatars/default-avatar.png";
 
   return (
     <div className="flex items-center space-x-2">

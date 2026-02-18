@@ -3,15 +3,14 @@ import PostList from "../../topic/_components/PostList";
 import { IBaseResponse, IMeta } from "@/app/types/common";
 import AllPostsHeader from "../_components/AllPostsHeader";
 import AllPostsFooter from "../_components/AllPostsFooter";
+import { ENV } from "@/config/env.config";
 
 async function fetchPosts(
   page: number,
   limit: number,
 ): Promise<IBaseResponse<{ data: IPostResponse[]; meta: IMeta }>> {
-  const API_BASE_URL =
-    process.env.NEXT_PUBLIC_API_BASE_URL || "http://localhost:3000/api";
   try {
-    const url = `${API_BASE_URL}/posts/all?page=${page}&limit=${limit}`;
+    const url = `${ENV.API_URL}/posts/all?page=${page}&limit=${limit}`;
 
     const response = await fetch(url);
 
