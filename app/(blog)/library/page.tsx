@@ -10,6 +10,7 @@ import {
   FolderOpen,
   Zap,
   ChevronRight,
+  ListChecks,
 } from "lucide-react";
 
 export default function LibraryPage() {
@@ -24,7 +25,7 @@ export default function LibraryPage() {
   ) => (
     <Link
       href={href}
-      className="group flex items-center justify-between p-4 bg-neutral-950 border border-neutral-800 rounded-[2rem] hover:border-cyan-500/40 transition-all duration-300 active:scale-[0.98]"
+      className="group flex items-center justify-between p-4 bg-neutral-950 border border-neutral-800 rounded-4xl hover:border-cyan-500/40 transition-all duration-300 active:scale-[0.98]"
     >
       <div className="flex items-center space-x-4">
         <div
@@ -64,11 +65,12 @@ export default function LibraryPage() {
           authored or created.
         </p>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
           {renderLink("/library/my-flows", "My Flows", Zap)}
           {renderLink("/library/my-posts", "My Posts", MessageSquare)}
           {renderLink("/library/my-topics", "My Topics", FolderOpen)}
           {renderLink("/library/my-tags", "My Tags", Tag)}
+          {renderLink("/library/voted-posts", "My Voted Posts", ListChecks)}
         </div>
       </section>
 
@@ -85,7 +87,7 @@ export default function LibraryPage() {
         </p>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-          <div className="p-6 rounded-[2rem] border border-dashed border-neutral-800 flex items-center justify-center bg-neutral-950/30 md:col-span-3">
+          <div className="p-6 rounded-4xl border border-dashed border-neutral-800 flex items-center justify-center bg-neutral-950/30 md:col-span-3">
             <div className="flex items-center gap-3 opacity-30">
               <Star size={16} className="text-neutral-500" />
               <p className="text-[11px] uppercase tracking-widest">
