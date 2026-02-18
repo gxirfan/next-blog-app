@@ -20,6 +20,7 @@ import {
 import api from "@/api/axios";
 import { useAuth } from "@/app/context/AuthContext";
 import { ENV } from "@/config/env.config";
+import { getMinAgeDate } from "@/app/types/validators/min-age-custom.validator";
 
 // DTO Interface for local use
 interface UserResponseWithRecoveryCodesDto {
@@ -62,6 +63,12 @@ export default function RegisterPage() {
     bio: "",
     nickname: "",
   });
+
+  const handleUsernameKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === " ") {
+      e.preventDefault();
+    }
+  };
 
   const [termsAccepted, setTermsAccepted] = useState(false);
   const [error, setError] = useState("");
@@ -183,8 +190,9 @@ export default function RegisterPage() {
                   <label className={LABEL_STYLING}>Username</label>
                   <input
                     name="username"
+                    onKeyDown={handleUsernameKeyDown}
                     type="text"
-                    placeholder="handle"
+                    placeholder="handle_username"
                     className={INPUT_STYLING}
                     onChange={handleChange}
                     required
@@ -202,7 +210,7 @@ export default function RegisterPage() {
                   />
                 </div>
                 <div className="space-y-2">
-                  <label className={LABEL_STYLING}>Access Pin</label>
+                  <label className={LABEL_STYLING}>PASSWORD</label>
                   <input
                     name="password"
                     type="password"
@@ -249,6 +257,7 @@ export default function RegisterPage() {
                     type="date"
                     className={`${INPUT_STYLING} uppercase text-[10px]`}
                     onChange={handleChange}
+                    max={getMinAgeDate()}
                   />
                 </div>
               </div>
