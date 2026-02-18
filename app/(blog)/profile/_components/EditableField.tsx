@@ -16,6 +16,9 @@ import {
   ChevronRight,
   Smile,
   X,
+  Mars,
+  Venus,
+  Transgender,
 } from "lucide-react";
 
 interface EditableFieldProps {
@@ -129,7 +132,25 @@ const EditableField = ({
       {!isEditing ? (
         /* Static View */
         <p className="text-sm font-bold text-white tracking-tight break-all">
-          {type === "password" ? "••••••••" : displayValue}
+          {type === "password" && fieldKey !== "gender" ? (
+            "••••••••"
+          ) : type !== "password" && fieldKey === "gender" ? (
+            <span className="flex items-center gap-2">
+              {displayValue === "male" && (
+                <Mars size={16} className="text-cyan-400" />
+              )}
+              {displayValue === "female" && (
+                <Venus size={16} className="text-pink-400" />
+              )}
+              {displayValue === "other" && (
+                <Transgender size={16} className="text-neutral-400" />
+              )}
+
+              <span className="capitalize">{displayValue as string}</span>
+            </span>
+          ) : (
+            displayValue
+          )}
         </p>
       ) : (
         /* Edit Mode */
