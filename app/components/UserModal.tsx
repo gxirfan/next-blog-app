@@ -39,9 +39,9 @@ const UserModal = ({ onClose }: UserModalProps) => {
     router.push("/login");
   };
 
-  const avatarUrl = user.avatar
-    ? ENV.API_IMAGE_URL + user.avatar
-    : "http://localhost:3000/images/user/avatars/default-avatar.png";
+  const avatarUrl =
+    ENV.API_IMAGE_URL +
+    (user.avatar ? user.avatar : "/images/user/avatars/default-avatar.png");
 
   return (
     <div
@@ -68,7 +68,7 @@ const UserModal = ({ onClose }: UserModalProps) => {
                 src={avatarUrl}
                 fill
                 className="object-cover"
-                alt="Identity"
+                alt="Identity avatar"
               />
             </div>
             {/* Role Badge Attached to Avatar */}
