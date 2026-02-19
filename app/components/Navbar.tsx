@@ -18,6 +18,7 @@ import {
 } from "lucide-react";
 import NotificationDropdown from "./NotificationDropdown";
 import { ENV } from "@/config/env.config";
+import Image from "next/image";
 
 const Navbar = () => {
   const { user, isLoading } = useAuth();
@@ -148,7 +149,17 @@ const Navbar = () => {
                 className="flex items-center gap-2 pl-1.5 pr-1.5 md:pl-2 md:pr-4 py-1.5 bg-neutral-900/40 border border-white/5 rounded-full hover:border-cyan-500/30 transition-all cursor-pointer group active:scale-95"
               >
                 <div className="w-8 h-8 bg-linear-to-tr from-cyan-600 to-cyan-400 rounded-full flex items-center justify-center transition-all">
-                  <User size={15} className="text-black font-bold" />
+                  <Image
+                    src={
+                      user.avatar
+                        ? `${ENV.API_IMAGE_URL}${user.avatar}`
+                        : `${ENV.API_IMAGE_URL}/images/user/avatars/default-avatar.png`
+                    }
+                    alt={user.nickname}
+                    width={32}
+                    height={32}
+                    className="w-full h-full object-cover rounded-full"
+                  />
                 </div>
                 <span className="text-sm font-bold text-neutral-200 group-hover:text-white transition-colors hidden md:block">
                   {user.nickname}
