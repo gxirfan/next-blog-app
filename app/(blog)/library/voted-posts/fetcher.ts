@@ -1,11 +1,11 @@
-import { headers } from "next/headers";
 import { IBaseResponse } from "@/app/types/common";
 import { IVoteStatusResponse } from "@/app/types/vote";
 import { ENV } from "@/config/env.config";
+import { cookies } from "next/headers";
 
 async function fetchUserVotedPosts(): Promise<IVoteStatusResponse[]> {
-  const headersList = await headers();
-  const cookieHeader = headersList.get("cookie");
+  const headersList = await cookies();
+  const cookieHeader = headersList.toString();
 
   if (!cookieHeader) return [];
 

@@ -1,4 +1,4 @@
-import { headers } from "next/headers";
+import { cookies } from "next/headers";
 import { INotification } from "@/app/types/notification";
 import { IBaseResponse } from "@/app/types/common";
 import { ENV } from "@/config/env.config";
@@ -24,8 +24,8 @@ export async function fetchAllNotifications({
 }: NotificationListParams): Promise<
   IBaseResponse<IPaginationResponse<INotification>>
 > {
-  const headersList = await headers();
-  const cookieHeader = headersList.get("cookie");
+  const headersList = await cookies();
+  const cookieHeader = headersList.toString();
 
   if (!cookieHeader) {
     return {

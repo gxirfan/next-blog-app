@@ -1,6 +1,6 @@
 import { IPostResponse } from "@/app/types/post";
 import { Clock } from "lucide-react";
-import { headers } from "next/headers";
+import { cookies } from "next/headers";
 import { IBaseResponse } from "@/app/types/common";
 import { IVoteStatusResponse } from "@/app/types/vote";
 import { prepareContentForImage } from "@/app/types/prepareContentForImage";
@@ -14,8 +14,8 @@ interface PostDetailsCardProps {
 }
 
 async function fetchUserVoteDirection(postId: string): Promise<number | null> {
-  const headersList = await headers();
-  const cookieHeader = headersList.get("cookie");
+  const headersList = await cookies();
+  const cookieHeader = headersList.toString();
   if (!cookieHeader) return null;
 
   try {

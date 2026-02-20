@@ -1,4 +1,4 @@
-import { headers } from "next/headers";
+import { cookies } from "next/headers";
 import FlowHeader from "./_components/FlowHeader";
 import FlowTableClient from "./_components/FlowTableClient";
 import FlowFooter from "./_components/FlowFooter";
@@ -11,15 +11,15 @@ async function fetchFlows(
   page: number = 1,
   limit: number = 10,
 ): Promise<IBaseResponse<IPaginationResponse<IFlow>>> {
-  const headerList = await headers();
-  const cookie = headerList.get("cookie");
+  const headerList = await cookies();
+  const cookie = headerList.toString();
 
   try {
     const response = await fetch(
       `${ENV.API_URL}/admin/get-flow-posts?page=${page}&limit=${limit}`,
       {
         headers: {
-          Cookie: cookie || "",
+          Cookie: cookie,
           Accept: "application/json",
         },
         cache: "no-store",

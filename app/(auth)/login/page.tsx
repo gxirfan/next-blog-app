@@ -3,7 +3,7 @@
 import { useState, useEffect, use } from "react";
 import api from "@/api/axios";
 import { useRouter } from "next/navigation";
-import { useAuth, UserProfile } from "@/app/context/AuthContext";
+import { useAuth } from "@/app/context/AuthContext";
 import Link from "next/link";
 import {
   User,
@@ -14,6 +14,7 @@ import {
   ArrowRight,
 } from "lucide-react";
 import { ENV } from "@/config/env.config";
+import { IUserResponse } from "@/app/types/user-response.dto";
 
 export default function LoginPage({
   searchParams,
@@ -64,7 +65,7 @@ export default function LoginPage({
     setError("");
     try {
       const response = await api.post("/auth/login", formData);
-      login(response.data.data as UserProfile);
+      login(response.data.data as IUserResponse);
     } catch (err: any) {
       setError(err.response?.data?.message || "Invalid credentials.");
     } finally {

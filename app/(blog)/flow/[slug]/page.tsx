@@ -1,4 +1,4 @@
-import { headers } from "next/headers";
+import { cookies } from "next/headers";
 import { notFound } from "next/navigation";
 
 import { IBaseResponse, IMeta } from "@/app/types/common";
@@ -13,13 +13,12 @@ import { ENV } from "@/config/env.config";
 async function getFlowDetail(
   slug: string,
 ): Promise<IBaseResponse<IFlow> | null> {
-  const headersList = await headers();
-  const cookieHeader = headersList.get("cookie");
+  const headersList = await cookies();
 
   try {
     const res = await fetch(`${ENV.API_URL}/flow/${slug}`, {
       cache: "no-store",
-      headers: { Cookie: cookieHeader || "" },
+      headers: { Cookie: headersList.toString() },
     });
     if (!res.ok) return null;
     const json = await res.json();
@@ -34,15 +33,14 @@ async function getReplies(
   slug: string,
   page: number,
 ): Promise<IBaseResponse<{ data: IFlow[]; meta: IMeta }>> {
-  const headersList = await headers();
-  const cookieHeader = headersList.get("cookie");
+  const headersList = await cookies();
 
   try {
     const res = await fetch(
       `${ENV.API_URL}/flow/${slug}/replies?page=${page}&limit=10`,
       {
         cache: "no-store",
-        headers: { Cookie: cookieHeader || "" },
+        headers: { Cookie: headersList.toString() },
       },
     );
 

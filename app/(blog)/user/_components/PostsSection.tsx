@@ -3,15 +3,15 @@ import PaginationControls from "@/app/components/PaginationControls";
 import { IBaseResponse, IMeta } from "@/app/types/common";
 import { IPostResponse } from "@/app/types/post";
 import { ENV } from "@/config/env.config";
-import { headers } from "next/headers";
+import { cookies } from "next/headers";
 
 async function fetchUserPosts(
   username: string,
   page: number,
   limit: number,
 ): Promise<IBaseResponse<{ data: IPostResponse[]; meta: IMeta }> | null> {
-  const headersList = await headers();
-  const cookieHeader = headersList.get("cookie");
+  const headersList = await cookies();
+  const cookieHeader = headersList.toString();
 
   try {
     const url = `${ENV.API_URL}/posts/all/username/${username}?page=${page}&limit=${limit}`;

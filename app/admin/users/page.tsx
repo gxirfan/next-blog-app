@@ -1,20 +1,19 @@
-import { headers } from "next/headers";
 import UserTable from "./_components/UserTable";
 import UserHeader from "./_components/UserHeader";
 import UserFooter from "./_components/UserFooter";
 import { IUserResponse } from "@/app/types/user-response.dto";
 import { ENV } from "@/config/env.config";
+import { cookies } from "next/headers";
 
 async function getUsers(): Promise<IUserResponse[]> {
-  const headerList = await headers();
-  const cookie = headerList.get("cookie");
+  const headerList = await cookies();
   try {
     const res = await fetch(`${ENV.API_URL}/admin/get-users`, {
       method: "GET",
       cache: "no-store",
       headers: {
         "Content-Type": "application/json",
-        Cookie: cookie || "",
+        Cookie: headerList.toString(),
         Accept: "application/json",
         "X-Admin-Panel": "true",
       },

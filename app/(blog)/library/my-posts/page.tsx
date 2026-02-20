@@ -1,7 +1,5 @@
-// app/library/my-posts/page.tsx
 import { Metadata } from "next";
-import { redirect } from "next/navigation";
-import { headers } from "next/headers";
+import { cookies } from "next/headers";
 import Link from "next/link";
 import {
   MessageSquare,
@@ -16,6 +14,7 @@ import PaginationControls from "@/app/components/PaginationControls";
 import { IBaseResponse } from "@/app/types/common";
 import { getRelativeTime } from "@/app/utils/date";
 import { ENV } from "@/config/env.config";
+import { getRequiredAuthSession } from "@/app/services/session";
 
 export const metadata: Metadata = {
   title: "My Posts | Content Library",
@@ -26,34 +25,19 @@ interface MyPostsPageProps {
 }
 
 /**
- * Fetch authentication status from the internal API
- */
-async function getCurrentUser() {
-  const headersList = await headers();
-  const res = await fetch(`${ENV.API_URL}/auth/status`, {
-    cache: "no-store",
-    headers: {
-      Cookie: headersList.get("cookie") || "",
-    },
-  });
-  if (!res.ok) return null;
-  return await res.json();
-}
-
-/**
  * Fetch user's posts with pagination
  */
 async function getMyPosts(
   page: number = 1,
   limit: number = 10,
 ): Promise<IBaseResponse<any>> {
-  const headersList = await headers();
+  const headersList = await cookies();
   const res = await fetch(
     `${ENV.API_URL}/posts/all/library/my-posts?page=${page}&limit=${limit}`,
     {
       cache: "no-store",
       headers: {
-        Cookie: headersList.get("cookie") || "",
+        Cookie: headersList.toString(),
       },
     },
   );
@@ -66,15 +50,9 @@ async function getMyPosts(
 }
 
 export default async function MyPostsPage({ searchParams }: MyPostsPageProps) {
-  const session = await getCurrentUser();
   const resolvedParams = await searchParams;
   const page = parseInt(resolvedParams.page || "1");
   const limit = parseInt(resolvedParams.limit || "10");
-
-  // Redirect unauthorized users
-  if (!session || !session.data) {
-    redirect("/auth/login?returnUrl=/library/my-posts");
-  }
 
   const response = await getMyPosts(page, limit);
   const posts = response?.data?.data || [];
@@ -96,6 +74,7 @@ export default async function MyPostsPage({ searchParams }: MyPostsPageProps) {
         };
   };
 
+  await getRequiredAuthSession("/library/my-posts");
   return (
     <div className="mx-auto space-y-12 pb-20 animate-in fade-in duration-700">
       {/* 1. HEADER SECTION */}

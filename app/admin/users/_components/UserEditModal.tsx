@@ -3,7 +3,6 @@
 import React, { useState, useEffect } from "react";
 import { X, Shield, ChevronDown, Calendar, Mail, AtSign } from "lucide-react";
 import { IUserResponse } from "@/app/types/user-response.dto";
-import { UserProfile } from "@/app/context/AuthContext";
 
 enum UserStatus {
   Active = "active",
@@ -31,7 +30,7 @@ export default function UserEditModal({
   onSave,
 }: {
   user: IUserResponse;
-  authUser: UserProfile;
+  authUser: IUserResponse;
   isOpen: boolean;
   onClose: () => void;
   onSave: (id: string, data: any) => void;

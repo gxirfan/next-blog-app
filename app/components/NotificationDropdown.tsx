@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useEffect, useRef, ElementType } from "react";
+import { useState, useEffect, useRef, ElementType } from "react";
 import Link from "next/link";
 import {
   Bell,
@@ -179,7 +179,8 @@ const NotificationDropdown = () => {
                 );
                 const avatarUrl = notification.senderAvatar
                   ? ENV.API_IMAGE_URL + notification.senderAvatar
-                  : "http://localhost:3000/images/user/avatars/default-avatar.png";
+                  : ENV.API_IMAGE_URL +
+                    "/images/user/avatars/default-avatar.png";
 
                 return (
                   <Link

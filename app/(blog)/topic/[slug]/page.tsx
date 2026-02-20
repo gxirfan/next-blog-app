@@ -3,16 +3,16 @@ import { Suspense } from "react";
 import TopicManagementActions from "../_components/TopicManagementActions";
 import TopicPostsSection from "../_components/TopicPostsSection";
 import PostCreationWrapper from "../_components/PostCreationWrapper";
-import { headers } from "next/headers";
 import { ITopicResponse } from "@/app/types/topic";
 import { Metadata } from "next";
 import { Loader } from "lucide-react";
 import TopicDetailsCard from "../_components/TopicDetailsCard";
 import { ENV } from "@/config/env.config";
+import { cookies } from "next/headers";
 
 async function fetchTopicDetails(slug: string): Promise<ITopicResponse | null> {
-  const headersList = await headers();
-  const cookieHeader = headersList.get("cookie");
+  const headersList = await cookies();
+  const cookieHeader = headersList.toString();
   try {
     const url = `${ENV.API_URL}/topics/${slug}`;
     const response = await fetch(url, {

@@ -1,7 +1,6 @@
 // app/library/my-topics/page.tsx
 import { Metadata } from "next";
-import { redirect } from "next/navigation";
-import { headers } from "next/headers";
+import { cookies } from "next/headers";
 import Link from "next/link";
 import {
   FolderOpen,
@@ -17,6 +16,7 @@ import PaginationControls from "@/app/components/PaginationControls";
 import { IBaseResponse } from "@/app/types/common";
 import { getRelativeTime } from "@/app/utils/date";
 import { ENV } from "@/config/env.config";
+import { getRequiredAuthSession } from "@/app/services/session";
 
 export const metadata: Metadata = {
   title: "My Topics | Content Library",
@@ -27,34 +27,19 @@ interface MyTopicsPageProps {
 }
 
 /**
- * Validates session on server side
- */
-async function getCurrentUser() {
-  const headersList = await headers();
-  const res = await fetch(`${ENV.API_URL}/auth/status`, {
-    cache: "no-store",
-    headers: {
-      Cookie: headersList.get("cookie") || "",
-    },
-  });
-  if (!res.ok) return null;
-  return await res.json();
-}
-
-/**
  * Server-side fetch for user's created topics
  */
 async function getMyTopics(
   page: number = 1,
   limit: number = 10,
 ): Promise<IBaseResponse<any>> {
-  const headersList = await headers();
+  const headersList = await cookies();
   const res = await fetch(
     `${ENV.API_URL}/topics/all/library/my-topics?page=${page}&limit=${limit}`,
     {
       cache: "no-store",
       headers: {
-        Cookie: headersList.get("cookie") || "",
+        Cookie: headersList.toString(),
       },
     },
   );
@@ -69,15 +54,9 @@ async function getMyTopics(
 export default async function MyTopicsPage({
   searchParams,
 }: MyTopicsPageProps) {
-  const session = await getCurrentUser();
   const resolvedParams = await searchParams;
   const page = parseInt(resolvedParams.page || "1");
   const limit = parseInt(resolvedParams.limit || "10");
-
-  // Authentication Guard
-  if (!session || !session.data) {
-    redirect("/auth/login?returnUrl=/library/my-topics");
-  }
 
   const response = await getMyTopics(page, limit);
   const topics = response?.data?.data || [];
@@ -99,6 +78,7 @@ export default async function MyTopicsPage({
         };
   };
 
+  await getRequiredAuthSession("/library/my-topics");
   return (
     <div className="mx-auto space-y-12 pb-20 animate-in fade-in duration-700">
       {/* 1. HEADER SECTION */}

@@ -1,19 +1,19 @@
 import { ITagResponse } from "@/app/types/tag";
-import { headers } from "next/headers";
+import { cookies } from "next/headers";
 import TagHeader from "./_components/TagHeader";
 import TagFooter from "./_components/TagFooter";
 import TagTableClient from "./_components/TagTableClient";
 import { ENV } from "@/config/env.config";
 
 async function fetchTags(): Promise<ITagResponse[]> {
-  const headerList = await headers();
-  const cookie = headerList.get("cookie");
+  const headerList = await cookies();
+  const cookie = headerList.toString();
 
   try {
     const url = `${ENV.API_URL}/admin/get-tags`;
     const response = await fetch(url, {
       headers: {
-        Cookie: cookie || "",
+        Cookie: cookie,
         Accept: "application/json",
       },
       next: { revalidate: 0 },

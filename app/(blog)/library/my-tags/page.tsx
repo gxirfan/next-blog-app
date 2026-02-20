@@ -1,7 +1,6 @@
 // app/library/my-tags/page.tsx
 import { Metadata } from "next";
-import { redirect } from "next/navigation";
-import { headers } from "next/headers";
+import { cookies } from "next/headers";
 import Link from "next/link";
 import {
   Tag,
@@ -14,6 +13,7 @@ import {
 import PaginationControls from "@/app/components/PaginationControls";
 import { IBaseResponse } from "@/app/types/common";
 import { ENV } from "@/config/env.config";
+import { getRequiredAuthSession } from "@/app/services/session";
 
 export const metadata: Metadata = {
   title: "My Tags | Content Library",
@@ -24,34 +24,19 @@ interface MyTagsPageProps {
 }
 
 /**
- * Validates the user session on the server
- */
-async function getCurrentUser() {
-  const headersList = await headers();
-  const res = await fetch(`${ENV.API_URL}/auth/status`, {
-    cache: "no-store",
-    headers: {
-      Cookie: headersList.get("cookie") || "",
-    },
-  });
-  if (!res.ok) return null;
-  return await res.json();
-}
-
-/**
  * Server-side fetch for user's created tags
  */
 async function getMyTags(
   page: number = 1,
   limit: number = 10,
 ): Promise<IBaseResponse<any>> {
-  const headersList = await headers();
+  const headersList = await cookies();
   const res = await fetch(
     `${ENV.API_URL}/tags/all/library/my-tags?page=${page}&limit=${limit}`,
     {
       cache: "no-store",
       headers: {
-        Cookie: headersList.get("cookie") || "",
+        Cookie: headersList.toString(),
       },
     },
   );
@@ -64,15 +49,9 @@ async function getMyTags(
 }
 
 export default async function MyTagsPage({ searchParams }: MyTagsPageProps) {
-  const session = await getCurrentUser();
   const resolvedParams = await searchParams;
   const page = parseInt(resolvedParams.page || "1");
   const limit = parseInt(resolvedParams.limit || "10");
-
-  // Auth Guard
-  if (!session || !session.data) {
-    redirect("/auth/login?returnUrl=/library/my-tags");
-  }
 
   const response = await getMyTags(page, limit);
   const tags = response?.data?.data || [];
@@ -93,6 +72,8 @@ export default async function MyTagsPage({ searchParams }: MyTagsPageProps) {
           bg: "bg-red-500/5 border-red-500/10",
         };
   };
+
+  await getRequiredAuthSession("/library/my-tags");
 
   return (
     <div className="mx-auto space-y-12 pb-20 animate-in fade-in duration-700">
@@ -121,7 +102,7 @@ export default async function MyTagsPage({ searchParams }: MyTagsPageProps) {
               return (
                 <div
                   key={tag.id}
-                  className="group relative p-6 bg-neutral-950 border border-neutral-800 rounded-[2rem] hover:border-cyan-500/30 transition-all duration-300 flex flex-col md:flex-row justify-between items-start md:items-center gap-6"
+                  className="group relative p-6 bg-neutral-950 border border-neutral-800 rounded-4xl hover:border-cyan-500/30 transition-all duration-300 flex flex-col md:flex-row justify-between items-start md:items-center gap-6"
                 >
                   <div className="flex-1 min-w-0 space-y-3">
                     <div className="flex items-center gap-3">

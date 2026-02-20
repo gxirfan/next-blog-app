@@ -1,5 +1,5 @@
 import { Sparkles } from "lucide-react";
-import { headers } from "next/headers";
+import { cookies, headers } from "next/headers";
 import PaginationControls from "@/app/components/PaginationControls";
 import { IBaseResponse } from "@/app/types/common";
 import { IFlow } from "@/app/types/flow";
@@ -11,13 +11,12 @@ async function getFlows(
   page: number,
   limit: number,
 ): Promise<IBaseResponse<IPaginationResponse<IFlow>>> {
-  const headersList = await headers();
-  const cookieHeader = headersList.get("cookie");
+  const headersList = await cookies();
 
   try {
     const res = await fetch(`${ENV.API_URL}/flow?page=${page}&limit=${limit}`, {
       cache: "no-store",
-      headers: { Cookie: cookieHeader || "" },
+      headers: { Cookie: headersList.toString() },
     });
 
     if (!res.ok) {

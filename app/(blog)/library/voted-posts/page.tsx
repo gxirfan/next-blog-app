@@ -2,11 +2,12 @@ import { ArrowBigUp, ArrowBigDown, ListChecks, Hash } from "lucide-react";
 import Link from "next/link";
 import { fetchUserVotedPosts } from "./fetcher";
 import { IVoteStatusResponse } from "@/app/types/vote";
+import { getRequiredAuthSession } from "@/app/services/session";
 
 export default async function VotedPostsPage() {
   const votedPosts = await fetchUserVotedPosts();
 
-  // if (votedPosts.length === 0 && userIsLoggedInCheck) redirect('/login');
+  await getRequiredAuthSession("/library/voted-posts");
 
   const TitleBar = (
     <div className="flex flex-col gap-2 mb-12 animate-in fade-in slide-in-from-top-4 duration-700">
@@ -30,6 +31,7 @@ export default async function VotedPostsPage() {
   );
 
   if (votedPosts.length === 0) {
+    await getRequiredAuthSession("/library/voted-posts");
     return (
       <div className="container mx-auto p-6 max-w-4xl min-h-[60vh] flex flex-col justify-center">
         {TitleBar}

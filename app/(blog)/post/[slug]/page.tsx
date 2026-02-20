@@ -1,7 +1,6 @@
 import { notFound } from "next/navigation";
 import { IPostResponse } from "@/app/types/post";
 import PostCreationWrapper from "@/app/(blog)/topic/_components/PostCreationWrapper";
-import { headers } from "next/headers";
 import { Metadata } from "next";
 import { Loader } from "lucide-react";
 import { Suspense } from "react";
@@ -9,10 +8,11 @@ import PostDetailsCard from "../_components/PostDetailsPage";
 import { RepliesSection } from "./RepliesSection";
 import PostManagementActions from "../_components/PostManagementActions";
 import { ENV } from "@/config/env.config";
+import { cookies } from "next/headers";
 
 async function fetchPostDetail(slug: string): Promise<IPostResponse | null> {
-  const headersList = await headers();
-  const cookieHeader = headersList.get("cookie");
+  const headersList = await cookies();
+  const cookieHeader = headersList.toString();
   try {
     const url = `${ENV.API_URL}/posts/${slug}`;
     const response = await fetch(url, {

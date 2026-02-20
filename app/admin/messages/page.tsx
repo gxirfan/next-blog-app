@@ -1,6 +1,6 @@
 import { IBaseResponse } from "@/app/types/common";
 import MessageTableClient from "./_components/MessageTableClient";
-import { headers } from "next/headers";
+import { cookies } from "next/headers";
 import { IPaginationResponse } from "@/app/types/pagination-response";
 import { IContactResponse } from "@/app/types/contact-response";
 import { ENV } from "@/config/env.config";
@@ -10,14 +10,14 @@ async function fetchMessages(
   limit: number,
 ): Promise<IBaseResponse<IPaginationResponse<IContactResponse>>> {
   // Note: Ensure you handle authentication cookies/headers here if needed
-  const headerList = await headers();
-  const cookie = headerList.get("cookie");
+  const headerList = await cookies();
+  const cookie = headerList.toString();
   const response = await fetch(
     `${ENV.API_URL}/admin/get-contacts?page=${page}&limit=${limit}`,
     {
       cache: "no-store",
       headers: {
-        Cookie: cookie || "",
+        Cookie: cookie,
         Accept: "application/json",
       },
     },

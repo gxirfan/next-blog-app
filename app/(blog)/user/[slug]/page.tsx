@@ -1,5 +1,4 @@
 import { notFound } from "next/navigation";
-import { headers } from "next/headers";
 import ProfileHeader from "../_components/ProfileHeader";
 import ProfileInfoCard from "../_components/ProfileInfoCard";
 import { IBaseResponse } from "@/app/types/common";
@@ -8,12 +7,13 @@ import { Suspense } from "react";
 import { Loader } from "lucide-react";
 import PostsSection from "../_components/PostsSection";
 import { ENV } from "@/config/env.config";
+import { cookies } from "next/headers";
 
 async function fetchUserProfile(
   username: string,
 ): Promise<IBaseResponse<IUserResponse> | null> {
-  const headersList = await headers();
-  const cookieHeader = headersList.get("cookie");
+  const headersList = await cookies();
+  const cookieHeader = headersList.toString();
 
   try {
     const url = `${ENV.API_URL}/user/public-profile/${username}`;

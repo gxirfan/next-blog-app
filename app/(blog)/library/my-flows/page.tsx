@@ -1,13 +1,13 @@
 import { Metadata } from "next";
-import { redirect } from "next/navigation";
 import { Zap, MessageSquareOff, ChevronRight, Calendar } from "lucide-react";
 import AuthorBlock from "@/app/components/AuthorBlock";
 import Link from "next/link";
-import { headers } from "next/headers";
 import { IBaseResponse } from "@/app/types/common";
 import PaginationControls from "@/app/components/PaginationControls";
 import { getRelativeTime } from "@/app/utils/date";
 import { ENV } from "@/config/env.config";
+import { cookies } from "next/headers";
+import { getRequiredAuthSession } from "@/app/services/session";
 
 export const metadata: Metadata = {
   title: "My Flows | Content Library",
@@ -17,31 +17,16 @@ interface MyFlowsPageProps {
   searchParams: Promise<{ page?: string }>;
 }
 
-// Logic remained exactly as you provided
-async function getCurrentUser() {
-  const headersList = await headers();
-  const res = await fetch(`${ENV.API_URL}/auth/status`, {
-    cache: "no-store",
-    headers: {
-      Cookie: headersList.get("cookie") || "",
-    },
-  });
-  if (!res.ok) return null;
-  const data = await res.json();
-  return data;
-}
-
-async function getFlowsByUsername(
-  username: string,
+async function getFlowsForLibrary(
   page: number = 1,
 ): Promise<IBaseResponse<any>> {
-  const headersList = await headers();
+  const headersList = await cookies();
   const res = await fetch(
-    `${ENV.API_URL}/flow/username/${username}?page=${page}&limit=10`,
+    `${ENV.API_URL}/flow/all/library/my-flows?page=${page}&limit=10`,
     {
       cache: "no-store",
       headers: {
-        Cookie: headersList.get("cookie") || "",
+        Cookie: headersList.toString(),
       },
     },
   );
@@ -54,22 +39,14 @@ async function getFlowsByUsername(
 }
 
 export default async function MyFlowsPage({ searchParams }: MyFlowsPageProps) {
-  const session = await getCurrentUser();
   const resolvedSearchParams = await searchParams;
   const page = resolvedSearchParams.page || "1";
 
-  if (!session || !session.data) {
-    redirect("/auth/login?returnUrl=/library/my-flows");
-  }
-
-  const response = await getFlowsByUsername(
-    session.data.user.username,
-    parseInt(page),
-  );
-
+  const response = await getFlowsForLibrary(parseInt(page));
   const flows = response?.data?.data || [];
   const meta = response?.data?.meta;
 
+  await getRequiredAuthSession("/library/my-flows");
   return (
     <div className="mx-auto space-y-10  animate-in fade-in duration-700">
       <div className="border-b border-neutral-900 pb-8">

@@ -1,4 +1,3 @@
-// app/layout.tsx
 import type { Metadata } from "next";
 import "./globals.css";
 import { AuthProvider } from "./context/AuthContext";
@@ -22,6 +21,7 @@ import {
   getSeoOpenGraphDescription,
 } from "./constants/seo";
 import { ENV } from "@/config/env.config";
+import { getSSRUser } from "./services/auth-server";
 
 const inter = Inter({ subsets: ["latin"], variable: "--font-inter" });
 const spaceMono = Space_Mono({
@@ -73,11 +73,12 @@ export const metadata: Metadata = {
   },
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
+  const user = await getSSRUser();
   return (
     <html
       lang="en"
@@ -86,7 +87,7 @@ export default function RootLayout({
     >
       <body className="text-white antialiased">
         <NextTopLoader color="#00bcd4" showSpinner={false} />
-        <AuthProvider>
+        <AuthProvider initialUser={user}>
           <StatusGuard>{children}</StatusGuard>
         </AuthProvider>
         <CookieConsentModal blogName={ENV.PROJECT_NAME} />

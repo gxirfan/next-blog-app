@@ -1,18 +1,18 @@
 import { IBaseResponse } from "@/app/types/common";
 import MessageDetailClient from "../_components/MessageDetailClient";
 import { IContactResponse } from "@/app/types/contact-response";
-import { headers } from "next/headers";
 import { ENV } from "@/config/env.config";
+import { cookies } from "next/headers";
 
 async function fetchMessageDetail(
   slug: string,
 ): Promise<IBaseResponse<IContactResponse>> {
-  const headersList = await headers();
+  const headersList = await cookies();
   // Ensure we are fetching without caching to get the latest read/unread status
   const response = await fetch(`${ENV.API_URL}/admin/get-contact/${slug}`, {
     cache: "no-store",
     headers: {
-      cookie: headersList.get("cookie") || "",
+      cookie: headersList.toString(),
     },
   });
   const result = await response.json();
