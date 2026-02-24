@@ -131,7 +131,7 @@ const Navbar = () => {
               transition-all duration-300 ease-in-out cursor-pointer active:scale-90
               ${
                 isStaticMenuOpen
-                  ? "bg-cyan-500 text-black shadow-[0_0_20px_rgba(6,182,212,0.3)]"
+                  ? "bg-cyan-500 text-black"
                   : "text-neutral-500 hover:bg-neutral-900 hover:text-white border border-transparent hover:border-neutral-800"
               }
             `}

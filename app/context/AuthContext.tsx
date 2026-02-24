@@ -22,13 +22,12 @@ const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
 export const AuthProvider = ({
   children,
-  initialUser, // Sunucudan gelen ilk veri
+  initialUser,
 }: {
   children: React.ReactNode;
   initialUser: IUserResponse | null;
 }) => {
   const [user, setUser] = useState<IUserResponse | null>(initialUser);
-  // SSR verisi varsa loading false, yoksa true başlar
   const [isLoading, setIsLoading] = useState(!initialUser);
 
   const checkAuthStatus = useCallback(async () => {
@@ -42,7 +41,6 @@ export const AuthProvider = ({
     }
   }, []);
 
-  // Hydration sonrası veriyi bir kez tazele (isteğe bağlı)
   useEffect(() => {
     if (!initialUser) {
       checkAuthStatus();

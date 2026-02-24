@@ -59,7 +59,7 @@ const NotificationListItem = ({ notification }: NotificationListItemProps) => {
               }`}
     >
       {!notification.isRead && (
-        <div className="absolute left-0 top-0 bottom-0 w-[2px] bg-cyan-500 shadow-[0_0_15px_rgba(6,182,212,0.5)]" />
+        <div className="absolute left-0 top-0 bottom-0 w-[2px] bg-cyan-500" />
       )}
 
       <div className="shrink-0 relative">
@@ -72,7 +72,7 @@ const NotificationListItem = ({ notification }: NotificationListItemProps) => {
           />
         </div>
         <div
-          className={`absolute -bottom-1 -right-1 p-2 rounded-full border-2 border-neutral-950 shadow-2xl ${color}`}
+          className={`absolute -bottom-1 -right-1 p-2 rounded-full border-2 border-neutral-950 ${color}`}
         >
           <Icon size={12} strokeWidth={3} />
         </div>
@@ -91,7 +91,7 @@ const NotificationListItem = ({ notification }: NotificationListItemProps) => {
           </p>
 
           {!notification.isRead && (
-            <div className="w-2 h-2 bg-cyan-500 rounded-full shadow-[0_0_8px_rgba(6,182,212,0.8)] mt-2 shrink-0 animate-pulse" />
+            <div className="w-2 h-2 bg-cyan-500 rounded-full mt-2 shrink-0 animate-pulse" />
           )}
         </div>
 

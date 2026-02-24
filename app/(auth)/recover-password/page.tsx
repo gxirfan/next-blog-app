@@ -195,7 +195,7 @@ export default function RecoveryPage() {
                 ${
                   loading || status?.type === "success"
                     ? "bg-neutral-900 text-neutral-700 border border-neutral-800 cursor-not-allowed"
-                    : "bg-white text-black hover:bg-cyan-400 active:scale-95 shadow-[0_0_30px_rgba(255,255,255,0.05)] cursor-pointer"
+                    : "bg-white text-black hover:bg-cyan-400 active:scale-95 cursor-pointer"
                 }
               `}
             >

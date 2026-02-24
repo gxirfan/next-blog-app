@@ -29,7 +29,7 @@ const LoadMoreButton = ({ meta }: LoadMoreButtonProps) => {
 
   const ButtonBaseClass =
     "px-6 py-3 rounded-lg font-bold text-sm transition-colors duration-200";
-  const ACCENT_CLASS = "bg-[#00bcd4] hover:bg-cyan-500 text-black";
+  const ACCENT_CLASS = "bg-neutral-950 hover:bg-cyan-500 text-black";
 
   return (
     <div className="flex justify-center pt-8">

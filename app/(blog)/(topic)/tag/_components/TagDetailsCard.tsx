@@ -4,6 +4,8 @@ import { ITagResponse } from "@/app/types/tag";
 import { BookOpen, Calendar, Info, Tag } from "lucide-react";
 import AuthorBlock from "@/app/components/AuthorBlock";
 import { getRelativeTime } from "@/app/utils/date";
+import ScrollProgress from "@/app/components/ScrollProgress";
+import { ENV } from "@/config/env.config";
 
 interface TagDetailsCardProps {
   tag: ITagResponse;
@@ -13,7 +15,7 @@ interface TagDetailsCardProps {
 const TagDetailsCard = ({ tag, topicCount }: TagDetailsCardProps) => {
   return (
     <div className="w-full mb-12 animate-in fade-in duration-700">
-      {/* 1. Header Section: Title & Icon */}
+      <ScrollProgress />
       <div className="flex flex-col gap-4 mb-8">
         <div className="flex items-center gap-3 text-[10px] uppercase tracking-[0.3em] text-cyan-500">
           <Info size={14} />
@@ -29,13 +31,11 @@ const TagDetailsCard = ({ tag, topicCount }: TagDetailsCardProps) => {
 
         <p className="text-neutral-400 text-lg md:text-xl leading-relaxed max-w-3xl font-medium">
           {tag.description ||
-            "Discover the latest discussions and insights in this tag."}
+            `Discover the latest discussions and ${ENV.POST_TYPE}s in this tag.`}
         </p>
       </div>
 
-      {/* 2. Meta Section: Badges & Author */}
       <div className="flex flex-wrap items-center justify-between gap-6 py-8 border-y border-neutral-900">
-        {/* Author Info */}
         <div className="flex items-center gap-4">
           <p className="text-[10px] uppercase tracking-widest text-neutral-600">
             Established by
@@ -48,9 +48,7 @@ const TagDetailsCard = ({ tag, topicCount }: TagDetailsCardProps) => {
           />
         </div>
 
-        {/* Stats & Date Badges */}
         <div className="flex items-center gap-4">
-          {/* Topic Count Badge */}
           <div className="flex items-center gap-2 px-4 py-2 bg-neutral-900 border border-neutral-800 rounded-full">
             <BookOpen size={14} className="text-cyan-500" />
             <span className="text-xs uppercase tracking-widest text-white">
@@ -61,7 +59,6 @@ const TagDetailsCard = ({ tag, topicCount }: TagDetailsCardProps) => {
             </span>
           </div>
 
-          {/* Creation Date Badge */}
           <div className="hidden sm:flex items-center gap-2 px-4 py-2 bg-neutral-900 border border-neutral-800 rounded-full">
             <Calendar size={14} className="text-neutral-700" />
             <span className="text-[10px] uppercase tracking-widest text-neutral-500">

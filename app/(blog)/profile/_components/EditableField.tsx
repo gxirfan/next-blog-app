@@ -94,7 +94,6 @@ const EditableField = ({
 
   const displayValue = initialValue || "Not specified.";
 
-  // 🎨 Flat & Sharp Styling Tokens
   const inputBaseStyles =
     "w-full pl-11 pr-4 py-3 bg-neutral-950 border border-neutral-800 rounded-2xl text-[13px] text-white font-bold placeholder-neutral-700 focus:outline-none focus:border-cyan-500/50 transition-all appearance-none";
 
@@ -107,10 +106,13 @@ const EditableField = ({
       }`}
     >
       {/* Label & Header */}
-      <div className="flex items-center justify-between mb-4">
-        <div className="flex items-center gap-2">
-          <CurrentIcon size={14} className="text-cyan-500" />
-          <span className="text-[10px] uppercase tracking-[0.2em] text-neutral-500">
+      <div className="flex items-center justify-between mb-4 group/header">
+        <div className="flex items-center gap-2.5">
+          <CurrentIcon
+            size={14}
+            className="text-neutral-600 group-hover/header:text-cyan-500 transition-colors duration-300"
+          />
+          <span className="text-[10px] font-black font-jetbrains-mono uppercase tracking-[0.2em] text-neutral-500">
             {label}
           </span>
         </div>
@@ -121,10 +123,15 @@ const EditableField = ({
               setIsEditing(true);
               setError("");
             }}
-            className="flex items-center gap-1.5 text-[10px] uppercase tracking-widest text-neutral-600 hover:text-cyan-400 transition-colors cursor-pointer"
+            className="flex items-center gap-1.5 px-2 py-1 rounded hover:bg-neutral-900 transition-all duration-200 cursor-pointer group/btn"
           >
-            <Edit size={12} />
-            <span>Modify</span>
+            <Edit
+              size={11}
+              className="text-neutral-700 group-hover/btn:text-cyan-500 transition-colors"
+            />
+            <span className="text-[9px] font-black font-jetbrains-mono uppercase tracking-widest text-neutral-700 group-hover/btn:text-neutral-300 transition-colors">
+              Edit
+            </span>
           </button>
         )}
       </div>
@@ -238,7 +245,7 @@ const EditableField = ({
                 </span>
               ) : (
                 <span className="flex items-center gap-2">
-                  <Save size={12} /> Commit Change
+                  <Save size={12} /> Save
                 </span>
               )}
             </button>

@@ -196,7 +196,7 @@ const PasswordModal = ({ onClose, onSuccess }: PasswordModalProps) => {
                     ${
                       loading
                         ? "bg-neutral-900 text-neutral-700 border border-neutral-800 cursor-wait"
-                        : "bg-cyan-500 text-black hover:bg-cyan-400 active:scale-95 shadow-[0_0_20px_rgba(6,182,212,0.1)]"
+                        : "bg-cyan-500 text-black hover:bg-cyan-400 active:scale-95"
                     }
                   `}
                 >

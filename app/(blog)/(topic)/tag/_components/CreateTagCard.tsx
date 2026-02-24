@@ -213,7 +213,7 @@ const CreateTagCard = () => {
                       className="
                         flex items-center gap-3 px-12 py-4 rounded-2xl 
                         bg-cyan-500 text-black font-black text-[10px] uppercase tracking-[0.3em]
-                        hover:bg-cyan-400 active:scale-95 transition-all shadow-[0_0_20px_rgba(6,182,212,0.2)]
+                        hover:bg-cyan-400 active:scale-95 transition-all
                         cursor-pointer
                       "
                     >

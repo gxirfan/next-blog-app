@@ -19,7 +19,7 @@ export default function AllTagsFooter({ meta }: AllTagsFooterProps) {
         <div className="h-px w-8 bg-neutral-800" />
       </div>
 
-      <div className="bg-black/40 backdrop-blur-sm p-3 rounded-4xl border border-neutral-800 shadow-2xl shadow-cyan-500/5">
+      <div className="bg-black/40 backdrop-blur-sm p-3 rounded-4xl border border-neutral-800">
         <PaginationControls meta={meta} />
       </div>
     </footer>

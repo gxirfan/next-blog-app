@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import { useState } from "react";
 import Link from "next/link";
 import { ITagResponse } from "@/app/types/tag";
 import { Eye, User, Calendar, Tag, Search } from "lucide-react";
@@ -17,7 +17,6 @@ export default function TagTableClient({ tags }: { tags: ITagResponse[] }) {
 
   return (
     <div className="space-y-8 animate-in fade-in duration-500">
-      {/* Search Bar - Konteynere Tam Uyumlu */}
       <div className="relative group max-w-md">
         <Search
           className="absolute left-4 top-1/2 -translate-y-1/2 text-neutral-600 group-focus-within:text-cyan-500 transition-colors"
@@ -28,12 +27,11 @@ export default function TagTableClient({ tags }: { tags: ITagResponse[] }) {
           placeholder="Search taxonomy nodes..."
           value={searchTerm}
           onChange={(e) => setSearchTerm(e.target.value)}
-          className="w-full bg-[#0d0d0d] border border-neutral-800/60 rounded-2xl pl-12 pr-6 py-3 text-sm text-neutral-200 focus:border-cyan-500/40 focus:outline-none transition-all placeholder:text-neutral-700 font-medium"
+          className="w-full border border-neutral-800/60 rounded-2xl pl-12 pr-6 py-3 text-sm text-neutral-200 focus:border-cyan-500/40 focus:outline-none transition-all placeholder:text-neutral-700 font-medium"
         />
       </div>
 
-      {/* Modern Flat Table */}
-      <div className="bg-[#0d0d0d] border border-neutral-900 rounded-[2rem] overflow-hidden">
+      <div className="border border-neutral-900 rounded-[2rem] overflow-hidden">
         <table className="w-full text-left border-separate border-spacing-0 table-fixed">
           <thead>
             <tr className="bg-neutral-900/30 text-neutral-600 text-[10px] uppercase tracking-[0.2em] font-black">

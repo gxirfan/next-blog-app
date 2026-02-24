@@ -92,24 +92,21 @@ export default async function TagAllPage({
 
   return (
     <div className="mx-auto max-w-6xl px-6 py-16 space-y-16">
-      {/* Visual Identity: Renders the system name and tag stats */}
       <AllTagsHeader totalTags={meta?.total || 0} />
       <CreateTagCard />
 
-      {/* Main Registry Display */}
       <main className="min-h-[50vh]">
         {tags.length > 0 ? (
           <TagCardList tags={tags} accentColor={ACCENT_COLOR} />
         ) : (
           <div className="flex flex-col items-center justify-center py-32 border border-dashed border-neutral-900 rounded-[3rem] bg-neutral-900/5">
             <span className="text-neutral-700 font-mono text-[10px] uppercase tracking-[0.5em] font-black">
-              Empty_Registry: No_Tags_Available
+              Empty Registry: No Tags Available
             </span>
           </div>
         )}
       </main>
 
-      {/* Pagination Module: Controls the data flow per page */}
       <AllTagsFooter meta={meta} />
     </div>
   );

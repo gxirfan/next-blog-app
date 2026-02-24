@@ -35,7 +35,7 @@ export default async function VotedPostsPage() {
     return (
       <div className="container mx-auto p-6 max-w-4xl min-h-[60vh] flex flex-col justify-center">
         {TitleBar}
-        <div className="bg-[#0d0d0d] border border-neutral-900 p-12 rounded-[2.5rem] text-center space-y-4">
+        <div className="bg-neutral-950/10 border border-neutral-900 p-12 rounded-[2.5rem] text-center space-y-4">
           <div className="inline-flex p-4 bg-neutral-900 border border-neutral-800 rounded-2xl text-neutral-600">
             <Hash size={32} />
           </div>
@@ -78,17 +78,17 @@ const PostListItem = ({ vote }: PostListItemProps) => {
   const slug = vote.slug || "#";
 
   return (
-    <div className="group relative flex items-center bg-[#0d0d0d] p-5 rounded-4xl border border-neutral-900 hover:border-cyan-500/30 transition-all duration-500">
+    <div className="group relative flex items-center p-5 rounded-4xl border border-neutral-900 hover:border-cyan-500/30 transition-all duration-500 bg-neutral-950/10">
       {/* Vote Indicator Node */}
       <div
         className={`flex items-center justify-center w-14 h-14 rounded-2xl border transition-all duration-500 
-                            ${
-                              isUpvote
-                                ? "bg-cyan-500/5 border-cyan-500/20 text-cyan-400"
-                                : isDownvote
-                                  ? "bg-red-500/5 border-red-500/20 text-red-400"
-                                  : "bg-neutral-900 border-neutral-800 text-neutral-600"
-                            }`}
+        ${
+          isUpvote
+            ? "bg-cyan-500/5 border-cyan-500/20 text-cyan-400"
+            : isDownvote
+              ? "bg-red-500/5 border-red-500/20 text-red-400"
+              : "bg-neutral-900 border-neutral-800 text-neutral-600"
+        }`}
       >
         {isUpvote ? (
           <ArrowBigUp

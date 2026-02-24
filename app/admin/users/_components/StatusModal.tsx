@@ -26,7 +26,7 @@ export default function StatusModal({
         onClick={type !== "loading" ? onClose : undefined}
       />
 
-      <div className="relative bg-[#0d0d0d] border border-neutral-800 w-full max-w-sm rounded-[2rem] p-8 text-center animate-in fade-in zoom-in-95 duration-300">
+      <div className="relative border border-neutral-800 w-full max-w-sm rounded-4xl p-8 text-center animate-in fade-in zoom-in-95 duration-300">
         <div className="flex justify-center mb-6">
           {type === "success" && (
             <div className="p-4 bg-emerald-500/10 rounded-2xl border border-emerald-500/20 text-emerald-500">

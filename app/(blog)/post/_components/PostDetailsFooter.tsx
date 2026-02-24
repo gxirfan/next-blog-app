@@ -34,21 +34,31 @@ export default function PostDetailsFooter({
           </div>
         </div>
 
-        <div className="flex items-center gap-4">
-          <div className="hidden md:block text-right pr-4">
-            <p className="text-[9px] text-neutral-600 font-mono uppercase leading-tight tracking-widest">
-              Global Access Point
-              <br />
-              Verified_Source_OK
-            </p>
+        <div className="flex items-center gap-6 group/share py-4 px-6 bg-neutral-900/20 border border-white/5 rounded-2xl backdrop-blur-sm transition-all duration-300 hover:border-cyan-500/30">
+          <div className="hidden md:flex items-center gap-4 border-r border-white/10 pr-6">
+            <div className="flex flex-col items-end">
+              <p className="text-[14px] text-neutral-400 font-jetbrains-mono font-bold leading-tight tracking-[0.2em] group-hover/share:text-white transition-colors">
+                SHARE
+              </p>
+            </div>
+
+            <div className="relative flex h-2 w-2">
+              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-cyan-400 opacity-75"></span>
+              <span className="relative inline-flex rounded-full h-2 w-2 bg-cyan-500"></span>
+            </div>
           </div>
-          <CopyPermalink />
+
+          <div className="flex flex-col gap-1">
+            <div className="relative overflow-hidden rounded-lg">
+              <CopyPermalink />
+            </div>
+          </div>
         </div>
       </div>
 
       <div className="flex flex-col md:flex-row justify-between items-center py-6 border-t border-neutral-900 gap-4 opacity-50">
-        <div className="text-[10px] text-neutral-600 font-medium uppercase tracking-[0.4em]">
-          {ENV.PROJECT_NAME} Protocol v2.6
+        <div className="text-[10px] text-neutral-600 font-medium tracking-[0.4em]">
+          {ENV.PROJECT_NAME} Protocol v{ENV.APP_VERSION}
         </div>
       </div>
     </div>

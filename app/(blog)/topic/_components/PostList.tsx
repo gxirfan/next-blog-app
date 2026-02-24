@@ -5,10 +5,8 @@ import { IPostResponse } from "@/app/types/post";
 import {
   MessageSquare,
   Eye,
-  Calendar,
   CornerDownRight,
   ChevronRight,
-  Clock,
   FolderOpen,
   ArrowBigUp,
   ArrowBigDown,
@@ -27,7 +25,9 @@ const PostList = ({ posts }: PostListProps) => {
   if (posts.length === 0) {
     return (
       <div className="p-12 text-center bg-neutral-950 border border-neutral-900 rounded-4xl">
-        <p className="text-neutral-500 font-medium">No posts found yet.</p>
+        <p className="text-neutral-500 font-medium">
+          No {ENV.POST_TYPE}s found yet.
+        </p>
       </div>
     );
   }
@@ -38,126 +38,130 @@ const PostList = ({ posts }: PostListProps) => {
         return (
           <div
             key={post.id}
-            className="group relative block p-6 md:p-8 bg-neutral-950 border border-neutral-800/50 rounded-4xl transition-all duration-300 hover:border-cyan-500/30 hover:bg-neutral-900/20"
+            className="group relative flex flex-col p-6 md:p-10 bg-neutral-950 border border-neutral-900 rounded-3xl transition-all duration-500 hover:border-cyan-500/30 overflow-hidden"
           >
-            {/* Header: Title & Context */}
-            <div className="space-y-4">
-              <div className="flex flex-wrap items-center gap-4 text-xs uppercase tracking-widest text-neutral-500">
-                <span className="flex items-center gap-1.5 px-3 py-1 bg-neutral-900 rounded-full border border-neutral-800 font-bold">
-                  <FolderOpen size={12} className="text-cyan-500" />
-                  <Link
-                    href={`/topic/${post.topicSlug}`}
-                    className="hover:text-cyan-400 transition-colors"
-                  >
-                    {post.topicTitle}
-                  </Link>
-                </span>
+            <div className="absolute top-0 left-0 w-full h-px bg-linear-to-r from-transparent via-cyan-500/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
 
-                {post.parentId && (
-                  <span className="flex items-center gap-1.5 px-3 py-1 bg-neutral-900 rounded-full border border-neutral-800 font-bold">
-                    <CornerDownRight size={12} className="text-cyan-500" />
-                    <Link
-                      href={`/post/${post.parentSlug}`}
-                      className="hover:text-cyan-400 transition-colors"
-                    >
-                      {post.parentTitle}
-                    </Link>
+            <div className="flex flex-col md:flex-row gap-8">
+              <div className="flex-1 space-y-5">
+                <div className="flex items-center gap-3">
+                  <AuthorBlock
+                    avatarUrl={post.authorAvatar}
+                    nickname={post.authorNickname}
+                    username={post.authorUsername}
+                    role={post.authorRole}
+                  />
+                  <span className="text-neutral-800">•</span>
+                  <span className="text-[12px] text-neutral-600 font-medium">
+                    {getRelativeTime(post.createdAt)}
                   </span>
-                )}
-              </div>
+                </div>
 
-              <Link href={`/post/${post.slug}`} className="block group/title">
-                <h3 className="text-2xl md:text-3xl text-white tracking-tight leading-tight group-hover/title:text-cyan-400 transition-colors">
-                  {post.title}
-                </h3>
-              </Link>
+                <div className="space-y-4">
+                  <div className="flex flex-wrap items-center gap-3 text-[13px] font-medium">
+                    <Link
+                      href={`/topic/${post.topicSlug}`}
+                      className="group/topic flex items-center gap-2 pr-3 pl-2 py-1 bg-cyan-500/5 hover:bg-cyan-500/10 border border-cyan-500/10 hover:border-cyan-500/30 rounded-lg transition-all duration-300"
+                    >
+                      <div className="p-1 bg-cyan-500/20 rounded-md group-hover/topic:bg-cyan-500 group-hover/topic:text-black transition-all">
+                        <FolderOpen
+                          size={12}
+                          className="text-cyan-400 group-hover/topic:text-inherit"
+                        />
+                      </div>
+                      <span className="text-[11px] text-neutral-400 group-hover/topic:text-cyan-400 transition-colors">
+                        {post.topicTitle}
+                      </span>
+                    </Link>
 
-              <div className="flex items-center gap-2">
-                <AuthorBlock
-                  avatarUrl={post.authorAvatar}
-                  nickname={post.authorNickname}
-                  username={post.authorUsername}
-                  role={post.authorRole}
+                    {post.parentId && (
+                      <div className="flex items-center gap-3">
+                        <div className="h-3 w-px bg-neutral-800 rotate-12" />
+                        <Link
+                          href={`/post/${post.parentSlug}`}
+                          className="group/ref flex items-center gap-2 py-1 text-neutral-500 hover:text-neutral-300 transition-all"
+                        >
+                          <CornerDownRight
+                            size={14}
+                            className="text-neutral-700 group-hover/ref:text-cyan-500 transition-colors"
+                          />
+                          <span className="text-[11px] truncate max-w-[150px] italic">
+                            {post.parentTitle}
+                          </span>
+                        </Link>
+                      </div>
+                    )}
+                  </div>
+
+                  <Link
+                    href={`/post/${post.slug}`}
+                    className="block group/title"
+                  >
+                    <h3 className="text-2xl md:text-3xl font-bold text-neutral-100 tracking-tight leading-[1.2] group-hover/title:text-cyan-400 transition-colors">
+                      {post.title}
+                    </h3>
+                  </Link>
+                </div>
+
+                <div
+                  className="text-neutral-400 text-sm md:text-base leading-relaxed line-clamp-3 opacity-90 group-hover:opacity-100 transition-opacity"
+                  dangerouslySetInnerHTML={{
+                    __html: prepareContentForImage(post.content, true),
+                  }}
                 />
               </div>
+
+              {post.mainImage && (
+                <div className="w-full md:w-52 lg:w-72 h-48 md:h-auto relative shrink-0 overflow-hidden rounded-2xl border border-neutral-900 bg-black">
+                  <Link href={`/post/${post.slug}`}>
+                    <Image
+                      src={ENV.API_IMAGE_URL + post.mainImage}
+                      alt={post.title}
+                      fill
+                      className="object-cover transition-transform duration-700 group-hover:scale-105"
+                      sizes="(max-width: 768px) 100vw, 300px"
+                    />
+                  </Link>
+                </div>
+              )}
             </div>
 
-            {post.mainImage && (
-              <div className="mt-4 relative w-full h-72 shrink-0 overflow-hidden rounded-[1.8rem] bg-neutral-900 border border-neutral-800">
-                <Link href={`/post/${post.slug}`}>
-                  <Image
-                    src={ENV.API_IMAGE_URL + post.mainImage}
-                    alt={post.title}
-                    fill
-                    className="object-cover transition-transform duration-500 group-hover:scale-105"
-                    sizes="(max-width: 768px) 100vw, 224px"
-                  />
+            <div className="mt-8 pt-6 border-t border-neutral-900 flex items-center justify-between text-[12px] text-neutral-600 font-medium">
+              <div className="flex items-center gap-6">
+                {post.score !== 0 && (
+                  <div
+                    className={`flex items-center gap-1.5 ${post.score > 0 ? "text-green-600" : "text-red-600"}`}
+                  >
+                    {post.score > 0 ? (
+                      <ArrowBigUp size={14} fill="currentColor" />
+                    ) : (
+                      <ArrowBigDown size={14} fill="currentColor" />
+                    )}
+                    <span className="font-mono">{Math.abs(post.score)}</span>
+                  </div>
+                )}
 
-                  <div className="absolute inset-0 bg-linear-to-t from-neutral-950/50 to-transparent opacity-60" />
-                </Link>
+                <div className="flex items-center gap-2 hover:text-cyan-500 transition-colors">
+                  <MessageSquare size={14} className="opacity-40" />
+                  <span>{post.postCount}</span>
+                </div>
+
+                <div className="flex items-center gap-2">
+                  <Eye size={14} className="opacity-40" />
+                  <span>{post.viewCount}</span>
+                </div>
               </div>
-            )}
-
-            {/* Content Preview */}
-            <div className="mt-6 space-y-4">
-              <div
-                className="text-neutral-400 text-base md:text-lg leading-relaxed line-clamp-3 prose prose-invert prose-p:my-0 max-w-none"
-                dangerouslySetInnerHTML={{
-                  __html: prepareContentForImage(post.content, true),
-                }}
-              />
 
               <Link
                 href={`/post/${post.slug}`}
-                className="inline-flex items-center gap-2 text-sm font-bold uppercase tracking-widest text-cyan-500 hover:text-cyan-400 transition-all pt-2 group/read"
+                className="flex items-center gap-1 text-cyan-600 hover:text-cyan-400 font-bold tracking-wide transition-all group/read"
               >
-                Read full entry
+                READ ENTRY
                 <ChevronRight
-                  size={16}
+                  size={14}
                   className="group-hover/read:translate-x-1 transition-transform"
                 />
               </Link>
-            </div>
-
-            {/* Footer Stats: Updated to be cleaner */}
-            <div className="mt-8 pt-6 border-t border-neutral-900 flex flex-wrap items-center gap-6 text-[11px] font-bold text-neutral-500 uppercase tracking-tight">
-              <div className="flex items-center gap-2">
-                <Calendar size={14} className="text-neutral-700" />
-                <span>{getRelativeTime(post.createdAt)}</span>
-              </div>
-
-              {/* Vote Scores with simple style */}
-              {post.score !== 0 && (
-                <div
-                  className={`flex items-center gap-1 px-2 py-0.5 rounded-md bg-neutral-900 border border-neutral-800 ${
-                    post.score > 0 ? "text-green-400" : "text-red-400"
-                  }`}
-                >
-                  {post.score > 0 ? (
-                    <ArrowBigUp size={14} fill="currentColor" />
-                  ) : (
-                    <ArrowBigDown size={14} fill="currentColor" />
-                  )}
-                  <span>{post.score > 0 ? `+${post.score}` : post.score}</span>
-                </div>
-              )}
-
-              <div className="flex items-center gap-2 text-cyan-500/80">
-                <MessageSquare size={14} />
-                <span>{post.postCount} Replies</span>
-              </div>
-
-              <div className="flex items-center gap-2">
-                <Eye size={14} />
-                <span>{post.viewCount} Views</span>
-              </div>
-
-              {post.lastPostAt && (
-                <div className="hidden sm:flex items-center gap-2 ml-auto text-neutral-600 font-medium">
-                  <Clock size={12} />
-                  <span>Activity: {getRelativeTime(post.lastPostAt)}</span>
-                </div>
-              )}
             </div>
           </div>
         );

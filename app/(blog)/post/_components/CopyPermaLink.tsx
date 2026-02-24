@@ -14,7 +14,7 @@ export default function CopyPermalink() {
   return (
     <button
       onClick={handleCopy}
-      className={`group flex items-center gap-3 px-6 py-3 rounded-2xl font-bold transition-all duration-300 ${
+      className={`bg-transparent cursor-pointer group flex items-center gap-3 px-6 py-3 rounded-2xl font-bold transition-all duration-300 ${
         copied
           ? "bg-green-600 text-white"
           : "bg-white text-black hover:bg-cyan-400"

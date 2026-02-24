@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { Layout, CornerDownRight, Calendar, Eye } from "lucide-react";
+import { CornerDownRight, Calendar, Eye, FolderOpen } from "lucide-react";
 import VoteButtons from "./VoteButtons";
 import { IPostResponse } from "@/app/types/post";
 import AuthorBlock from "@/app/components/AuthorBlock";
@@ -23,27 +23,38 @@ export default function PostDetailsHeader({
 
   return (
     <>
-      {/* Meta Labels & Hierarchy */}
-      <div className="flex flex-wrap items-center gap-3 mb-8 text-[10px] uppercase tracking-[0.2em] text-neutral-500 font-bold">
-        <div className="flex items-center gap-2 px-3 py-1.5 bg-neutral-900 border border-neutral-800 rounded-full">
-          <Layout size={12} className="text-cyan-500" />
-          <Link
-            href={`/topic/${postDetails.topicSlug}`}
-            className="hover:text-cyan-400 transition-colors"
-          >
+      <div className="flex flex-wrap items-center gap-3 mb-8 text-[13px] text-neutral-400 font-medium">
+        <Link
+          href={`/topic/${postDetails.topicSlug}`}
+          className="group flex items-center gap-2 pr-3 pl-2 py-1 bg-cyan-500/5 hover:bg-cyan-500/10 border border-cyan-500/10 hover:border-cyan-500/30 rounded-lg transition-all duration-300"
+        >
+          <div className="p-1 bg-cyan-500/20 rounded-md group-hover:bg-cyan-500 group-hover:text-black transition-all">
+            <FolderOpen
+              size={12}
+              className="text-cyan-400 group-hover:text-inherit"
+            />
+          </div>
+          <span className="group-hover:text-cyan-400 transition-colors">
             {postDetails.topicTitle}
-          </Link>
-        </div>
+          </span>
+        </Link>
+
         {postDetails.parentId && (
-          <div className="flex items-center gap-2 px-3 py-1.5 bg-neutral-900 border border-neutral-800 rounded-full">
-            <CornerDownRight size={12} className="text-cyan-500" />
+          <>
+            <div className="h-4 w-[1px] bg-neutral-800 rotate-12 mx-1" />{" "}
             <Link
               href={`/post/${postDetails.parentSlug}`}
-              className="hover:text-cyan-400 transition-colors"
+              className="group flex items-center gap-2 px-2 py-1 hover:text-neutral-200 transition-all"
             >
-              Ref: {postDetails.parentTitle}
+              <CornerDownRight
+                size={14}
+                className="text-neutral-600 group-hover:text-cyan-500 transition-colors"
+              />
+              <span className="text-neutral-500 group-hover:text-neutral-300 truncate max-w-[200px]">
+                {postDetails.parentTitle}
+              </span>
             </Link>
-          </div>
+          </>
         )}
       </div>
 
@@ -51,7 +62,6 @@ export default function PostDetailsHeader({
         {postDetails.title}
       </h1>
 
-      {/* Author & Engagement Bar */}
       <div className="flex flex-col md:flex-row md:items-center justify-between gap-6 pb-10 border-b border-neutral-900 mb-12">
         <div className="flex items-center gap-6">
           <AuthorBlock {...authorProps} />

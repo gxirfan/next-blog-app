@@ -32,12 +32,10 @@ export default async function AdminTagsListPage() {
 
   return (
     <div className="space-y-10 animate-in fade-in duration-700">
-      {/* 1. Header Bileşeni */}
       <TagHeader count={tags.length} />
 
-      {/* 2. İçerik / Tablo Kısmı */}
       {tags.length === 0 ? (
-        <div className="py-32 text-center bg-[#0d0d0d] border border-neutral-900 rounded-4xl">
+        <div className="py-32 text-center border border-neutral-900 rounded-4xl">
           <p className="text-neutral-600 text-sm font-light font-mono uppercase tracking-widest">
             Null_Data_Partition: No tags detected.
           </p>
@@ -46,7 +44,6 @@ export default async function AdminTagsListPage() {
         <TagTableClient tags={tags} />
       )}
 
-      {/* 3. Footer Bileşeni */}
       <TagFooter />
     </div>
   );

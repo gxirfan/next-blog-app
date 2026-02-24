@@ -10,10 +10,9 @@ import {
   Lock,
   AlertCircle,
   Loader2,
-  ShieldCheck,
   ArrowRight,
+  Mail,
 } from "lucide-react";
-import { ENV } from "@/config/env.config";
 import { IUserResponse } from "@/app/types/user-response.dto";
 
 export default function LoginPage({
@@ -52,11 +51,33 @@ export default function LoginPage({
 
   if (isLoading || user) {
     return (
-      <div className="flex min-h-screen items-center justify-center bg-neutral-950 font-mono text-neutral-600 text-[10px] uppercase tracking-[0.4em]">
-        <Loader2 className="animate-spin mr-3 text-cyan-500" size={18} />
-        Synchronizing Identity...
+      <div className="flex min-h-screen items-center justify-center bg-neutral-950 transition-all duration-500">
+        <div className="flex flex-col items-center gap-6">
+          <div className="relative flex items-center justify-center">
+            <div className="absolute w-12 h-12 bg-cyan-500/5 rounded-full animate-ping duration-[3s]" />
+
+            <div className="w-10 h-10 border-2 border-neutral-900 border-t-cyan-500 rounded-full animate-spin" />
+          </div>
+
+          <div className="flex flex-col items-center gap-1.5">
+            <span className="text-[11px] font-bold text-neutral-400 uppercase tracking-[0.2em]">
+              Loading Profile
+            </span>
+            <div className="w-12 h-[1px] bg-neutral-900 rounded-full overflow-hidden">
+              <div className="w-full h-full bg-cyan-500/40 animate-[loading-bar_2s_infinite_ease-in-out]" />
+            </div>
+          </div>
+        </div>
       </div>
     );
+
+    // Note: Add this to tailwind.config.js or a global CSS file for the progress bar:
+    // keyframes: {
+    //   'loading-bar': {
+    //     '0%': { transform: 'translateX(-100%)' },
+    //     '100%': { transform: 'translateX(100%)' }
+    //   }
+    // }
   }
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -73,71 +94,58 @@ export default function LoginPage({
     }
   };
 
+  const INPUT_STYLING =
+    "w-full h-16 pl-16 pr-6 bg-neutral-900/40 border-2 border-neutral-800 rounded-full text-[15px] text-white font-semibold placeholder-neutral-600 focus:outline-none focus:border-cyan-500/50 focus:bg-neutral-900 transition-all duration-300 appearance-none";
+
+  const LABEL_STYLING =
+    "text-[12px] font-black text-neutral-400 uppercase tracking-[0.15em] ml-6 mb-2 block";
+
   return (
     <div className="flex min-h-screen items-center justify-center p-6 bg-neutral-950 relative overflow-hidden">
-      <div className="w-full max-w-[440px] relative z-10 animate-in fade-in duration-700">
-        {/* Main Card - No Shadow, Sharp Borders */}
-        <div className="bg-[#0d0d0d] border border-neutral-900 p-10 md:p-12 rounded-[2.5rem]">
-          {/* Header Section */}
-          <div className="flex flex-col items-center gap-6 mb-12">
-            <div className="p-5 bg-neutral-900 border border-neutral-800 rounded-[1.8rem] text-cyan-400">
-              <ShieldCheck size={36} strokeWidth={2.5} />
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(6,182,212,0.03),transparent)] pointer-events-none" />
+
+      <div className="w-full max-w-[480px] relative z-10 animate-in fade-in zoom-in-95 duration-700">
+        <div className="bg-[#050505] border-2 border-neutral-900 p-10 md:p-16 rounded-[4rem]">
+          <div className="flex flex-col items-center gap-6 mb-14">
+            <div className="w-20 h-20 flex items-center justify-center bg-neutral-900 border-2 border-neutral-800 rounded-full text-cyan-500">
+              <User size={36} strokeWidth={1.5} />
             </div>
-            <div className="text-center space-y-3">
+            <div className="text-center space-y-2">
               <h1 className="text-4xl font-black text-white tracking-tighter uppercase leading-none">
-                Identity
+                Welcome
               </h1>
-              <div className="flex items-center justify-center gap-2">
-                <div className="h-px w-4 bg-neutral-800" />
-                <p className="font-mono text-[9px] uppercase tracking-[0.4em] text-neutral-400 font-bold">
-                  {ENV.PROJECT_NAME} Protocol
-                </p>
-                <div className="h-px w-4 bg-neutral-800" />
-              </div>
+              <p className="text-[11px] font-bold text-neutral-500 uppercase tracking-[0.3em]">
+                Sign in to your account
+              </p>
             </div>
           </div>
 
           <form onSubmit={handleSubmit} className="space-y-8">
-            {/* Username Field */}
-            <div className="space-y-3">
-              <label className="text-[10px] uppercase tracking-[0.25em] text-neutral-300 ml-4 font-black">
-                Identifier Node
-              </label>
+            <div className="space-y-2">
+              <label className={LABEL_STYLING}>Username or Email</label>
               <div className="relative group">
-                <User
-                  size={16}
-                  className="absolute left-6 top-1/2 -translate-y-1/2 text-neutral-600 group-focus-within:text-cyan-400 transition-colors"
+                <Mail
+                  size={20}
+                  className="absolute left-6 top-1/2 -translate-y-1/2 text-neutral-600 group-focus-within:text-cyan-500 transition-colors"
                 />
                 <input
                   name="username"
                   type="text"
-                  placeholder="USERNAME / EMAIL"
+                  placeholder="Your username or email"
                   onChange={handleChange}
                   required
                   autoFocus
-                  className="h-16 w-full pl-14 pr-6 bg-[#0a0a0a] border border-neutral-800 rounded-2xl text-white font-bold text-[13px] placeholder-neutral-700 focus:outline-none focus:border-cyan-500/50 transition-all duration-300"
+                  className={INPUT_STYLING}
                 />
               </div>
             </div>
 
-            {/* Password Field */}
-            <div className="space-y-3">
-              <div className="flex justify-between items-center px-4">
-                <label className="text-[10px] uppercase tracking-[0.25em] text-neutral-300 font-black">
-                  Password
-                </label>
-                <Link
-                  href="/forgot-password"
-                  tabIndex={-1}
-                  className="text-[11px] px-2 py-1 bg-neutral-900 border border-neutral-800 uppercase tracking-widest text-neutral-400 hover:text-cyan-400 hover:border-cyan-500/50 transition-all font-bold"
-                >
-                  [ RECOVER ]
-                </Link>
-              </div>
+            <div className="space-y-2">
+              <label className={LABEL_STYLING}>Password</label>
               <div className="relative group">
                 <Lock
-                  size={16}
-                  className="absolute left-6 top-1/2 -translate-y-1/2 text-neutral-600 group-focus-within:text-cyan-400 transition-colors"
+                  size={20}
+                  className="absolute left-6 top-1/2 -translate-y-1/2 text-neutral-600 group-focus-within:text-cyan-500 transition-colors"
                 />
                 <input
                   name="password"
@@ -145,42 +153,40 @@ export default function LoginPage({
                   placeholder="••••••••"
                   onChange={handleChange}
                   required
-                  className="h-16 w-full pl-14 pr-6 bg-[#0a0a0a] border border-neutral-800 rounded-2xl text-white font-bold text-[13px] placeholder-neutral-700 focus:outline-none focus:border-cyan-500/50 transition-all duration-300"
+                  className={INPUT_STYLING}
                 />
               </div>
             </div>
 
             {error && (
-              <div className="flex items-center gap-3 p-5 bg-red-500/5 border border-red-500/20 rounded-2xl text-red-500 text-[10px] uppercase tracking-widest font-bold">
-                <AlertCircle size={14} className="shrink-0" />
+              <div className="flex items-center gap-3 p-5 bg-red-500/10 border-2 border-red-500/20 rounded-[2.5rem] text-red-500 text-[11px] font-black uppercase tracking-tight">
+                <AlertCircle size={18} className="shrink-0" />
                 <span>{error}</span>
               </div>
             )}
 
-            {/* Action Button - High Contrast, No Shadow */}
             <button
               type="submit"
               disabled={loading}
-              className="relative w-full group pt-4 outline-none"
+              className="w-full pt-4 outline-none group"
             >
               <div
                 className={`
-                  relative flex items-center justify-center gap-4 h-16 rounded-2xl text-[11px] font-black uppercase tracking-[0.3em] transition-all duration-300
-                  ${
-                    loading
-                      ? "bg-neutral-900 text-neutral-700 border border-neutral-800"
-                      : "bg-white text-black hover:bg-cyan-400 active:scale-[0.98] border border-white"
-                  }
-                `}
+                flex items-center justify-center gap-4 h-16 rounded-full text-[13px] font-black uppercase tracking-[0.2em] transition-all duration-300 active:scale-95
+                ${
+                  loading
+                    ? "bg-neutral-900 text-neutral-700 border-2 border-neutral-800"
+                    : "bg-cyan-500 text-black hover:bg-white cursor-pointer"
+                }
+              `}
               >
                 {loading ? (
-                  <Loader2 className="animate-spin" size={18} />
+                  <Loader2 className="animate-spin" size={20} />
                 ) : (
                   <>
-                    <span>Authorize Access</span>
+                    <span>Sign In</span>
                     <ArrowRight
-                      size={16}
-                      strokeWidth={3}
+                      size={20}
                       className="group-hover:translate-x-1 transition-transform"
                     />
                   </>
@@ -189,23 +195,29 @@ export default function LoginPage({
             </button>
           </form>
 
-          {/* Footer - Upright & Flat */}
-          <div className="mt-12 pt-8 border-t border-neutral-900 flex flex-col gap-6 text-center">
+          <div className="mt-14 space-y-8 text-center">
             <Link
               href="/register"
-              className="text-[11px] uppercase tracking-[0.25em] text-neutral-400 hover:text-white transition-all font-medium"
+              className="block text-[13px] text-neutral-500 hover:text-white transition-all font-bold uppercase tracking-widest"
             >
-              No account detected?{" "}
-              <span className="text-cyan-400 font-black underline underline-offset-4">
-                Create NEW
-              </span>
+              New here? <span className="text-cyan-500">Create account</span>
             </Link>
-            <Link
-              href="/"
-              className="flex items-center justify-center gap-2 text-[10px] uppercase tracking-[0.2em] text-neutral-600 hover:text-neutral-400 transition-all font-bold"
-            >
-              Resume Guest Protocol <ArrowRight size={12} />
-            </Link>
+
+            <div className="flex items-center justify-center gap-6 pt-6 border-t border-neutral-900">
+              <Link
+                href="/forgot-password"
+                className="text-[10px] uppercase font-black tracking-[0.2em] text-neutral-700 hover:text-cyan-500 transition-colors"
+              >
+                Recover
+              </Link>
+              <span className="w-1.5 h-1.5 bg-neutral-900 rounded-full" />
+              <Link
+                href="/"
+                className="text-[10px] uppercase font-black tracking-[0.2em] text-neutral-700 hover:text-neutral-400 transition-colors"
+              >
+                Home
+              </Link>
+            </div>
           </div>
         </div>
       </div>

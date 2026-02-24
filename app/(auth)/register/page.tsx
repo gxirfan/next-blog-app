@@ -4,22 +4,20 @@ import React, { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 import {
-  Loader2,
   Fingerprint,
   User,
   Globe,
   ChevronRight,
   XCircle,
-  ShieldCheck,
   Lock,
   AlertTriangle,
   Download,
   Copy,
   CheckCircle2,
+  ArrowRight,
 } from "lucide-react";
 import api from "@/api/axios";
 import { useAuth } from "@/app/context/AuthContext";
-import { ENV } from "@/config/env.config";
 import { getMinAgeDate } from "@/app/types/validators/min-age-custom.validator";
 
 // DTO Interface for local use
@@ -74,7 +72,6 @@ export default function RegisterPage() {
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
 
-  // State to hold the recovery codes after success
   const [recoveryData, setRecoveryData] =
     useState<UserResponseWithRecoveryCodesDto | null>(null);
   const [copied, setCopied] = useState(false);
@@ -133,7 +130,6 @@ export default function RegisterPage() {
 
       const response = await api.post("/auth/register", submissionData);
 
-      // Instead of direct redirect, show recovery codes
       setRecoveryData(response.data.data);
     } catch (err: any) {
       const message = err.response?.data?.message || "Registration failed.";
@@ -145,134 +141,167 @@ export default function RegisterPage() {
 
   if (isLoading || user) {
     return (
-      <div className="flex min-h-screen items-center justify-center bg-neutral-950 text-neutral-600 text-[10px] uppercase tracking-[0.3em]">
-        <Loader2 className="animate-spin mr-3 text-cyan-500" size={18} />
-        Synchronizing_Registry...
+      <div className="flex min-h-screen items-center justify-center bg-neutral-950 transition-colors duration-500">
+        <div className="flex flex-col items-center gap-6">
+          <div className="relative flex items-center justify-center">
+            <div className="absolute w-12 h-12 bg-cyan-500/5 rounded-full animate-ping duration-[3s]" />
+
+            <div className="w-10 h-10 border-2 border-neutral-900 border-t-cyan-500 rounded-full animate-spin" />
+          </div>
+
+          <div className="flex flex-col items-center gap-2">
+            <span className="text-[11px] font-bold text-neutral-500 uppercase tracking-[0.2em]">
+              Loading Profile
+            </span>
+
+            <div className="w-8 h-px bg-neutral-900 rounded-full overflow-hidden">
+              <div className="w-full h-full bg-cyan-500/30 animate-[loading-slide_2s_infinite_ease-in-out]" />
+            </div>
+          </div>
+        </div>
       </div>
     );
+
+    /** * Note: Add this to tailwind.config.js for the smooth bar effect:
+     * keyframes: {
+     * 'loading-slide': {
+     * '0%': { transform: 'translateX(-100%)' },
+     * '100%': { transform: 'translateX(100%)' }
+     * }
+     * }
+     */
   }
 
   const INPUT_STYLING =
-    "w-full px-6 py-4 bg-[#0d0d0d] border border-neutral-800 rounded-2xl text-[13px] text-white font-medium placeholder-neutral-600 focus:outline-none focus:border-cyan-500/50 transition-all appearance-none";
+    "w-full h-16 px-8 bg-neutral-900/40 border-2 border-neutral-800 rounded-full text-[15px] text-white font-semibold placeholder-neutral-600 focus:outline-none focus:border-cyan-500/50 focus:bg-neutral-900 transition-all duration-300 appearance-none";
+
   const LABEL_STYLING =
-    "text-[10px] uppercase tracking-[0.25em] text-neutral-400 mb-3 block font-black";
+    "text-[12px] font-black text-neutral-400 uppercase tracking-[0.15em] ml-6 mb-2 block";
 
   return (
-    <div className="min-h-screen bg-neutral-950 flex items-center justify-center py-24 px-6 relative overflow-hidden">
-      <div className="w-full max-w-4xl">
+    <div className="min-h-screen bg-neutral-950 flex items-center justify-center py-20 px-6 relative overflow-hidden">
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(6,182,212,0.03),transparent)] pointer-events-none" />
+
+      <div className="w-full max-w-4xl relative z-10">
         {!recoveryData ? (
-          /* --- STAGE 1: IDENTITY INITIALIZATION FORM --- */
-          <div className="animate-in fade-in duration-700">
-            <div className="mb-16 border-b border-neutral-900 pb-10">
-              <div className="flex items-center gap-2 text-cyan-500 font-mono text-[10px] tracking-[0.3em] uppercase mb-4">
-                <ShieldCheck size={14} />
-                System Entry Point
-              </div>
-              <h1 className="text-5xl text-white tracking-tighter uppercase font-black leading-none">
-                Initialize{" "}
-                <span className="text-neutral-400 font-light">Identity</span>
+          <div className="animate-in fade-in zoom-in-95 duration-700">
+            <div className="mb-14 text-center">
+              <h1 className="text-5xl md:text-7xl text-white tracking-tighter font-black leading-none uppercase">
+                Create <span className="text-neutral-800">Account</span>
               </h1>
-              <p className="text-neutral-700 text-[9px] uppercase tracking-[0.5em] mt-4">
-                Establishing New Node in Global Grid
+              <p className="text-neutral-500 text-[11px] font-bold uppercase tracking-[0.3em] mt-6">
+                Join the stream network today
               </p>
             </div>
 
-            <form onSubmit={handleSubmit} className="space-y-16">
-              {/* Section: Access Credentials */}
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-8 pt-4">
-                <div className="col-span-full flex items-center gap-3 text-neutral-500 border-l-2 border-cyan-500/30 pl-4">
-                  <Fingerprint size={16} />
-                  <h2 className="text-[11px] uppercase tracking-widest font-bold">
-                    Security Keys
-                  </h2>
-                </div>
-                <div className="space-y-2">
-                  <label className={LABEL_STYLING}>Username</label>
-                  <input
-                    name="username"
-                    onKeyDown={handleUsernameKeyDown}
-                    type="text"
-                    placeholder="handle_username"
-                    className={INPUT_STYLING}
-                    onChange={handleChange}
-                    required
-                  />
-                </div>
-                <div className="space-y-2">
-                  <label className={LABEL_STYLING}>Network Mail</label>
-                  <input
-                    name="email"
-                    type="email"
-                    placeholder="identity@node.com"
-                    className={INPUT_STYLING}
-                    onChange={handleChange}
-                    required
-                  />
-                </div>
-                <div className="space-y-2">
-                  <label className={LABEL_STYLING}>PASSWORD</label>
-                  <input
-                    name="password"
-                    type="password"
-                    placeholder="••••••••"
-                    className={INPUT_STYLING}
-                    onChange={handleChange}
-                    required
-                  />
-                </div>
-              </div>
-
-              {/* Section: Core Identity */}
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-                <div className="col-span-full flex items-center gap-3 text-neutral-500 border-l-2 border-cyan-500/30 pl-4">
-                  <User size={16} />
-                  <h2 className="text-[11px] uppercase tracking-widest font-bold">
-                    Identity Data
-                  </h2>
-                </div>
-                <div className="space-y-2">
-                  <label className={LABEL_STYLING}>First Name</label>
-                  <input
-                    name="firstName"
-                    type="text"
-                    className={INPUT_STYLING}
-                    onChange={handleChange}
-                    required
-                  />
-                </div>
-                <div className="space-y-2">
-                  <label className={LABEL_STYLING}>Last Name</label>
-                  <input
-                    name="lastName"
-                    type="text"
-                    className={INPUT_STYLING}
-                    onChange={handleChange}
-                    required
-                  />
-                </div>
-                <div className="space-y-2">
-                  <label className={LABEL_STYLING}>Birth Epoch</label>
-                  <input
-                    name="birthDate"
-                    type="date"
-                    className={`${INPUT_STYLING} uppercase text-[10px]`}
-                    onChange={handleChange}
-                    max={getMinAgeDate()}
-                  />
-                </div>
-              </div>
-
-              {/* Section: Environment */}
+            <form
+              onSubmit={handleSubmit}
+              className="space-y-12 bg-[#050505] border-2 border-neutral-900 p-8 md:p-16 rounded-[4rem]"
+            >
               <div className="space-y-8">
-                <div className="flex items-center gap-3 text-neutral-500 border-l-2 border-cyan-500/30 pl-4">
-                  <Globe size={16} />
-                  <h2 className="text-[11px] uppercase tracking-widest font-bold">
-                    Contextual Data
+                <div className="flex items-center gap-3 px-2">
+                  <div className="w-10 h-10 rounded-full bg-neutral-900 border border-neutral-800 flex items-center justify-center text-cyan-500">
+                    <Fingerprint size={20} />
+                  </div>
+                  <h2 className="text-[13px] uppercase tracking-widest font-black text-white">
+                    Security
                   </h2>
                 </div>
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                   <div className="space-y-2">
-                    <label className={LABEL_STYLING}>Node Location</label>
+                    <label className={LABEL_STYLING}>Username</label>
+                    <input
+                      name="username"
+                      onKeyDown={handleUsernameKeyDown}
+                      type="text"
+                      placeholder="username"
+                      className={INPUT_STYLING}
+                      onChange={handleChange}
+                      required
+                    />
+                  </div>
+                  <div className="space-y-2">
+                    <label className={LABEL_STYLING}>Email Address</label>
+                    <input
+                      name="email"
+                      type="email"
+                      placeholder="mail@example.com"
+                      className={INPUT_STYLING}
+                      onChange={handleChange}
+                      required
+                    />
+                  </div>
+                  <div className="space-y-2">
+                    <label className={LABEL_STYLING}>Password</label>
+                    <input
+                      name="password"
+                      type="password"
+                      placeholder="••••••••"
+                      className={INPUT_STYLING}
+                      onChange={handleChange}
+                      required
+                    />
+                  </div>
+                </div>
+              </div>
+
+              <div className="space-y-8">
+                <div className="flex items-center gap-3 px-2">
+                  <div className="w-10 h-10 rounded-full bg-neutral-900 border border-neutral-800 flex items-center justify-center text-cyan-500">
+                    <User size={20} />
+                  </div>
+                  <h2 className="text-[13px] uppercase tracking-widest font-black text-white">
+                    Identity
+                  </h2>
+                </div>
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                  <div className="space-y-2">
+                    <label className={LABEL_STYLING}>First Name</label>
+                    <input
+                      name="firstName"
+                      type="text"
+                      placeholder="John"
+                      className={INPUT_STYLING}
+                      onChange={handleChange}
+                      required
+                    />
+                  </div>
+                  <div className="space-y-2">
+                    <label className={LABEL_STYLING}>Last Name</label>
+                    <input
+                      name="lastName"
+                      type="text"
+                      placeholder="Doe"
+                      className={INPUT_STYLING}
+                      onChange={handleChange}
+                      required
+                    />
+                  </div>
+                  <div className="space-y-2">
+                    <label className={LABEL_STYLING}>Birth Date</label>
+                    <input
+                      name="birthDate"
+                      type="date"
+                      className={INPUT_STYLING}
+                      onChange={handleChange}
+                      max={getMinAgeDate()}
+                    />
+                  </div>
+                </div>
+              </div>
+
+              <div className="space-y-8">
+                <div className="flex items-center gap-3 px-2">
+                  <div className="w-10 h-10 rounded-full bg-neutral-900 border border-neutral-800 flex items-center justify-center text-cyan-500">
+                    <Globe size={20} />
+                  </div>
+                  <h2 className="text-[13px] uppercase tracking-widest font-black text-white">
+                    Context
+                  </h2>
+                </div>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                  <div className="space-y-2">
+                    <label className={LABEL_STYLING}>Location</label>
                     <input
                       name="location"
                       type="text"
@@ -282,199 +311,160 @@ export default function RegisterPage() {
                     />
                   </div>
                   <div className="space-y-2">
-                    <label className={LABEL_STYLING}>Gender Assignment</label>
+                    <label className={LABEL_STYLING}>Gender</label>
                     <select
                       name="gender"
                       className={INPUT_STYLING}
                       onChange={handleChange}
                     >
-                      <option value="" className="bg-black">
-                        UNSPECIFIED
+                      <option value="" className="bg-neutral-950">
+                        Select Gender
                       </option>
-                      <option value="male" className="bg-black">
-                        MALE
+                      <option value="male" className="bg-neutral-950">
+                        Male
                       </option>
-                      <option value="female" className="bg-black">
-                        FEMALE
+                      <option value="female" className="bg-neutral-950">
+                        Female
                       </option>
-                      <option value="other" className="bg-black">
-                        OTHER
+                      <option value="other" className="bg-neutral-950">
+                        Other
                       </option>
                     </select>
                   </div>
                 </div>
                 <div className="space-y-2">
-                  <label className={LABEL_STYLING}>Biography Fragment</label>
+                  <label className={LABEL_STYLING}>Biography</label>
                   <textarea
                     name="bio"
                     rows={3}
-                    placeholder="System narrative..."
-                    className={`${INPUT_STYLING} resize-none pt-5 h-24`}
+                    placeholder="Tell your story..."
+                    className={`${INPUT_STYLING} resize-none h-32 py-5`}
                     onChange={handleChange}
                   />
                 </div>
               </div>
 
-              <div className="flex items-start gap-4 p-6 bg-neutral-900/20 border border-neutral-900 rounded-2xl group transition-all hover:border-neutral-800">
-                <input
-                  type="checkbox"
-                  id="terms"
-                  checked={termsAccepted}
-                  onChange={(e) => setTermsAccepted(e.target.checked)}
-                  className="mt-1 w-4 h-4 rounded-md border-neutral-800 bg-neutral-950 text-cyan-500 focus:ring-cyan-500/20 cursor-pointer"
-                />
-                <label
-                  htmlFor="terms"
-                  className="text-[10px] text-neutral-500 uppercase tracking-widest leading-relaxed cursor-pointer select-none"
-                >
-                  I acknowledge the{" "}
-                  <Link
-                    href="/terms-of-use"
-                    className="text-cyan-500 hover:underline"
-                  >
-                    Terms of Use
-                  </Link>{" "}
-                  and the{" "}
-                  <Link
-                    href="/privacy-policy"
-                    className="text-cyan-500 hover:underline"
-                  >
-                    Privacy Policy
-                  </Link>
-                  . Data synchronization is final.
-                </label>
-              </div>
-
-              {error && (
-                <div className="flex items-center gap-3 p-5 bg-red-500/5 border border-red-500/20 rounded-2xl text-red-500 text-[10px] uppercase tracking-widest animate-in fade-in slide-in-from-top-2">
-                  <XCircle size={16} /> <span>{error}</span>
-                </div>
-              )}
-
-              <div className="flex flex-col md:flex-row items-center justify-between gap-10 pt-12 border-t border-neutral-900">
-                <Link
-                  href="/login"
-                  className="flex items-center gap-2 text-[10px] uppercase tracking-[0.3em] text-neutral-700 hover:text-white transition-all group font-black"
-                >
-                  Existing Identity?{" "}
-                  <span className="text-cyan-500">Log_In</span>
-                  <ChevronRight
-                    size={14}
-                    className="group-hover:translate-x-1 transition-transform"
+              <div className="pt-10 border-t border-neutral-900 space-y-8">
+                <div className="flex items-start gap-4 p-6 bg-neutral-900/30 border-2 border-neutral-900 rounded-[2.5rem] transition-all hover:border-neutral-800">
+                  <input
+                    type="checkbox"
+                    id="terms"
+                    checked={termsAccepted}
+                    onChange={(e) => setTermsAccepted(e.target.checked)}
+                    className="mt-1 w-6 h-6 rounded-full border-2 border-neutral-800 bg-neutral-950 text-cyan-500 focus:ring-0 cursor-pointer"
                   />
-                </Link>
+                  <label
+                    htmlFor="terms"
+                    className="text-[12px] text-neutral-500 font-bold leading-relaxed cursor-pointer select-none"
+                  >
+                    I AGREE TO THE{" "}
+                    <Link
+                      href="/terms"
+                      className="text-white hover:text-cyan-500 underline underline-offset-4"
+                    >
+                      TERMS
+                    </Link>{" "}
+                    AND{" "}
+                    <Link
+                      href="/privacy"
+                      className="text-white hover:text-cyan-500 underline underline-offset-4"
+                    >
+                      PRIVACY POLICY
+                    </Link>
+                    .
+                  </label>
+                </div>
 
-                <button
-                  type="submit"
-                  disabled={loading}
-                  className={`px-12 py-5 rounded-2xl text-[11px] font-black uppercase tracking-[0.3em] transition-all
-                    ${loading || !termsAccepted ? "bg-neutral-900 text-neutral-600 cursor-not-allowed border border-neutral-800" : "bg-white text-black hover:bg-cyan-400 active:scale-95 border border-white"}
-                  `}
-                >
-                  {loading ? "Establishing..." : "Register Node"}
-                </button>
+                {error && (
+                  <div className="flex items-center gap-3 p-5 bg-red-500/10 border-2 border-red-500/20 rounded-full text-red-500 text-[11px] font-black uppercase tracking-tight animate-in fade-in slide-in-from-top-2">
+                    <XCircle size={18} /> <span>{error}</span>
+                  </div>
+                )}
+
+                <div className="flex flex-col md:flex-row items-center justify-between gap-10">
+                  <Link
+                    href="/login"
+                    className="flex items-center gap-2 text-[13px] font-black text-neutral-600 hover:text-white transition-all uppercase tracking-widest"
+                  >
+                    Already have an account?{" "}
+                    <span className="text-cyan-500 ml-1">Sign In</span>
+                    <ChevronRight size={16} />
+                  </Link>
+
+                  <button
+                    type="submit"
+                    disabled={loading || !termsAccepted}
+                    className={`px-16 py-5 rounded-full text-[13px] font-black uppercase tracking-[0.2em] transition-all active:scale-95
+                      ${loading || !termsAccepted ? "bg-neutral-900 text-neutral-700 border-2 border-neutral-800" : "bg-cyan-500 text-black hover:bg-white"}
+                    `}
+                  >
+                    {loading ? "Registering..." : "Create Account"}
+                  </button>
+                </div>
               </div>
             </form>
           </div>
         ) : (
-          /* --- STAGE 2: RECOVERY CODE SHIELD PROTOCOL --- */
-          <div className="animate-in zoom-in-95 fade-in duration-700">
-            <div className="p-10 bg-neutral-900/10 border border-cyan-500/20 rounded-[3rem] backdrop-blur-xl relative overflow-hidden">
-              <div className="absolute -top-24 -right-24 w-64 h-64 bg-cyan-500/5 blur-[100px] rounded-full" />
+          <div className="animate-in zoom-in-95 duration-700 max-w-2xl mx-auto">
+            <div className="p-10 md:p-16 bg-[#050505] border-2 border-neutral-900 rounded-[4rem] text-center space-y-12">
+              <div className="w-24 h-24 bg-cyan-500/10 rounded-full flex items-center justify-center text-cyan-500 mx-auto border-2 border-cyan-500/20">
+                <Lock size={40} />
+              </div>
 
-              <div className="relative z-10 space-y-10">
-                <div className="text-center space-y-4">
-                  <div className="inline-flex p-4 bg-cyan-500/10 rounded-2xl text-cyan-500 border border-cyan-500/20 mb-2">
-                    <Lock size={32} />
-                  </div>
-                  <h2 className="text-4xl font-black text-white uppercase tracking-tighter leading-none">
-                    Security{" "}
-                    <span className="text-neutral-500 font-light">
-                      Handover
-                    </span>
-                  </h2>
-                  <p className="text-[9px] font-mono text-neutral-600 uppercase tracking-[0.4em]">
-                    {/* Node_Identifier: {recoveryData.id} */}
-                  </p>
+              <div className="space-y-4">
+                <h2 className="text-4xl font-black text-white uppercase tracking-tighter">
+                  Security Keys
+                </h2>
+                <div className="flex items-center justify-center gap-3 p-4 bg-red-500/10 border-2 border-red-500/20 rounded-4xl text-red-500">
+                  <AlertTriangle size={18} />
+                  <span className="text-[11px] font-black uppercase tracking-widest text-center">
+                    Store these safely. This is your only backup.
+                  </span>
                 </div>
+              </div>
 
-                <div className="p-6 bg-red-500/5 border border-red-500/10 rounded-2xl space-y-4">
-                  <div className="flex items-center gap-2 text-red-500">
-                    <AlertTriangle size={16} />
-                    <span className="text-[10px] font-black uppercase tracking-[0.3em]">
-                      Critical_Security_Notice
-                    </span>
-                  </div>
-                  <p className="text-[11px] text-neutral-400 leading-relaxed uppercase tracking-widest font-medium">
-                    Account initialization is complete. If you lose access to
-                    your <span className="text-white">Network Mail</span> and
-                    these <span className="text-white">Recovery Codes</span>,
-                    {ENV.PROJECT_NAME} cannot restore your node.{" "}
-                    <span className="text-red-500 font-bold underline">
-                      This is your only backup.
-                    </span>
-                  </p>
-                </div>
-
-                <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
-                  {recoveryData.recoveryCodes.map((code, index) => (
+              <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+                {recoveryData.recoveryCodes.map(
+                  (code: string, index: number) => (
                     <div
                       key={index}
-                      className="p-4 bg-neutral-950 border border-neutral-800 rounded-xl font-mono text-[12px] text-cyan-400 text-center tracking-widest font-black hover:border-cyan-500/50 transition-colors"
+                      className="py-5 bg-neutral-950 border-2 border-neutral-900 rounded-2xl font-mono text-cyan-500 text-[15px] font-black tracking-widest"
                     >
                       {code}
                     </div>
-                  ))}
-                </div>
+                  ),
+                )}
+              </div>
 
-                <div className="flex flex-col md:flex-row items-center gap-4">
-                  <button
-                    onClick={handleDownloadCodes}
-                    className="w-full flex items-center justify-center gap-3 px-8 py-5 bg-white text-black text-[11px] font-black uppercase tracking-[0.2em] rounded-2xl hover:bg-cyan-400 transition-all active:scale-95"
-                  >
-                    <Download size={16} /> Save_As_Fragment.txt
-                  </button>
+              <div className="flex flex-col sm:flex-row gap-4 pt-6">
+                <button
+                  onClick={handleDownloadCodes}
+                  className="flex-1 py-5 bg-neutral-900 text-white rounded-full text-[12px] font-black uppercase tracking-widest border-2 border-neutral-800 hover:bg-neutral-800 transition-all flex items-center justify-center gap-2"
+                >
+                  <Download size={16} /> Save .txt
+                </button>
 
-                  <button
-                    onClick={handleCopyCodes}
-                    className="w-full flex items-center justify-center gap-3 px-8 py-5 bg-neutral-900 text-neutral-300 text-[11px] font-black uppercase tracking-[0.2em] rounded-2xl hover:bg-neutral-800 border border-neutral-800 transition-all active:scale-95"
-                  >
-                    {copied ? (
-                      <CheckCircle2 size={16} className="text-green-500" />
-                    ) : (
-                      <Copy size={16} />
-                    )}
-                    {copied ? "Copied_to_Buffer" : "Copy_Fragments"}
-                  </button>
-                </div>
+                <button
+                  onClick={handleCopyCodes}
+                  className="flex-1 py-5 bg-neutral-800 text-neutral-300 rounded-full text-[12px] font-black uppercase tracking-widest border-2 border-neutral-700 hover:bg-neutral-700 transition-all flex items-center justify-center gap-2"
+                >
+                  {copied ? (
+                    <CheckCircle2 size={16} className="text-green-500" />
+                  ) : (
+                    <Copy size={16} />
+                  )}
+                  {copied ? "Copied" : "Copy Codes"}
+                </button>
+              </div>
 
-                <div className="pt-8 border-t border-neutral-900">
-                  <button
-                    onClick={() => router.push("/login")}
-                    className="
-      w-full relative group flex items-center justify-center gap-4 px-10 py-5 rounded-2xl 
-      bg-neutral-100 text-neutral-900 border border-white
-      hover:bg-cyan-400 hover:text-black hover:border-cyan-300
-      transition-all duration-500 cursor-pointer 
-      text-[11px] font-black uppercase tracking-[0.3em]
-      active:scale-[0.98] shadow-[0_0_30px_rgba(255,255,255,0.05)]
-      hover:shadow-[0_0_40px_rgba(6,182,212,0.2)]
-    "
-                  >
-                    {/* Side Accent Line */}
-                    <div className="absolute left-0 top-1/4 bottom-1/4 w-[3px] bg-cyan-600 rounded-r-full" />
-
-                    <span className="relative z-10">
-                      I have secured my access keys
-                    </span>
-
-                    <ChevronRight
-                      size={16}
-                      strokeWidth={3}
-                      className="group-hover:translate-x-2 transition-transform duration-500"
-                    />
-                  </button>
-                </div>
+              <div className="pt-8 border-t border-neutral-900">
+                <button
+                  onClick={() => router.push("/login")}
+                  className="w-full flex items-center justify-center gap-4 px-10 py-5 rounded-full bg-cyan-500 text-black text-[12px] font-black uppercase tracking-[0.2em] hover:bg-white transition-all active:scale-95"
+                >
+                  <span>I&apos;ve Secured My Keys</span>
+                  <ArrowRight size={18} />
+                </button>
               </div>
             </div>
           </div>

@@ -7,8 +7,8 @@ export function prepareContentForImage(
   if (!htmlContent) return "";
 
   let processedContent = htmlContent.replace(
-    /src="\/?public\//g,
-    `src="${ENV.API_IMAGE_URL}/public/`,
+    /src="\/?\//g,
+    `src="${ENV.API_IMAGE_URL}/`,
   );
 
   if (removeFirstImage) {

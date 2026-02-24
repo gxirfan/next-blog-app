@@ -1,7 +1,6 @@
 "use client";
 
-import React from "react";
-import { Mail, User, Clock, Eye, Trash2, CheckCircle2 } from "lucide-react";
+import { User, Clock, Eye } from "lucide-react";
 import { IPaginationResponse } from "@/app/types/pagination-response";
 import PaginationControls from "@/app/components/PaginationControls";
 import Link from "next/link";
@@ -25,8 +24,7 @@ export default function MessageTableClient({
 
   return (
     <div className="space-y-8 animate-in fade-in duration-700">
-      {/* Container with sharp terminal aesthetics */}
-      <div className="bg-[#0d0d0d] border border-neutral-900 rounded-[2.5rem] overflow-hidden">
+      <div className="border border-neutral-900 rounded-[2.5rem] overflow-hidden">
         <table className="w-full text-left border-separate border-spacing-0 table-fixed">
           <thead>
             <tr className="bg-neutral-900/30 text-neutral-500 text-[10px] uppercase tracking-[0.2em] font-black">
@@ -49,13 +47,12 @@ export default function MessageTableClient({
                   !message.isRead ? "bg-cyan-500/[0.02]" : "hover:bg-white/1.5"
                 }`}
               >
-                {/* Sender Details */}
                 <td className="px-8 py-7">
                   <div className="flex items-center gap-5">
                     <div
                       className={`h-11 w-11 shrink-0 rounded-2xl border flex items-center justify-center transition-all duration-500 ${
                         !message.isRead
-                          ? "bg-cyan-500/10 border-cyan-500/40 text-cyan-400 shadow-[0_0_15px_rgba(6,182,212,0.1)]"
+                          ? "bg-cyan-500/10 border-cyan-500/40 text-cyan-400"
                           : "bg-neutral-900 border-neutral-800 text-neutral-500"
                       }`}
                     >
@@ -72,7 +69,6 @@ export default function MessageTableClient({
                   </div>
                 </td>
 
-                {/* Subject and Status */}
                 <td className="px-8 py-7">
                   <div className="flex flex-col gap-1.5">
                     <div className="flex items-center gap-2">
@@ -93,7 +89,6 @@ export default function MessageTableClient({
                   </div>
                 </td>
 
-                {/* Date and Actions */}
                 <td className="px-8 py-7 text-right">
                   <div className="flex items-center justify-end gap-6">
                     <div className="text-right hidden md:block">
@@ -119,7 +114,6 @@ export default function MessageTableClient({
         </table>
       </div>
 
-      {/* Pagination component with metadata */}
       {meta && <PaginationControls meta={meta} />}
     </div>
   );

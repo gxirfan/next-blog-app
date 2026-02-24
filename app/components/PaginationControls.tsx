@@ -16,7 +16,6 @@ const PaginationControls = ({ meta }: PaginationProps) => {
   const router = useRouter();
   const searchParams = useSearchParams();
 
-  // Ensure 'page' is always treated as a number to avoid string concatenation like "1"+1 = "11"
   const currentPage = Number(meta.page);
   const totalPages = Number(meta.totalPages);
 
@@ -66,7 +65,6 @@ const PaginationControls = ({ meta }: PaginationProps) => {
 
   return (
     <div className="flex items-center justify-center gap-4 mt-16 mb-12 select-none">
-      {/* 1. PREV BUTTON */}
       <button
         onClick={() => handlePageChange(currentPage - 1)}
         disabled={currentPage <= 1}
@@ -75,7 +73,6 @@ const PaginationControls = ({ meta }: PaginationProps) => {
         <ChevronLeft size={18} />
       </button>
 
-      {/* 2. NUMBERS KAPSÜLÜ */}
       <div className="flex items-center gap-2 px-3 py-2 bg-neutral-950 border border-neutral-900 rounded-[2rem]">
         {getPageNumbers().map((p, index) => {
           if (p === "...") {
@@ -110,7 +107,6 @@ const PaginationControls = ({ meta }: PaginationProps) => {
         })}
       </div>
 
-      {/* 3. NEXT BUTTON */}
       <button
         onClick={() => handlePageChange(currentPage + 1)}
         disabled={currentPage >= totalPages}

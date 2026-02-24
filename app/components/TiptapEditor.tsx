@@ -202,7 +202,7 @@ const TiptapToolbar = ({
           />
 
           {/* Modal Content */}
-          <div className="relative w-full max-w-xs p-6 bg-neutral-900 border border-neutral-800 rounded-[2.5rem] shadow-[0_0_50px_-12px_rgba(6,182,212,0.2)] animate-in zoom-in-95 duration-300">
+          <div className="relative w-full max-w-xs p-6 bg-neutral-900 border border-neutral-800 rounded-[2.5rem] animate-in zoom-in-95 duration-300">
             <div className="space-y-4">
               <div className="flex items-center gap-3 mb-2">
                 <div className="p-2 bg-cyan-500/10 rounded-lg text-cyan-500">

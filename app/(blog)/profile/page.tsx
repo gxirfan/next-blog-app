@@ -3,7 +3,7 @@
 import { useAuth } from "@/app/context/AuthContext";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
-import Image from "next/image"; // Next Image eklendi
+import Image from "next/image";
 import EditableField from "./_components/EditableField";
 import PasswordModal from "./_components/PasswordModal";
 import RecoveryCard from "./_components/RecoveryCard";
@@ -12,7 +12,6 @@ import {
   Key,
   Calendar,
   UserCheck,
-  Loader,
   Shield,
   Activity,
 } from "lucide-react";
@@ -33,14 +32,7 @@ export default function ProfilePage() {
   }, [user, isLoading, router]);
 
   if (isLoading || !user) {
-    return (
-      <div className="flex flex-col justify-center items-center h-screen bg-neutral-950 space-y-4">
-        <Loader className="animate-spin text-cyan-500" size={32} />
-        <p className="text-[10px] uppercase tracking-[0.4em] text-neutral-600">
-          Synchronizing Grid...
-        </p>
-      </div>
-    );
+    return null;
   }
 
   const GENDER_OPTIONS = [

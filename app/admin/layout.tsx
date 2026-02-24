@@ -46,7 +46,7 @@ export default async function AdminLayout({
     redirect("/login?returnUrl=/admin");
   }
   return (
-    <div className="bg-neutral-950 min-h-screen pt-16">
+    <div className="bg-neutral-950 min-h-screen pt-16 px-4">
       {/* <div className="p-4 border-b border-gray-800 text-sm text-neutral-500">
           ADMINISTRATOR ACCESS ONLY
         </div> */}

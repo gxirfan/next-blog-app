@@ -32,7 +32,7 @@ const AuthorBlock = ({
         href={`/user/${username}`}
         className="flex items-center space-x-2 group hover:underline"
       >
-        <div className="w-10 h-10 relative">
+        <div className="w-10 h-10 relative text-[16px] font-black text-white tracking-tight leading-none">
           <Image
             src={avatarUrlFinal}
             alt={`${nickname}'s avatar`}
@@ -40,7 +40,11 @@ const AuthorBlock = ({
             className="rounded-full border border-cyan-800 object-cover"
           />
         </div>
-        <span className={`font-semibold text-white`}>@{nickname}</span>
+        <span
+          className={`text-[16px] font-black text-white tracking-tight leading-none`}
+        >
+          {nickname}
+        </span>
       </Link>
       {role.toLowerCase() !== "user" && (
         <span

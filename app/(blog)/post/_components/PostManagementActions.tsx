@@ -45,7 +45,6 @@ const PostManagementActions = ({ post }: PostManagementActionsProps) => {
 
   return (
     <div className="flex flex-wrap items-center justify-end gap-3 mb-6 animate-in fade-in slide-in-from-right-2 duration-300">
-      {/* Error Message: More subtle and elegant */}
       {error && (
         <div className="flex items-center gap-2 px-3 py-1.5 bg-red-500/10 border border-red-500/20 rounded-full text-[10px] uppercase tracking-widest text-red-500">
           <AlertCircle size={14} />
@@ -53,18 +52,17 @@ const PostManagementActions = ({ post }: PostManagementActionsProps) => {
         </div>
       )}
 
-      {/* Toggle Visibility Button */}
       <button
         onClick={handleToggleStatus}
         disabled={loading}
         className={`
-                    group flex items-center gap-2 px-5 py-2 rounded-full text-[11px] uppercase tracking-widest transition-all duration-300 cursor-pointer disabled:opacity-50
-                    ${
-                      isCurrentlyActive
-                        ? "bg-neutral-900 text-neutral-400 hover:bg-red-500/10 hover:text-red-500 border border-neutral-800 hover:border-red-500/30"
-                        : "bg-green-500/10 text-green-500 hover:bg-green-500/20 border border-green-500/20"
-                    }
-                `}
+          group flex items-center gap-2 px-5 py-2 rounded-full text-[11px] uppercase tracking-widest transition-all duration-300 cursor-pointer disabled:opacity-50
+          ${
+            isCurrentlyActive
+              ? "bg-neutral-900 text-neutral-400 hover:bg-red-500/10 hover:text-red-500 border border-neutral-800 hover:border-red-500/30"
+              : "bg-green-500/10 text-green-500 hover:bg-green-500/20 border border-green-500/20"
+          }
+      `}
       >
         {loading ? (
           <Loader2 size={14} className="animate-spin" />
@@ -81,7 +79,6 @@ const PostManagementActions = ({ post }: PostManagementActionsProps) => {
         </span>
       </button>
 
-      {/* Edit Button: Matching the premium cyan theme */}
       <button
         onClick={() => setIsModalOpen(true)}
         disabled={loading}

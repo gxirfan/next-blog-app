@@ -5,6 +5,8 @@ import { ITopicResponse } from "@/app/types/topic";
 import { Eye, MessageSquare, Clock, Tag } from "lucide-react";
 import AuthorBlock from "@/app/components/AuthorBlock";
 import { getRelativeTime } from "@/app/utils/date";
+import { ENV } from "@/config/env.config";
+import ScrollProgress from "@/app/components/ScrollProgress";
 
 interface TopicDetailsCardProps {
   topicDetails: ITopicResponse;
@@ -13,16 +15,25 @@ interface TopicDetailsCardProps {
 const TopicDetailsCard = ({ topicDetails }: TopicDetailsCardProps) => {
   return (
     <div className="w-full max-w-4xl mx-auto space-y-10">
-      <div className="flex items-center gap-3 animate-in fade-in duration-500">
-        <div className="flex items-center gap-2 px-3 py-1.5 bg-neutral-950 border border-neutral-800 rounded-full group hover:border-cyan-500/50 transition-all">
-          <Tag size={14} className="text-cyan-500" />
-          <Link
-            href={`/tag/${topicDetails.tagSlug}`}
-            className="text-[10px] uppercase tracking-[0.2em] text-neutral-500 group-hover:text-white transition-colors"
-          >
+      <ScrollProgress />
+      <div className="flex items-center gap-3 animate-in fade-in slide-in-from-left-2 duration-500">
+        <Link
+          href={`/tag/${topicDetails.tagSlug}`}
+          className="group flex items-center gap-2.5 px-3 py-1.5 bg-neutral-900/50 hover:bg-cyan-500/10 border border-neutral-800 hover:border-cyan-500/30 rounded-lg transition-all duration-300"
+        >
+          <div className="flex items-center justify-center w-5 h-5 rounded-md bg-neutral-800 group-hover:bg-cyan-500 transition-colors duration-300">
+            <Tag
+              size={12}
+              className="text-neutral-500 group-hover:text-black transition-colors"
+            />
+          </div>
+
+          <span className="text-[13px] font-medium text-neutral-400 group-hover:text-cyan-400 transition-colors">
             {topicDetails.tagTitle}
-          </Link>
-        </div>
+          </span>
+
+          <div className="w-1 h-1 rounded-full bg-cyan-500/0 group-hover:bg-cyan-500 transition-all" />
+        </Link>
       </div>
 
       <div className="space-y-6">
@@ -68,25 +79,28 @@ const TopicDetailsCard = ({ topicDetails }: TopicDetailsCardProps) => {
         <div dangerouslySetInnerHTML={{ __html: topicDetails.content }} />
       </article>
 
-      <div className="mt-16 pt-8 border-t border-neutral-900 flex items-center justify-between gap-8">
+      <div className="mt-16 pt-8 border-t border-neutral-900 flex flex-col md:flex-row md:items-center justify-between gap-6 md:gap-8">
         <AuthorBlock
           avatarUrl={topicDetails.authorAvatar}
           nickname={topicDetails.authorNickname}
           username={topicDetails.authorUsername}
           role={topicDetails.authorRole}
         />
-        <div className="flex items-center gap-4">
-          <div className="px-5 py-3 bg-neutral-900/50 border border-neutral-800 rounded-4xl flex items-center gap-8">
+
+        <div className="flex items-center gap-4 w-full md:w-auto">
+          <div className="w-full md:w-auto px-5 py-3 bg-neutral-900/50 border border-neutral-800 rounded-2xl md:rounded-4xl flex items-center justify-between md:justify-start gap-8">
             <div>
               <p className="text-[9px] uppercase tracking-widest text-neutral-600 mb-1">
-                Posts
+                {ENV.POST_TYPE}s
               </p>
               <div className="flex items-center gap-2 text-white font-bold text-base">
                 <MessageSquare size={16} className="text-cyan-500" />
                 <span>{topicDetails.postCount}</span>
               </div>
             </div>
+
             <div className="h-6 w-px bg-neutral-800" />
+
             <div>
               <p className="text-[9px] uppercase tracking-widest text-neutral-600 mb-1">
                 Last Update

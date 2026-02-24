@@ -13,7 +13,7 @@ export default function TopicHeader({ count }: { count: number }) {
         </h1>
       </div>
 
-      <div className="bg-[#0d0d0d] border border-neutral-800/60 flex items-center gap-3 px-4 py-2 rounded-2xl">
+      <div className="bg-neutral-950/10 border border-neutral-800/60 flex items-center gap-3 px-4 py-2 rounded-2xl">
         <div className="text-right leading-none">
           <p className="text-[9px] text-neutral-600 uppercase font-black tracking-tighter">
             Nodes

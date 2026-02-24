@@ -32,18 +32,18 @@ export default function TopicTableClient({
           placeholder="Filter data nodes..."
           value={searchTerm}
           onChange={(e) => setSearchTerm(e.target.value)}
-          className="w-full bg-[#0d0d0d] border border-neutral-800/60 rounded-2xl pl-12 pr-6 py-3 text-sm text-neutral-200 focus:border-cyan-500/40 focus:outline-none transition-all placeholder:text-neutral-700"
+          className="w-full border border-neutral-800/60 rounded-2xl pl-12 pr-6 py-3 text-sm text-neutral-200 focus:border-cyan-500/40 focus:outline-none transition-all placeholder:text-neutral-700"
         />
       </div>
 
       {filteredTopics.length === 0 ? (
-        <div className="bg-[#0d0d0d] border border-neutral-900 py-20 text-center rounded-[2rem]">
+        <div className="border border-neutral-900 py-20 text-center rounded-4xl">
           <p className="text-neutral-600 text-xs font-mono uppercase tracking-widest font-bold">
             Null_Search_Results
           </p>
         </div>
       ) : (
-        <div className="bg-[#0d0d0d] border border-neutral-900 rounded-[2rem] overflow-hidden">
+        <div className="border border-neutral-900 rounded-4xl overflow-hidden">
           <table className="w-full text-left border-separate border-spacing-0 table-fixed">
             <thead>
               <tr className="bg-neutral-900/30 text-neutral-600 text-[10px] uppercase tracking-widest font-black">

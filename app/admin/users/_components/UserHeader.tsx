@@ -6,7 +6,7 @@ interface UserHeaderProps {
 
 export default function UserHeader({ count }: UserHeaderProps) {
   const BORDER_STYLE = "border border-neutral-800/60";
-  const CARD_BG = "bg-[#111]";
+  const CARD_BG = "bg-neutral-950";
 
   return (
     <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 border-b border-neutral-800/50 pb-8">

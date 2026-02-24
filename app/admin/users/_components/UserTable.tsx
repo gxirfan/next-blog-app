@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import { useState } from "react";
 import { Search, Edit3, Shield } from "lucide-react";
 import { IUserResponse } from "@/app/types/user-response.dto";
 import UserEditModal from "./UserEditModal";
@@ -97,7 +97,7 @@ export default function UserTable({
           open: true,
           type: "success",
           title: "Update Verified",
-          message: "Kernel data synchronized.",
+          message: "Data synchronized.",
         });
 
         router.refresh();
@@ -136,12 +136,12 @@ export default function UserTable({
         <input
           type="text"
           placeholder="Search users..."
-          className="w-full bg-[#0d0d0d] border border-neutral-800/60 rounded-2xl pl-12 pr-6 py-3 text-sm text-neutral-200 focus:border-cyan-500/40 focus:outline-none transition-all placeholder:text-neutral-700 font-medium"
+          className="w-full border border-neutral-800/60 rounded-2xl pl-12 pr-6 py-3 text-sm text-neutral-200 focus:border-cyan-500/40 focus:outline-none transition-all placeholder:text-neutral-700 font-medium"
           onChange={(e) => setSearch(e.target.value)}
         />
       </div>
 
-      <div className="bg-[#0d0d0d] border border-neutral-900 rounded-[2.5rem] overflow-hidden">
+      <div className="border border-neutral-900 rounded-[2.5rem] overflow-hidden overflow-x-auto">
         <table className="w-full text-left border-separate border-spacing-0">
           <thead>
             <tr className="bg-neutral-900/30 text-neutral-600 text-[10px] uppercase tracking-[0.25em] font-black">

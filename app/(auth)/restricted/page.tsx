@@ -2,9 +2,8 @@
 
 import { useAuth } from "@/app/context/AuthContext";
 import { useRouter } from "next/navigation";
-import { AlertTriangle, ShieldOff, LogOut, ArrowLeft } from "lucide-react";
+import { AlertTriangle, ShieldOff } from "lucide-react";
 import { useEffect } from "react";
-import Link from "next/link";
 
 export default function RestrictedPage() {
   const { user, logout, isLoading } = useAuth();
@@ -23,7 +22,7 @@ export default function RestrictedPage() {
   return (
     <div className="min-h-screen bg-neutral-950 flex items-center justify-center p-6 font-mono">
       <div className="max-w-md w-full space-y-8 animate-in zoom-in-95 duration-500">
-        <div className="bg-[#0d0d0d] border border-red-500/20 p-10 rounded-[2.5rem] text-center space-y-6">
+        <div className="border border-red-500/20 p-10 rounded-[2.5rem] text-center space-y-6">
           <div className="inline-flex p-5 bg-red-500/5 border border-red-500/10 rounded-[2rem] text-red-500 mb-4">
             {isBanned ? <ShieldOff size={40} /> : <AlertTriangle size={40} />}
           </div>

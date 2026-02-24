@@ -21,9 +21,9 @@ export default function AllTopicsHeader({ totalTopics }: AllTopicsHeaderProps) {
             Topic <span className="text-neutral-600 font-light">Archive</span>
           </h1>
           <p className="text-neutral-500 font-medium max-w-md text-sm mt-3">
-            Explore the categorized data streams. Each node represents a
-            distinct collection of shared intelligence within the{" "}
-            {ENV.PROJECT_NAME} grid.
+            Explore content by topic. Join specific spheres to discover and
+            contribute to shared knowledge within the {ENV.PROJECT_NAME}{" "}
+            network.
           </p>
         </div>
 

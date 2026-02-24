@@ -115,9 +115,9 @@ export default function UserEditModal({
   });
 
   const SELECT_STYLE =
-    "w-full bg-[#0d0d0d] border border-neutral-800 rounded-xl px-4 py-2.5 text-sm text-neutral-200 focus:border-cyan-500/40 focus:outline-none appearance-none cursor-pointer transition-all font-medium";
+    "w-full border border-neutral-800 rounded-xl px-4 py-2.5 text-sm text-neutral-200 focus:border-cyan-500/40 focus:outline-none appearance-none cursor-pointer transition-all font-medium";
   const INPUT_STYLE =
-    "w-full bg-[#0a0a0a] border border-neutral-800 rounded-xl px-4 py-2.5 text-[13px] text-white font-medium placeholder-neutral-700 focus:outline-none focus:border-cyan-500/50 transition-all";
+    "w-full bg-neutral-950 border border-neutral-800 rounded-xl px-4 py-2.5 text-[13px] text-white font-medium placeholder-neutral-700 focus:outline-none focus:border-cyan-500/50 transition-all";
   const LABEL_STYLE =
     "text-[10px] font-black text-neutral-500 uppercase tracking-[0.2em] mb-2 block";
   const authUserRole = authUser.role;
@@ -130,7 +130,7 @@ export default function UserEditModal({
       />
 
       {/* Modal Container */}
-      <div className="relative bg-[#0d0d0d] border border-neutral-800 w-full max-w-3xl rounded-[2.5rem] flex flex-col max-h-[90vh] animate-in fade-in zoom-in-95 duration-300">
+      <div className="relative border border-neutral-800 w-full max-w-3xl rounded-[2.5rem] flex flex-col max-h-[90vh] animate-in fade-in zoom-in-95 duration-300">
         {/* Header - Fixed */}
         <div className="px-10 py-8 border-b border-neutral-900 flex justify-between items-center bg-neutral-900/10">
           <div className="flex items-center gap-5">

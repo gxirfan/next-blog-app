@@ -19,7 +19,6 @@ export default function MessageDetailClient({
 
   return (
     <div className="max-w-5xl mx-auto space-y-6 animate-in fade-in duration-500">
-      {/* 1. Slim Header Section */}
       <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 border-b border-neutral-900 pb-8">
         <div className="space-y-1">
           <div className="flex items-center gap-2 text-[9px] font-mono font-black text-cyan-500 uppercase tracking-[0.3em]">
@@ -42,9 +41,8 @@ export default function MessageDetailClient({
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
-        {/* 2. Compact Identity Sidebar */}
         <aside className="lg:col-span-4">
-          <div className="bg-[#0a0a0a] border border-neutral-900 rounded-3xl p-6 space-y-6">
+          <div className="bg-neutral-950 border border-neutral-900 rounded-3xl p-6 space-y-6">
             <p className="text-[9px] font-mono text-neutral-700 uppercase tracking-widest font-black">
               // Source_Metadata
             </p>
@@ -95,9 +93,8 @@ export default function MessageDetailClient({
           </div>
         </aside>
 
-        {/* 3. Refined Message Body */}
         <main className="lg:col-span-8">
-          <div className="bg-[#0a0a0a] border border-neutral-900 rounded-3xl p-8 md:p-10 min-h-[300px] flex flex-col">
+          <div className="bg-neutral-950 border border-neutral-900 rounded-3xl p-8 md:p-10 min-h-[300px] flex flex-col">
             <div className="flex items-center gap-2 mb-6 text-[9px] font-mono text-neutral-700 uppercase tracking-[0.3em] font-black">
               <MessageSquare size={12} /> Payload_Data
             </div>

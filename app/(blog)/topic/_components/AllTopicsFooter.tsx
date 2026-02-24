@@ -19,7 +19,7 @@ export default function AllTopicsFooter({ meta }: AllTopicsFooterProps) {
         <div className="h-[1px] w-16 bg-gradient-to-l from-transparent to-neutral-800" />
       </div>
 
-      <div className="bg-[#0a0a0a] p-3 rounded-2xl border border-neutral-800/50 shadow-2xl shadow-cyan-500/5">
+      <div className="bg-neutral-950 p-3 rounded-2xl border border-neutral-800/50">
         <PaginationControls meta={meta} />
       </div>
     </footer>

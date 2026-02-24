@@ -86,30 +86,26 @@ export default async function PostAllPage({
   const currentPage = Number(params.page) || 1;
   const currentLimit = Number(params.limit) || 10;
 
-  // Fetch data from the primary data stream
   const postsData = await fetchPosts(currentPage, currentLimit);
   const posts = postsData.data.data || [];
   const meta = postsData.data.meta;
 
   return (
     <div className="mx-auto max-w-5xl px-4 py-12 space-y-12">
-      {/* Visual Identity & Records Count */}
       <AllPostsHeader totalRecords={meta?.total || 0} />
 
-      {/* Main Content Area */}
       <main className="min-h-[60vh]">
         {posts.length > 0 ? (
           <PostList posts={posts} />
         ) : (
           <div className="flex flex-col items-center justify-center py-20 border-2 border-dashed border-neutral-900 rounded-[3rem]">
             <span className="text-neutral-700 font-mono text-sm uppercase tracking-widest">
-              No entries found in this sector
+              No entries found in this sector.
             </span>
           </div>
         )}
       </main>
 
-      {/* Control Module for Pagination */}
       <AllPostsFooter meta={meta} />
     </div>
   );
