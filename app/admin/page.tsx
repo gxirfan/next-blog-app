@@ -6,21 +6,20 @@ import {
   ArrowRight,
   Tag,
   Command,
-  Activity,
+  Zap,
   Mail,
 } from "lucide-react";
 import { ENV } from "@/config/env.config";
 
 export default function AdminPage() {
   const BORDER_STYLE = "border border-neutral-800/60";
-  const CARD_BG = "bg-[#0d0d0d]";
 
   const modules = [
     {
-      href: "/admin/flow",
-      label: "Flow",
+      href: `/admin/${ENV.SOCIAL_POST_TYPE}`,
+      label: ENV.SOCIAL_POST_TYPE,
       description: "Monitor real-time data streams and content propagation.",
-      icon: Activity,
+      icon: Zap,
     },
     {
       href: "/admin/messages",
@@ -50,7 +49,6 @@ export default function AdminPage() {
 
   return (
     <div className="max-w-6xl mx-auto space-y-12 animate-in fade-in duration-700">
-      {/* Header Section - No Shadows */}
       <header className="flex flex-col md:flex-row md:items-end justify-between gap-6 border-b border-neutral-800/50 pb-10">
         <div className="space-y-2">
           <div className="flex items-center gap-2 text-cyan-500 font-mono text-[10px] tracking-[0.3em] uppercase">
@@ -68,7 +66,7 @@ export default function AdminPage() {
         </div>
 
         <div
-          className={`${CARD_BG} ${BORDER_STYLE} flex items-center gap-4 px-6 py-4 rounded-3xl transition-all hover:border-cyan-500/30`}
+          className={`${BORDER_STYLE} flex items-center gap-4 px-6 py-4 rounded-3xl transition-all hover:border-cyan-500/30`}
         >
           <div className="text-right">
             <p className="text-[10px] text-neutral-600 uppercase font-bold tracking-widest">
@@ -84,10 +82,7 @@ export default function AdminPage() {
         </div>
       </header>
 
-      {/* Modern Flat Table */}
-      <div
-        className={`${CARD_BG} ${BORDER_STYLE} rounded-[2.5rem] overflow-hidden`}
-      >
+      <div className={`${BORDER_STYLE} rounded-[2.5rem] overflow-hidden`}>
         <table className="w-full text-left border-separate border-spacing-0">
           <thead>
             <tr className="bg-neutral-900/40 text-neutral-600 text-[11px] uppercase tracking-[0.2em] font-black">
@@ -143,8 +138,10 @@ export default function AdminPage() {
       </div>
 
       {/* System Footer */}
-      <footer className="flex justify-between items-center text-[10px] font-mono text-neutral-700 uppercase tracking-[0.4em] px-4">
-        <p>{ENV.PROJECT_NAME}_Terminal_v1.0.4</p>
+      <footer className="flex justify-between items-center text-[10px] font-mono text-neutral-700 tracking-[0.4em] px-4">
+        <p>
+          {ENV.PROJECT_NAME}_Terminal_v{ENV.APP_VERSION}
+        </p>
         <div className="flex items-center gap-4">
           <p>Auth: Admin_Privileges</p>
           <div className="h-3 w-px bg-neutral-800" />

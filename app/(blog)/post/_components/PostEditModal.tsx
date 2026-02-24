@@ -32,7 +32,6 @@ const PostEditModal = ({ post, onClose }: PostEditModalProps) => {
   const [error, setError] = useState<string | null>(null);
   const [showImageUpload, setShowImageUpload] = useState(false);
 
-  // Başlangıçta mevcut görseli tam URL olarak alıyoruz
   const initialImage = post.mainImage
     ? `${ENV.API_IMAGE_URL}${post.mainImage}`
     : null;
@@ -112,10 +111,10 @@ const PostEditModal = ({ post, onClose }: PostEditModalProps) => {
             </div>
             <div>
               <p className="text-[10px] font-mono uppercase tracking-[0.3em] text-cyan-500 mb-1">
-                Node_Configuration
+                Edit Entry
               </p>
               <h2 className="text-xl text-white font-black uppercase tracking-tighter">
-                Update Post Details
+                Update {ENV.POST_TYPE} Details
               </h2>
             </div>
           </div>
@@ -142,7 +141,7 @@ const PostEditModal = ({ post, onClose }: PostEditModalProps) => {
             <div className="space-y-4">
               <div className="flex items-center justify-between px-4">
                 <label className="font-mono text-[10px] uppercase tracking-[0.4em] text-neutral-500">
-                  Featured_Media
+                  Featured Media
                 </label>
 
                 {!showImageUpload && !formData.mainImage && (
@@ -202,7 +201,7 @@ const PostEditModal = ({ post, onClose }: PostEditModalProps) => {
 
                         <div className="flex flex-col items-center gap-2">
                           <span className="font-mono text-[10px] uppercase tracking-[0.5em] text-neutral-400 group-hover/label:text-white transition-colors">
-                            Select_Node_Resource
+                            Select Featured Media
                           </span>
                           <span className="text-[9px] text-neutral-600 uppercase tracking-widest font-medium">
                             JPG • PNG • WEBP
@@ -232,7 +231,7 @@ const PostEditModal = ({ post, onClose }: PostEditModalProps) => {
 
             <div className="space-y-3">
               <label className="text-[10px] font-mono uppercase tracking-[0.3em] text-neutral-500 ml-4">
-                Subject_Identifier
+                Title
               </label>
               <input
                 type="text"
@@ -248,7 +247,7 @@ const PostEditModal = ({ post, onClose }: PostEditModalProps) => {
 
             <div className="space-y-3">
               <label className="text-[10px] font-mono uppercase tracking-[0.3em] text-neutral-500 ml-4">
-                Content_Stream
+                Content Stream
               </label>
               <div className="bg-neutral-900/30 rounded-4xl border border-neutral-800 overflow-hidden focus-within:border-cyan-500/30 transition-all">
                 <TiptapEditor
@@ -273,7 +272,7 @@ const PostEditModal = ({ post, onClose }: PostEditModalProps) => {
               onClick={onClose}
               className="px-8 py-4 rounded-full text-[10px] font-mono uppercase tracking-widest text-neutral-600 hover:text-white transition-all cursor-pointer"
             >
-              Abort_Changes
+              Abort Changes
             </button>
             <button
               type="submit"
@@ -292,7 +291,7 @@ const PostEditModal = ({ post, onClose }: PostEditModalProps) => {
               ) : (
                 <>
                   <Save size={16} />
-                  <span>Execute_Save</span>
+                  <span>Save</span>
                 </>
               )}
             </button>

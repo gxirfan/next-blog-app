@@ -23,7 +23,7 @@ export default function FlowTableClient({ paginationData }: FlowTableProps) {
   return (
     <div className="space-y-8 animate-in fade-in duration-700">
       {/* Table Container */}
-      <div className="bg-[#0d0d0d] border border-neutral-900 rounded-[2.5rem] overflow-hidden">
+      <div className="border border-neutral-900 rounded-[2.5rem] overflow-hidden">
         <table className="w-full text-left border-separate border-spacing-0 table-fixed">
           <thead>
             <tr className="bg-neutral-900/30 text-neutral-500 text-[10px] uppercase tracking-[0.2em] font-black">
@@ -95,7 +95,7 @@ export default function FlowTableClient({ paginationData }: FlowTableProps) {
                       </p>
                     </div>
                     <Link
-                      href={`/flow/${flow.slug}`}
+                      href={`/board/${flow.slug}`}
                       className={ACTION_BUTTON_STYLE}
                     >
                       <Eye size={16} />

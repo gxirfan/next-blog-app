@@ -18,11 +18,14 @@ export default function AllPostsHeader({ totalRecords }: AllPostsHeaderProps) {
       <div className="flex flex-col md:flex-row md:items-end justify-between gap-6">
         <div className="space-y-1">
           <h1 className="text-5xl font-black text-white tracking-tighter uppercase">
-            All <span className="text-neutral-600 font-light">Posts</span>
+            Latest{" "}
+            <span className="text-neutral-600 font-light">
+              {ENV.POST_TYPE}s
+            </span>
           </h1>
           <p className="text-neutral-500 font-medium max-w-md">
-            Complete archive of system logs and shared insights across the
-            {ENV.PROJECT_NAME} network.
+            Complete archive of system logs and shared {ENV.POST_TYPE}s across
+            the {ENV.PROJECT_NAME} network.
           </p>
         </div>
 

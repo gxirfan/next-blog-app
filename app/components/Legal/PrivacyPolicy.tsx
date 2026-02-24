@@ -1,3 +1,5 @@
+import { ENV } from "@/config/env.config";
+
 interface PrivacyPolicyProps {
   blogName: string;
   effectiveDate: string;
@@ -35,8 +37,8 @@ const PrivacyPolicy = ({ blogName, effectiveDate }: PrivacyPolicyProps) => {
             and diagnostic data.
           </li>
           <li>
-            **Content Data:** All content you share, post, upload, or submit to
-            the Service (comments, articles, etc.).
+            **Content Data:** All content you share, post, {ENV.POST_TYPE},
+            upload, or submit to the Service (comments, articles, etc.).
           </li>
           <li>
             **Tracking & Cookies Data:** Used to track activity and hold certain
@@ -69,7 +71,7 @@ const PrivacyPolicy = ({ blogName, effectiveDate }: PrivacyPolicyProps) => {
             **For Internal Analysis and Reporting:** To generate aggregated,
             anonymized, and non-anonymized reports, conduct **internal
             evaluations**, and provide insights for business decisions related
-            to the project's performance.
+            to the project&apos;s performance.
           </li>
           <li>To provide, operate, and maintain our Service.</li>
         </ul>

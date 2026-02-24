@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { ITopicResponse } from "@/app/types/topic";
 import { getRelativeTime } from "@/app/utils/date";
+import { ENV } from "@/config/env.config";
 
 interface TopicListProps {
   topics: ITopicResponse[];
@@ -38,14 +39,15 @@ const TopicList = ({ topics }: TopicListProps) => {
 
             <div className="flex justify-between line-clamp-2 mt-2 border-t border-gray-800 pt-2">
               <span className={`font-medium ${ACCENT_COLOR}`}>
-                @{topic.authorNickname}
+                {topic.authorNickname}
               </span>
               <div className="flex flex-col items-end shrink-0 text-sm font-mono">
                 <span className="text-neutral-400">
-                  Post Count: {topic.postCount.toString() || "N/A"}
+                  {ENV.POST_TYPE}: {topic.postCount.toString() || "N/A"}
                 </span>
                 <span className="text-neutral-400">
-                  Last Post: {getRelativeTime(topic.lastPostAt) || "N/A"}
+                  Last {ENV.POST_TYPE}:{" "}
+                  {getRelativeTime(topic.lastPostAt) || "N/A"}
                 </span>
               </div>
             </div>

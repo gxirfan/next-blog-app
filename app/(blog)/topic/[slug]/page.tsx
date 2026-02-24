@@ -95,14 +95,16 @@ export default async function TopicDetailPage({
       <PostCreationWrapper
         topicId={topicDetails.id}
         parentId={null}
-        buttonLabel="Start a new discussion post"
+        buttonLabel={`Start a new discussion ${ENV.POST_TYPE}`}
       />
 
       <Suspense
         fallback={
           <div className="flex justify-center items-center py-10 bg-neutral-900/50 rounded-lg border border-neutral-700">
             <Loader className="animate-spin text-cyan-400" size={24} />
-            <span className="text-cyan-400 ml-3">Loading posts...</span>
+            <span className="text-cyan-400 ml-3">
+              Loading {ENV.POST_TYPE}s...
+            </span>
           </div>
         }
       >

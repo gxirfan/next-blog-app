@@ -1,4 +1,3 @@
-// app/flow/_components/FlowCardActions.tsx
 "use client";
 
 import { MessageCircle } from "lucide-react";
@@ -15,8 +14,8 @@ export default function FlowCardActions({
   return (
     <button
       onClick={(e) => {
-        e.preventDefault(); // Link'in çalışmasını engelle
-        e.stopPropagation(); // Kart tıklamasını engelle (varsa)
+        e.preventDefault();
+        e.stopPropagation();
         onClick();
       }}
       className="text-neutral-500 hover:text-cyan-400 transition-colors flex items-center text-xs group cursor-pointer"

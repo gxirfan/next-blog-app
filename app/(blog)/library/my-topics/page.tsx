@@ -142,7 +142,9 @@ export default async function MyTopicsPage({
                         <MessageSquare size={14} className="text-neutral-700" />
                         <span>
                           {topic.postCount}{" "}
-                          <span className="text-neutral-800">Posts</span>
+                          <span className="text-neutral-800">
+                            {ENV.POST_TYPE}s
+                          </span>
                         </span>
                       </div>
                       <div className="flex items-center gap-2">

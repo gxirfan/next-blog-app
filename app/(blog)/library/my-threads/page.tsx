@@ -10,7 +10,7 @@ import { cookies } from "next/headers";
 import { getRequiredAuthSession } from "@/app/services/session";
 
 export const metadata: Metadata = {
-  title: "My Flows | Content Library",
+  title: "My Threads | Content Library",
 };
 
 interface MyFlowsPageProps {
@@ -46,7 +46,7 @@ export default async function MyFlowsPage({ searchParams }: MyFlowsPageProps) {
   const flows = response?.data?.data || [];
   const meta = response?.data?.meta;
 
-  await getRequiredAuthSession("/library/my-flows");
+  await getRequiredAuthSession("/library/my-threads");
   return (
     <div className="mx-auto space-y-10  animate-in fade-in duration-700">
       <div className="border-b border-neutral-900 pb-8">
@@ -55,11 +55,11 @@ export default async function MyFlowsPage({ searchParams }: MyFlowsPageProps) {
             <Zap size={28} strokeWidth={2} />
           </div>
           <h1 className="text-4xl text-white tracking-tighter uppercase">
-            My Flows
+            My Threads
           </h1>
         </div>
         <p className="text-neutral-500 text-[13px] font-medium ml-1">
-          Everything you&apos;ve shared in the flow stream.
+          Everything you&apos;ve shared in the threads.
         </p>
       </div>
 
@@ -91,7 +91,7 @@ export default async function MyFlowsPage({ searchParams }: MyFlowsPageProps) {
 
               <div className="flex items-center justify-between pt-4 border-t border-neutral-900">
                 <Link
-                  href={`/flow/${flow.slug}`}
+                  href={`/${ENV.SOCIAL_POST_TYPE}/thread/${flow.slug}`}
                   className="inline-flex items-center gap-2 text-[10px] uppercase tracking-[0.2em] text-cyan-500 font-bold hover:text-cyan-400 transition-all group/link"
                 >
                   View Thread
@@ -112,13 +112,13 @@ export default async function MyFlowsPage({ searchParams }: MyFlowsPageProps) {
               <MessageSquareOff size={40} />
             </div>
             <p className="text-neutral-400 uppercase tracking-widest text-xs">
-              No flows detected in the grid.
+              No threads detected in the grid.
             </p>
             <Link
-              href="/flow"
+              href={`/${ENV.SOCIAL_POST_TYPE}`}
               className="mt-6 inline-flex items-center gap-2 px-8 py-3 bg-neutral-900 border border-neutral-800 rounded-full text-[10px] uppercase tracking-[0.2em] text-cyan-500 hover:border-cyan-500/50 transition-all active:scale-95"
             >
-              Initialize First Flow
+              Initialize First Thread
             </Link>
           </div>
         )}

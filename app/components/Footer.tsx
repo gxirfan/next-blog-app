@@ -20,10 +20,10 @@ const Footer = () => {
                 <Cpu size={18} className="text-cyan-500" />
               </div>
               <div className="flex flex-col">
-                <span className="text-sm font-black uppercase tracking-[0.3em] text-white">
+                <span className="text-sm font-black tracking-[0.3em] text-white">
                   <span className="text-cyan-500">{ENV.PROJECT_NAME}</span>
                 </span>
-                <span className="text-[9px] font-mono text-neutral-600 uppercase tracking-widest">
+                <span className="text-[9px] font-mono text-neutral-600 tracking-widest">
                   Content_Node_System
                 </span>
               </div>
@@ -33,10 +33,10 @@ const Footer = () => {
               <p className="text-[10px] font-mono font-bold text-neutral-500 uppercase tracking-[0.2em]">
                 &copy; {currentYear} All Rights Reserved_
               </p>
-              <div className="flex items-center gap-3 text-[9px] font-mono uppercase tracking-widest text-neutral-700">
+              <div className="flex items-center gap-3 text-[9px] font-mono tracking-widest text-neutral-700">
                 <span className="flex items-center gap-1.5">
                   <div className="w-1 h-1 bg-cyan-900 rounded-full animate-pulse" />
-                  V1.2.4_Stable
+                  V{ENV.APP_VERSION}_{ENV.VERSION_TEST}
                 </span>
                 <span className="w-1 h-1 bg-neutral-800 rounded-full" />
                 <span>Production_Env</span>
@@ -96,7 +96,8 @@ const Footer = () => {
         {/* 3. Global Protocol Indicator */}
         <div className="mt-16 flex justify-center border-t border-neutral-900/30 pt-8">
           <p className="text-[9px] font-mono text-neutral-800 uppercase tracking-[0.5em] text-center">
-            Encrypted_Data_Transmission_Verified // Protocol_2.6.0
+            Encrypted_Data_Transmission_Verified // Protocol_{ENV.APP_VERSION}_
+            {ENV.VERSION_TEST}
           </p>
         </div>
       </div>

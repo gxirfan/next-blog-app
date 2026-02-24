@@ -45,6 +45,9 @@ export const ENV = {
       : "Default SEO keywords",
 
   PROJECT_NAME: process.env.NEXT_PUBLIC_PROJECT_NAME || "Blog App",
-  VERSION: process.env.NEXT_PUBLIC_VERSION_TEST || "stable",
+  VERSION_TEST: process.env.NEXT_PUBLIC_VERSION_TEST || "stable",
+  APP_VERSION: process.env.NEXT_PUBLIC_APP_VERSION || "1.0.0",
   IS_PROD: process.env.NODE_ENV === "production",
+  POST_TYPE: process.env.NEXT_PUBLIC_POST_TYPE || "post",
+  SOCIAL_POST_TYPE: process.env.NEXT_PUBLIC_SOCIAL_POST_TYPE || "flow",
 };

@@ -1,5 +1,5 @@
 import { Sparkles } from "lucide-react";
-import { cookies, headers } from "next/headers";
+import { cookies } from "next/headers";
 import PaginationControls from "@/app/components/PaginationControls";
 import { IBaseResponse } from "@/app/types/common";
 import { IFlow } from "@/app/types/flow";
@@ -25,14 +25,14 @@ async function getFlows(
           data: [],
           meta: { total: 0, page: 0, limit: 0, totalPages: 0 },
         },
-        message: "Failed to fetch flows",
+        message: "Failed to fetch stream.",
         success: false,
         statusCode: res.status,
       };
     }
     return await res.json();
   } catch (error) {
-    console.error("Fetch flows error:", error);
+    console.error("Fetch stream error:", error);
     return {
       data: { data: [], meta: { total: 0, page: 0, limit: 0, totalPages: 0 } },
       message: "Network error",
@@ -49,7 +49,7 @@ interface FlowPageProps {
 export default async function FlowPage({ searchParams }: FlowPageProps) {
   const params = await searchParams;
   const page = Number(params.page) || 1;
-  const limit = Number(params.limit) || 10;
+  const limit = Number(params.limit) || 50;
 
   const flowsResponse = await getFlows(page, limit);
   const flows = flowsResponse.data?.data || [];
@@ -60,7 +60,7 @@ export default async function FlowPage({ searchParams }: FlowPageProps) {
       <div className="flex items-center space-x-2 mb-6 px-2">
         <Sparkles className="text-cyan-400" size={24} />
         <h1 className="text-2xl font-bold text-white tracking-tight">
-          The Flow Ground
+          The Stream
         </h1>
       </div>
 

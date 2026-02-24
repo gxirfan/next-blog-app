@@ -9,7 +9,7 @@ export default function FlowHeader({ count }: { count: number }) {
           Network Throughput
         </div>
         <h1 className="text-3xl font-black text-white tracking-tighter uppercase leading-none">
-          Flow{" "}
+          Feed{" "}
           <span className="text-neutral-500 font-light text-2xl tracking-tighter">
             Analyzer
           </span>
@@ -19,14 +19,14 @@ export default function FlowHeader({ count }: { count: number }) {
         </p>
       </div>
 
-      <div className="bg-[#0d0d0d] border border-neutral-800 flex items-center gap-4 px-6 py-3 rounded-2xl">
+      <div className="border border-neutral-800 flex items-center gap-4 px-6 py-3 rounded-2xl">
         <div className="text-right leading-none">
           <p className="text-[9px] text-neutral-600 uppercase font-black tracking-tighter">
-            Active_Streams
+            Active Streams
           </p>
           <p className="text-xl font-bold text-neutral-200">{count}</p>
         </div>
-        <div className="h-8 w-[1px] bg-neutral-800" />
+        <div className="h-8 w-px bg-neutral-800" />
         <Activity className="text-cyan-500/30" size={20} />
       </div>
     </div>

@@ -17,7 +17,7 @@ import { ENV } from "@/config/env.config";
 import { getRequiredAuthSession } from "@/app/services/session";
 
 export const metadata: Metadata = {
-  title: "My Posts | Content Library",
+  title: `My ${ENV.POST_TYPE}s | Content Library`,
 };
 
 interface MyPostsPageProps {
@@ -84,7 +84,7 @@ export default async function MyPostsPage({ searchParams }: MyPostsPageProps) {
             <MessageSquare size={28} strokeWidth={2} />
           </div>
           <h1 className="text-4xl text-white tracking-tighter uppercase leading-none">
-            My Posts
+            My {ENV.POST_TYPE}s
           </h1>
         </div>
         <div className="flex items-center gap-3 ml-1 text-neutral-500">

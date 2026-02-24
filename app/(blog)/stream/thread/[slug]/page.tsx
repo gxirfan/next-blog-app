@@ -8,8 +8,6 @@ import FlowDetailClient from "./_components/FlowDetailClient";
 import PaginationControls from "@/app/components/PaginationControls";
 import { ENV } from "@/config/env.config";
 
-// --- Fetchers ---
-
 async function getFlowDetail(
   slug: string,
 ): Promise<IBaseResponse<IFlow> | null> {
@@ -24,7 +22,7 @@ async function getFlowDetail(
     const json = await res.json();
     return json.success ? json : null;
   } catch (e) {
-    console.error("Error fetching flow detail:", e);
+    console.error("Error fetching stream entry detail:", e);
     return null;
   }
 }

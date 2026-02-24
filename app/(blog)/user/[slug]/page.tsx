@@ -100,11 +100,11 @@ export default async function PublicProfilePage({
   const postsFallback = (
     <div className="min-h-[400px]">
       <h2 className="text-2xl font-bold text-white border-b border-neutral-700 pb-3 mb-6">
-        Latest Posts by @{nickname}
+        Latest {ENV.POST_TYPE}s by {nickname}
       </h2>
       <div className="flex justify-center items-center py-10 bg-neutral-900/50 rounded-xl border border-neutral-700">
         <Loader className="animate-spin text-cyan-400" size={24} />
-        <span className="text-cyan-400 ml-3">Loading posts...</span>
+        <span className="text-cyan-400 ml-3">Loading {ENV.POST_TYPE}s...</span>
       </div>
     </div>
   );

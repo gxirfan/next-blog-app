@@ -7,7 +7,6 @@ import {
   Trash2,
   X,
   Loader2,
-  AlertTriangle,
   ChevronRight,
   ShieldAlert,
 } from "lucide-react";
@@ -31,7 +30,7 @@ export default function FlowActions({
 
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [modalMode, setModalMode] = useState<"none" | "edit" | "delete">(
-    "none"
+    "none",
   );
   const [content, setContent] = useState(initialContent);
   const [loading, setLoading] = useState(false);
@@ -51,7 +50,7 @@ export default function FlowActions({
       setModalMode("none");
       router.refresh();
       if (updatedData.slug !== slug) {
-        router.push(`/flow/${updatedData.slug}`);
+        router.push(`/stream/thread/${updatedData.slug}`);
       }
     } catch (err) {
       console.error("Update failed:", err);
@@ -64,7 +63,7 @@ export default function FlowActions({
     setLoading(true);
     try {
       await api.patch(`/flow/${slug}`, { isDeleted: true });
-      router.push("/flow");
+      router.push("/stream");
       router.refresh();
     } catch (err) {
       console.error("Delete failed:", err);
@@ -101,7 +100,7 @@ export default function FlowActions({
                   size={14}
                   className="mr-3 text-neutral-600 group-hover:text-cyan-500 transition-colors"
                 />{" "}
-                Edit Flow
+                Edit Entry
               </button>
             )}
             <button
@@ -115,7 +114,7 @@ export default function FlowActions({
                 size={14}
                 className="mr-3 text-red-900/50 group-hover:text-red-500 transition-colors"
               />{" "}
-              Delete Flow
+              Delete Entry
             </button>
           </div>
         </>
@@ -123,7 +122,6 @@ export default function FlowActions({
 
       {modalMode !== "none" && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/90 backdrop-blur-sm p-6">
-          {/* 🎯 DELETE MODAL: Zero Shadow, Stark Red Accents */}
           {modalMode === "delete" && (
             <div className="bg-neutral-950 border border-red-900/30 w-full max-w-sm rounded-[2.5rem] p-8 md:p-10 animate-in zoom-in-95 duration-200">
               <div className="flex items-center gap-3 text-red-500 mb-6">
@@ -159,7 +157,6 @@ export default function FlowActions({
             </div>
           )}
 
-          {/* 🎯 EDIT MODAL: Deep Black, Cyan Accents, Zero Shadow */}
           {modalMode === "edit" && (
             <div className="bg-neutral-950 border border-neutral-800 w-full max-w-xl rounded-[2.5rem] p-8 md:p-10 animate-in zoom-in-95 duration-200">
               <div className="flex justify-between items-center mb-8 border-b border-neutral-900 pb-6">

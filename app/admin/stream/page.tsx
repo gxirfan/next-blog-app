@@ -29,7 +29,7 @@ async function fetchFlows(
     if (!response.ok)
       return {
         success: false,
-        message: "Failed to fetch flows",
+        message: "Failed to fetch threads",
         statusCode: response.status,
         data: {
           data: [],
@@ -41,7 +41,7 @@ async function fetchFlows(
   } catch {
     return {
       success: false,
-      message: "Failed to fetch flows",
+      message: "Failed to fetch threads",
       statusCode: 500,
       data: { data: [], meta: { total: 0, page: 0, limit: 0, totalPages: 0 } },
     };
@@ -66,9 +66,9 @@ export default async function AdminFlowPage({
       <FlowHeader count={flowResponse?.data?.meta?.total || 0} />
 
       {!hasData ? (
-        <div className="py-32 text-center bg-[#0d0d0d] border border-neutral-900 rounded-[2.5rem]">
+        <div className="py-32 text-center border border-neutral-900 rounded-[2.5rem]">
           <p className="text-neutral-600 text-[10px] font-black uppercase tracking-[0.4em]">
-            No_Data_Streams_Detected_In_Grid
+            No Threads Detected In Stream
           </p>
         </div>
       ) : (

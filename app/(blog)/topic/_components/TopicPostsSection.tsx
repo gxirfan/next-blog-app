@@ -15,15 +15,17 @@ async function fetchTopicPosts(
       cache: "no-store",
     });
     if (!response.ok) {
-      throw new Error(`Failed to fetch topic posts: ${response.status}`);
+      throw new Error(
+        `Failed to fetch topic ${ENV.POST_TYPE}s: ${response.status}`,
+      );
     }
     const result = await response.json();
     return result;
   } catch (error) {
-    console.error(`Topic posts fetching error: ${error}`);
+    console.error(`Topic ${ENV.POST_TYPE}s fetching error: ${error}`);
     return {
       success: false,
-      message: "Failed to fetch topic posts",
+      message: `Failed to fetch topic ${ENV.POST_TYPE}s`,
       statusCode: 500,
       data: { data: [], meta: { total: 0, page: 1, limit: 10, totalPages: 0 } },
     };
@@ -48,7 +50,7 @@ export default async function TopicPostsSection({
   return (
     <>
       <h2 className="text-xl font-bold text-white mb-4 border-b border-neutral-700 pb-2">
-        Posts ({meta.total})
+        {ENV.POST_TYPE}s ({meta.total})
       </h2>
 
       <PostList posts={topicPosts || []} />
