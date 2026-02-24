@@ -1,32 +1,40 @@
-// app/library/loading.tsx
 import { Loader } from "lucide-react";
 
 export default function LibraryLoading() {
   return (
-    <div className="mx-auto space-y-10  animate-in fade-in duration-500">
-      {/* 1. Header Skeleton - Keep it consistent with your Library layout */}
+    <div className="mx-auto space-y-10 animate-in fade-in duration-500">
       <div className="border-b border-neutral-900 pb-8">
-        <div className="flex items-center space-x-4 mb-3">
-          <div className="w-10 h-10 bg-neutral-900 border border-neutral-800 rounded-2xl animate-pulse" />
-          <div className="h-8 w-40 bg-neutral-900 rounded-lg animate-pulse" />
+        <div className="flex items-center space-x-4 mb-4">
+          <div className="w-10 h-10 bg-neutral-900 border border-neutral-800 rounded-full animate-pulse" />
+          <div className="h-7 w-48 bg-neutral-900 rounded-full animate-pulse" />
         </div>
-        <div className="h-3 w-56 bg-neutral-900 rounded-md animate-pulse ml-1" />
+        <div className="h-2.5 w-64 bg-neutral-900/40 rounded-full animate-pulse ml-1" />
       </div>
 
-      {/* 2. Centralized Loader Area */}
-      <div className="flex flex-col items-center justify-center py-32 bg-neutral-950 border border-neutral-900 rounded-[2.5rem]">
-        <div className="relative flex items-center justify-center">
-          {/* Subtle glow without using shadow: strictly using blur and opacity */}
-          <div className="absolute inset-0 bg-cyan-500/10 blur-2xl rounded-full animate-pulse" />
-          <Loader
-            className="animate-spin text-cyan-500 relative z-10"
-            size={32}
-          />
+      <div className="relative flex flex-col items-center justify-center py-32 bg-neutral-950 border border-neutral-900 rounded-[3rem] overflow-hidden">
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(6,182,212,0.03),transparent)] pointer-events-none" />
+
+        <div className="relative flex flex-col items-center">
+          <div className="absolute w-12 h-12 bg-cyan-500/5 rounded-full animate-ping duration-[3s]" />
+
+          <div className="p-6 bg-neutral-900/30 border border-neutral-800 rounded-full relative z-10">
+            <Loader
+              className="animate-spin text-cyan-500/80"
+              size={28}
+              strokeWidth={1.5}
+            />
+          </div>
         </div>
 
-        <p className="mt-6 text-[10px] uppercase tracking-[0.4em] text-neutral-600 animate-pulse">
-          Synchronizing Grid Data...
-        </p>
+        <div className="mt-8 flex flex-col items-center space-y-3">
+          <p className="text-[11px] font-bold uppercase tracking-[0.2em] text-neutral-500">
+            Loading Library
+          </p>
+
+          <div className="w-12 h-px bg-neutral-900 rounded-full overflow-hidden">
+            <div className="w-full h-full bg-cyan-500/30 animate-[loading-slide_2s_infinite_ease-in-out]" />
+          </div>
+        </div>
       </div>
     </div>
   );

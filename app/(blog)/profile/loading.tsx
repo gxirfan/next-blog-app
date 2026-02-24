@@ -1,6 +1,6 @@
 import { Loader } from "lucide-react";
 
-export default function TagLoading() {
+export default function ProfileLoading() {
   return (
     <div className="w-full mx-auto space-y-10 animate-in fade-in duration-700">
       <div className="border-b border-neutral-900 pb-10">
@@ -28,7 +28,7 @@ export default function TagLoading() {
 
         <div className="mt-8 flex flex-col items-center space-y-3">
           <p className="text-[11px] font-bold uppercase tracking-[0.2em] text-neutral-500">
-            Loading Tags
+            Loading Profile
           </p>
 
           <div className="w-10 h-px bg-neutral-900 rounded-full overflow-hidden">

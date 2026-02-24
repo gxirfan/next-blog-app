@@ -8,7 +8,7 @@ export default function AdminLoading() {
     <div className="flex flex-col items-center justify-center min-h-[60vh] space-y-6 animate-in fade-in duration-500">
       <div className="relative">
         <div className="absolute inset-0 rounded-full border border-cyan-500/20 animate-ping" />
-        <div className="relative h-16 w-16 bg-[#0d0d0d] border border-neutral-800 rounded-2xl flex items-center justify-center text-cyan-500">
+        <div className="relative h-16 w-16 border border-neutral-800 rounded-2xl flex items-center justify-center text-cyan-500">
           <Loader2 size={32} className="animate-spin" />
         </div>
       </div>
@@ -21,8 +21,8 @@ export default function AdminLoading() {
           </span>
         </div>
 
-        <p className="text-[9px] font-mono text-neutral-700 uppercase tracking-widest">
-          {ENV.PROJECT_NAME} Protocol v1.0.4
+        <p className="text-[9px] font-mono text-neutral-700 tracking-widest">
+          {ENV.PROJECT_NAME} Protocol {ENV.APP_VERSION}
         </p>
       </div>
 
