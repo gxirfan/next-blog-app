@@ -23,7 +23,9 @@ const getNotificationIcon = (
       return { Icon: ArrowBigUp, color: "bg-green-600" };
     case "vote_down":
       return { Icon: ArrowBigDown, color: "bg-red-600" };
-    case "reply":
+    case "flow_reply":
+      return { Icon: MessageSquare, color: "bg-blue-600" };
+    case "post_reply":
       return { Icon: MessageSquare, color: "bg-blue-600" };
     default:
       return { Icon: ListChecks, color: "bg-neutral-600" };
@@ -39,45 +41,69 @@ const NotificationListItem = ({ notification }: NotificationListItemProps) => {
 
   return (
     <Link
-      href={notification.targetUrl}
-      className={`flex items-start p-4 rounded-lg transition-colors border border-neutral-700
-                ${
-                  !notification.isRead
-                    ? "bg-neutral-900 border-cyan-800 hover:bg-neutral-800"
-                    : "bg-neutral-900 hover:bg-neutral-900"
-                }`}
+      href={
+        notification.type === "flow_reply"
+          ? "/stream/thread/" + notification.targetUrl
+          : notification.type === "post_reply"
+            ? "/post/" + notification.targetUrl
+            : notification.type === "vote_up" ||
+                notification.type === "vote_down"
+              ? "/post/" + notification.targetUrl
+              : notification.targetUrl
+      }
+      className={`flex items-start gap-5 p-5 transition-all duration-100 border-b border-neutral-900 group relative
+              ${
+                !notification.isRead
+                  ? "bg-cyan-500/3 hover:bg-cyan-500/6"
+                  : "bg-transparent hover:bg-white/2"
+              }`}
     >
-      <div className="shrink-0 mr-4 relative">
-        <div className="w-10 h-10 relative rounded-full overflow-hidden bg-neutral-800">
+      {!notification.isRead && (
+        <div className="absolute left-0 top-0 bottom-0 w-[2px] bg-cyan-500 shadow-[0_0_15px_rgba(6,182,212,0.5)]" />
+      )}
+
+      <div className="shrink-0 relative">
+        <div className="w-14 h-14 rounded-full overflow-hidden relative">
           <Image
             src={avatarUrl}
             fill
             className="object-cover"
-            alt={`${notification.senderUsername}'s avatar`}
+            alt={`${notification.senderNickname}'s avatar`}
           />
         </div>
-
         <div
-          className={`absolute top-0 right-0 p-1 rounded-full border-2 border-neutral-900 text-white ${color}`}
+          className={`absolute -bottom-1 -right-1 p-2 rounded-full border-2 border-neutral-950 shadow-2xl ${color}`}
         >
-          <Icon size={12} />
+          <Icon size={12} strokeWidth={3} />
         </div>
       </div>
 
-      <div className="flex-1 min-w-0">
-        <p
-          className={`text-sm ${
-            !notification.isRead ? "text-white font-medium" : "text-neutral-300"
-          }`}
-        >
-          {notification.message}
-        </p>
-        <span className="text-xs text-neutral-500 mt-1 flex items-center space-x-2">
+      <div className="flex-1 min-w-0 pt-1">
+        <div className="flex justify-between items-start gap-4">
+          <p
+            className={`text-[15px] leading-relaxed break-words ${
+              !notification.isRead
+                ? "text-neutral-100 font-semibold"
+                : "text-neutral-400"
+            }`}
+          >
+            {notification.message}
+          </p>
+
           {!notification.isRead && (
-            <span className="w-2 h-2 bg-cyan-400 rounded-full mr-1 shrink-0"></span>
+            <div className="w-2 h-2 bg-cyan-500 rounded-full shadow-[0_0_8px_rgba(6,182,212,0.8)] mt-2 shrink-0 animate-pulse" />
           )}
-          <span>{getRelativeTime(notification.createdAt)}</span>
-        </span>
+        </div>
+
+        <div className="flex items-center gap-3 mt-3">
+          <span className="text-[10px] font-black uppercase tracking-[0.15em] text-neutral-600">
+            {getRelativeTime(notification.createdAt)}
+          </span>
+          <div className="h-px w-4 bg-neutral-800" />
+          <span className="text-[9px] font-bold text-neutral-700 uppercase tracking-widest">
+            Signal Received
+          </span>
+        </div>
       </div>
     </Link>
   );
