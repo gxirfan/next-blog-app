@@ -54,15 +54,15 @@ const RecoveryCodesModal = ({ codes, onClose }: RecoveryCodesModalProps) => {
           <div className="w-16 h-16 bg-red-500/10 rounded-3xl flex items-center justify-center text-red-500 mb-8 border border-red-500/20">
             <ShieldAlert size={32} />
           </div>
-          <h2 className="text-4xl md:text-5xl font-black text-white uppercase tracking-tighter leading-none">
+          <h2 className="text-4xl md:text-5xl font-black text-white tracking-tighter leading-none">
             Backup <span className="text-neutral-800">Keys</span>
           </h2>
-          <p className="text-[11px] font-black uppercase tracking-[0.3em] text-red-500 mt-6">
+          <p className="text-[11px] font-black tracking-[0.3em] text-red-500 mt-6">
             Critical: Save these now
           </p>
         </div>
 
-        <p className="text-[15px] font-bold text-neutral-400 mb-10 leading-relaxed uppercase tracking-tight">
+        <p className="text-[15px] font-bold text-neutral-400 mb-10 leading-relaxed tracking-tight">
           These are your <span className="text-white">final access keys</span>.
           If you lose access to your account, these codes are the only way back.
           They will never be shown again.
@@ -76,7 +76,7 @@ const RecoveryCodesModal = ({ codes, onClose }: RecoveryCodesModalProps) => {
                 <span className="text-[10px] font-black text-neutral-700 select-none w-4">
                   {(index + 1).toString().padStart(2, "0")}
                 </span>
-                <span className="text-lg font-black text-cyan-500 tracking-[0.2em] uppercase">
+                <span className="text-lg font-black text-cyan-500 tracking-[0.2em]">
                   {code}
                 </span>
               </div>
@@ -88,7 +88,7 @@ const RecoveryCodesModal = ({ codes, onClose }: RecoveryCodesModalProps) => {
         <div className="flex flex-col sm:flex-row items-center gap-4">
           <button
             onClick={downloadAsText}
-            className="w-full flex items-center justify-center gap-3 px-8 py-5 bg-neutral-900 border-2 border-neutral-800 rounded-full text-[12px] font-black uppercase tracking-widest text-white hover:bg-neutral-800 transition-all cursor-pointer"
+            className="w-full flex items-center justify-center gap-3 px-8 py-5 bg-neutral-900 border-2 border-neutral-800 rounded-full text-[12px] font-black tracking-widest text-white hover:bg-neutral-800 transition-all cursor-pointer"
           >
             <Download size={18} />
             Save .txt
@@ -96,7 +96,7 @@ const RecoveryCodesModal = ({ codes, onClose }: RecoveryCodesModalProps) => {
 
           <button
             onClick={copyToClipboard}
-            className="w-full flex items-center justify-center gap-3 px-8 py-5 bg-neutral-800 border-2 border-neutral-700 rounded-full text-[12px] font-black uppercase tracking-widest text-neutral-300 hover:text-white transition-all cursor-pointer"
+            className="w-full flex items-center justify-center gap-3 px-8 py-5 bg-neutral-800 border-2 border-neutral-700 rounded-full text-[12px] font-black tracking-widest text-neutral-300 hover:text-white transition-all cursor-pointer"
           >
             {copied ? (
               <CheckCircle2 size={18} className="text-green-500" />
@@ -109,7 +109,7 @@ const RecoveryCodesModal = ({ codes, onClose }: RecoveryCodesModalProps) => {
 
         <button
           onClick={onClose}
-          className="w-full mt-4 px-8 py-6 bg-cyan-500 text-black rounded-full text-[13px] font-black uppercase tracking-[0.2em] hover:bg-white transition-all active:scale-95 cursor-pointer flex items-center justify-center gap-3"
+          className="w-full mt-4 px-8 py-6 bg-cyan-500 text-black rounded-full text-[13px] font-black tracking-[0.2em] hover:bg-white transition-all active:scale-95 cursor-pointer flex items-center justify-center gap-3"
         >
           I&apos;ve secured my keys <ArrowRight size={20} />
         </button>

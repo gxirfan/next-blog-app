@@ -112,7 +112,7 @@ const EditableField = ({
             size={14}
             className="text-neutral-600 group-hover/header:text-cyan-500 transition-colors duration-300"
           />
-          <span className="text-[10px] font-black font-jetbrains-mono uppercase tracking-[0.2em] text-neutral-500">
+          <span className="text-[11px] font-black font-jetbrains-mono tracking-[0.2em] text-neutral-500">
             {label}
           </span>
         </div>
@@ -126,10 +126,10 @@ const EditableField = ({
             className="flex items-center gap-1.5 px-2 py-1 rounded hover:bg-neutral-900 transition-all duration-200 cursor-pointer group/btn"
           >
             <Edit
-              size={11}
+              size={12}
               className="text-neutral-700 group-hover/btn:text-cyan-500 transition-colors"
             />
-            <span className="text-[9px] font-black font-jetbrains-mono uppercase tracking-widest text-neutral-700 group-hover/btn:text-neutral-300 transition-colors">
+            <span className="text-[11px] font-black font-jetbrains-mono tracking-widest text-neutral-700 group-hover/btn:text-neutral-300 transition-colors">
               Edit
             </span>
           </button>
@@ -217,7 +217,7 @@ const EditableField = ({
           </div>
 
           {error && (
-            <div className="flex items-center gap-2 text-[10px] uppercase tracking-widest text-red-500 px-2">
+            <div className="flex items-center gap-2 text-[11px] tracking-widest text-red-500 px-2">
               <XCircle size={12} /> <span>{error}</span>
             </div>
           )}
@@ -229,7 +229,7 @@ const EditableField = ({
                 setValue(initialValue);
                 setIsEditing(false);
               }}
-              className="px-4 py-2 text-[10px] uppercase tracking-widest text-neutral-600 hover:text-white transition-colors cursor-pointer flex items-center gap-1"
+              className="px-4 py-2 text-[11px] tracking-widest text-neutral-600 hover:text-white transition-colors cursor-pointer flex items-center gap-1"
             >
               <X size={12} /> Cancel
             </button>
@@ -237,7 +237,7 @@ const EditableField = ({
             <button
               onClick={handleSave}
               disabled={isSaving || value === initialValue}
-              className="px-5 py-2.5 bg-neutral-950 border border-neutral-800 rounded-xl text-[10px] uppercase tracking-widest text-neutral-400 hover:border-cyan-500/50 hover:text-cyan-400 transition-all disabled:opacity-30 active:scale-95 cursor-pointer"
+              className="px-5 py-2.5 bg-neutral-950 border border-neutral-800 rounded-xl text-[11px] tracking-widest text-neutral-400 hover:border-cyan-500/50 hover:text-cyan-400 transition-all disabled:opacity-30 active:scale-95 cursor-pointer"
             >
               {isSaving ? (
                 <span className="flex items-center gap-2">

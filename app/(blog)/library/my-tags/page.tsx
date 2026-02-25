@@ -2,14 +2,7 @@
 import { Metadata } from "next";
 import { cookies } from "next/headers";
 import Link from "next/link";
-import {
-  Tag,
-  ChevronRight,
-  ShieldCheck,
-  ShieldAlert,
-  Hash,
-  TagIcon,
-} from "lucide-react";
+import { Tag, ShieldCheck, ShieldAlert, ArrowRight } from "lucide-react";
 import PaginationControls from "@/app/components/PaginationControls";
 import { IBaseResponse } from "@/app/types/common";
 import { ENV } from "@/config/env.config";
@@ -76,25 +69,35 @@ export default async function MyTagsPage({ searchParams }: MyTagsPageProps) {
   await getRequiredAuthSession("/library/my-tags");
 
   return (
-    <div className="mx-auto space-y-12 pb-20 animate-in fade-in duration-700">
-      {/* 1. HEADER SECTION */}
-      <div className="border-b border-neutral-900 pb-10">
-        <div className="flex items-center space-x-4 mb-3">
-          <div className="p-3 bg-neutral-900 border border-neutral-800 rounded-2xl text-cyan-500">
-            <Tag size={28} strokeWidth={2} />
+    <div className="mx-auto space-y-16 pb-24 animate-in fade-in duration-700">
+      {/* 1. HEADER SECTION - Solid & Balanced */}
+      <div className="border-b-2 border-neutral-900 pb-12">
+        <div className="flex flex-col md:flex-row md:items-end justify-between gap-8">
+          <div className="space-y-6">
+            <div className="flex items-center gap-4">
+              <div className="w-14 h-14 bg-neutral-900 border-2 border-neutral-800 rounded-3xl flex items-center justify-center text-cyan-500">
+                <Tag size={28} />
+              </div>
+            </div>
+            <h1 className="text-6xl md:text-7xl font-black text-white tracking-tighter leading-none">
+              My <span className="text-neutral-800">Tags</span>
+            </h1>
+            <div className="flex items-center gap-4 px-1">
+              <div className="flex items-center gap-2">
+                <span className="text-[11px] font-black text-neutral-600 tracking-[0.3em]">
+                  Total Created:
+                </span>
+                <span className="text-[11px] font-black text-white tracking-widest bg-neutral-900 px-3 py-1 rounded-full border border-neutral-800">
+                  {meta?.total || 0}
+                </span>
+              </div>
+            </div>
           </div>
-          <h1 className="text-4xl text-white tracking-tighter uppercase leading-none">
-            My Created Tags
-          </h1>
         </div>
-        <p className="text-neutral-500 text-[11px] uppercase tracking-widest ml-1">
-          Defined Classifications:{" "}
-          <span className="text-white">{meta?.total || 0}</span>
-        </p>
       </div>
 
-      {/* 2. TAG LIST */}
-      <div className="space-y-4">
+      {/* 2. TAG LIST - High Contrast & Clean Language */}
+      <div className="space-y-6">
         {tags.length > 0 ? (
           <>
             {tags.map((tag: any) => {
@@ -102,75 +105,64 @@ export default async function MyTagsPage({ searchParams }: MyTagsPageProps) {
               return (
                 <div
                   key={tag.id}
-                  className="group relative p-6 bg-neutral-950 border border-neutral-800 rounded-4xl hover:border-cyan-500/30 transition-all duration-300 flex flex-col md:flex-row justify-between items-start md:items-center gap-6"
+                  className="group relative p-8 md:p-10 bg-neutral-950 border-2 border-neutral-900 rounded-[3rem] hover:border-neutral-700 transition-all duration-300 flex flex-col md:flex-row justify-between items-start md:items-center gap-10"
                 >
-                  <div className="flex-1 min-w-0 space-y-3">
-                    <div className="flex items-center gap-3">
-                      <div className="flex items-center gap-1.5 px-3 py-1 bg-neutral-900 border border-neutral-800 rounded-full text-cyan-500">
-                        <Hash size={12} />
-                        <span className="text-[10px] uppercase tracking-widest">
-                          Tag Node
-                        </span>
-                      </div>
-                    </div>
-
-                    <h3 className="text-xl md:text-2xl font-bold text-neutral-200 group-hover:text-cyan-400 transition-colors tracking-tight">
+                  <div className="flex-1 min-w-0 space-y-5">
+                    <h3 className="text-2xl md:text-3xl font-black text-white group-hover:text-cyan-500 transition-colors tracking-tighter">
                       {tag.title}
                     </h3>
 
-                    <p className="text-sm font-medium text-neutral-500 leading-relaxed max-w-2xl">
+                    <p className="text-sm font-bold text-neutral-500 leading-relaxed max-w-2xl tracking-tight">
                       {tag.description ||
-                        "No registry description provided for this node."}
+                        "No description has been added for this tag yet."}
                     </p>
                   </div>
 
-                  <div className="flex items-center gap-6 w-full md:w-auto pt-4 md:pt-0 border-t md:border-t-0 border-neutral-900">
-                    <div className="flex flex-col items-end gap-3 min-w-[120px]">
-                      <div
-                        className={`flex items-center gap-1.5 px-3 py-1 rounded-full border ${status.bg} ${status.color}`}
+                  {/* Status & Actions */}
+                  <div className="flex flex-col items-end gap-6 w-full md:w-auto pt-8 md:pt-0 border-t-2 md:border-t-0 border-neutral-900">
+                    <div
+                      className={`flex items-center gap-2 px-4 py-2 rounded-full border-2 ${status.bg} border-opacity-20`}
+                    >
+                      <span
+                        className={`text-[10px] font-black tracking-widest ${status.color}`}
                       >
-                        <status.icon size={12} />
-                        <span className="text-[9px] uppercase tracking-widest">
-                          {status.text}
-                        </span>
-                      </div>
-
-                      <Link
-                        href={`/tag/${tag.slug}`}
-                        className="flex items-center gap-2 text-[10px] uppercase tracking-[0.2em] text-neutral-600 hover:text-cyan-400 transition-all group/link"
-                      >
-                        View Node
-                        <ChevronRight
-                          size={14}
-                          className="group-hover/link:translate-x-1 transition-transform"
-                        />
-                      </Link>
+                        {status.text}
+                      </span>
                     </div>
+
+                    <Link
+                      href={`/tag/${tag.slug}`}
+                      className="flex-1 md:flex-none flex items-center justify-center gap-3 px-10 py-5 bg-neutral-900 border-2 border-neutral-800 rounded-full text-[12px] font-black tracking-[0.2em] text-neutral-400 hover:text-white hover:border-white transition-all active:scale-95"
+                    >
+                      View Topics
+                      <ArrowRight size={18} />
+                    </Link>
                   </div>
                 </div>
               );
             })}
 
             {meta && meta.totalPages > 1 && (
-              <div className="pt-10 flex justify-center">
+              <div className="pt-16 flex justify-center">
                 <PaginationControls meta={meta} />
               </div>
             )}
           </>
         ) : (
-          /* EMPTY STATE */
-          <div className="flex flex-col items-center justify-center py-24 bg-neutral-950 border border-dashed border-neutral-800 rounded-[2.5rem]">
-            <div className="p-6 bg-neutral-900 rounded-full mb-6">
-              <TagIcon size={40} className="text-neutral-700" />
+          /* EMPTY STATE - Samimi Dil */
+          <div className="flex flex-col items-center justify-center py-32 bg-neutral-950 border-2 border-dashed border-neutral-900 rounded-[4rem]">
+            <div className="w-20 h-20 bg-neutral-900 rounded-full flex items-center justify-center mb-8 border-2 border-neutral-800">
+              <Tag size={32} className="text-neutral-700" />
             </div>
-            <p className="text-neutral-400 uppercase tracking-widest text-xs">
-              No tags found in the registry.
+            <p className="text-neutral-500 font-black tracking-[0.3em] text-[11px] mb-10 text-center">
+              You haven't created any tags yet.
             </p>
             <Link
               href="/library"
-              className="mt-6 inline-flex items-center gap-2 px-8 py-3 bg-neutral-900 border border-neutral-800 rounded-full text-[10px] uppercase tracking-[0.2em] text-cyan-500 hover:border-cyan-500/50 transition-all"
+              className="inline-flex items-center gap-4 px-12 py-6 bg-white text-black rounded-full text-[12px] font-black tracking-[0.2em] hover:bg-cyan-500 transition-all active:scale-95"
             >
-              Return to Library
+              Back to Library
+              <ArrowRight size={18} />
             </Link>
           </div>
         )}

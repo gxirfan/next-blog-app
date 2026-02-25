@@ -110,10 +110,10 @@ const PostEditModal = ({ post, onClose }: PostEditModalProps) => {
               <PenBox size={22} />
             </div>
             <div>
-              <p className="text-[10px] font-mono uppercase tracking-[0.3em] text-cyan-500 mb-1">
+              <p className="text-[10px] font-mono tracking-[0.3em] text-cyan-500 mb-1">
                 Edit Entry
               </p>
-              <h2 className="text-xl text-white font-black uppercase tracking-tighter">
+              <h2 className="text-xl text-white font-black tracking-tighter">
                 Update {ENV.POST_TYPE} Details
               </h2>
             </div>
@@ -131,7 +131,7 @@ const PostEditModal = ({ post, onClose }: PostEditModalProps) => {
           className="p-8 pt-6 overflow-y-auto custom-scrollbar flex-1"
         >
           {error && (
-            <div className="flex items-center gap-2 p-4 mb-8 bg-red-500/10 border border-red-500/20 rounded-2xl text-red-500 text-[10px] font-mono uppercase tracking-widest">
+            <div className="flex items-center gap-2 p-4 mb-8 bg-red-500/10 border border-red-500/20 rounded-2xl text-red-500 text-[10px] font-mono tracking-widest">
               <AlertCircle size={18} />
               <span>{error}</span>
             </div>
@@ -140,7 +140,7 @@ const PostEditModal = ({ post, onClose }: PostEditModalProps) => {
           <div className="space-y-8">
             <div className="space-y-4">
               <div className="flex items-center justify-between px-4">
-                <label className="font-mono text-[10px] uppercase tracking-[0.4em] text-neutral-500">
+                <label className="font-mono text-[10px] tracking-[0.4em] text-neutral-500">
                   Featured Media
                 </label>
 
@@ -151,7 +151,7 @@ const PostEditModal = ({ post, onClose }: PostEditModalProps) => {
                     className="
                     flex items-center gap-2 px-5 py-2.5 
                     bg-neutral-200 text-black border border-neutral-300
-                    rounded-xl text-[10px] font-bold uppercase tracking-[0.2em] 
+                    rounded-xl text-[10px] font-bold tracking-[0.2em] 
                     hover:bg-white transition-all duration-300 cursor-pointer
                   "
                   >
@@ -183,7 +183,7 @@ const PostEditModal = ({ post, onClose }: PostEditModalProps) => {
                           }}
                           className="
                           flex items-center gap-2 px-6 py-3 bg-neutral-950 text-red-400 
-                          border border-red-900/30 rounded-xl text-[10px] font-bold uppercase tracking-[0.2em]
+                          border border-red-900/30 rounded-xl text-[10px] font-bold tracking-[0.2em]
                           hover:bg-red-500/10 hover:border-red-500/50 transition-all cursor-pointer
                         "
                         >
@@ -200,10 +200,10 @@ const PostEditModal = ({ post, onClose }: PostEditModalProps) => {
                         </div>
 
                         <div className="flex flex-col items-center gap-2">
-                          <span className="font-mono text-[10px] uppercase tracking-[0.5em] text-neutral-400 group-hover/label:text-white transition-colors">
+                          <span className="font-mono text-[10px] tracking-[0.5em] text-neutral-400 group-hover/label:text-white transition-colors">
                             Select Featured Media
                           </span>
-                          <span className="text-[9px] text-neutral-600 uppercase tracking-widest font-medium">
+                          <span className="text-[9px] text-neutral-600 tracking-widest font-medium">
                             JPG • PNG • WEBP
                           </span>
                         </div>
@@ -230,7 +230,7 @@ const PostEditModal = ({ post, onClose }: PostEditModalProps) => {
             </div>
 
             <div className="space-y-3">
-              <label className="text-[10px] font-mono uppercase tracking-[0.3em] text-neutral-500 ml-4">
+              <label className="text-[10px] font-mono tracking-[0.3em] text-neutral-500 ml-4">
                 Title
               </label>
               <input
@@ -246,7 +246,7 @@ const PostEditModal = ({ post, onClose }: PostEditModalProps) => {
             </div>
 
             <div className="space-y-3">
-              <label className="text-[10px] font-mono uppercase tracking-[0.3em] text-neutral-500 ml-4">
+              <label className="text-[10px] font-mono tracking-[0.3em] text-neutral-500 ml-4">
                 Content Stream
               </label>
               <div className="bg-neutral-900/30 rounded-4xl border border-neutral-800 overflow-hidden focus-within:border-cyan-500/30 transition-all">
@@ -270,7 +270,7 @@ const PostEditModal = ({ post, onClose }: PostEditModalProps) => {
             <button
               type="button"
               onClick={onClose}
-              className="px-8 py-4 rounded-full text-[10px] font-mono uppercase tracking-widest text-neutral-600 hover:text-white transition-all cursor-pointer"
+              className="px-8 py-4 rounded-full text-[10px] font-mono tracking-widest text-neutral-600 hover:text-white transition-all cursor-pointer"
             >
               Abort Changes
             </button>
@@ -278,7 +278,7 @@ const PostEditModal = ({ post, onClose }: PostEditModalProps) => {
               type="submit"
               disabled={loading || !formData.title || !formData.content}
               className={`
-                flex items-center gap-3 px-10 py-4 rounded-full text-[10px] font-mono uppercase tracking-widest transition-all
+                flex items-center gap-3 px-10 py-4 rounded-full text-[10px] font-mono tracking-widest transition-all
                 ${
                   loading || !formData.title || !formData.content
                     ? "bg-neutral-900 text-neutral-700 cursor-not-allowed border border-neutral-800"

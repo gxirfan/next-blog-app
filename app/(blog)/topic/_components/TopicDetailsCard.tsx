@@ -52,13 +52,13 @@ const TopicDetailsCard = ({ topicDetails }: TopicDetailsCardProps) => {
               />
             </div>
             <div className="h-10 w-px bg-neutral-900 hidden md:block" />
-            <div className="flex items-center gap-4 text-neutral-600 font-bold text-[11px] uppercase tracking-widest">
+            <div className="flex items-center gap-4 text-neutral-600 font-bold text-[11px] tracking-widest">
               <span className="flex items-center gap-1.5">
                 <Eye size={14} /> {topicDetails.viewCount}
               </span>
             </div>
           </div>
-          <div className="text-[11px] uppercase tracking-widest text-neutral-700">
+          <div className="text-[11px] tracking-widest text-neutral-700">
             Published:{" "}
             <span className="text-neutral-400 ml-1">
               {getRelativeTime(topicDetails.createdAt)}
@@ -90,7 +90,7 @@ const TopicDetailsCard = ({ topicDetails }: TopicDetailsCardProps) => {
         <div className="flex items-center gap-4 w-full md:w-auto">
           <div className="w-full md:w-auto px-5 py-3 bg-neutral-900/50 border border-neutral-800 rounded-2xl md:rounded-4xl flex items-center justify-between md:justify-start gap-8">
             <div>
-              <p className="text-[9px] uppercase tracking-widest text-neutral-600 mb-1">
+              <p className="text-[9px] tracking-widest text-neutral-600 mb-1">
                 {ENV.POST_TYPE}s
               </p>
               <div className="flex items-center gap-2 text-white font-bold text-base">
@@ -102,7 +102,7 @@ const TopicDetailsCard = ({ topicDetails }: TopicDetailsCardProps) => {
             <div className="h-6 w-px bg-neutral-800" />
 
             <div>
-              <p className="text-[9px] uppercase tracking-widest text-neutral-600 mb-1">
+              <p className="text-[9px] tracking-widest text-neutral-600 mb-1">
                 Last Update
               </p>
               <div className="flex items-center gap-2 text-white font-bold text-base">

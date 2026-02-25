@@ -21,7 +21,7 @@ export default function CopyPermalink() {
       }`}
     >
       {copied ? <Check size={18} /> : <Hash size={18} />}
-      <span className="text-xs uppercase tracking-widest">
+      <span className="text-xs tracking-widest">
         {copied ? "Copied" : "Permalink"}
       </span>
     </button>

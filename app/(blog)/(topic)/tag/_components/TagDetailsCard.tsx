@@ -17,7 +17,7 @@ const TagDetailsCard = ({ tag, topicCount }: TagDetailsCardProps) => {
     <div className="w-full mb-12 animate-in fade-in duration-700">
       <ScrollProgress />
       <div className="flex flex-col gap-4 mb-8">
-        <div className="flex items-center gap-3 text-[10px] uppercase tracking-[0.3em] text-cyan-500">
+        <div className="flex items-center gap-3 text-[10px] tracking-[0.3em] text-cyan-500">
           <Info size={14} />
           <span>Tag Overview</span>
         </div>
@@ -48,7 +48,7 @@ const TagDetailsCard = ({ tag, topicCount }: TagDetailsCardProps) => {
         <div className="flex items-center gap-4">
           <div className="flex items-center gap-2 px-4 py-2 bg-neutral-900 border border-neutral-800 rounded-full">
             <BookOpen size={14} className="text-cyan-500" />
-            <span className="text-xs uppercase tracking-widest text-white">
+            <span className="text-xs tracking-widest text-white">
               {topicCount}{" "}
               <span className="text-neutral-500 ml-1">
                 {topicCount === 1 ? "Topic" : "Topics"}
@@ -58,7 +58,7 @@ const TagDetailsCard = ({ tag, topicCount }: TagDetailsCardProps) => {
 
           <div className="hidden sm:flex items-center gap-2 px-4 py-2 bg-neutral-900 border border-neutral-800 rounded-full">
             <Calendar size={14} className="text-neutral-700" />
-            <span className="text-[10px] uppercase tracking-widest text-neutral-500">
+            <span className="text-[10px] tracking-widest text-neutral-500">
               {getRelativeTime(tag.createdAt)}
             </span>
           </div>

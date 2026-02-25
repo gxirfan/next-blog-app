@@ -38,7 +38,7 @@ export default function TopicTableClient({
 
       {filteredTopics.length === 0 ? (
         <div className="border border-neutral-900 py-20 text-center rounded-4xl">
-          <p className="text-neutral-600 text-xs font-mono uppercase tracking-widest font-bold">
+          <p className="text-neutral-600 text-xs font-mono tracking-widest font-bold">
             Null_Search_Results
           </p>
         </div>
@@ -46,7 +46,7 @@ export default function TopicTableClient({
         <div className="border border-neutral-900 rounded-4xl overflow-hidden">
           <table className="w-full text-left border-separate border-spacing-0 table-fixed">
             <thead>
-              <tr className="bg-neutral-900/30 text-neutral-600 text-[10px] uppercase tracking-widest font-black">
+              <tr className="bg-neutral-900/30 text-neutral-600 text-[10px] tracking-widest font-black">
                 <th className="px-6 py-4 border-b border-neutral-800/50 w-[45%]">
                   Resource
                 </th>
@@ -70,7 +70,7 @@ export default function TopicTableClient({
                         <Layers size={16} />
                       </div>
                       <div className="min-w-0">
-                        <div className="text-sm font-bold text-neutral-200 truncate group-hover:text-cyan-400 uppercase tracking-tight">
+                        <div className="text-sm font-bold text-neutral-200 truncate group-hover:text-cyan-400 tracking-tight">
                           {topic.title}
                         </div>
                         <div className="text-[10px] text-neutral-600 font-mono flex items-center gap-1.5 mt-0.5">
@@ -84,7 +84,7 @@ export default function TopicTableClient({
                   </td>
                   <td className="px-6 py-6 text-center">
                     <div className="flex flex-col items-center gap-1.5">
-                      <span className="inline-flex items-center px-2 py-0.5 rounded-md text-[9px] font-black bg-cyan-500/5 border border-cyan-500/20 text-cyan-400/80 uppercase tracking-widest">
+                      <span className="inline-flex items-center px-2 py-0.5 rounded-md text-[9px] font-black bg-cyan-500/5 border border-cyan-500/20 text-cyan-400/80 tracking-widest">
                         {topic.tagTitle}
                       </span>
                       <div className="flex items-center gap-1.5">
@@ -92,7 +92,7 @@ export default function TopicTableClient({
                           className={`h-1 w-1 rounded-full ${topic.status ? "bg-emerald-500" : "bg-neutral-800"}`}
                         />
                         <span
-                          className={`text-[9px] font-bold uppercase ${topic.status ? "text-emerald-500/80" : "text-neutral-700"}`}
+                          className={`text-[9px] font-bold ${topic.status ? "text-emerald-500/80" : "text-neutral-700"}`}
                         >
                           {topic.status ? "Live" : "Idle"}
                         </span>
@@ -102,7 +102,7 @@ export default function TopicTableClient({
                   <td className="px-6 py-6 text-right">
                     <div className="flex items-center justify-end gap-3">
                       <div className="hidden sm:flex flex-col items-end opacity-40">
-                        <span className="text-[9px] font-mono text-neutral-600 uppercase">
+                        <span className="text-[9px] font-mono text-neutral-600">
                           {getRelativeTime(topic.createdAt) || "Unknown"}
                         </span>
                       </div>

@@ -73,12 +73,10 @@ const TopicEditModal = ({ topic, onClose }: TopicEditModalProps) => {
         {/* Modal Header */}
         <div className="p-8 pb-4 flex items-center justify-between border-b border-neutral-900">
           <div>
-            <p className="text-[10px] uppercase tracking-[0.3em] text-cyan-500 mb-1">
+            <p className="text-[10px] tracking-[0.3em] text-cyan-500 mb-1">
               Management Suite
             </p>
-            <h2 className="text-xl text-white tracking-tight uppercase">
-              Edit Topic
-            </h2>
+            <h2 className="text-xl text-white tracking-tight">Edit Topic</h2>
           </div>
           <button
             onClick={onClose}
@@ -90,7 +88,7 @@ const TopicEditModal = ({ topic, onClose }: TopicEditModalProps) => {
 
         <form onSubmit={handleUpdateDetails} className="p-8 pt-6">
           {error && (
-            <div className="mb-6 p-4 rounded-2xl bg-red-500/10 border border-red-500/20 text-red-500 text-[10px] uppercase tracking-widest flex items-center gap-3 animate-in slide-in-from-top-2">
+            <div className="mb-6 p-4 rounded-2xl bg-red-500/10 border border-red-500/20 text-red-500 text-[10px] tracking-widest flex items-center gap-3 animate-in slide-in-from-top-2">
               <AlertCircle size={16} />
               <span>{error}</span>
             </div>
@@ -99,7 +97,7 @@ const TopicEditModal = ({ topic, onClose }: TopicEditModalProps) => {
           <div className="space-y-6">
             {/* Title Input Area */}
             <div className="space-y-2">
-              <label className="text-[10px] uppercase tracking-widest text-neutral-700 ml-4">
+              <label className="text-[10px] tracking-widest text-neutral-700 ml-4">
                 Topic Subject
               </label>
               <input
@@ -114,7 +112,7 @@ const TopicEditModal = ({ topic, onClose }: TopicEditModalProps) => {
 
             {/* Editor Area */}
             <div className="space-y-2">
-              <label className="text-[10px] uppercase tracking-widest text-neutral-700 ml-4">
+              <label className="text-[10px] tracking-widest text-neutral-700 ml-4">
                 Main Discussion Content
               </label>
               <div className="bg-neutral-900/30 rounded-4xl border border-neutral-800 overflow-hidden">
@@ -133,7 +131,7 @@ const TopicEditModal = ({ topic, onClose }: TopicEditModalProps) => {
             <button
               type="button"
               onClick={onClose}
-              className="text-[10px] uppercase tracking-[0.2em] text-neutral-600 hover:text-white transition-colors cursor-pointer"
+              className="text-[10px] tracking-[0.2em] text-neutral-600 hover:text-white transition-colors cursor-pointer"
             >
               Discard Changes
             </button>
@@ -141,7 +139,7 @@ const TopicEditModal = ({ topic, onClose }: TopicEditModalProps) => {
               type="submit"
               disabled={loading}
               className={`
-                flex items-center gap-2 px-10 py-4 rounded-full text-[10px] uppercase tracking-[0.2em] transition-all cursor-pointer
+                flex items-center gap-2 px-10 py-4 rounded-full text-[10px] tracking-[0.2em] transition-all cursor-pointer
                 ${
                   loading
                     ? "bg-neutral-900 text-neutral-700 border border-neutral-800"

@@ -89,7 +89,7 @@ export default function FlowInput({
                 </div>
 
                 <p className="text-[11px] font-bold tracking-tight truncate flex items-center gap-2">
-                  <span className="text-neutral-500 uppercase tracking-widest text-[9px]">
+                  <span className="text-neutral-500 tracking-widest text-[9px]">
                     Replying to
                   </span>
 
@@ -120,7 +120,7 @@ export default function FlowInput({
           {status === "success" ? (
             <div className="w-full py-10 flex flex-col items-center justify-center space-y-3 animate-in zoom-in-95 duration-500">
               <CheckCircle2 className="text-green-500" size={36} />
-              <p className="text-green-500 font-black text-[12px] uppercase tracking-[0.2em]">
+              <p className="text-green-500 font-black text-[12px] tracking-[0.2em]">
                 Thread Broadcasted
               </p>
             </div>
@@ -172,7 +172,7 @@ export default function FlowInput({
               </span>
             </div>
             <div className="h-5 w-px bg-neutral-900 hidden sm:block" />
-            <span className="text-[10px] font-black text-neutral-700 uppercase tracking-[0.2em] hidden md:block">
+            <span className="text-[10px] font-black text-neutral-700 tracking-[0.2em] hidden md:block">
               Character Limit
             </span>
           </div>
@@ -181,7 +181,7 @@ export default function FlowInput({
             type="submit"
             disabled={status !== "idle" || !content.trim()}
             className={`
-            flex items-center justify-center gap-4 px-12 py-4 rounded-full text-[11px] font-black uppercase tracking-[0.2em] transition-all duration-300 active:scale-95
+            flex items-center justify-center gap-4 px-12 py-4 rounded-full text-[11px] font-black tracking-[0.2em] transition-all duration-300 active:scale-95
             ${
               status === "success"
                 ? "bg-green-600 text-white"

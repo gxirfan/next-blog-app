@@ -14,7 +14,7 @@ const TagCardList = ({ tags, accentColor }: TagCardListProps) => {
   if (!tags || tags.length === 0) {
     return (
       <div className="p-12 text-center bg-neutral-950 border border-neutral-800 rounded-[2rem]">
-        <p className="text-neutral-600 text-sm uppercase tracking-widest">
+        <p className="text-neutral-600 text-sm tracking-widest">
           No tags discovered yet.
         </p>
       </div>
@@ -68,7 +68,7 @@ const TagCardList = ({ tags, accentColor }: TagCardListProps) => {
                   href={`/tag/${tag.slug}`}
                   className="inline-flex items-center gap-2 px-5 py-2 bg-neutral-900 border border-neutral-800 hover:bg-white hover:border-white rounded-full transition-all duration-200 group/btn"
                 >
-                  <span className="text-[10px] uppercase tracking-widest text-neutral-400 group-hover/btn:text-black transition-colors duration-200">
+                  <span className="text-[10px] tracking-widest text-neutral-400 group-hover/btn:text-black transition-colors duration-200">
                     View Topics
                   </span>
                   <ChevronRight

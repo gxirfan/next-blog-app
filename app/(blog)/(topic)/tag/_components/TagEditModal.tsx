@@ -69,7 +69,7 @@ const TagEditModal = ({ tag, onClose }: TagEditModalProps) => {
         {/* Header Section */}
         <div className="p-8 pb-4 flex items-center justify-between border-b border-neutral-900">
           <div>
-            <p className="text-[10px] uppercase tracking-[0.3em] text-cyan-500 mb-1">
+            <p className="text-[10px] tracking-[0.3em] text-cyan-500 mb-1">
               Admin Suite
             </p>
             <h2 className="text-xl text-white tracking-tight">
@@ -86,7 +86,7 @@ const TagEditModal = ({ tag, onClose }: TagEditModalProps) => {
 
         <form onSubmit={handleUpdateDetails} className="p-8 pt-6">
           {error && (
-            <div className="flex items-center gap-2 p-4 mb-6 bg-red-500/10 border border-red-500/20 rounded-2xl text-red-500 text-[11px] uppercase tracking-widest">
+            <div className="flex items-center gap-2 p-4 mb-6 bg-red-500/10 border border-red-500/20 rounded-2xl text-red-500 text-[11px] tracking-widest">
               <AlertCircle size={14} />
               <span>{error}</span>
             </div>
@@ -95,7 +95,7 @@ const TagEditModal = ({ tag, onClose }: TagEditModalProps) => {
           <div className="space-y-6">
             {/* Title Input */}
             <div className="space-y-2">
-              <label className="text-[10px] uppercase tracking-widest text-neutral-600 ml-4">
+              <label className="text-[10px] tracking-widest text-neutral-600 ml-4">
                 Tag Label
               </label>
               <div className="relative">
@@ -116,8 +116,8 @@ const TagEditModal = ({ tag, onClose }: TagEditModalProps) => {
 
             {/* Description Area */}
             <div className="space-y-2">
-              <label className="text-[10px] uppercase tracking-widest text-neutral-600 ml-4">
-                Category Description
+              <label className="text-[10px] tracking-widest text-neutral-600 ml-4">
+                Tag Description
               </label>
               <textarea
                 name="description"
@@ -135,7 +135,7 @@ const TagEditModal = ({ tag, onClose }: TagEditModalProps) => {
             <button
               type="button"
               onClick={onClose}
-              className="px-6 py-3 rounded-full text-[10px] uppercase tracking-[0.2em] text-neutral-500 hover:text-white hover:bg-neutral-900 transition-all cursor-pointer"
+              className="px-6 py-3 rounded-full text-[10px] tracking-[0.2em] text-neutral-500 hover:text-white hover:bg-neutral-900 transition-all cursor-pointer"
             >
               Cancel
             </button>
@@ -143,7 +143,7 @@ const TagEditModal = ({ tag, onClose }: TagEditModalProps) => {
               type="submit"
               disabled={loading}
               className={`
-                flex items-center gap-2 px-8 py-3 rounded-full text-[10px] uppercase tracking-[0.2em] transition-all cursor-pointer
+                flex items-center gap-2 px-8 py-3 rounded-full text-[10px] tracking-[0.2em] transition-all cursor-pointer
                 ${
                   loading
                     ? "bg-neutral-900 text-neutral-700 border border-neutral-800"

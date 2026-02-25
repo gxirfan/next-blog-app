@@ -60,7 +60,7 @@ export default function ContactPage() {
     <div className="max-w-4xl mx-auto py-10 space-y-12 animate-in fade-in duration-700">
       {/* 1. Header Section */}
       <div className="space-y-4 border-b border-neutral-900 pb-10">
-        <div className="flex items-center gap-2 text-[10px] uppercase tracking-[0.3em] text-cyan-500">
+        <div className="flex items-center gap-2 text-[10px] tracking-[0.3em] text-cyan-500">
           <Globe size={14} />
           <span>Get in Touch</span>
         </div>
@@ -74,7 +74,7 @@ export default function ContactPage() {
 
       <div className="bg-neutral-950 border border-neutral-900 rounded-[2.5rem] p-8 md:p-12">
         <div className="mb-10">
-          <h2 className="text-xl text-white uppercase tracking-tight flex items-center gap-2">
+          <h2 className="text-xl text-white tracking-tight flex items-center gap-2">
             <MessageSquare size={20} className="text-cyan-500" />
             Direct Communication
           </h2>
@@ -97,7 +97,7 @@ export default function ContactPage() {
             ) : (
               <AlertCircle size={18} />
             )}
-            <span className="text-xs font-bold uppercase tracking-widest">
+            <span className="text-xs font-bold tracking-widest">
               {status.msg}
             </span>
           </div>
@@ -108,7 +108,7 @@ export default function ContactPage() {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             {/* Full Name */}
             <div className="space-y-2">
-              <label className="text-[10px] uppercase tracking-widest text-neutral-500 ml-4">
+              <label className="text-[10px] tracking-widest text-neutral-500 ml-4">
                 Full Name
               </label>
               <div className="relative group">
@@ -130,7 +130,7 @@ export default function ContactPage() {
 
             {/* Email Address */}
             <div className="space-y-2">
-              <label className="text-[10px] uppercase tracking-widest text-neutral-500 ml-4">
+              <label className="text-[10px] tracking-widest text-neutral-500 ml-4">
                 Email Address
               </label>
               <div className="relative group">
@@ -153,7 +153,7 @@ export default function ContactPage() {
 
           {/* Subject */}
           <div className="space-y-2">
-            <label className="text-[10px] uppercase tracking-widest text-neutral-500 ml-4">
+            <label className="text-[10px] tracking-widest text-neutral-500 ml-4">
               Subject
             </label>
             <div className="relative group">
@@ -175,7 +175,7 @@ export default function ContactPage() {
 
           {/* Message Area */}
           <div className="space-y-2">
-            <label className="text-[10px] uppercase tracking-widest text-neutral-500 ml-4">
+            <label className="text-[10px] tracking-widest text-neutral-500 ml-4">
               Your Message
             </label>
             <textarea
@@ -193,7 +193,7 @@ export default function ContactPage() {
             type="submit"
             disabled={loading}
             className={`
-              self-end group flex items-center justify-center gap-3 px-10 py-4 rounded-full text-[10px] uppercase tracking-[0.2em] transition-all cursor-pointer
+              self-end group flex items-center justify-center gap-3 px-10 py-4 rounded-full text-[10px] tracking-[0.2em] transition-all cursor-pointer
               ${
                 loading
                   ? "bg-neutral-900 text-neutral-600 border border-neutral-800"
@@ -214,7 +214,7 @@ export default function ContactPage() {
 
       {/* 4. Alternative Info */}
       <div className="pt-10 border-t border-neutral-900 flex flex-col md:flex-row justify-between items-center gap-4">
-        <p className="text-[10px] uppercase tracking-widest text-neutral-700">
+        <p className="text-[10px] tracking-widest text-neutral-700">
           Emergency Channel
         </p>
         <div className="flex items-center gap-3 px-6 py-3 bg-neutral-950 border border-neutral-800 rounded-full group hover:border-cyan-500/30 transition-all">

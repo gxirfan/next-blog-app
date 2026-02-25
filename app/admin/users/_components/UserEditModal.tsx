@@ -119,7 +119,7 @@ export default function UserEditModal({
   const INPUT_STYLE =
     "w-full bg-neutral-950 border border-neutral-800 rounded-xl px-4 py-2.5 text-[13px] text-white font-medium placeholder-neutral-700 focus:outline-none focus:border-cyan-500/50 transition-all";
   const LABEL_STYLE =
-    "text-[10px] font-black text-neutral-500 uppercase tracking-[0.2em] mb-2 block";
+    "text-[10px] font-black text-neutral-500 tracking-[0.2em] mb-2 block";
   const authUserRole = authUser.role;
   return (
     <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 overflow-hidden">
@@ -138,10 +138,10 @@ export default function UserEditModal({
               <Shield size={24} />
             </div>
             <div>
-              <h3 className="text-xl font-black text-white uppercase tracking-tighter leading-none">
+              <h3 className="text-xl font-black text-white tracking-tighter leading-none">
                 Identity Override
               </h3>
-              <p className="text-[10px] text-neutral-600 font-mono uppercase tracking-[0.3em] mt-2">
+              <p className="text-[10px] text-neutral-600 font-mono tracking-[0.3em] mt-2">
                 Modifying Node:{" "}
                 <span className="text-cyan-500/80">{user.username}</span>
               </p>
@@ -163,7 +163,7 @@ export default function UserEditModal({
           {/* Section: System Access */}
           <div className="space-y-6">
             <div className="flex items-center gap-3 text-neutral-400 border-l-2 border-cyan-500/40 pl-4">
-              <h4 className="text-[11px] font-black uppercase tracking-widest">
+              <h4 className="text-[11px] font-black tracking-widest">
                 System Privileges
               </h4>
             </div>
@@ -220,7 +220,7 @@ export default function UserEditModal({
           {/* Section: Core Identity */}
           <div className="space-y-6">
             <div className="flex items-center gap-3 text-neutral-400 border-l-2 border-cyan-500/40 pl-4">
-              <h4 className="text-[11px] font-black uppercase tracking-widest">
+              <h4 className="text-[11px] font-black tracking-widest">
                 Network Identifiers
               </h4>
             </div>
@@ -263,7 +263,7 @@ export default function UserEditModal({
           {/* Section: Personal Data */}
           <div className="space-y-6">
             <div className="flex items-center gap-3 text-neutral-400 border-l-2 border-cyan-500/40 pl-4">
-              <h4 className="text-[11px] font-black uppercase tracking-widest">
+              <h4 className="text-[11px] font-black tracking-widest">
                 Biological & Social Data
               </h4>
             </div>
@@ -300,7 +300,7 @@ export default function UserEditModal({
                     type="date"
                     value={formData.birthDate}
                     onChange={handleChange}
-                    className={`${INPUT_STYLE} pl-10 uppercase text-[11px]`}
+                    className={`${INPUT_STYLE} pl-10 text-[11px]`}
                   />
                 </div>
               </div>
@@ -353,10 +353,10 @@ export default function UserEditModal({
           <div className="pt-4">
             <div className="flex items-center justify-between p-6 bg-neutral-900/20 border border-neutral-800 rounded-3xl group transition-all hover:border-neutral-700">
               <div className="space-y-1">
-                <p className="text-[11px] font-black text-white uppercase tracking-wider">
+                <p className="text-[11px] font-black text-white tracking-wider">
                   Public Email Protocol
                 </p>
-                <p className="text-[10px] text-neutral-500 font-mono uppercase tracking-tight">
+                <p className="text-[10px] text-neutral-500 font-mono tracking-tight">
                   Broadcast email to other network nodes
                 </p>
               </div>
@@ -376,14 +376,14 @@ export default function UserEditModal({
           <button
             type="button"
             onClick={onClose}
-            className="text-[10px] font-black uppercase tracking-[0.3em] text-neutral-600 hover:text-white transition-all"
+            className="text-[10px] font-black tracking-[0.3em] text-neutral-600 hover:text-white transition-all"
           >
             Abort_Changes
           </button>
           <button
             disabled={!isDirty}
             onClick={() => onSave(user.id, formData)}
-            className="px-12 py-4 bg-white text-black rounded-2xl text-[11px] font-black uppercase tracking-[0.3em] hover:bg-cyan-400 active:scale-95 transition-all"
+            className="px-12 py-4 bg-white text-black rounded-2xl text-[11px] font-black tracking-[0.3em] hover:bg-cyan-400 active:scale-95 transition-all"
           >
             Commit_Override
           </button>

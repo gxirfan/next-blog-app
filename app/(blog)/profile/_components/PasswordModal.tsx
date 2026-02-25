@@ -20,7 +20,7 @@ interface PasswordModalProps {
 const MIN_LENGTH = 6;
 
 const LABEL_STYLING =
-  "text-[10px] uppercase tracking-[0.25em] text-neutral-500 mb-3 block font-black";
+  "text-[10px] tracking-[0.25em] text-neutral-500 mb-3 block font-black";
 const INPUT_STYLING =
   "w-full bg-neutral-900/50 border border-neutral-800 rounded-2xl px-6 py-4 text-white font-bold placeholder-neutral-800 focus:outline-none focus:border-cyan-500/50 transition-all";
 
@@ -90,10 +90,10 @@ const PasswordModal = ({ onClose, onSuccess }: PasswordModalProps) => {
               <ShieldCheck size={28} />
             </div>
             <div>
-              <h3 className="text-3xl font-black text-white uppercase tracking-tighter">
+              <h3 className="text-3xl font-black text-white tracking-tighter">
                 Security
               </h3>
-              <p className="text-[11px] font-bold text-neutral-600 uppercase tracking-widest mt-1">
+              <p className="text-[11px] font-bold text-neutral-600 tracking-widest mt-1">
                 Update your password
               </p>
             </div>
@@ -113,16 +113,16 @@ const PasswordModal = ({ onClose, onSuccess }: PasswordModalProps) => {
                 <CheckCircle2 size={48} />
               </div>
               <div className="space-y-3">
-                <h3 className="text-3xl font-black text-white uppercase tracking-tight">
+                <h3 className="text-3xl font-black text-white tracking-tight">
                   Updated
                 </h3>
-                <p className="text-sm font-bold text-neutral-500 uppercase tracking-widest leading-relaxed">
+                <p className="text-sm font-bold text-neutral-500 tracking-widest leading-relaxed">
                   Your credentials are now secure.
                 </p>
               </div>
               <button
                 onClick={onClose}
-                className="px-12 py-5 bg-white text-black text-[12px] font-black uppercase tracking-[0.2em] rounded-full hover:bg-cyan-500 transition-all active:scale-95"
+                className="px-12 py-5 bg-white text-black text-[12px] font-black tracking-[0.2em] rounded-full hover:bg-cyan-500 transition-all active:scale-95"
               >
                 Back to Settings
               </button>
@@ -168,13 +168,13 @@ const PasswordModal = ({ onClose, onSuccess }: PasswordModalProps) => {
 
               <div className="flex items-center gap-3 px-2 text-neutral-600">
                 <ShieldCheck size={14} />
-                <p className="text-[10px] font-black uppercase tracking-widest">
+                <p className="text-[10px] font-black tracking-widest">
                   Use a complex password for maximum safety.
                 </p>
               </div>
 
               {error && (
-                <div className="p-5 rounded-full bg-red-500/10 border-2 border-red-500/20 text-red-500 text-[11px] font-black uppercase tracking-tight flex items-center gap-3 animate-in fade-in">
+                <div className="p-5 rounded-full bg-red-500/10 border-2 border-red-500/20 text-red-500 text-[11px] font-black tracking-tight flex items-center gap-3 animate-in fade-in">
                   <AlertTriangle size={18} />
                   <span>{error}</span>
                 </div>
@@ -184,14 +184,14 @@ const PasswordModal = ({ onClose, onSuccess }: PasswordModalProps) => {
                 <button
                   type="button"
                   onClick={onClose}
-                  className="text-[12px] font-black uppercase tracking-widest text-neutral-600 hover:text-white transition-all"
+                  className="text-[12px] font-black tracking-widest text-neutral-600 hover:text-white transition-all"
                 >
                   Cancel
                 </button>
                 <button
                   type="submit"
                   disabled={loading}
-                  className={`px-12 py-5 rounded-full text-[12px] font-black uppercase tracking-[0.2em] transition-all active:scale-95 flex items-center gap-3 ${
+                  className={`px-12 py-5 rounded-full text-[12px] font-black tracking-[0.2em] transition-all active:scale-95 flex items-center gap-3 ${
                     loading
                       ? "bg-neutral-900 text-neutral-700"
                       : "bg-cyan-500 text-black hover:bg-white"

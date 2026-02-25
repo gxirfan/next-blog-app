@@ -3,12 +3,11 @@ import { cookies } from "next/headers";
 import Link from "next/link";
 import {
   MessageSquare,
-  BookOpen,
   Clock,
   CheckCircle,
-  ChevronRight,
-  Hash,
   MessageSquareOff,
+  ArrowRight,
+  Eye,
 } from "lucide-react";
 import PaginationControls from "@/app/components/PaginationControls";
 import { IBaseResponse } from "@/app/types/common";
@@ -24,9 +23,6 @@ interface MyPostsPageProps {
   searchParams: Promise<{ page?: string; limit?: string }>;
 }
 
-/**
- * Fetch user's posts with pagination
- */
 async function getMyPosts(
   page: number = 1,
   limit: number = 10,
@@ -76,28 +72,35 @@ export default async function MyPostsPage({ searchParams }: MyPostsPageProps) {
 
   await getRequiredAuthSession("/library/my-posts");
   return (
-    <div className="mx-auto space-y-12 pb-20 animate-in fade-in duration-700">
-      {/* 1. HEADER SECTION */}
-      <div className="border-b border-neutral-900 pb-10">
-        <div className="flex items-center space-x-4 mb-3">
-          <div className="p-3 bg-neutral-900 border border-neutral-800 rounded-2xl text-cyan-500">
-            <MessageSquare size={28} strokeWidth={2} />
+    <div className="mx-auto space-y-16 pb-24 animate-in fade-in duration-700">
+      {/* 1. HEADER SECTION - Solid & Balanced */}
+      <div className="border-b-2 border-neutral-900 pb-12">
+        <div className="flex flex-col md:flex-row md:items-end justify-between gap-8">
+          <div className="space-y-6">
+            <div className="flex items-center gap-4">
+              <div className="w-14 h-14 bg-neutral-900 border-2 border-neutral-800 rounded-3xl flex items-center justify-center text-cyan-500">
+                <MessageSquare size={28} />
+              </div>
+            </div>
+            <h1 className="text-6xl md:text-7xl font-black text-white tracking-tighter leading-none">
+              My <span className="text-neutral-800">{ENV.POST_TYPE}s</span>
+            </h1>
+            <div className="flex items-center gap-4 px-1">
+              <div className="flex items-center gap-2">
+                <span className="text-[11px] font-black text-neutral-600 tracking-[0.3em]">
+                  Total Shared:
+                </span>
+                <span className="text-[11px] font-black text-white tracking-widest bg-neutral-900 px-3 py-1 rounded-full border border-neutral-800">
+                  {meta?.total || 0}
+                </span>
+              </div>
+            </div>
           </div>
-          <h1 className="text-4xl text-white tracking-tighter uppercase leading-none">
-            My {ENV.POST_TYPE}s
-          </h1>
-        </div>
-        <div className="flex items-center gap-3 ml-1 text-neutral-500">
-          <Hash size={14} className="text-neutral-700" />
-          <p className="text-[11px] uppercase tracking-widest">
-            Total Registry:{" "}
-            <span className="text-white">{meta?.total || 0}</span>
-          </p>
         </div>
       </div>
 
-      {/* 2. POST LIST */}
-      <div className="space-y-4">
+      {/* 2. POST LIST - High Contrast & Human Language */}
+      <div className="space-y-6">
         {posts.length > 0 ? (
           <>
             {posts.map((post: any) => {
@@ -105,58 +108,67 @@ export default async function MyPostsPage({ searchParams }: MyPostsPageProps) {
               return (
                 <div
                   key={post.id}
-                  className="group relative p-6 md:p-8 bg-neutral-950 border border-neutral-800 rounded-4xl hover:border-cyan-500/30 transition-all duration-300 flex flex-col md:flex-row justify-between items-start md:items-center gap-6"
+                  className="group relative p-8 md:p-10 bg-neutral-950 border-2 border-neutral-900 rounded-[3rem] hover:border-neutral-700 transition-all duration-300 flex flex-col md:flex-row justify-between items-start md:items-center gap-10"
                 >
-                  <div className="flex-1 min-w-0 space-y-4">
-                    <div className="flex items-center gap-3">
+                  <div className="flex-1 min-w-0 space-y-6">
+                    {/* Status & Date Row */}
+                    <div className="flex items-center gap-4">
                       <div
-                        className={`px-3 py-1 rounded-full border ${status.bg} flex items-center gap-1.5`}
+                        className={`px-4 py-1.5 rounded-full border-2 ${status.bg} border-opacity-20 flex items-center gap-2`}
                       >
-                        <status.icon size={12} className={status.color} />
                         <span
-                          className={`text-[9px] uppercase tracking-widest ${status.color}`}
+                          className={`text-[10px] font-black tracking-widest ${status.color}`}
                         >
                           {status.text}
                         </span>
                       </div>
-                      <span className="text-[10px] text-neutral-700 uppercase tracking-widest">
+                      <span className="text-[10px] font-black text-neutral-700 tracking-[0.2em]">
                         {getRelativeTime(post.createdAt) || "N/A"}
                       </span>
                     </div>
 
+                    {/* Title - Bold & Large */}
                     <Link
                       href={`/post/${post.slug}`}
-                      className="text-xl md:text-2xl font-bold text-neutral-200 group-hover:text-cyan-400 transition-colors block leading-tight tracking-tight"
+                      className="text-2xl md:text-3xl font-black text-white hover:text-cyan-500 transition-colors block leading-tight tracking-tighter"
                     >
                       {post.title}
                     </Link>
 
-                    <div className="flex flex-wrap items-center gap-x-4 gap-y-2 text-[11px] font-medium text-neutral-500">
-                      <span className="flex items-center gap-1.5">
-                        Topic:{" "}
-                        <span className="text-neutral-400 font-bold">
+                    {/* Info Tags */}
+                    <div className="flex flex-wrap items-center gap-4">
+                      <div className="flex items-center gap-2 bg-neutral-900 px-4 py-2 rounded-full border border-neutral-800">
+                        <span className="text-[10px] font-black text-neutral-600 tracking-widest">
+                          Topic:
+                        </span>
+                        <span className="text-[10px] font-black text-neutral-300">
                           {post.topicTitle}
                         </span>
-                      </span>
-                      {post.parentId && (
-                        <span className="text-neutral-600">
-                          ↳ Reply to thread
-                        </span>
-                      )}
-                      <div className="flex items-center gap-1.5 ml-0 md:ml-2">
-                        <BookOpen size={14} className="text-neutral-700" />
-                        <span>{post.viewCount} Views</span>
                       </div>
+
+                      <div className="flex items-center gap-2 bg-neutral-900 px-4 py-2 rounded-full border border-neutral-800">
+                        <Eye size={14} className="text-neutral-600" />
+                        <span className="text-[10px] font-black text-neutral-400 tracking-widest">
+                          {post.viewCount} Views
+                        </span>
+                      </div>
+
+                      {post.parentId && (
+                        <div className="px-4 py-2 border-2 border-dashed border-neutral-900 rounded-full text-[10px] font-black text-neutral-700 tracking-widest">
+                          Reply Post
+                        </div>
+                      )}
                     </div>
                   </div>
 
-                  <div className="flex items-center gap-4 w-full md:w-auto pt-4 md:pt-0 border-t md:border-t-0 border-neutral-900">
+                  {/* Actions */}
+                  <div className="flex items-center gap-4 w-full md:w-auto pt-8 md:pt-0 border-t-2 md:border-t-0 border-neutral-900">
                     <Link
                       href={`/post/${post.slug}`}
-                      className="flex-1 md:flex-none flex items-center justify-center gap-2 px-6 py-4 bg-neutral-900 border border-neutral-800 rounded-xl text-[10px] uppercase tracking-[0.2em] text-neutral-400 hover:text-white hover:border-cyan-500/50 transition-all active:scale-95"
+                      className="flex-1 md:flex-none flex items-center justify-center gap-3 px-10 py-5 bg-neutral-900 border-2 border-neutral-800 rounded-full text-[12px] font-black tracking-[0.2em] text-neutral-400 hover:text-white hover:border-white transition-all active:scale-95"
                     >
-                      Modify Entry
-                      <ChevronRight size={14} />
+                      View Detail
+                      <ArrowRight size={18} />
                     </Link>
                   </div>
                 </div>
@@ -164,25 +176,26 @@ export default async function MyPostsPage({ searchParams }: MyPostsPageProps) {
             })}
 
             {meta && meta.totalPages > 1 && (
-              <div className="pt-10 flex justify-center">
+              <div className="pt-16 flex justify-center">
                 <PaginationControls meta={meta} />
               </div>
             )}
           </>
         ) : (
-          /* EMPTY STATE */
-          <div className="flex flex-col items-center justify-center py-24 bg-neutral-950 border border-dashed border-neutral-800 rounded-[2.5rem]">
-            <div className="p-6 bg-neutral-900 rounded-full mb-6">
-              <MessageSquareOff size={40} className="text-neutral-700" />
+          /* EMPTY STATE - Samimi Dil */
+          <div className="flex flex-col items-center justify-center py-32 bg-neutral-950 border-2 border-dashed border-neutral-900 rounded-[4rem]">
+            <div className="w-20 h-20 bg-neutral-900 rounded-full flex items-center justify-center mb-8 border-2 border-neutral-800">
+              <MessageSquareOff size={32} className="text-neutral-700" />
             </div>
-            <p className="text-neutral-400 uppercase tracking-widest text-xs">
-              No transmissions recorded in the grid.
+            <p className="text-neutral-500 font-black tracking-[0.3em] text-[11px] mb-10 text-center px-6">
+              You haven't shared any {ENV.POST_TYPE}s yet.
             </p>
             <Link
               href="/topic/all"
-              className="mt-6 inline-flex items-center gap-2 px-8 py-3 bg-neutral-900 border border-neutral-800 rounded-full text-[10px] uppercase tracking-[0.2em] text-cyan-500 hover:border-cyan-500/50 transition-all"
+              className="inline-flex items-center gap-4 px-12 py-6 bg-white text-black rounded-full text-[12px] font-black tracking-[0.2em] hover:bg-cyan-500 transition-all active:scale-95"
             >
-              Start New Discussion
+              Create Your First Post
+              <ArrowRight size={18} />
             </Link>
           </div>
         )}

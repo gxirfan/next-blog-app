@@ -15,7 +15,7 @@ const TopicList = ({ topics }: TopicListProps) => {
   if (topics.length === 0) {
     return (
       <div className="p-12 text-center bg-neutral-950 border border-neutral-900 rounded-[2.5rem]">
-        <p className="text-neutral-500 text-sm uppercase tracking-widest">
+        <p className="text-neutral-500 text-sm tracking-widest">
           No topics discovered yet.
         </p>
       </div>
@@ -45,7 +45,7 @@ const TopicList = ({ topics }: TopicListProps) => {
                   </span>
                 </div>
 
-                <div className="text-[10px] text-neutral-700 font-bold uppercase tracking-widest">
+                <div className="text-[10px] text-neutral-700 font-bold tracking-widest">
                   Updated {getRelativeTime(topic.lastPostAt)}
                 </div>
               </div>
@@ -62,7 +62,7 @@ const TopicList = ({ topics }: TopicListProps) => {
                         className="text-neutral-500 group-hover/tag:text-cyan-500 transition-colors"
                       />
                     </div>
-                    <span className="text-[11px] font-bold text-neutral-500 group-hover/tag:text-neutral-300 uppercase tracking-wider transition-colors">
+                    <span className="text-[11px] font-bold text-neutral-500 group-hover/tag:text-neutral-300 tracking-wider transition-colors">
                       {topic.tagTitle}
                     </span>
                   </Link>
@@ -82,7 +82,7 @@ const TopicList = ({ topics }: TopicListProps) => {
             </div>
 
             <div className="mt-8 pt-6 border-t border-neutral-900 flex items-center justify-between">
-              <div className="flex items-center gap-6 text-[11px] font-bold text-neutral-500 uppercase tracking-widest">
+              <div className="flex items-center gap-6 text-[11px] font-bold text-neutral-500 tracking-widest">
                 <div className="flex items-center gap-2">
                   <MessageSquare size={14} className="text-neutral-500" />
                   <span>
@@ -98,7 +98,7 @@ const TopicList = ({ topics }: TopicListProps) => {
 
               <Link
                 href={`/topic/${topic.slug}`}
-                className="flex items-center gap-2 text-cyan-500 hover:text-cyan-400 font-black text-[11px] uppercase tracking-[0.2em] transition-all group/explore"
+                className="flex items-center gap-2 text-cyan-500 hover:text-cyan-400 font-black text-[11px] tracking-[0.2em] transition-all group/explore"
               >
                 Explore
                 <ChevronRight

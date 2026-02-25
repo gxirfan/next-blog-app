@@ -78,10 +78,10 @@ export default function ProfilePage() {
               <Settings size={24} strokeWidth={1.5} />
               <div className="h-px w-8 bg-neutral-800" />
             </div>
-            <h1 className="text-5xl text-white tracking-tighter uppercase leading-none">
+            <h1 className="text-5xl text-white tracking-tighter leading-none">
               Settings
             </h1>
-            <p className="text-neutral-500 text-[10px] uppercase tracking-[0.4em]">
+            <p className="text-neutral-500 text-[11px] tracking-[0.4em]">
               Manage your account and profile
             </p>
           </div>
@@ -91,7 +91,7 @@ export default function ProfilePage() {
           <section className="space-y-6">
             <div className="flex items-center gap-3 mb-4">
               <Shield size={16} className="text-cyan-500/50" />
-              <h2 className="text-[11px] uppercase tracking-[0.3em] text-neutral-400">
+              <h2 className="text-[11px] tracking-[0.3em] text-neutral-400">
                 Profile Media
               </h2>
             </div>
@@ -115,14 +115,14 @@ export default function ProfilePage() {
           <section className="space-y-6">
             <div className="flex items-center gap-3 mb-4">
               <Activity size={16} className="text-cyan-500/50" />
-              <h2 className="text-[11px] uppercase tracking-[0.3em] text-neutral-400">
+              <h2 className="text-[12px] tracking-[0.3em] text-neutral-400">
                 Account Info
               </h2>
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               <div className="p-8 bg-neutral-950/40 backdrop-blur-xl border border-white/5 rounded-4xl flex flex-col justify-center">
-                <p className="text-[10px] uppercase tracking-[0.2em] text-neutral-600 mb-4 ml-1">
+                <p className="text-[12px] tracking-[0.2em] text-neutral-600 mb-4 ml-1 font-black">
                   Username
                 </p>
                 <div className="flex items-center gap-3 text-white font-bold text-lg">
@@ -196,16 +196,16 @@ export default function ProfilePage() {
           <div className="pt-12 border-t border-white/5 flex flex-col lg:flex-row justify-between items-start lg:items-center gap-10">
             <div className="flex flex-wrap items-center gap-8">
               <div className="space-y-1">
-                <p className="text-[9px] uppercase tracking-widest text-neutral-700">
+                <p className="text-[9px] tracking-widest text-neutral-700">
                   Access Level
                 </p>
-                <div className="flex items-center gap-2 text-neutral-400 font-bold text-xs uppercase tracking-tight">
+                <div className="flex items-center gap-2 text-neutral-400 font-bold text-xs tracking-tight">
                   <Shield size={14} className="text-cyan-500/50" />
                   {user.role === "user" ? "Standard Identity" : user.role}
                 </div>
               </div>
               <div className="space-y-1">
-                <p className="text-[9px] uppercase tracking-widest text-neutral-700">
+                <p className="text-[9px] tracking-widest text-neutral-700">
                   Registry Date
                 </p>
                 <div className="flex items-center gap-2 text-neutral-400 font-bold text-xs">
@@ -222,7 +222,7 @@ export default function ProfilePage() {
               px-12 py-6 
               bg-neutral-900 border-2 border-neutral-800 
               rounded-full 
-              text-[12px] font-black uppercase tracking-[0.2em] text-neutral-400 
+              text-[12px] font-black tracking-[0.2em] text-neutral-400 
               hover:border-white hover:text-white 
               transition-all duration-300 cursor-pointer 
               active:scale-95

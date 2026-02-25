@@ -37,12 +37,12 @@ export default async function NotificationsPage({
       {/* 1. Header: Modern & Minimal */}
       <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 border-b border-neutral-900 pb-10">
         <div className="space-y-4">
-          <div className="flex items-center gap-2 text-[10px] uppercase tracking-[0.3em] text-cyan-500">
+          <div className="flex items-center gap-2 text-[10px] tracking-[0.3em] text-cyan-500">
             <Bell size={14} />
             <span>Activity Stream</span>
           </div>
           <div className="flex items-center gap-4">
-            <h1 className="text-4xl md:text-5xl text-white tracking-tighter uppercase">
+            <h1 className="text-4xl md:text-5xl text-white tracking-tighter">
               Notifications
             </h1>
             <div className="px-3 py-1 bg-neutral-900 border border-neutral-800 rounded-full text-[10px] text-neutral-500">
@@ -54,7 +54,7 @@ export default async function NotificationsPage({
 
       {/* 2. Error State: Integrated Label */}
       {!response.success && meta.total === 0 ? (
-        <div className="flex items-center gap-3 p-6 bg-red-500/5 border border-red-500/10 rounded-[2rem] text-red-500 text-xs uppercase tracking-widest">
+        <div className="flex items-center gap-3 p-6 bg-red-500/5 border border-red-500/10 rounded-[2rem] text-red-500 text-xs tracking-widest">
           <AlertCircle size={18} />
           <span>Error Syncing: {response.message || "Connection lost."}</span>
         </div>
@@ -65,7 +65,7 @@ export default async function NotificationsPage({
         {notifications.length === 0 && response.success ? (
           <div className="flex flex-col items-center justify-center py-24 bg-neutral-950 border border-neutral-900 rounded-[3rem]">
             <Bell size={48} className="text-neutral-900 mb-4" />
-            <p className="text-[10px] uppercase tracking-[0.3em] text-neutral-700">
+            <p className="text-[10px] tracking-[0.3em] text-neutral-700">
               Your stream is empty
             </p>
           </div>
@@ -86,7 +86,7 @@ export default async function NotificationsPage({
             fallback={
               <div className="flex items-center justify-center gap-2 text-neutral-700">
                 <Loader2 size={16} className="animate-spin" />
-                <span className="text-[10px] uppercase tracking-widest">
+                <span className="text-[10px] tracking-widest">
                   Syncing Pages...
                 </span>
               </div>

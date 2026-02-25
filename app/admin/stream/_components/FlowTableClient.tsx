@@ -26,7 +26,7 @@ export default function FlowTableClient({ paginationData }: FlowTableProps) {
       <div className="border border-neutral-900 rounded-[2.5rem] overflow-hidden">
         <table className="w-full text-left border-separate border-spacing-0 table-fixed">
           <thead>
-            <tr className="bg-neutral-900/30 text-neutral-500 text-[10px] uppercase tracking-[0.2em] font-black">
+            <tr className="bg-neutral-900/30 text-neutral-500 text-[10px] tracking-[0.2em] font-black">
               <th className="px-8 py-5 border-b border-neutral-800/50 w-[45%] font-black">
                 Stream Origin
               </th>
@@ -51,7 +51,7 @@ export default function FlowTableClient({ paginationData }: FlowTableProps) {
                       <Share2 size={18} />
                     </div>
                     <div className="min-w-0">
-                      <p className="text-[13px] font-bold text-neutral-200 uppercase tracking-tight truncate leading-none">
+                      <p className="text-[13px] font-bold text-neutral-200 tracking-tight truncate leading-none">
                         {flow.content}
                       </p>
                       <div className="flex items-center gap-2 mt-2 font-mono text-[10px] text-neutral-400">
@@ -60,7 +60,7 @@ export default function FlowTableClient({ paginationData }: FlowTableProps) {
                           @{flow.author?.username || "unknown_node"}
                         </span>
                         {flow.parentId && (
-                          <span className="px-2 py-0.5 bg-cyan-500/10 border border-cyan-500/20 text-[8px] text-cyan-400 font-black rounded uppercase">
+                          <span className="px-2 py-0.5 bg-cyan-500/10 border border-cyan-500/20 text-[8px] text-cyan-400 font-black rounded">
                             Reply
                           </span>
                         )}
@@ -76,7 +76,7 @@ export default function FlowTableClient({ paginationData }: FlowTableProps) {
                       <MessageSquare size={12} className="text-cyan-500/60" />
                       {flow.replyCount || 0}
                     </div>
-                    <div className="text-[9px] uppercase tracking-widest text-neutral-600 font-black">
+                    <div className="text-[9px] tracking-widest text-neutral-600 font-black">
                       Interaction_Level
                     </div>
                   </div>
@@ -90,7 +90,7 @@ export default function FlowTableClient({ paginationData }: FlowTableProps) {
                         <Clock size={11} className="mr-1.5 text-neutral-600" />
                         {getRelativeTime(flow.createdAt) || "Unknown"}
                       </div>
-                      <p className="text-[9px] font-black text-cyan-500/40 uppercase tracking-tighter">
+                      <p className="text-[9px] font-black text-cyan-500/40 tracking-tighter">
                         Data_Verified
                       </p>
                     </div>

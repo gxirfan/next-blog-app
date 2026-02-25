@@ -73,9 +73,9 @@ const ProfileHeader = ({ user }: ProfileHeaderProps) => {
 
               {user.role && user.role.toLowerCase() !== "user" && (
                 <span
-                  className={`px-3 py-1 rounded-full text-[10px] md:text-xs tracking-widest ${getRoleColor(
+                  className={`px-3 py-1 rounded-full text-[11px] md:text-xs tracking-widest uppercase ${getRoleColor(
                     user.role,
-                  )} bg-neutral-950 border border-neutral-800 uppercase`}
+                  )} bg-neutral-950 border border-neutral-800`}
                 >
                   {user.role}
                 </span>

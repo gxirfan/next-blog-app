@@ -12,7 +12,7 @@ const TiptapEditor = dynamic(
   {
     ssr: false,
     loading: () => (
-      <div className="p-12 bg-neutral-900/50 rounded-4xl text-neutral-600 text-[10px] uppercase tracking-widest text-center border border-neutral-800">
+      <div className="p-12 bg-neutral-900/50 rounded-4xl text-neutral-600 text-[10px] tracking-widest text-center border border-neutral-800">
         Initializing Editor...
       </div>
     ),
@@ -107,7 +107,7 @@ const TopicCreationWrapper = ({
             setError(null);
             setLoading(false);
           }}
-          className="group flex items-center gap-2 px-6 py-3 bg-white text-black rounded-full text-[11px] uppercase tracking-[0.2em] transition-all hover:bg-cyan-400 active:scale-95 cursor-pointer"
+          className="group flex items-center gap-2 px-6 py-3 bg-white text-black rounded-full text-[11px] tracking-[0.2em] transition-all hover:bg-cyan-400 active:scale-95 cursor-pointer"
         >
           <Plus size={16} /> New Topic
         </button> */}
@@ -122,7 +122,7 @@ const TopicCreationWrapper = ({
                     group relative flex items-center gap-4 px-10 py-4 rounded-2xl 
                     bg-neutral-200 text-neutral-900 border border-neutral-300
                     hover:bg-white hover:text-black transition-all duration-500 
-                    cursor-pointer text-[11px] font-black uppercase tracking-[0.25em]
+                    cursor-pointer text-[11px] font-black tracking-[0.25em]
                     active:scale-[0.97]
                   "
           >
@@ -152,10 +152,10 @@ const TopicCreationWrapper = ({
               {/* Modal Header */}
               <div className="p-8 pb-4 flex items-center justify-between border-b border-neutral-900">
                 <div>
-                  <p className="text-[10px] uppercase tracking-[0.3em] text-cyan-500 mb-1">
+                  <p className="text-[10px] tracking-[0.3em] text-cyan-500 mb-1">
                     Topic Studio
                   </p>
-                  <h3 className="text-xl text-white tracking-tight uppercase flex items-center gap-2">
+                  <h3 className="text-xl text-white tracking-tight flex items-center gap-2">
                     <Tag className="inline-block" size={16} /> {tagTitle}
                   </h3>
                 </div>
@@ -169,7 +169,7 @@ const TopicCreationWrapper = ({
 
               <form onSubmit={handleSubmit} className="p-8 pt-6">
                 {error && (
-                  <div className="mb-6 p-4 rounded-2xl bg-red-500/10 border border-red-500/20 text-red-500 text-[10px] uppercase tracking-widest flex items-center gap-3 animate-in shake duration-300">
+                  <div className="mb-6 p-4 rounded-2xl bg-red-500/10 border border-red-500/20 text-red-500 text-[10px] tracking-widest flex items-center gap-3 animate-in shake duration-300">
                     <AlertCircle size={16} />
                     <span>{error}</span>
                   </div>
@@ -177,7 +177,7 @@ const TopicCreationWrapper = ({
 
                 <div className="space-y-6">
                   <div className="space-y-2">
-                    <label className="text-[10px] uppercase tracking-widest text-neutral-700 ml-4">
+                    <label className="text-[10px] tracking-widest text-neutral-700 ml-4">
                       Subject Title
                     </label>
                     <input
@@ -197,7 +197,7 @@ const TopicCreationWrapper = ({
                   </div>
 
                   <div className="space-y-2">
-                    <label className="text-[10px] uppercase tracking-widest text-neutral-700 ml-4">
+                    <label className="text-[10px] tracking-widest text-neutral-700 ml-4">
                       Discussion Content
                     </label>
                     <div className="bg-neutral-900/30 rounded-4xl border border-neutral-800 overflow-hidden">
@@ -213,7 +213,7 @@ const TopicCreationWrapper = ({
                   <button
                     type="button"
                     onClick={() => setIsModalOpen(false)}
-                    className="text-[10px] uppercase tracking-[0.2em] text-neutral-600 hover:text-white transition-colors cursor-pointer"
+                    className="text-[10px] tracking-[0.2em] text-neutral-600 hover:text-white transition-colors cursor-pointer"
                   >
                     Discard
                   </button>
@@ -221,7 +221,7 @@ const TopicCreationWrapper = ({
                     type="submit"
                     disabled={loading || isPending}
                     className={`
-                    flex items-center gap-2 px-10 py-4 rounded-full text-[10px] uppercase tracking-[0.2em] transition-all cursor-pointer
+                    flex items-center gap-2 px-10 py-4 rounded-full text-[10px] tracking-[0.2em] transition-all cursor-pointer
                     ${
                       loading || isPending
                         ? "bg-neutral-900 text-neutral-700 border border-neutral-800"

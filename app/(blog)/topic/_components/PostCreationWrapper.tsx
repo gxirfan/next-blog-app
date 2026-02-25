@@ -162,7 +162,7 @@ const PostCreationWrapper = ({
           className="group relative flex items-center gap-4 px-10 py-5 rounded-full bg-cyan-500 text-black hover:bg-white transition-all duration-300 active:scale-95 cursor-pointer"
         >
           <Plus size={20} strokeWidth={3} />
-          <span className="text-[13px] font-black uppercase tracking-[0.2em]">
+          <span className="text-[13px] font-black tracking-[0.2em]">
             {buttonLabel}
           </span>
         </button>
@@ -177,7 +177,7 @@ const PostCreationWrapper = ({
             }`}
           >
             <Sparkles size={18} />
-            <span className="text-[11px] font-black uppercase tracking-widest">
+            <span className="text-[11px] font-black tracking-widest">
               {status.msg}
             </span>
           </div>
@@ -203,10 +203,10 @@ const PostCreationWrapper = ({
                     )}
                   </div>
                   <div>
-                    <h3 className="text-2xl font-black text-white uppercase tracking-tighter">
+                    <h3 className="text-2xl font-black text-white tracking-tighter">
                       {parentId ? "Reply" : `New ${ENV.POST_TYPE}`}
                     </h3>
-                    <p className="text-[11px] font-bold text-neutral-500 uppercase tracking-widest mt-1">
+                    <p className="text-[11px] font-bold text-neutral-500 tracking-widest mt-1">
                       Share your thoughts with the network
                     </p>
                   </div>
@@ -225,7 +225,7 @@ const PostCreationWrapper = ({
                   <form onSubmit={handleSubmit} className="space-y-10">
                     {/* Media Section */}
                     <div className="space-y-4">
-                      <label className="text-[12px] font-black text-neutral-400 uppercase tracking-[0.2em] ml-6 block">
+                      <label className="text-[12px] font-black text-neutral-400 tracking-[0.2em] ml-6 block">
                         Cover Image
                       </label>
 
@@ -247,7 +247,7 @@ const PostCreationWrapper = ({
                                     setMainImage(null);
                                     setShowImageUpload(false);
                                   }}
-                                  className="px-8 py-3 bg-red-500 text-white rounded-full text-[11px] font-black uppercase tracking-widest hover:bg-red-600 transition-colors"
+                                  className="px-8 py-3 bg-red-500 text-white rounded-full text-[11px] font-black tracking-widest hover:bg-red-600 transition-colors"
                                 >
                                   Remove Image
                                 </button>
@@ -259,7 +259,7 @@ const PostCreationWrapper = ({
                                 <div className="w-16 h-16 bg-neutral-950 rounded-full border-2 border-neutral-800 flex items-center justify-center group-hover:border-cyan-500/50 transition-all duration-500">
                                   <Plus size={28} className="text-cyan-500" />
                                 </div>
-                                <span className="text-[11px] font-black text-neutral-400 uppercase tracking-widest">
+                                <span className="text-[11px] font-black text-neutral-400 tracking-widest">
                                   Select Image
                                 </span>
                                 <input
@@ -286,7 +286,7 @@ const PostCreationWrapper = ({
                           className="w-full py-8 border-2 border-dashed border-neutral-800 rounded-[2.5rem] flex items-center justify-center gap-4 text-neutral-500 hover:border-cyan-500/30 hover:text-cyan-500 transition-all group"
                         >
                           <ImageIcon size={20} />
-                          <span className="text-[12px] font-black uppercase tracking-widest">
+                          <span className="text-[12px] font-black tracking-widest">
                             Add Media
                           </span>
                         </button>
@@ -295,7 +295,7 @@ const PostCreationWrapper = ({
 
                     {/* Subject Input */}
                     <div className="space-y-3">
-                      <label className="text-[12px] font-black text-neutral-400 uppercase tracking-[0.2em] ml-6 block">
+                      <label className="text-[12px] font-black text-neutral-400 tracking-[0.2em] ml-6 block">
                         Subject
                       </label>
                       <input
@@ -316,7 +316,7 @@ const PostCreationWrapper = ({
 
                     {/* Content Editor */}
                     <div className="space-y-3">
-                      <label className="text-[12px] font-black text-neutral-400 uppercase tracking-[0.2em] ml-6 block">
+                      <label className="text-[12px] font-black text-neutral-400 tracking-[0.2em] ml-6 block">
                         Content
                       </label>
                       <div className="bg-neutral-900/20 rounded-[3rem] border-2 border-neutral-800 overflow-hidden p-2 focus-within:border-cyan-500/30 transition-all">
@@ -336,10 +336,10 @@ const PostCreationWrapper = ({
                       <Loader2 size={40} className="animate-spin" />
                     </div>
                     <div className="text-center space-y-3">
-                      <h3 className="text-2xl font-black text-white uppercase tracking-widest">
+                      <h3 className="text-2xl font-black text-white tracking-widest">
                         Posting...
                       </h3>
-                      <p className="text-[11px] font-bold text-neutral-500 uppercase tracking-[0.2em]">
+                      <p className="text-[11px] font-bold text-neutral-500 tracking-[0.2em]">
                         Synchronizing with network
                       </p>
                     </div>
@@ -352,7 +352,7 @@ const PostCreationWrapper = ({
                 {/* Character Progress */}
                 <div className="flex items-center gap-10">
                   <div className="flex flex-col gap-2">
-                    <span className="text-[10px] font-black text-neutral-600 uppercase tracking-widest">
+                    <span className="text-[10px] font-black text-neutral-600 tracking-widest">
                       Title
                     </span>
                     <div className="flex items-center gap-3">
@@ -373,7 +373,7 @@ const PostCreationWrapper = ({
                   </div>
 
                   <div className="flex flex-col gap-2 border-l-2 border-neutral-900 pl-10">
-                    <span className="text-[10px] font-black text-neutral-600 uppercase tracking-widest">
+                    <span className="text-[10px] font-black text-neutral-600 tracking-widest">
                       Body
                     </span>
                     <div className="flex items-center gap-3">
@@ -397,7 +397,7 @@ const PostCreationWrapper = ({
                   <button
                     type="button"
                     onClick={handleClose}
-                    className="px-10 py-5 rounded-full text-[12px] font-black uppercase tracking-widest text-neutral-500 hover:text-red-500 transition-all active:scale-95"
+                    className="px-10 py-5 rounded-full text-[12px] font-black tracking-widest text-neutral-500 hover:text-red-500 transition-all active:scale-95"
                   >
                     Cancel
                   </button>
@@ -409,7 +409,7 @@ const PostCreationWrapper = ({
                       formData.title.trim().length === 0 ||
                       getContentCharCount() < 1
                     }
-                    className={`flex-1 md:flex-none flex items-center justify-center gap-4 px-16 py-5 rounded-full text-[12px] font-black uppercase tracking-widest transition-all ${
+                    className={`flex-1 md:flex-none flex items-center justify-center gap-4 px-16 py-5 rounded-full text-[12px] font-black tracking-widest transition-all ${
                       loading ||
                       formData.title.trim().length === 0 ||
                       getContentCharCount() < 1

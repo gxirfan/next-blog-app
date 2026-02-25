@@ -76,7 +76,7 @@ export default function RecoveryPage() {
   const INPUT_STYLING =
     "w-full px-6 py-4 bg-neutral-900 border border-neutral-800 rounded-2xl text-[13px] text-white font-medium placeholder-neutral-700 focus:outline-none focus:border-cyan-500/50 transition-all appearance-none";
   const LABEL_STYLING =
-    "text-[10px] uppercase tracking-[0.25em] text-neutral-500 mb-3 block font-black";
+    "text-[10px] tracking-[0.25em] text-neutral-500 mb-3 block font-black";
 
   return (
     <div className="min-h-screen bg-neutral-950 flex items-center justify-center py-24 px-6 relative overflow-hidden">
@@ -91,11 +91,11 @@ export default function RecoveryPage() {
           <div className="inline-flex p-3 bg-neutral-900 border border-neutral-800 rounded-2xl text-cyan-500 mb-6">
             <ShieldAlert size={28} />
           </div>
-          <h1 className="text-4xl text-white font-black uppercase tracking-tighter leading-none mb-4">
+          <h1 className="text-4xl text-white font-black tracking-tighter leading-none mb-4">
             Recovery{" "}
             <span className="text-neutral-500 font-light">Protocol</span>
           </h1>
-          <p className="text-neutral-600 text-[9px] font-mono uppercase tracking-[0.4em]">
+          <p className="text-neutral-600 text-[9px] font-mono tracking-[0.4em]">
             Emergency Identity Restoration Access
           </p>
         </div>
@@ -114,7 +114,7 @@ export default function RecoveryPage() {
               ) : (
                 <XCircle size={18} />
               )}
-              <span className="text-[10px] font-mono uppercase tracking-widest">
+              <span className="text-[10px] font-mono tracking-widest">
                 {status.msg}
               </span>
             </div>
@@ -191,7 +191,7 @@ export default function RecoveryPage() {
               type="submit"
               disabled={loading || status?.type === "success"}
               className={`
-                w-full py-5 rounded-2xl text-[11px] font-black uppercase tracking-[0.4em] transition-all flex items-center justify-center gap-3
+                w-full py-5 rounded-2xl text-[11px] font-black tracking-[0.4em] transition-all flex items-center justify-center gap-3
                 ${
                   loading || status?.type === "success"
                     ? "bg-neutral-900 text-neutral-700 border border-neutral-800 cursor-not-allowed"
@@ -215,7 +215,7 @@ export default function RecoveryPage() {
         <div className="mt-12 text-center">
           <Link
             href="/login"
-            className="inline-flex items-center gap-2 text-[10px] font-black uppercase tracking-[0.3em] text-neutral-700 hover:text-white transition-all group"
+            className="inline-flex items-center gap-2 text-[10px] font-black tracking-[0.3em] text-neutral-700 hover:text-white transition-all group"
           >
             <ChevronLeft
               size={14}

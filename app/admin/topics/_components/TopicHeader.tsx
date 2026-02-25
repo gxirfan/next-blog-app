@@ -4,18 +4,18 @@ export default function TopicHeader({ count }: { count: number }) {
   return (
     <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-neutral-800/50 pb-6">
       <div className="space-y-1">
-        <div className="flex items-center gap-2 text-cyan-500 font-mono text-[10px] tracking-widest uppercase">
+        <div className="flex items-center gap-2 text-cyan-500 font-mono text-[10px] tracking-widest">
           <Layers size={12} />
           Data Partition
         </div>
-        <h1 className="text-2xl font-bold text-white tracking-tight leading-none uppercase">
+        <h1 className="text-2xl font-bold text-white tracking-tight leading-none">
           Topic <span className="text-neutral-500 font-medium">Inventory</span>
         </h1>
       </div>
 
       <div className="bg-neutral-950/10 border border-neutral-800/60 flex items-center gap-3 px-4 py-2 rounded-2xl">
         <div className="text-right leading-none">
-          <p className="text-[9px] text-neutral-600 uppercase font-black tracking-tighter">
+          <p className="text-[9px] text-neutral-600 font-black tracking-tighter">
             Nodes
           </p>
           <p className="text-lg font-bold text-neutral-200">{count}</p>

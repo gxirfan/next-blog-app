@@ -75,7 +75,7 @@ export default async function PostsSection({
           className="
     flex items-center gap-3 px-4 py-2 
     bg-neutral-900/50 border border-neutral-900 rounded-xl
-    text-neutral-400 font-jetbrains-mono text-[11px] font-black uppercase tracking-widest
+    text-neutral-400 font-jetbrains-mono text-[11px] font-black tracking-widest
     hover:bg-neutral-900 hover:border-neutral-700 hover:text-white
     transition-all duration-300 active:scale-95 group
   "

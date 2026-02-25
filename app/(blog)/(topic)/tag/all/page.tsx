@@ -100,7 +100,7 @@ export default async function TagAllPage({
           <TagCardList tags={tags} accentColor={ACCENT_COLOR} />
         ) : (
           <div className="flex flex-col items-center justify-center py-32 border border-dashed border-neutral-900 rounded-[3rem] bg-neutral-900/5">
-            <span className="text-neutral-700 font-mono text-[10px] uppercase tracking-[0.5em] font-black">
+            <span className="text-neutral-700 font-mono text-[10px] tracking-[0.5em] font-black">
               Empty Registry: No Tags Available
             </span>
           </div>

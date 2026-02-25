@@ -27,7 +27,7 @@ export default function TagLoading() {
         </div>
 
         <div className="mt-8 flex flex-col items-center space-y-3">
-          <p className="text-[11px] font-bold uppercase tracking-[0.2em] text-neutral-500">
+          <p className="text-[11px] font-bold tracking-[0.2em] text-neutral-500">
             Loading Tags
           </p>
 

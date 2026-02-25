@@ -14,7 +14,7 @@ export default function PostDetailsFooter({
       <div className="flex flex-col md:flex-row justify-between items-end md:items-center gap-8">
         <div className="flex items-center gap-10">
           <div className="space-y-2">
-            <div className="flex items-center gap-2 text-neutral-500 text-[10px] font-bold uppercase tracking-[0.2em]">
+            <div className="flex items-center gap-2 text-neutral-500 text-[10px] font-bold tracking-[0.2em]">
               <MessageSquare size={14} /> Engagements
             </div>
             <p className="text-2xl font-black text-white tracking-tighter italic">
@@ -23,10 +23,10 @@ export default function PostDetailsFooter({
           </div>
           <div className="w-px h-10 bg-neutral-800" />
           <div className="space-y-2">
-            <div className="flex items-center gap-2 text-neutral-500 text-[10px] font-bold uppercase tracking-[0.2em]">
+            <div className="flex items-center gap-2 text-neutral-500 text-[10px] font-bold tracking-[0.2em]">
               <Activity size={14} /> Last Activity
             </div>
-            <p className="text-lg font-bold text-neutral-300 uppercase">
+            <p className="text-lg font-bold text-neutral-300">
               {postDetails.lastPostAt
                 ? getRelativeTime(postDetails.lastPostAt)
                 : "PENDING"}

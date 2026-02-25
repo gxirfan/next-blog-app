@@ -36,7 +36,7 @@ export default async function AdminTagsListPage() {
 
       {tags.length === 0 ? (
         <div className="py-32 text-center border border-neutral-900 rounded-4xl">
-          <p className="text-neutral-600 text-sm font-light font-mono uppercase tracking-widest">
+          <p className="text-neutral-600 text-sm font-light font-mono tracking-widest">
             Null_Data_Partition: No tags detected.
           </p>
         </div>

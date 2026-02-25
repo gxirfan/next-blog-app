@@ -13,8 +13,8 @@ export default function AllTagsFooter({ meta }: AllTagsFooterProps) {
     <footer className="pt-12 border-t border-neutral-900 flex flex-col items-center gap-8">
       <div className="flex items-center gap-4">
         <div className="h-px w-8 bg-neutral-800" />
-        <span className="text-[10px] font-mono text-neutral-600 uppercase tracking-[0.5em] font-black">
-          Registry_Navigation
+        <span className="text-[10px] font-mono text-neutral-600 tracking-[0.5em] font-black">
+          Registry Navigation
         </span>
         <div className="h-px w-8 bg-neutral-800" />
       </div>

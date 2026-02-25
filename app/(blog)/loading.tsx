@@ -20,7 +20,7 @@ export default function BlogLoading() {
           </div>
 
           <div className="mt-8 flex flex-col items-center space-y-3">
-            <span className="text-[11px] font-bold uppercase tracking-[0.2em] text-neutral-500">
+            <span className="text-[11px] font-bold tracking-[0.2em] text-neutral-500">
               Loading {ENV.POST_TYPE}s
             </span>
             <div className="w-10 h-px bg-neutral-900 rounded-full overflow-hidden">

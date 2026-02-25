@@ -22,7 +22,7 @@ export default function FlowDetailClient({ mainFlow }: { mainFlow: IFlow }) {
               <div className="w-6 h-6 rounded-full bg-neutral-950 flex items-center justify-center border border-neutral-800 text-neutral-500 group-hover:text-cyan-500 transition-colors">
                 <CornerDownRight size={12} strokeWidth={3} />
               </div>
-              <span className="text-[10px] font-black uppercase tracking-[0.2em] text-neutral-500 group-hover:text-neutral-400">
+              <span className="text-[10px] font-black tracking-[0.2em] text-neutral-500 group-hover:text-neutral-400">
                 Replying to
               </span>
             </div>
@@ -60,11 +60,11 @@ export default function FlowDetailClient({ mainFlow }: { mainFlow: IFlow }) {
           <div className="flex items-center gap-6 pt-8 border-t border-neutral-900/80">
             <div className="flex items-center gap-2">
               <div className="w-1.5 h-1.5 rounded-full bg-cyan-500" />
-              <span className="text-[10px] font-black uppercase tracking-[0.2em] text-neutral-300">
+              <span className="text-[10px] font-black tracking-[0.2em] text-neutral-300">
                 Posted
               </span>
             </div>
-            <span className="text-[10px] font-bold text-neutral-600 uppercase tracking-widest">
+            <span className="text-[10px] font-bold text-neutral-600 tracking-widest">
               {getRelativeTime(mainFlow.createdAt) || "Just now"}
             </span>
           </div>

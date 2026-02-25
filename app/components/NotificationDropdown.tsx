@@ -127,7 +127,7 @@ const NotificationDropdown = () => {
                     : "text-neutral-600"
                 }
               />
-              <h3 className="text-[11px] font-bold uppercase tracking-[0.15em] text-neutral-400">
+              <h3 className="text-[11px] font-bold tracking-[0.15em] text-neutral-400">
                 Signals
               </h3>
               {unreadCount > 0 && (
@@ -155,7 +155,7 @@ const NotificationDropdown = () => {
                 <div className="p-3 rounded-xl bg-neutral-900/50 border border-neutral-800">
                   <Bell size={20} className="text-neutral-700" />
                 </div>
-                <p className="text-neutral-600 text-[10px] font-bold uppercase tracking-widest">
+                <p className="text-neutral-600 text-[10px] font-bold tracking-widest">
                   Frequency Clear
                 </p>
               </div>
@@ -199,7 +199,7 @@ const NotificationDropdown = () => {
                         {notification.message}
                       </p>
                       <div className="flex items-center gap-2 mt-2">
-                        <span className="text-[9px] font-mono text-neutral-700 uppercase tracking-tighter">
+                        <span className="text-[9px] font-mono text-neutral-700 tracking-tighter">
                           {getRelativeTime(notification.createdAt)}
                         </span>
                         {!notification.isRead && (
@@ -218,7 +218,7 @@ const NotificationDropdown = () => {
             href="/notification/all"
             className="block p-4 bg-neutral-900/30 hover:bg-neutral-900 text-center border-t border-neutral-900 transition-colors group"
           >
-            <span className="text-[10px] font-bold uppercase tracking-[0.2em] text-neutral-600 group-hover:text-cyan-500 transition-colors">
+            <span className="text-[12px] font-bold tracking-[0.2em] text-neutral-600 group-hover:text-cyan-500 transition-colors">
               Access Full List
             </span>
           </Link>

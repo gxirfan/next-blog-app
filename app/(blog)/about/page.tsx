@@ -13,7 +13,7 @@ export default function AboutPage() {
     <div className="max-w-4xl mx-auto py-10 space-y-12 animate-in fade-in duration-700">
       {/* 1. Page Header */}
       <div className="space-y-4 border-b border-neutral-900 pb-10">
-        <div className="flex items-center gap-2 text-[10px] uppercase tracking-[0.3em] text-cyan-500">
+        <div className="flex items-center gap-2 text-[10px] tracking-[0.3em] text-cyan-500">
           <Terminal size={14} />
           <span>System Specifications</span>
         </div>
@@ -28,7 +28,7 @@ export default function AboutPage() {
       {/* 2. Main Architecture Card */}
       <div className="bg-neutral-950 border border-neutral-900 rounded-[2.5rem] p-8 md:p-12 space-y-10">
         <div className="space-y-6">
-          <h2 className="text-2xl text-white flex items-center gap-3 uppercase tracking-tight">
+          <h2 className="text-2xl text-white flex items-center gap-3 tracking-tight">
             <Cpu size={24} className="text-cyan-500" />
             <span>Architecture Overview</span>
           </h2>
@@ -49,7 +49,7 @@ export default function AboutPage() {
 
         {/* 3. Tech Stack Grid */}
         <div className="space-y-6 pt-10 border-t border-neutral-900">
-          <h3 className="text-[10px] uppercase tracking-[0.3em] text-neutral-600 flex items-center gap-2">
+          <h3 className="text-[10px] tracking-[0.3em] text-neutral-600 flex items-center gap-2">
             <Server size={14} />
             Core Technology Stack
           </h3>
@@ -97,7 +97,7 @@ const TechItem = ({
       {icon}
     </div>
     <div className="flex flex-col">
-      <span className="text-[9px] uppercase tracking-widest text-neutral-600 mb-0.5">
+      <span className="text-[9px] tracking-widest text-neutral-600 mb-0.5">
         {label}
       </span>
       <span className="text-sm font-bold text-neutral-300">{value}</span>

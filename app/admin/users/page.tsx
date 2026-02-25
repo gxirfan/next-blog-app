@@ -38,7 +38,7 @@ export default async function UserManagementPage() {
       <div className="min-h-[400px]">
         {users.length === 0 ? (
           <div className="py-32 text-center border border-neutral-900 rounded-[2.5rem]">
-            <p className="text-neutral-600 text-sm font-mono uppercase tracking-widest">
+            <p className="text-neutral-600 text-sm font-mono tracking-widest">
               Null_Identity_Detected
             </p>
           </div>

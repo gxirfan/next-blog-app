@@ -88,9 +88,6 @@ export default function PostDetailsHeader({
               <Eye size={14} />
             </div>
             <div className="flex flex-col">
-              <span className="text-neutral-700 text-[8px] uppercase tracking-[0.3em] mb-1 leading-none">
-                Hits
-              </span>
               <span className="text-neutral-400">
                 {postDetails.viewCount.toLocaleString()}
               </span>

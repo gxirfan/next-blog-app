@@ -16,7 +16,7 @@ export default function AdminLoading() {
       <div className="flex flex-col items-center space-y-2">
         <div className="flex items-center gap-2 px-4 py-1.5 bg-neutral-900/50 border border-neutral-800 rounded-full">
           <Terminal size={12} className="text-neutral-600" />
-          <span className="text-[10px] font-mono text-neutral-500 uppercase tracking-[0.3em] animate-pulse">
+          <span className="text-[10px] font-mono text-neutral-500 tracking-[0.3em] animate-pulse">
             Fetching_System_Resources...
           </span>
         </div>

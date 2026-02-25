@@ -114,7 +114,7 @@ export default async function SearchPage({ searchParams }: PageProps) {
 
                   <div>
                     <div className="flex items-center gap-2">
-                      <span className="text-[10px] text-cyan-500/70 font-bold tracking-widest uppercase bg-cyan-500/10 px-1.5 py-0.5 rounded">
+                      <span className="text-[10px] text-cyan-500/70 font-bold tracking-widest bg-cyan-500/10 px-1.5 py-0.5 rounded">
                         {item.type === "user"
                           ? "User"
                           : item.type === "post"

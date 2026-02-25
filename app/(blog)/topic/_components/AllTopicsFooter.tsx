@@ -13,7 +13,7 @@ export default function AllTopicsFooter({ meta }: AllTopicsFooterProps) {
     <footer className="pt-12 border-t border-neutral-900 flex flex-col items-center gap-8">
       <div className="flex items-center gap-6">
         <div className="h-[1px] w-16 bg-gradient-to-r from-transparent to-neutral-800" />
-        <span className="text-[10px] font-mono text-neutral-700 uppercase tracking-[0.3em] font-bold">
+        <span className="text-[10px] font-mono text-neutral-700 tracking-[0.3em] font-bold">
           Sector Navigation
         </span>
         <div className="h-[1px] w-16 bg-gradient-to-l from-transparent to-neutral-800" />

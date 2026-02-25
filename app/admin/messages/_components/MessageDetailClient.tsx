@@ -21,16 +21,16 @@ export default function MessageDetailClient({
     <div className="max-w-5xl mx-auto space-y-6 animate-in fade-in duration-500">
       <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 border-b border-neutral-900 pb-8">
         <div className="space-y-1">
-          <div className="flex items-center gap-2 text-[9px] font-mono font-black text-cyan-500 uppercase tracking-[0.3em]">
+          <div className="flex items-center gap-2 text-[9px] font-mono font-black text-cyan-500 tracking-[0.3em]">
             <ShieldCheck size={12} /> Signal_Verified
           </div>
-          <h1 className="text-3xl font-black text-white uppercase tracking-tight">
+          <h1 className="text-3xl font-black text-white tracking-tight">
             {msg.subject}
           </h1>
         </div>
 
         <div
-          className={`px-3 py-1.5 rounded-lg border font-mono text-[9px] font-bold uppercase tracking-widest ${
+          className={`px-3 py-1.5 rounded-lg border font-mono text-[9px] font-bold tracking-widest ${
             msg.isRead
               ? "bg-neutral-900/50 border-neutral-800 text-neutral-600"
               : "bg-cyan-500/5 border-cyan-500/20 text-cyan-500"
@@ -43,7 +43,7 @@ export default function MessageDetailClient({
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
         <aside className="lg:col-span-4">
           <div className="bg-neutral-950 border border-neutral-900 rounded-3xl p-6 space-y-6">
-            <p className="text-[9px] font-mono text-neutral-700 uppercase tracking-widest font-black">
+            <p className="text-[9px] font-mono text-neutral-700 tracking-widest font-black">
               // Source_Metadata
             </p>
 
@@ -53,7 +53,7 @@ export default function MessageDetailClient({
                   <User size={16} />
                 </div>
                 <div className="min-w-0">
-                  <p className="text-[10px] text-neutral-500 font-bold uppercase tracking-tighter">
+                  <p className="text-[10px] text-neutral-500 font-bold tracking-tighter">
                     Sender
                   </p>
                   <p className="text-sm text-neutral-200 font-semibold truncate">
@@ -67,7 +67,7 @@ export default function MessageDetailClient({
                   <Mail size={16} />
                 </div>
                 <div className="min-w-0">
-                  <p className="text-[10px] text-neutral-500 font-bold uppercase tracking-tighter">
+                  <p className="text-[10px] text-neutral-500 font-bold tracking-tighter">
                     Address
                   </p>
                   <p className="text-sm text-neutral-200 font-mono truncate">
@@ -81,7 +81,7 @@ export default function MessageDetailClient({
                   <Clock size={16} />
                 </div>
                 <div className="min-w-0">
-                  <p className="text-[10px] text-neutral-500 font-bold uppercase tracking-tighter">
+                  <p className="text-[10px] text-neutral-500 font-bold tracking-tighter">
                     Timestamp
                   </p>
                   <p className="text-sm text-neutral-200 font-mono">
@@ -95,7 +95,7 @@ export default function MessageDetailClient({
 
         <main className="lg:col-span-8">
           <div className="bg-neutral-950 border border-neutral-900 rounded-3xl p-8 md:p-10 min-h-[300px] flex flex-col">
-            <div className="flex items-center gap-2 mb-6 text-[9px] font-mono text-neutral-700 uppercase tracking-[0.3em] font-black">
+            <div className="flex items-center gap-2 mb-6 text-[9px] font-mono text-neutral-700 tracking-[0.3em] font-black">
               <MessageSquare size={12} /> Payload_Data
             </div>
 
@@ -103,7 +103,7 @@ export default function MessageDetailClient({
               {msg.message}
             </div>
 
-            <div className="mt-8 pt-6 border-t border-neutral-900/50 text-[9px] font-mono text-neutral-800 uppercase tracking-widest">
+            <div className="mt-8 pt-6 border-t border-neutral-900/50 text-[9px] font-mono text-neutral-800 tracking-widest">
               End_of_Signal_Log
             </div>
           </div>

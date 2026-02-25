@@ -67,7 +67,7 @@ export default async function AdminFlowPage({
 
       {!hasData ? (
         <div className="py-32 text-center border border-neutral-900 rounded-[2.5rem]">
-          <p className="text-neutral-600 text-[10px] font-black uppercase tracking-[0.4em]">
+          <p className="text-neutral-600 text-[10px] font-black tracking-[0.4em]">
             No Threads Detected In Stream
           </p>
         </div>

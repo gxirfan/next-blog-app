@@ -17,7 +17,7 @@ const ProfileInfoCard = ({ user }: ProfileInfoCardProps) => {
         */}
         <div className="lg:col-span-4 space-y-10 order-2 lg:order-1">
           <section className="space-y-8">
-            <h2 className="text-[10px] uppercase tracking-[0.3em] text-neutral-500 flex items-center gap-2">
+            <h2 className="text-[12px] tracking-[0.3em] text-neutral-500 flex items-center gap-2">
               <User size={14} className="text-cyan-500" />
               Information
             </h2>
@@ -25,7 +25,7 @@ const ProfileInfoCard = ({ user }: ProfileInfoCardProps) => {
             <div className="space-y-8">
               {/* Username Item */}
               <div className="group">
-                <p className="text-[10px] text-neutral-600 font-bold uppercase mb-2 tracking-tighter">
+                <p className="text-[12px] text-neutral-600 font-bold mb-2 tracking-tighter">
                   Handle
                 </p>
                 <p className="text-white font-bold text-lg flex items-center gap-1.5">
@@ -36,7 +36,7 @@ const ProfileInfoCard = ({ user }: ProfileInfoCardProps) => {
 
               {/* Email Item */}
               <div className="group">
-                <p className="text-[10px] text-neutral-600 font-bold uppercase mb-2 tracking-tighter">
+                <p className="text-[12px] text-neutral-600 font-bold mb-2 tracking-tighter">
                   Contact
                 </p>
                 <div className="flex items-center gap-2">
@@ -50,7 +50,7 @@ const ProfileInfoCard = ({ user }: ProfileInfoCardProps) => {
                   ) : (
                     <div className="flex items-center gap-2 text-neutral-500 bg-neutral-900/50 px-3 py-1.5 rounded-lg border border-neutral-800">
                       <Shield size={12} />
-                      <span className="text-[10px] font-bold tracking-widest uppercase">
+                      <span className="text-[12px] font-bold tracking-widest">
                         Encrypted
                       </span>
                     </div>
@@ -60,7 +60,7 @@ const ProfileInfoCard = ({ user }: ProfileInfoCardProps) => {
 
               {/* Joined Date */}
               <div className="group">
-                <p className="text-[10px] text-neutral-600 font-bold uppercase mb-2 tracking-tighter">
+                <p className="text-[12px] text-neutral-600 font-bold mb-2 tracking-tighter">
                   Joined
                 </p>
                 <div className="flex items-center gap-2 text-neutral-300 font-medium">
@@ -77,7 +77,7 @@ const ProfileInfoCard = ({ user }: ProfileInfoCardProps) => {
         */}
         <div className="lg:col-span-8 space-y-10 order-1 lg:order-2">
           <section>
-            <h2 className="text-[10px] uppercase tracking-[0.3em] text-neutral-500 mb-6 flex items-center gap-2">
+            <h2 className="text-[12px] tracking-[0.3em] text-neutral-500 mb-6 flex items-center gap-2">
               <Info size={14} className="text-cyan-500" />
               About Me
             </h2>

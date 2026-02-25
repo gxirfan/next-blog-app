@@ -96,11 +96,11 @@ const NotificationListItem = ({ notification }: NotificationListItemProps) => {
         </div>
 
         <div className="flex items-center gap-3 mt-3">
-          <span className="text-[10px] font-black uppercase tracking-[0.15em] text-neutral-600">
+          <span className="text-[10px] font-black tracking-[0.15em] text-neutral-600">
             {getRelativeTime(notification.createdAt)}
           </span>
           <div className="h-px w-4 bg-neutral-800" />
-          <span className="text-[9px] font-bold text-neutral-700 uppercase tracking-widest">
+          <span className="text-[9px] font-bold text-neutral-700 tracking-widest">
             Signal Received
           </span>
         </div>

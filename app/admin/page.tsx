@@ -51,7 +51,7 @@ export default function AdminPage() {
     <div className="max-w-6xl mx-auto space-y-12 animate-in fade-in duration-700">
       <header className="flex flex-col md:flex-row md:items-end justify-between gap-6 border-b border-neutral-800/50 pb-10">
         <div className="space-y-2">
-          <div className="flex items-center gap-2 text-cyan-500 font-mono text-[10px] tracking-[0.3em] uppercase">
+          <div className="flex items-center gap-2 text-cyan-500 font-mono text-[10px] tracking-[0.3em]">
             <Command size={14} />
             Kernel Root Access
           </div>
@@ -69,10 +69,10 @@ export default function AdminPage() {
           className={`${BORDER_STYLE} flex items-center gap-4 px-6 py-4 rounded-3xl transition-all hover:border-cyan-500/30`}
         >
           <div className="text-right">
-            <p className="text-[10px] text-neutral-600 uppercase font-bold tracking-widest">
+            <p className="text-[10px] text-neutral-600 font-bold tracking-widest">
               System Status
             </p>
-            <p className="text-sm font-medium text-emerald-500 flex items-center justify-end gap-2 uppercase tracking-tighter">
+            <p className="text-sm font-medium text-emerald-500 flex items-center justify-end gap-2 tracking-tighter">
               <span className="h-1.5 w-1.5 rounded-full bg-emerald-500" />
               Operational
             </p>
@@ -85,7 +85,7 @@ export default function AdminPage() {
       <div className={`${BORDER_STYLE} rounded-[2.5rem] overflow-hidden`}>
         <table className="w-full text-left border-separate border-spacing-0">
           <thead>
-            <tr className="bg-neutral-900/40 text-neutral-600 text-[11px] uppercase tracking-[0.2em] font-black">
+            <tr className="bg-neutral-900/40 text-neutral-600 text-[11px] tracking-[0.2em] font-black">
               <th className="px-10 py-6 border-b border-neutral-800/50">
                 Core Module
               </th>
@@ -110,7 +110,7 @@ export default function AdminPage() {
                     >
                       <module.icon size={20} />
                     </div>
-                    <span className="text-[15px] font-bold text-neutral-200 uppercase tracking-tight group-hover:text-white transition-colors">
+                    <span className="text-[15px] font-bold text-neutral-200 tracking-tight group-hover:text-white transition-colors">
                       {module.label}
                     </span>
                   </div>

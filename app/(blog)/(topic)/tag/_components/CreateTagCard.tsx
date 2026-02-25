@@ -84,7 +84,7 @@ const CreateTagCard = () => {
             group relative flex items-center gap-4 px-10 py-4 rounded-2xl 
             bg-neutral-200 text-neutral-900 border border-neutral-300
             hover:bg-white hover:text-black transition-all duration-500 
-            cursor-pointer text-[11px] font-black uppercase tracking-[0.25em]
+            cursor-pointer text-[11px] font-black tracking-[0.25em]
             active:scale-[0.97]
           "
         >
@@ -111,7 +111,7 @@ const CreateTagCard = () => {
             }`}
           >
             <Sparkles size={18} />
-            <span className="font-mono text-[10px] uppercase tracking-widest">
+            <span className="font-mono text-[10px] tracking-widest">
               {submissionStatus.msg}
             </span>
           </div>
@@ -134,10 +134,10 @@ const CreateTagCard = () => {
                   <Tag size={22} />
                 </div>
                 <div>
-                  <h3 className="font-urbanist text-xl text-white uppercase tracking-tighter font-black">
+                  <h3 className="font-urbanist text-xl text-white tracking-tighter font-black">
                     Tag Architect
                   </h3>
-                  <p className="font-mono text-[9px] text-neutral-600 uppercase tracking-widest mt-1">
+                  <p className="font-mono text-[9px] text-neutral-600 tracking-widest mt-1">
                     Node: Administrative_Control
                   </p>
                 </div>
@@ -155,7 +155,7 @@ const CreateTagCard = () => {
               {!loading ? (
                 <form onSubmit={handleSubmit} className="space-y-8">
                   <div className="space-y-3">
-                    <label className="font-mono text-[10px] uppercase tracking-[0.2em] text-neutral-500 ml-4">
+                    <label className="font-mono text-[10px] tracking-[0.2em] text-neutral-500 ml-4">
                       Tag Identifier
                     </label>
                     <div className="relative">
@@ -180,8 +180,8 @@ const CreateTagCard = () => {
                   </div>
 
                   <div className="space-y-3">
-                    <label className="font-mono text-[10px] uppercase tracking-[0.2em] text-neutral-500 ml-4">
-                      Category Description
+                    <label className="font-mono text-[10px] tracking-[0.2em] text-neutral-500 ml-4">
+                      Tag Description
                     </label>
                     <textarea
                       name="description"
@@ -203,7 +203,7 @@ const CreateTagCard = () => {
                     <button
                       type="button"
                       onClick={handleClose}
-                      className="text-[10px] uppercase tracking-[0.2em] text-neutral-600 hover:text-white transition-colors cursor-pointer"
+                      className="text-[10px] tracking-[0.2em] text-neutral-600 hover:text-white transition-colors cursor-pointer"
                     >
                       Abort_Action
                     </button>
@@ -212,7 +212,7 @@ const CreateTagCard = () => {
                       disabled={loading}
                       className="
                         flex items-center gap-3 px-12 py-4 rounded-2xl 
-                        bg-cyan-500 text-black font-black text-[10px] uppercase tracking-[0.3em]
+                        bg-cyan-500 text-black font-black text-[10px] tracking-[0.3em]
                         hover:bg-cyan-400 active:scale-95 transition-all
                         cursor-pointer
                       "
@@ -229,10 +229,10 @@ const CreateTagCard = () => {
                     <Loader2 size={40} className="animate-spin" />
                   </div>
                   <div className="text-center space-y-2">
-                    <h3 className="text-xl font-black text-white uppercase tracking-[0.3em]">
+                    <h3 className="text-xl font-black text-white tracking-[0.3em]">
                       Transmitting_Data
                     </h3>
-                    <p className="text-xs font-mono text-neutral-500 uppercase tracking-widest">
+                    <p className="text-xs font-mono text-neutral-500 tracking-widest">
                       Mapping new tag to database...
                     </p>
                   </div>

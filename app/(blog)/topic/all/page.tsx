@@ -103,8 +103,8 @@ export default async function TopicAllPage({
           <TopicList topics={topicsData.data.data} />
         ) : (
           <div className="flex flex-col items-center justify-center py-24 border border-dashed border-neutral-900 rounded-[3rem] bg-neutral-900/5">
-            <span className="text-neutral-700 font-mono text-xs uppercase tracking-[0.5em] font-black">
-              Zero_Topics_Detected_In_Current_Quadrant
+            <span className="text-neutral-700 font-mono text-xs tracking-[0.5em] font-black">
+              No Topics Detected In Current Quadrant
             </span>
           </div>
         )}

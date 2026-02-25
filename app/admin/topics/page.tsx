@@ -30,7 +30,7 @@ export default async function AdminTopicsListPage() {
 
       {topics.length === 0 ? (
         <div className="bg-neutral-950/10 border border-neutral-800/60 py-20 text-center rounded-4xl">
-          <p className="text-neutral-600 text-xs font-mono tracking-widest uppercase font-bold">
+          <p className="text-neutral-600 text-xs font-mono tracking-widest font-bold">
             Null_Data_Detected
           </p>
         </div>

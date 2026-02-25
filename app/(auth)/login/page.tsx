@@ -32,7 +32,7 @@ export default function LoginPage({
   };
 
   const resolvedSearchParams = use(searchParams);
-  const redirectPath = resolvedSearchParams.redirect;
+  const redirectPath = resolvedSearchParams.redirect || "/";
 
   useEffect(() => {
     if (user && !isLoading) {
@@ -60,7 +60,7 @@ export default function LoginPage({
           </div>
 
           <div className="flex flex-col items-center gap-1.5">
-            <span className="text-[11px] font-bold text-neutral-400 uppercase tracking-[0.2em]">
+            <span className="text-[11px] font-bold text-neutral-400 tracking-[0.2em]">
               Loading Profile
             </span>
             <div className="w-12 h-[1px] bg-neutral-900 rounded-full overflow-hidden">
@@ -98,7 +98,7 @@ export default function LoginPage({
     "w-full h-16 pl-16 pr-6 bg-neutral-900/40 border-2 border-neutral-800 rounded-full text-[15px] text-white font-semibold placeholder-neutral-600 focus:outline-none focus:border-cyan-500/50 focus:bg-neutral-900 transition-all duration-300 appearance-none";
 
   const LABEL_STYLING =
-    "text-[12px] font-black text-neutral-400 uppercase tracking-[0.15em] ml-6 mb-2 block";
+    "text-[13px] font-black text-neutral-400 tracking-[0.15em] ml-6 mb-2 block";
 
   return (
     <div className="flex min-h-screen items-center justify-center p-6 bg-neutral-950 relative overflow-hidden">
@@ -111,10 +111,10 @@ export default function LoginPage({
               <User size={36} strokeWidth={1.5} />
             </div>
             <div className="text-center space-y-2">
-              <h1 className="text-4xl font-black text-white tracking-tighter uppercase leading-none">
+              <h1 className="text-4xl font-black text-white tracking-tighter leading-none">
                 Welcome
               </h1>
-              <p className="text-[11px] font-bold text-neutral-500 uppercase tracking-[0.3em]">
+              <p className="text-[12px] font-bold text-neutral-500 tracking-[0.3em]">
                 Sign in to your account
               </p>
             </div>
@@ -159,7 +159,7 @@ export default function LoginPage({
             </div>
 
             {error && (
-              <div className="flex items-center gap-3 p-5 bg-red-500/10 border-2 border-red-500/20 rounded-[2.5rem] text-red-500 text-[11px] font-black uppercase tracking-tight">
+              <div className="flex items-center gap-3 p-5 bg-red-500/10 border-2 border-red-500/20 rounded-[2.5rem] text-red-500 text-[12px] font-black tracking-tight">
                 <AlertCircle size={18} className="shrink-0" />
                 <span>{error}</span>
               </div>
@@ -172,7 +172,7 @@ export default function LoginPage({
             >
               <div
                 className={`
-                flex items-center justify-center gap-4 h-16 rounded-full text-[13px] font-black uppercase tracking-[0.2em] transition-all duration-300 active:scale-95
+                flex items-center justify-center gap-4 h-16 rounded-full text-[14px] font-black tracking-[0.2em] transition-all duration-300 active:scale-95
                 ${
                   loading
                     ? "bg-neutral-900 text-neutral-700 border-2 border-neutral-800"
@@ -198,7 +198,7 @@ export default function LoginPage({
           <div className="mt-14 space-y-8 text-center">
             <Link
               href="/register"
-              className="block text-[13px] text-neutral-500 hover:text-white transition-all font-bold uppercase tracking-widest"
+              className="block text-[14px] text-neutral-500 hover:text-white transition-all font-bold tracking-widest"
             >
               New here? <span className="text-cyan-500">Create account</span>
             </Link>
@@ -206,16 +206,16 @@ export default function LoginPage({
             <div className="flex items-center justify-center gap-6 pt-6 border-t border-neutral-900">
               <Link
                 href="/forgot-password"
-                className="text-[10px] uppercase font-black tracking-[0.2em] text-neutral-700 hover:text-cyan-500 transition-colors"
+                className="text-[14px] font-black tracking-[0.2em] text-neutral-700 hover:text-cyan-500 transition-colors"
               >
                 Recover
               </Link>
               <span className="w-1.5 h-1.5 bg-neutral-900 rounded-full" />
               <Link
-                href="/"
-                className="text-[10px] uppercase font-black tracking-[0.2em] text-neutral-700 hover:text-neutral-400 transition-colors"
+                href={redirectPath}
+                className="text-[14px] font-black tracking-[0.2em] text-neutral-700 hover:text-neutral-400 transition-colors"
               >
-                Home
+                Resume without login
               </Link>
             </div>
           </div>

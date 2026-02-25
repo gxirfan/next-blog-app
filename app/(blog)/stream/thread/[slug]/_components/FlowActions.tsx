@@ -94,7 +94,7 @@ export default function FlowActions({
                   setModalMode("edit");
                   setIsMenuOpen(false);
                 }}
-                className="w-full flex items-center px-5 py-3 text-[11px] uppercase tracking-widest text-neutral-400 hover:text-white hover:bg-neutral-900 transition-all cursor-pointer group"
+                className="w-full flex items-center px-5 py-3 text-[11px] tracking-widest text-neutral-400 hover:text-white hover:bg-neutral-900 transition-all cursor-pointer group"
               >
                 <Pencil
                   size={14}
@@ -108,7 +108,7 @@ export default function FlowActions({
                 setModalMode("delete");
                 setIsMenuOpen(false);
               }}
-              className="w-full flex items-center px-5 py-3 text-[11px] uppercase tracking-widest text-red-500/70 hover:text-red-400 hover:bg-red-500/5 transition-all cursor-pointer group"
+              className="w-full flex items-center px-5 py-3 text-[11px] tracking-widest text-red-500/70 hover:text-red-400 hover:bg-red-500/5 transition-all cursor-pointer group"
             >
               <Trash2
                 size={14}
@@ -128,7 +128,7 @@ export default function FlowActions({
                 <ShieldAlert size={28} strokeWidth={1.5} />
                 <div className="h-px w-8 bg-red-900/20" />
               </div>
-              <h3 className="text-2xl text-white tracking-tighter uppercase mb-2">
+              <h3 className="text-2xl text-white tracking-tighter mb-2">
                 Terminate?
               </h3>
               <p className="text-neutral-500 text-xs font-medium leading-relaxed mb-8">
@@ -139,7 +139,7 @@ export default function FlowActions({
                 <button
                   onClick={handleDelete}
                   disabled={loading}
-                  className="w-full py-4 bg-red-600/10 border border-red-600/20 hover:bg-red-600 text-white rounded-2xl text-[10px] uppercase tracking-[0.2em] transition-all active:scale-95 disabled:opacity-30 cursor-pointer"
+                  className="w-full py-4 bg-red-600/10 border border-red-600/20 hover:bg-red-600 text-white rounded-2xl text-[10px] tracking-[0.2em] transition-all active:scale-95 disabled:opacity-30 cursor-pointer"
                 >
                   {loading ? (
                     <Loader2 className="animate-spin mx-auto" size={18} />
@@ -149,7 +149,7 @@ export default function FlowActions({
                 </button>
                 <button
                   onClick={() => setModalMode("none")}
-                  className="w-full py-4 bg-transparent text-neutral-600 hover:text-white text-[10px] uppercase tracking-[0.2em] transition-all cursor-pointer"
+                  className="w-full py-4 bg-transparent text-neutral-600 hover:text-white text-[10px] tracking-[0.2em] transition-all cursor-pointer"
                 >
                   Aborted
                 </button>
@@ -162,7 +162,7 @@ export default function FlowActions({
               <div className="flex justify-between items-center mb-8 border-b border-neutral-900 pb-6">
                 <div className="flex items-center gap-3">
                   <Pencil size={20} className="text-cyan-500" />
-                  <h3 className="text-2xl text-white tracking-tighter uppercase">
+                  <h3 className="text-2xl text-white tracking-tighter">
                     Edit Stream
                   </h3>
                 </div>
@@ -184,7 +184,7 @@ export default function FlowActions({
 
               <div className="flex flex-col sm:flex-row justify-between items-center mt-8 gap-6">
                 <div className="flex flex-col w-24">
-                  <span className="text-[9px] tracking-widest uppercase text-neutral-600 mb-1.5">
+                  <span className="text-[9px] tracking-widest text-neutral-600 mb-1.5">
                     {content.length} / 500
                   </span>
                   <div className="w-full h-1 bg-neutral-900 rounded-full overflow-hidden">
@@ -198,14 +198,14 @@ export default function FlowActions({
                 <div className="flex items-center gap-4 w-full sm:w-auto">
                   <button
                     onClick={() => setModalMode("none")}
-                    className="flex-1 sm:flex-none px-6 py-4 text-[10px] uppercase tracking-widest text-neutral-600 hover:text-white transition-colors cursor-pointer"
+                    className="flex-1 sm:flex-none px-6 py-4 text-[10px] tracking-widest text-neutral-600 hover:text-white transition-colors cursor-pointer"
                   >
                     Discard
                   </button>
                   <button
                     onClick={handleUpdate}
                     disabled={loading || content.trim() === initialContent}
-                    className="flex-1 sm:flex-none flex items-center justify-center gap-3 px-10 py-4 bg-neutral-950 border border-neutral-800 rounded-2xl text-[10px] uppercase tracking-[0.2em] text-neutral-400 hover:border-cyan-500/50 hover:text-cyan-400 transition-all active:scale-95 disabled:opacity-30 cursor-pointer"
+                    className="flex-1 sm:flex-none flex items-center justify-center gap-3 px-10 py-4 bg-neutral-950 border border-neutral-800 rounded-2xl text-[10px] tracking-[0.2em] text-neutral-400 hover:border-cyan-500/50 hover:text-cyan-400 transition-all active:scale-95 disabled:opacity-30 cursor-pointer"
                   >
                     {loading ? (
                       <Loader2 className="animate-spin" size={18} />

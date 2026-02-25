@@ -212,7 +212,7 @@ const Navbar = () => {
               </span>
               {ENV.VERSION_TEST && (
                 <span
-                  className={`text-[8px] uppercase px-1.5 py-0.5 rounded border font-black ${
+                  className={`text-[8px] px-1.5 py-0.5 rounded border font-black ${
                     ENV.VERSION_TEST === "alpha"
                       ? "border-red-900 text-red-500"
                       : "border-yellow-900 text-yellow-500"
@@ -224,7 +224,7 @@ const Navbar = () => {
             </Link>
             {/* GREETING */}
             <div className="hidden md:flex flex-col items-end pr-3 border-r border-neutral-900 mr-1">
-              <span className="text-[10px] font-black uppercase tracking-widest text-neutral-600">
+              <span className="text-[12px] font-black tracking-widest text-neutral-600">
                 {getGreetingTime()}
               </span>
             </div>
@@ -245,10 +245,11 @@ const Navbar = () => {
 
                 <button
                   onClick={() => setIsModalOpen(true)}
-                  className="flex items-center gap-3.5 p-1 bg-neutral-900/50 border border-neutral-800 rounded-full hover:border-neutral-700 hover:bg-neutral-900 cursor-pointer group active:scale-[0.98] transition-all duration-100 ease-[cubic-bezier(0.23,1,0.32,1)]"
+                  className="flex items-center gap-3 p-1.5 bg-neutral-950 border-2 border-neutral-900 rounded-full hover:border-neutral-700 cursor-pointer group active:scale-[0.98] transition-all duration-300"
                 >
+                  {/* AVATAR - ALWAYS ROUNDED FULL */}
                   <div className="shrink-0">
-                    <div className="w-8 h-8 rounded-full overflow-hidden border border-neutral-800 bg-neutral-950">
+                    <div className="w-8 h-8 rounded-full overflow-hidden border-2 border-neutral-900 bg-neutral-900 group-hover:border-neutral-800 transition-colors">
                       <Image
                         src={
                           user.avatar
@@ -263,18 +264,18 @@ const Navbar = () => {
                     </div>
                   </div>
 
-                  <div className="hidden sm:flex items-center gap-3 pt-0.5">
-                    {/* Nickname */}
-                    <span className="text-[14px] font-black text-neutral-200 tracking-tighter leading-none">
+                  <div className="hidden sm:flex items-center gap-3 pr-2">
+                    {/* Nickname - Bold & High Contrast */}
+                    <span className="text-[14px] font-black text-white tracking-tight">
                       {user.nickname}
                     </span>
 
-                    {/* Vertical Separator */}
-                    <div className="h-3 w-px bg-neutral-800" />
+                    {/* Vertical Separator - Solid */}
+                    <div className="h-3 w-0.5 bg-neutral-900" />
 
-                    {/* Role: Pure Text-Based */}
-                    <span
-                      className={`text-[10px] font-black uppercase tracking-[0.2em] leading-none pr-2 ${
+                    {/* Role Badge - Using your custom classes */}
+                    <div
+                      className={`flex items-center gap-1.5 ${
                         user.role === "admin"
                           ? "adminColor"
                           : user.role === "moderator"
@@ -284,15 +285,15 @@ const Navbar = () => {
                               : "userColor"
                       }`}
                     >
-                      <Shield size={20} />
-                    </span>
+                      <Shield size={18} strokeWidth={2.5} />
+                    </div>
                   </div>
                 </button>
               </>
             ) : (
               <Link
                 href="/login"
-                className="px-5 py-2 bg-white text-black rounded-full text-[10px] font-black uppercase tracking-widest hover:bg-cyan-500 transition-colors flex items-center gap-1"
+                className="px-5 py-2 bg-white text-black rounded-full text-[12px] font-black tracking-widest hover:bg-cyan-500 transition-colors flex items-center gap-1"
               >
                 <LogInIcon size={16} />
                 <span>Sign In</span>

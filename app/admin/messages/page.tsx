@@ -40,11 +40,11 @@ export default async function AdminMessagesPage({
   return (
     <div className="space-y-10 animate-in fade-in duration-700">
       <header className="flex flex-col gap-2">
-        <h1 className="text-3xl font-black text-white uppercase tracking-tighter">
+        <h1 className="text-3xl font-black text-white tracking-tighter">
           Contact_Logs{" "}
           <span className="text-neutral-600 font-light">Archive</span>
         </h1>
-        <p className="text-neutral-500 font-mono text-[10px] uppercase tracking-[0.3em]">
+        <p className="text-neutral-500 font-mono text-[10px] tracking-[0.3em]">
           Total_Signals_Detected: {paginationData?.data?.meta?.total || 0}
         </p>
       </header>

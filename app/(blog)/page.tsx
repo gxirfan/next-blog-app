@@ -62,7 +62,7 @@ export default async function blogHomePage({
           <div className="flex items-center gap-4 mb-8">
             <div className="inline-flex items-center gap-3 px-4 py-2 bg-neutral-900 border border-neutral-800 rounded-full transition-all hover:border-orange-500/50 group/trending">
               <Flame size={14} className="text-orange-500" />
-              <span className="text-[11px] font-black text-neutral-500 group-hover/trending:text-white transition-colors tracking-widest uppercase">
+              <span className="text-[11px] font-black text-neutral-500 group-hover/trending:text-white transition-colors tracking-widest">
                 Trending
               </span>
             </div>
@@ -70,14 +70,14 @@ export default async function blogHomePage({
           </div>
 
           <div className="relative">
-            <h1 className="text-5xl md:text-7xl font-black text-white tracking-tighter uppercase leading-[0.9] mb-8">
+            <h1 className="text-5xl md:text-8xl font-black text-white tracking-tighter uppercase leading-[0.9] mb-8">
               Featured <br />
               <span className="text-neutral-800">{ENV.POST_TYPE}s</span>
             </h1>
           </div>
 
           <div className="mt-8">
-            <p className="text-neutral-500 text-lg md:text-xl max-w-xl leading-relaxed font-bold uppercase tracking-tight">
+            <p className="text-neutral-500 text-lg md:text-xl max-w-xl leading-relaxed font-bold tracking-tight">
               The most popular {ENV.POST_TYPE}s across the network, ranked by
               live
               <span className="text-white ml-2 underline underline-offset-4 decoration-neutral-800">
@@ -90,7 +90,7 @@ export default async function blogHomePage({
         <div className="flex flex-wrap items-center gap-5 mb-16">
           <Link
             href="/post/all"
-            className="group relative inline-flex items-center gap-3 px-10 py-5 bg-white text-black rounded-full font-black text-[12px] uppercase tracking-[0.2em] transition-all hover:bg-cyan-500 active:scale-95"
+            className="group relative inline-flex items-center gap-3 px-10 py-5 bg-white text-black rounded-full font-black text-[12px] tracking-[0.2em] transition-all hover:bg-cyan-500 uppercase active:scale-95"
           >
             <span>Browse {ENV.POST_TYPE}s</span>
             <ArrowRight
@@ -101,7 +101,7 @@ export default async function blogHomePage({
 
           <Link
             href="/stream"
-            className="group relative inline-flex items-center gap-4 px-10 py-5 bg-neutral-900 border-2 border-neutral-800 text-white rounded-full font-black text-[12px] uppercase tracking-[0.2em] transition-all duration-500 hover:border-cyan-500 hover:text-cyan-400 active:scale-95 overflow-hidden"
+            className="group relative inline-flex items-center gap-4 px-10 py-5 bg-neutral-900 border-2 border-neutral-800 text-white rounded-full font-black text-[12px] tracking-[0.2em] transition-all duration-500 hover:border-cyan-500 hover:text-cyan-400 active:scale-95 uppercase overflow-hidden"
           >
             <div className="absolute inset-0 w-full h-full bg-linear-to-r from-cyan-500/20 via-transparent to-transparent opacity-0 group-hover:opacity-100 group-hover:animate-[loading-slide_2s_infinite_ease-in-out] transition-opacity duration-500 pointer-events-none" />
 
@@ -131,10 +131,10 @@ export default async function blogHomePage({
                   <Layers size={20} />
                 </div>
                 <div className="flex flex-col">
-                  <span className="text-[9px] font-black text-neutral-600 uppercase tracking-widest mb-0.5">
+                  <span className="text-[9px] font-black text-neutral-600 tracking-widest mb-0.5">
                     Browse
                   </span>
-                  <span className="text-lg font-black text-neutral-400 uppercase tracking-tighter group-hover:text-white transition-colors">
+                  <span className="text-lg font-black text-neutral-400 tracking-tighter group-hover:text-white transition-colors">
                     Latest Topics
                   </span>
                 </div>
@@ -154,10 +154,10 @@ export default async function blogHomePage({
                   <Tag size={20} />
                 </div>
                 <div className="flex flex-col">
-                  <span className="text-[9px] font-black text-neutral-600 uppercase tracking-widest mb-0.5">
+                  <span className="text-[9px] font-black text-neutral-600 tracking-widest mb-0.5">
                     Explore
                   </span>
-                  <span className="text-lg font-black text-neutral-400 uppercase tracking-tighter group-hover:text-white transition-colors">
+                  <span className="text-lg font-black text-neutral-400 tracking-tighter group-hover:text-white transition-colors">
                     Latest Tags
                   </span>
                 </div>

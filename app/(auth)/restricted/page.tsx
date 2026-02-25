@@ -27,19 +27,19 @@ export default function RestrictedPage() {
             {isBanned ? <ShieldOff size={40} /> : <AlertTriangle size={40} />}
           </div>
 
-          <h1 className="text-3xl font-black text-white uppercase tracking-tighter">
+          <h1 className="text-3xl font-black text-white tracking-tighter">
             {isBanned ? "BANNED" : "SUSPENDED"}
           </h1>
 
           <div className="space-y-4">
-            <p className="text-[11px] uppercase tracking-[0.2em] text-neutral-500 leading-relaxed">
+            <p className="text-[11px] tracking-[0.2em] text-neutral-500 leading-relaxed">
               {isBanned
                 ? "Your identity has been permanently purged from the central grid due to protocol violations."
                 : "Your access to the network has been temporarily throttled. Review process is ongoing."}
             </p>
 
             <div className="py-3 px-4 bg-neutral-900/50 border border-neutral-800 rounded-xl">
-              <p className="text-[9px] text-red-400 font-bold uppercase tracking-widest">
+              <p className="text-[9px] text-red-400 font-bold tracking-widest">
                 Status: {user.status?.toUpperCase()}{" "}
               </p>
             </div>
@@ -48,13 +48,13 @@ export default function RestrictedPage() {
           <div className="pt-6 flex flex-col gap-3">
             <button
               onClick={() => logout()}
-              className="w-full h-14 bg-white text-black rounded-2xl text-[10px] font-black uppercase tracking-[0.3em] hover:bg-red-500 hover:text-white transition-all"
+              className="w-full h-14 bg-white text-black rounded-2xl text-[10px] font-black tracking-[0.3em] hover:bg-red-500 hover:text-white transition-all"
             >
               Sign Out
             </button>
             {/* <Link
               href="/"
-              className="text-[10px] text-neutral-600 hover:text-neutral-400 uppercase tracking-widest transition-all"
+              className="text-[10px] text-neutral-600 hover:text-neutral-400 tracking-widest transition-all"
             >
               Return To Public Grid
             </Link> */}

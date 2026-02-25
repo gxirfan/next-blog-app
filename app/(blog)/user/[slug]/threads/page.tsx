@@ -42,20 +42,20 @@ export default async function UserFlowsPage({
           <div className="text-cyan-500">
             <Zap size={20} className="text-cyan-500" />
           </div>
-          <span className="text-[14px] font-black tracking-[0.3em] text-neutral-600 uppercase">
+          <span className="text-[14px] font-black tracking-[0.3em] text-neutral-600">
             / @{paramList.slug}
           </span>
         </div>
 
-        <h1 className="text-5xl font-black text-white tracking-tighter uppercase leading-none">
+        <h1 className="text-5xl font-black text-white tracking-tighter leading-none">
           User <span className="text-cyan-500">Threads</span>
         </h1>
 
         <div className="flex items-center justify-between mt-8">
           <div className="flex items-center gap-2 px-4 py-1.5 bg-neutral-900/30 border border-neutral-800 rounded-full">
             <Activity size={12} className="text-cyan-900" />
-            <span className="text-[10px] font-black text-neutral-500 uppercase tracking-widest">
-              Total_Threads: {result.data.meta?.total || 0}
+            <span className="text-[10px] font-black text-neutral-500 tracking-widest">
+              Total Threads: {result.data.meta?.total || 0}
             </span>
           </div>
           <div className="h-px flex-1 bg-neutral-900/50 mx-4" />
@@ -69,7 +69,7 @@ export default async function UserFlowsPage({
           ))
         ) : (
           <div className="py-20 text-center border border-dashed border-neutral-900 rounded-[2rem]">
-            <p className="text-neutral-700 font-black uppercase tracking-widest text-xs">
+            <p className="text-neutral-700 font-black tracking-widest text-xs">
               No threads broadcasted yet.
             </p>
           </div>

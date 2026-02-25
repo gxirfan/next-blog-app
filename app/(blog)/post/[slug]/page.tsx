@@ -157,8 +157,8 @@ export default async function PostDetailPage({
         fallback={
           <div className="flex flex-col items-center justify-center py-12 bg-neutral-950 border border-neutral-900 rounded-4xl space-y-4">
             <Loader className="animate-spin text-cyan-500" size={20} />
-            <span className="font-mono text-[9px] uppercase tracking-[0.4em] text-neutral-600">
-              Streaming Replies...
+            <span className="font-mono text-[9px] tracking-[0.4em] text-neutral-600">
+              Loading Replies...
             </span>
           </div>
         }

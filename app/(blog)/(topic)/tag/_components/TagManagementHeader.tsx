@@ -25,10 +25,10 @@ const TagManagementHeader = () => {
             <ShieldCheck size={20} />
           </div>
           <div>
-            <h3 className="font-urbanist text-sm font-black uppercase tracking-widest text-white leading-none">
+            <h3 className="font-urbanist text-sm font-black tracking-widest text-white leading-none">
               Tag Authority
             </h3>
-            <p className="font-inter text-[10px] text-neutral-600 uppercase tracking-widest mt-1">
+            <p className="font-inter text-[10px] text-neutral-600 tracking-widest mt-1">
               Privileged Registry Access
             </p>
           </div>
@@ -43,7 +43,7 @@ const TagManagementHeader = () => {
                 : "bg-neutral-900 border-neutral-800 text-cyan-500 hover:border-cyan-500 hover:text-white"
             }`}
         >
-          <span className="font-mono text-[10px] font-black uppercase tracking-[0.2em]">
+          <span className="font-mono text-[10px] font-black tracking-[0.2em]">
             {isFormVisible ? "Cancel Protocol" : "Initialize Tag"}
           </span>
           {isFormVisible ? (

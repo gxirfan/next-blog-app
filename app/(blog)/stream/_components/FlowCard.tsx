@@ -30,7 +30,7 @@ export default function FlowCard({ flow, actionSlot }: FlowCardProps) {
 
           <Link
             href={`/stream/thread/${flow.slug}`}
-            className="text-[10px] font-black uppercase tracking-[0.25em] text-neutral-600 hover:text-white transition-colors"
+            className="text-[10px] font-black tracking-[0.25em] text-neutral-600 hover:text-white transition-colors"
           >
             {getRelativeTime(flow.createdAt)}
           </Link>
@@ -56,7 +56,7 @@ export default function FlowCard({ flow, actionSlot }: FlowCardProps) {
                 <div className="w-6 h-6 rounded-full bg-neutral-800 flex items-center justify-center text-cyan-500 border border-neutral-700">
                   <CornerDownRight size={12} strokeWidth={3} />
                 </div>
-                <span className="text-[10px] font-black uppercase tracking-[0.2em] text-neutral-500 group-hover/parent:text-cyan-400 transition-colors">
+                <span className="text-[10px] font-black tracking-[0.2em] text-neutral-500 group-hover/parent:text-cyan-400 transition-colors">
                   Replying to
                 </span>
               </div>

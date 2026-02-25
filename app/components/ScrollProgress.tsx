@@ -4,7 +4,7 @@ import { motion, useScroll, useSpring } from "framer-motion";
 import { RefObject } from "react";
 
 interface ScrollProgressProps {
-  targetRef: RefObject<HTMLElement | null>;
+  targetRef?: RefObject<HTMLElement | null>;
 }
 
 export default function ScrollProgress({ targetRef }: ScrollProgressProps) {

@@ -11,6 +11,7 @@ import {
   Tag,
   ChevronRight,
   Activity,
+  ArrowRight,
 } from "lucide-react";
 import PaginationControls from "@/app/components/PaginationControls";
 import { IBaseResponse } from "@/app/types/common";
@@ -80,25 +81,35 @@ export default async function MyTopicsPage({
 
   await getRequiredAuthSession("/library/my-topics");
   return (
-    <div className="mx-auto space-y-12 pb-20 animate-in fade-in duration-700">
-      {/* 1. HEADER SECTION */}
-      <div className="border-b border-neutral-900 pb-10">
-        <div className="flex items-center space-x-4 mb-3">
-          <div className="p-3 bg-neutral-900 border border-neutral-800 rounded-2xl text-cyan-500">
-            <FolderOpen size={28} strokeWidth={2} />
+    <div className="mx-auto space-y-16 pb-24 animate-in fade-in duration-700">
+      {/* 1. HEADER SECTION - Solid & Balanced */}
+      <div className="border-b-2 border-neutral-900 pb-12">
+        <div className="flex flex-col md:flex-row md:items-end justify-between gap-8">
+          <div className="space-y-6">
+            <div className="flex items-center gap-4">
+              <div className="w-14 h-14 bg-neutral-900 border-2 border-neutral-800 rounded-3xl flex items-center justify-center text-cyan-500">
+                <FolderOpen size={28} />
+              </div>
+            </div>
+            <h1 className="text-6xl md:text-7xl font-black text-white tracking-tighter leading-none">
+              My <span className="text-neutral-800">Topics</span>
+            </h1>
+            <div className="flex items-center gap-4 px-1">
+              <div className="flex items-center gap-2">
+                <span className="text-[11px] font-black text-neutral-600 tracking-[0.3em]">
+                  Total Created:
+                </span>
+                <span className="text-[11px] font-black text-white tracking-widest bg-neutral-900 px-3 py-1 rounded-full border border-neutral-800">
+                  {meta?.total || 0}
+                </span>
+              </div>
+            </div>
           </div>
-          <h1 className="text-4xl text-white tracking-tighter uppercase leading-none">
-            My Topics
-          </h1>
         </div>
-        <p className="text-neutral-500 text-[11px] uppercase tracking-widest ml-1">
-          Registered Master Nodes:{" "}
-          <span className="text-white">{meta?.total || 0}</span>
-        </p>
       </div>
 
-      {/* 2. TOPIC LIST */}
-      <div className="space-y-4">
+      {/* 2. TOPIC LIST - High Contrast & Human Language */}
+      <div className="space-y-6">
         {topics.length > 0 ? (
           <>
             {topics.map((topic: any) => {
@@ -106,40 +117,41 @@ export default async function MyTopicsPage({
               return (
                 <div
                   key={topic.id}
-                  className="group relative p-6 md:p-8 bg-neutral-950 border border-neutral-800 rounded-[2rem] hover:border-cyan-500/30 transition-all duration-300 flex flex-col md:flex-row justify-between items-start md:items-center gap-6"
+                  className="group relative p-8 md:p-10 bg-neutral-950 border-2 border-neutral-900 rounded-[3rem] hover:border-neutral-700 transition-all duration-300 flex flex-col md:flex-row justify-between items-start md:items-center gap-10"
                 >
-                  <div className="flex-1 min-w-0 space-y-4">
-                    {/* Badge Row */}
-                    <div className="flex items-center gap-3">
+                  <div className="flex-1 min-w-0 space-y-6">
+                    {/* Status & Tag Row */}
+                    <div className="flex flex-wrap items-center gap-4">
                       <div
-                        className={`px-3 py-1 rounded-full border ${status.bg} flex items-center gap-1.5`}
+                        className={`px-4 py-1.5 rounded-full border-2 ${status.bg} border-opacity-20 flex items-center gap-2`}
                       >
-                        <status.icon size={12} className={status.color} />
                         <span
-                          className={`text-[9px] uppercase tracking-widest ${status.color}`}
+                          className={`text-[10px] font-black tracking-widest ${status.color}`}
                         >
                           {status.text}
                         </span>
                       </div>
-                      <div className="flex items-center gap-1.5 px-3 py-1 bg-neutral-900 border border-neutral-800 rounded-full text-neutral-400">
-                        <Tag size={12} className="text-cyan-500/50" />
-                        <span className="text-[9px] uppercase tracking-widest">
+
+                      <div className="flex items-center gap-2 bg-neutral-900 px-4 py-1.5 rounded-full border border-neutral-800 text-neutral-400">
+                        <Tag size={12} className="text-cyan-500" />
+                        <span className="text-[10px] font-black tracking-widest">
                           {topic.tagTitle}
                         </span>
                       </div>
                     </div>
 
+                    {/* Title - Bold & Large */}
                     <Link
                       href={`/topic/${topic.slug}`}
-                      className="text-xl md:text-2xl font-bold text-neutral-200 group-hover:text-cyan-400 transition-colors block leading-tight tracking-tight"
+                      className="text-2xl md:text-3xl font-black text-white hover:text-cyan-500 transition-colors block leading-tight tracking-tighter"
                     >
                       {topic.title}
                     </Link>
 
-                    {/* Metadata Row */}
-                    <div className="flex flex-wrap items-center gap-6 text-[11px] uppercase tracking-widest text-neutral-500">
-                      <div className="flex items-center gap-2">
-                        <MessageSquare size={14} className="text-neutral-700" />
+                    {/* Metadata - Simplified */}
+                    <div className="flex flex-wrap items-center gap-x-8 gap-y-4 text-[10px] font-black tracking-[0.2em] text-neutral-500">
+                      <div className="flex items-center gap-2.5">
+                        <MessageSquare size={16} className="text-neutral-700" />
                         <span>
                           {topic.postCount}{" "}
                           <span className="text-neutral-800">
@@ -147,30 +159,31 @@ export default async function MyTopicsPage({
                           </span>
                         </span>
                       </div>
-                      <div className="flex items-center gap-2">
-                        <Eye size={14} className="text-neutral-700" />
+                      <div className="flex items-center gap-2.5">
+                        <Eye size={16} className="text-neutral-700" />
                         <span>
                           {topic.viewCount}{" "}
                           <span className="text-neutral-800">Views</span>
                         </span>
                       </div>
-                      <div className="flex items-center gap-2">
-                        <Activity size={14} className="text-neutral-700" />
+                      <div className="flex items-center gap-2.5">
+                        <Activity size={16} className="text-neutral-700" />
                         <span className="text-neutral-600">
-                          Last Sync:{" "}
+                          Last Update:{" "}
                           {getRelativeTime(topic.lastPostAt) || "N/A"}
                         </span>
                       </div>
                     </div>
                   </div>
 
-                  <div className="flex items-center gap-4 w-full md:w-auto pt-6 md:pt-0 border-t md:border-t-0 border-neutral-900">
+                  {/* Actions */}
+                  <div className="flex items-center gap-4 w-full md:w-auto pt-8 md:pt-0 border-t-2 md:border-t-0 border-neutral-900">
                     <Link
                       href={`/topic/${topic.slug}`}
-                      className="flex-1 md:flex-none flex items-center justify-center gap-2 px-6 py-4 bg-neutral-900 border border-neutral-800 rounded-xl text-[10px] uppercase tracking-[0.2em] text-neutral-400 hover:text-white hover:border-cyan-500/50 transition-all active:scale-95"
+                      className="flex-1 md:flex-none flex items-center justify-center gap-3 px-10 py-5 bg-neutral-900 border-2 border-neutral-800 rounded-full text-[12px] font-black tracking-[0.2em] text-neutral-400 hover:text-white hover:border-white transition-all active:scale-95"
                     >
-                      See
-                      <ChevronRight size={14} />
+                      View Topic
+                      <ArrowRight size={18} />
                     </Link>
                   </div>
                 </div>
@@ -178,25 +191,26 @@ export default async function MyTopicsPage({
             })}
 
             {meta && meta.totalPages > 1 && (
-              <div className="pt-10 flex justify-center">
+              <div className="pt-16 flex justify-center">
                 <PaginationControls meta={meta} />
               </div>
             )}
           </>
         ) : (
-          /* EMPTY STATE */
-          <div className="flex flex-col items-center justify-center py-24 bg-neutral-950 border border-dashed border-neutral-800 rounded-[2.5rem]">
-            <div className="p-6 bg-neutral-900 rounded-full mb-6">
-              <FolderOpen size={40} className="text-neutral-700" />
+          /* EMPTY STATE - Samimi Dil */
+          <div className="flex flex-col items-center justify-center py-32 bg-neutral-950 border-2 border-dashed border-neutral-900 rounded-[4rem]">
+            <div className="w-20 h-20 bg-neutral-900 rounded-full flex items-center justify-center mb-8 border-2 border-neutral-800">
+              <FolderOpen size={32} className="text-neutral-700" />
             </div>
-            <p className="text-neutral-400 uppercase tracking-widest text-xs">
-              No topics established in this registry.
+            <p className="text-neutral-500 font-black tracking-[0.3em] text-[11px] mb-10 text-center px-6">
+              You haven't started any topics yet.
             </p>
             <Link
               href="/library"
-              className="mt-6 inline-flex items-center gap-2 px-8 py-3 bg-neutral-900 border border-neutral-800 rounded-full text-[10px] uppercase tracking-[0.2em] text-cyan-500 hover:border-cyan-500/50 transition-all"
+              className="inline-flex items-center gap-4 px-12 py-6 bg-white text-black rounded-full text-[12px] font-black tracking-[0.2em] hover:bg-cyan-500 transition-all active:scale-95"
             >
-              Return to Library
+              Back to Library
+              <ArrowRight size={18} />
             </Link>
           </div>
         )}

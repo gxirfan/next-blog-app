@@ -13,7 +13,7 @@ export default function AllPostsFooter({ meta }: AllPostsFooterProps) {
     <footer className="pt-10 border-t border-neutral-900 flex flex-col items-center gap-6">
       <div className="flex items-center gap-4">
         <div className="h-px w-12 bg-neutral-900" />
-        <span className="text-[10px] font-mono text-neutral-600 uppercase tracking-widest">
+        <span className="text-[10px] font-mono text-neutral-600 tracking-widest">
           Navigation Control
         </span>
         <div className="h-px w-12 bg-neutral-900" />

@@ -107,7 +107,7 @@ export default function ForgotPasswordPage() {
             className="space-y-4"
           >
             <div className="space-y-2">
-              <label className="text-[10px] uppercase tracking-[0.2em] text-neutral-600 ml-2">
+              <label className="text-[10px] tracking-[0.2em] text-neutral-600 ml-2">
                 Identity Information
               </label>
               <div className="relative group">
@@ -136,7 +136,7 @@ export default function ForgotPasswordPage() {
             {isSuccess && (
               <div className="space-y-4 pt-2 animate-in fade-in slide-in-from-top-4 duration-500">
                 <div className="space-y-2">
-                  <label className="text-[10px] uppercase tracking-[0.2em] text-neutral-600 ml-2">
+                  <label className="text-[10px] tracking-[0.2em] text-neutral-600 ml-2">
                     Verification Code
                   </label>
                   <input
@@ -151,7 +151,7 @@ export default function ForgotPasswordPage() {
                 </div>
 
                 <div className="space-y-2">
-                  <label className="text-[10px] uppercase tracking-[0.2em] text-neutral-600 ml-2">
+                  <label className="text-[10px] tracking-[0.2em] text-neutral-600 ml-2">
                     New Password
                   </label>
                   <input
@@ -165,7 +165,7 @@ export default function ForgotPasswordPage() {
                 </div>
 
                 <div className="space-y-2">
-                  <label className="text-[10px] uppercase tracking-[0.2em] text-neutral-600 ml-2">
+                  <label className="text-[10px] tracking-[0.2em] text-neutral-600 ml-2">
                     Confirm Password
                   </label>
                   <input
@@ -202,7 +202,7 @@ export default function ForgotPasswordPage() {
               <div
                 className="relative flex items-center justify-center gap-2 px-6 py-4 
     bg-neutral-900 border border-neutral-800 
-    text-white uppercase tracking-widest text-[11px] 
+    text-white tracking-widest text-[12px] 
     rounded-2xl transition-all duration-300
     group-hover:border-cyan-500/50 group-hover:bg-neutral-900/80 active:scale-[0.98] disabled:opacity-50 disabled:cursor-not-allowed"
               >
@@ -214,7 +214,7 @@ export default function ForgotPasswordPage() {
                 ) : passwordResetSuccess ? (
                   <div className="flex items-center gap-3 text-cyan-500 animate-in fade-in zoom-in duration-300">
                     <Check size={14} strokeWidth={3} />
-                    <span className="font-bold uppercase tracking-widest text-[10px]">
+                    <span className="font-bold tracking-widest text-[12px]">
                       Password Reset Successful
                     </span>
                   </div>
@@ -234,14 +234,14 @@ export default function ForgotPasswordPage() {
 
             <Link
               href="/recover-password"
-              className="flex items-center justify-center text-[12px] uppercase tracking-[0.2em] text-neutral-500 hover:text-cyan-400 transition-colors pt-2 hover:underline cursor-pointer"
+              className="flex items-center justify-center text-[12px] tracking-[0.2em] text-neutral-500 hover:text-cyan-400 transition-colors pt-2 hover:underline cursor-pointer"
             >
               <span>Try another method</span>
             </Link>
 
             <Link
               href="/login"
-              className="flex items-center justify-center gap-2 text-[10px] uppercase tracking-[0.2em] text-neutral-500 hover:text-cyan-400 transition-colors pt-4 group"
+              className="flex items-center justify-center gap-2 text-[12px] tracking-[0.2em] text-neutral-500 hover:text-cyan-400 transition-colors pt-4 group"
             >
               <ArrowLeft
                 size={12}

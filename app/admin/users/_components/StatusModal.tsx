@@ -45,7 +45,7 @@ export default function StatusModal({
           )}
         </div>
 
-        <h3 className="text-lg font-black text-white uppercase tracking-tight mb-2">
+        <h3 className="text-lg font-black text-white tracking-tight mb-2">
           {title}
         </h3>
         <p className="text-sm text-neutral-500 mb-8 leading-relaxed font-medium">
@@ -55,7 +55,7 @@ export default function StatusModal({
         {type !== "loading" && (
           <button
             onClick={onClose}
-            className="w-full py-3 bg-neutral-900 border border-neutral-800 text-neutral-200 rounded-xl text-xs font-black uppercase tracking-widest hover:bg-neutral-800 transition-all active:scale-95"
+            className="w-full py-3 bg-neutral-900 border border-neutral-800 text-neutral-200 rounded-xl text-xs font-black tracking-widest hover:bg-neutral-800 transition-all active:scale-95"
           >
             Acknowledge
           </button>

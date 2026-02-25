@@ -200,7 +200,7 @@ const ProfileMediaPreview = ({
           <button
             onClick={handleUpload}
             disabled={(!selectedAvatar && !selectedCover) || isImageUpdating}
-            className={`px-6 py-2.5 rounded-2xl text-xs tracking-widest uppercase transition-all duration-300 flex items-center gap-2
+            className={`px-6 py-2.5 rounded-2xl text-xs tracking-widest transition-all duration-300 flex items-center gap-2
               ${
                 (selectedAvatar || selectedCover) && !isImageUpdating
                   ? "bg-white text-black hover:scale-105 active:scale-95"

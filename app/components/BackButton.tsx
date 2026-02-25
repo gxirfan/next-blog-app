@@ -26,7 +26,7 @@ const BackButton = () => {
         className="text-cyan-500 group-hover:-translate-x-2 transition-transform duration-300"
       />
 
-      <span className="text-[13px] font-black uppercase tracking-[0.2em] text-white group-hover:text-cyan-400 transition-colors">
+      <span className="text-[13px] font-black tracking-[0.2em] text-white group-hover:text-cyan-400 transition-colors">
         Go Back
       </span>
     </button>

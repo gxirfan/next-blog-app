@@ -27,7 +27,7 @@ export default function MessageTableClient({
       <div className="border border-neutral-900 rounded-[2.5rem] overflow-hidden">
         <table className="w-full text-left border-separate border-spacing-0 table-fixed">
           <thead>
-            <tr className="bg-neutral-900/30 text-neutral-500 text-[10px] uppercase tracking-[0.2em] font-black">
+            <tr className="bg-neutral-900/30 text-neutral-500 text-[10px] tracking-[0.2em] font-black">
               <th className="px-8 py-5 border-b border-neutral-800/50 w-[40%] font-black">
                 Source_Signal
               </th>
@@ -59,7 +59,7 @@ export default function MessageTableClient({
                       <User size={18} />
                     </div>
                     <div className="min-w-0">
-                      <p className="text-[13px] font-bold text-neutral-200 uppercase tracking-tight truncate leading-none">
+                      <p className="text-[13px] font-bold text-neutral-200 tracking-tight truncate leading-none">
                         {message.name}
                       </p>
                       <p className="mt-2 font-mono text-[10px] text-neutral-500 truncate">
@@ -76,14 +76,14 @@ export default function MessageTableClient({
                         <span className="w-1.5 h-1.5 rounded-full bg-cyan-500 animate-pulse" />
                       )}
                       <p
-                        className={`text-[11px] font-black uppercase tracking-tighter truncate ${
+                        className={`text-[11px] font-black tracking-tighter truncate ${
                           !message.isRead ? "text-cyan-400" : "text-neutral-400"
                         }`}
                       >
                         {message.subject}
                       </p>
                     </div>
-                    <div className="text-[9px] uppercase tracking-widest text-neutral-600 font-bold">
+                    <div className="text-[9px] tracking-widest text-neutral-600 font-bold">
                       {message.isRead ? "Signal_Processed" : "Awaiting_Review"}
                     </div>
                   </div>

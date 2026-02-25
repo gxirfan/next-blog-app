@@ -30,7 +30,7 @@ const Footer = () => {
             </div>
 
             <div className="space-y-2">
-              <p className="text-[10px] font-mono font-bold text-neutral-500 uppercase tracking-[0.2em]">
+              <p className="text-[10px] font-mono font-bold text-neutral-500 tracking-[0.2em]">
                 &copy; {currentYear} All Rights Reserved_
               </p>
               <div className="flex items-center gap-3 text-[9px] font-mono tracking-widest text-neutral-700">
@@ -78,13 +78,13 @@ const Footer = () => {
               <div className="flex items-center gap-6">
                 <Link
                   href="/terms-of-use"
-                  className="text-[10px] font-mono uppercase tracking-[0.2em] text-neutral-600 hover:text-white transition-all"
+                  className="text-[10px] font-mono tracking-[0.2em] text-neutral-600 hover:text-white transition-all"
                 >
                   Terms_
                 </Link>
                 <Link
                   href="/cookie-policy"
-                  className="text-[10px] font-mono uppercase tracking-[0.2em] text-neutral-600 hover:text-white transition-all"
+                  className="text-[10px] font-mono tracking-[0.2em] text-neutral-600 hover:text-white transition-all"
                 >
                   Cookies_
                 </Link>
@@ -95,7 +95,7 @@ const Footer = () => {
 
         {/* 3. Global Protocol Indicator */}
         <div className="mt-16 flex justify-center border-t border-neutral-900/30 pt-8">
-          <p className="text-[9px] font-mono text-neutral-800 uppercase tracking-[0.5em] text-center">
+          <p className="text-[9px] font-mono text-neutral-800 tracking-[0.5em] text-center">
             Encrypted_Data_Transmission_Verified // Protocol_{ENV.APP_VERSION}_
             {ENV.VERSION_TEST}
           </p>
@@ -116,7 +116,7 @@ const FooterLink = ({
 }) => (
   <Link
     href={href}
-    className="flex items-center gap-2 text-[11px] font-bold uppercase tracking-[0.2em] text-neutral-500 hover:text-cyan-400 transition-all group"
+    className="flex items-center gap-2 text-[11px] font-bold tracking-[0.2em] text-neutral-500 hover:text-cyan-400 transition-all group"
   >
     <span className="opacity-0 group-hover:opacity-100 transition-all -translate-x-2 group-hover:translate-x-0 text-cyan-500">
       {icon}

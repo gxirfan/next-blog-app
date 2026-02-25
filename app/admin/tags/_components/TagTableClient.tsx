@@ -34,7 +34,7 @@ export default function TagTableClient({ tags }: { tags: ITagResponse[] }) {
       <div className="border border-neutral-900 rounded-[2rem] overflow-hidden">
         <table className="w-full text-left border-separate border-spacing-0 table-fixed">
           <thead>
-            <tr className="bg-neutral-900/30 text-neutral-600 text-[10px] uppercase tracking-[0.2em] font-black">
+            <tr className="bg-neutral-900/30 text-neutral-600 text-[10px] tracking-[0.2em] font-black">
               <th className="px-8 py-5 border-b border-neutral-800/50 w-[40%]">
                 Tag Identity
               </th>
@@ -61,7 +61,7 @@ export default function TagTableClient({ tags }: { tags: ITagResponse[] }) {
                         <Tag size={18} />
                       </div>
                       <div className="min-w-0">
-                        <p className="text-[14px] font-bold text-neutral-200 uppercase tracking-tight group-hover:text-cyan-400 transition-colors truncate">
+                        <p className="text-[14px] font-bold text-neutral-200 tracking-tight group-hover:text-cyan-400 transition-colors truncate">
                           {tag.title}
                         </p>
                         <p className="text-[10px] text-neutral-600 flex items-center gap-1.5 mt-0.5 font-mono tracking-tighter">
@@ -90,7 +90,7 @@ export default function TagTableClient({ tags }: { tags: ITagResponse[] }) {
                           {getRelativeTime(tag.createdAt) || "Unknown"}
                         </div>
                         <div
-                          className={`flex items-center gap-1.5 px-2.5 py-1 rounded-lg text-[9px] font-black uppercase border ${
+                          className={`flex items-center gap-1.5 px-2.5 py-1 rounded-lg text-[9px] font-black border ${
                             isTagActive
                               ? "bg-emerald-500/5 border-emerald-500/20 text-emerald-500/80"
                               : "bg-neutral-900 border-neutral-800 text-neutral-600"

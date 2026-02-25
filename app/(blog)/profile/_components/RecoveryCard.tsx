@@ -48,7 +48,7 @@ const RecoveryCard = () => {
               <div className="p-2.5 bg-neutral-900 border border-neutral-800 rounded-xl text-red-500/80">
                 <ShieldAlert size={20} strokeWidth={1.5} />
               </div>
-              <h3 className="text-xl text-white tracking-tighter uppercase">
+              <h3 className="text-xl text-white tracking-tighter">
                 Account Recovery Codes
               </h3>
             </div>
@@ -66,7 +66,7 @@ const RecoveryCard = () => {
             <button
               onClick={handleGenerateCodes}
               disabled={isLoading}
-              className="group relative flex items-center gap-3 px-8 py-4 bg-neutral-950 border border-neutral-800 rounded-2xl text-[10px] uppercase tracking-[0.2em] text-neutral-400 hover:border-cyan-500/50 hover:text-cyan-400 transition-all cursor-pointer active:scale-95 disabled:opacity-30"
+              className="group relative flex items-center gap-3 px-8 py-4 bg-neutral-950 border border-neutral-800 rounded-2xl text-[10px] tracking-[0.2em] text-neutral-400 hover:border-cyan-500/50 hover:text-cyan-400 transition-all cursor-pointer active:scale-95 disabled:opacity-30"
             >
               {isLoading ? (
                 <>
@@ -87,7 +87,7 @@ const RecoveryCard = () => {
         </div>
 
         {error && (
-          <div className="mt-6 flex items-center gap-3 p-4 bg-red-500/5 border border-red-500/10 rounded-2xl text-red-500 text-[10px] uppercase tracking-widest animate-in fade-in zoom-in-95">
+          <div className="mt-6 flex items-center gap-3 p-4 bg-red-500/5 border border-red-500/10 rounded-2xl text-red-500 text-[10px] tracking-widest animate-in fade-in zoom-in-95">
             <AlertCircle size={14} />
             <span>{error}</span>
           </div>

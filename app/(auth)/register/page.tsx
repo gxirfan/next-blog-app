@@ -17,6 +17,7 @@ import {
   Mail,
   ShieldCheck,
   UserPlus,
+  LogIn,
 } from "lucide-react";
 import api from "@/api/axios";
 import { useAuth } from "@/app/context/AuthContext";
@@ -141,7 +142,7 @@ export default function RegisterPage() {
     const url = window.URL.createObjectURL(blob);
     const a = document.createElement("a");
     a.href = url;
-    a.download = `RECOVERY_KEYS_${recoveryData.username.toUpperCase()}.txt`;
+    a.download = `RECOVERY_KEYS_${recoveryData.username}.txt`;
     a.click();
     window.URL.revokeObjectURL(url);
   };
@@ -183,7 +184,7 @@ export default function RegisterPage() {
           </div>
 
           <div className="flex flex-col items-center gap-2">
-            <span className="text-[11px] font-bold text-neutral-500 uppercase tracking-[0.2em]">
+            <span className="text-[13px] font-bold text-neutral-500 tracking-[0.2em]">
               Loading Profile
             </span>
 
@@ -209,9 +210,9 @@ export default function RegisterPage() {
   const INPUT_STYLING =
     "w-full h-16 px-8 bg-neutral-900/40 border-2 border-neutral-800 rounded-full text-[15px] text-white font-semibold placeholder-neutral-500 focus:outline-none focus:border-cyan-500/50 focus:bg-neutral-900 transition-all duration-300 appearance-none";
   const LABEL_STYLING =
-    "text-[12px] font-black text-neutral-500 uppercase tracking-[0.15em] ml-6 mb-2 block";
+    "text-[12px] font-black text-neutral-500 tracking-[0.15em] ml-6 mb-2 block";
   const BUTTON_STYLING =
-    "w-full h-16 bg-white text-black rounded-full text-[13px] font-black uppercase tracking-[0.2em] transition-all hover:bg-cyan-500 disabled:opacity-10 active:scale-95 flex items-center justify-center gap-2";
+    "w-full h-16 bg-white text-black rounded-full text-[14px] font-black tracking-[0.2em] transition-all hover:bg-cyan-500 disabled:opacity-10 active:scale-95 flex items-center justify-center gap-2";
 
   return (
     <div className="min-h-screen bg-neutral-950 flex items-center justify-center py-20 px-6 relative overflow-hidden">
@@ -221,7 +222,7 @@ export default function RegisterPage() {
         {!recoveryData ? (
           <div className="animate-in fade-in zoom-in-95 duration-700">
             <div className="mb-14 text-center">
-              <h1 className="text-5xl md:text-7xl text-white tracking-tighter font-black leading-none uppercase">
+              <h1 className="text-5xl md:text-7xl text-white tracking-tighter font-black leading-none">
                 Step <span className="text-cyan-500">{step}</span>
               </h1>
               <div className="flex justify-center gap-2 mt-6">
@@ -278,7 +279,7 @@ export default function RegisterPage() {
 
                     {usernameMessage && (
                       <p
-                        className={`text-[10px] font-black uppercase tracking-widest ${isUsernameValid ? "text-green-500" : "text-red-500"}`}
+                        className={`text-[12px] font-black tracking-widest ${isUsernameValid ? "text-green-500" : "text-red-500"}`}
                       >
                         {usernameMessage}
                       </p>
@@ -526,13 +527,13 @@ export default function RegisterPage() {
                         <>
                           <div className="flex items-center gap-2 text-neutral-600 animate-in fade-in duration-500">
                             <ShieldCheck size={14} />
-                            <p className="text-[10px] font-black uppercase tracking-widest">
+                            <p className="text-[12px] font-black tracking-widest">
                               Must be at least 6 characters.
                             </p>
                           </div>
                           <div className="flex items-center gap-2 text-neutral-600 animate-in fade-in duration-500">
                             <ShieldCheck size={14} />
-                            <p className="text-[10px] font-black uppercase tracking-widest">
+                            <p className="text-[12px] font-black tracking-widest">
                               No strict rules, but a complex password is highly
                               recommended.
                             </p>
@@ -543,7 +544,7 @@ export default function RegisterPage() {
                       {formData.password &&
                         confirmPassword &&
                         formData.password !== confirmPassword && (
-                          <p className="text-red-500 text-[10px] font-black uppercase text-center animate-in zoom-in-95">
+                          <p className="text-red-500 text-[12px] font-black tracking-widest text-center animate-in zoom-in-95">
                             Passwords do not match
                           </p>
                         )}
@@ -563,7 +564,7 @@ export default function RegisterPage() {
                     {/* Legal Links Label */}
                     <label
                       htmlFor="terms"
-                      className="text-[10px] font-black text-neutral-500 uppercase tracking-widest leading-relaxed cursor-pointer select-none"
+                      className="text-[12px] font-black text-neutral-500 tracking-widest leading-relaxed cursor-pointer select-none"
                     >
                       I HAVE READ AND AGREE TO THE{" "}
                       <Link
@@ -594,7 +595,7 @@ export default function RegisterPage() {
                   </div>
 
                   {error && (
-                    <div className="text-red-500 text-[10px] font-black uppercase text-center">
+                    <div className="text-red-500 text-[12px] font-black tracking-widest text-center">
                       {error}
                     </div>
                   )}
@@ -623,16 +624,30 @@ export default function RegisterPage() {
                 </div>
               )}
             </form>
+            {step === 1 && (
+              <div className="mt-10 text-center animate-in fade-in slide-in-from-bottom-4 duration-700">
+                <p className="text-[14px] font-black text-neutral-600 tracking-[0.3em] mb-4">
+                  Already have an account?
+                </p>
+                <Link
+                  href="/login"
+                  className="inline-flex items-center gap-2 px-8 py-3 border border-neutral-900 rounded-full text-[14px] font-black tracking-[0.2em] text-neutral-500 hover:text-white hover:border-neutral-700 transition-all active:scale-95"
+                >
+                  <ArrowLeft size={12} className="opacity-50" />
+                  Return to Login
+                </Link>
+              </div>
+            )}
           </div>
         ) : (
           /* RECOVERY CODES VIEW */
           <div className="animate-in zoom-in-95 duration-700 bg-neutral-950 border-2 border-neutral-900 p-12 rounded-[4rem] text-center space-y-10">
             <Lock size={60} className="mx-auto text-cyan-500" />
             <div className="space-y-4">
-              <h2 className="text-4xl font-black text-white uppercase tracking-tighter">
+              <h2 className="text-4xl font-black text-white tracking-tighter">
                 Secure Keys
               </h2>
-              <p className="bg-red-500/10 text-red-500 text-[11px] font-black uppercase py-2 px-4 rounded-full border border-red-500/20 inline-block">
+              <p className="bg-red-500/10 text-red-500 text-[13px] font-black py-2 px-4 rounded-full border border-red-500/20 inline-block">
                 Store these safely. Only backup.
               </p>
             </div>
@@ -649,13 +664,13 @@ export default function RegisterPage() {
             <div className="flex flex-col sm:flex-row gap-4">
               <button
                 onClick={handleDownloadCodes}
-                className="flex-1 h-14 bg-neutral-900 text-white rounded-2xl text-[11px] font-black uppercase border-2 border-neutral-800 hover:bg-neutral-800 flex items-center justify-center gap-2"
+                className="flex-1 h-14 bg-neutral-900 text-white rounded-2xl text-[13px] font-black tracking-[0.2em] border-2 border-neutral-800 hover:bg-neutral-800 flex items-center justify-center gap-2"
               >
                 <Download size={16} /> Save
               </button>
               <button
                 onClick={handleCopyCodes}
-                className="flex-1 h-14 bg-neutral-800 text-neutral-300 rounded-2xl text-[11px] font-black uppercase border-2 border-neutral-700 hover:bg-neutral-700 flex items-center justify-center gap-2"
+                className="flex-1 h-14 bg-neutral-800 text-neutral-300 rounded-2xl text-[13px] font-black tracking-[0.2em] border-2 border-neutral-700 hover:bg-neutral-700 flex items-center justify-center gap-2"
               >
                 {copied ? (
                   <CheckCircle2 size={16} className="text-green-500" />
@@ -667,7 +682,7 @@ export default function RegisterPage() {
             </div>
             <button
               onClick={() => router.push("/login")}
-              className="w-full h-16 bg-cyan-500 text-black rounded-full text-[12px] font-black uppercase tracking-[0.2em] hover:bg-white flex items-center justify-center gap-3"
+              className="w-full h-16 bg-cyan-500 text-black rounded-full text-[13px] font-black tracking-[0.2em] hover:bg-white flex items-center justify-center gap-3"
             >
               I'm Secured <ArrowRight size={18} />
             </button>

@@ -208,13 +208,13 @@ const TiptapToolbar = ({
                 <div className="p-2 bg-cyan-500/10 rounded-lg text-cyan-500">
                   <LinkIcon size={18} />
                 </div>
-                <h4 className="text-[11px] uppercase tracking-[0.3em] text-white font-black">
+                <h4 className="text-[11px] tracking-[0.3em] text-white font-black">
                   Inject Link
                 </h4>
               </div>
 
               <div className="space-y-2">
-                <label className="text-[9px] uppercase tracking-widest text-neutral-500 ml-2 font-bold">
+                <label className="text-[9px] tracking-widest text-neutral-500 ml-2 font-bold">
                   Target URL Address
                 </label>
                 <input
@@ -237,13 +237,13 @@ const TiptapToolbar = ({
               <div className="flex gap-2 pt-2">
                 <button
                   onClick={saveLink}
-                  className="flex-1 h-11 bg-white text-black text-[11px] font-black uppercase tracking-widest rounded-xl hover:bg-cyan-400 active:scale-95 transition-all"
+                  className="flex-1 h-11 bg-white text-black text-[11px] font-black tracking-widest rounded-xl hover:bg-cyan-400 active:scale-95 transition-all"
                 >
                   Apply Protocol
                 </button>
                 <button
                   onClick={() => setIsLinkModalOpen(false)}
-                  className="px-4 h-11 bg-neutral-800 text-neutral-400 text-[11px] font-black uppercase rounded-xl hover:bg-red-500/20 hover:text-red-500 transition-all"
+                  className="px-4 h-11 bg-neutral-800 text-neutral-400 text-[11px] font-black rounded-xl hover:bg-red-500/20 hover:text-red-500 transition-all"
                 >
                   Cancel
                 </button>

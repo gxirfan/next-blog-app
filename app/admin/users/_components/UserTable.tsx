@@ -144,7 +144,7 @@ export default function UserTable({
       <div className="border border-neutral-900 rounded-[2.5rem] overflow-hidden overflow-x-auto">
         <table className="w-full text-left border-separate border-spacing-0">
           <thead>
-            <tr className="bg-neutral-900/30 text-neutral-600 text-[10px] uppercase tracking-[0.25em] font-black">
+            <tr className="bg-neutral-900/30 text-neutral-600 text-[10px] tracking-[0.25em] font-black">
               <th className="px-10 py-6 border-b border-neutral-800/50">
                 Entity Identity
               </th>
@@ -185,7 +185,7 @@ export default function UserTable({
                         {user.username[0].toUpperCase()}
                       </div>
                       <div className="min-w-0">
-                        <div className="text-[15px] font-bold text-neutral-200 group-hover:text-cyan-400 transition-colors tracking-tight truncate uppercase">
+                        <div className="text-[15px] font-bold text-neutral-200 group-hover:text-cyan-400 transition-colors tracking-tight truncate">
                           {user.username}
                         </div>
                         <div className="text-[11px] text-neutral-600 font-mono tracking-tighter truncate opacity-60 mt-0.5">
@@ -198,7 +198,7 @@ export default function UserTable({
                   {/* Auth Column */}
                   <td className="px-10 py-7 text-center">
                     <span
-                      className={`inline-flex items-center px-4 py-1.5 rounded-xl text-[10px] font-black border uppercase tracking-widest leading-none ${roleStyle.border} ${roleStyle.bg} ${roleStyle.text}`}
+                      className={`inline-flex items-center px-4 py-1.5 rounded-xl text-[10px] font-black border tracking-widest leading-none ${roleStyle.border} ${roleStyle.bg} ${roleStyle.text}`}
                     >
                       <Shield
                         size={12}

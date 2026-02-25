@@ -48,7 +48,7 @@ const TagManagementActions = ({ tag }: TagManagementActionsProps) => {
     <div className="flex flex-wrap items-center justify-end gap-3 mb-6 animate-in fade-in slide-in-from-right-2 duration-300">
       {/* Error Message Badge */}
       {error && (
-        <div className="flex items-center gap-2 px-3 py-1.5 bg-red-500/10 border border-red-500/20 rounded-full text-[10px] uppercase tracking-widest text-red-500">
+        <div className="flex items-center gap-2 px-3 py-1.5 bg-red-500/10 border border-red-500/20 rounded-full text-[10px] tracking-widest text-red-500">
           <AlertCircle size={14} />
           <span>{error}</span>
         </div>
@@ -59,7 +59,7 @@ const TagManagementActions = ({ tag }: TagManagementActionsProps) => {
         onClick={handleToggleStatus}
         disabled={loading}
         className={`
-                    group flex items-center gap-2 px-5 py-2 rounded-full text-[11px] uppercase tracking-widest transition-all duration-300 cursor-pointer disabled:opacity-50
+                    group flex items-center gap-2 px-5 py-2 rounded-full text-[11px] tracking-widest transition-all duration-300 cursor-pointer disabled:opacity-50
                     ${
                       isCurrentlyActive
                         ? "bg-neutral-900 text-neutral-400 border border-neutral-800 hover:bg-red-500/10 hover:text-red-500 hover:border-red-500/30"
@@ -86,7 +86,7 @@ const TagManagementActions = ({ tag }: TagManagementActionsProps) => {
       <button
         onClick={() => setIsModalOpen(true)}
         disabled={loading}
-        className="group flex items-center gap-2 px-5 py-2 bg-neutral-950 text-cyan-500 border border-cyan-500/20 rounded-full text-[11px] uppercase tracking-widest hover:bg-cyan-500 hover:text-black hover:border-cyan-500 transition-all duration-300 cursor-pointer"
+        className="group flex items-center gap-2 px-5 py-2 bg-neutral-950 text-cyan-500 border border-cyan-500/20 rounded-full text-[11px] tracking-widest hover:bg-cyan-500 hover:text-black hover:border-cyan-500 transition-all duration-300 cursor-pointer"
       >
         <Pencil
           size={14}

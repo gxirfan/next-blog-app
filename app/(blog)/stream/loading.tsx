@@ -29,7 +29,7 @@ export default function FlowLoading() {
         </div>
 
         <div className="mt-8 flex flex-col items-center space-y-3">
-          <p className="text-[10px] uppercase tracking-[0.4em] text-neutral-500 animate-pulse">
+          <p className="text-[10px] tracking-[0.4em] text-neutral-500 animate-pulse">
             Establishing Stream
           </p>
           <div className="flex gap-1.5">

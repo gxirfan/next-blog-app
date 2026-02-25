@@ -99,7 +99,7 @@ export default async function PostAllPage({
           <PostList posts={posts} />
         ) : (
           <div className="flex flex-col items-center justify-center py-20 border-2 border-dashed border-neutral-900 rounded-[3rem]">
-            <span className="text-neutral-700 font-mono text-sm uppercase tracking-widest">
+            <span className="text-neutral-700 font-mono text-sm tracking-widest">
               No entries found in this sector.
             </span>
           </div>

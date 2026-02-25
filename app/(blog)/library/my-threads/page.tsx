@@ -1,5 +1,11 @@
 import { Metadata } from "next";
-import { Zap, MessageSquareOff, ChevronRight, Calendar } from "lucide-react";
+import {
+  Zap,
+  MessageSquareOff,
+  ChevronRight,
+  Calendar,
+  ArrowRight,
+} from "lucide-react";
 import AuthorBlock from "@/app/components/AuthorBlock";
 import Link from "next/link";
 import { IBaseResponse } from "@/app/types/common";
@@ -48,87 +54,91 @@ export default async function MyFlowsPage({ searchParams }: MyFlowsPageProps) {
 
   await getRequiredAuthSession("/library/my-threads");
   return (
-    <div className="mx-auto space-y-10  animate-in fade-in duration-700">
-      <div className="border-b border-neutral-900 pb-8">
-        <div className="flex items-center space-x-4 mb-3">
-          <div className="p-3 bg-neutral-900 border border-neutral-800 rounded-2xl text-cyan-500">
-            <Zap size={28} strokeWidth={2} />
+    <div className="mx-auto space-y-16 pb-24 animate-in fade-in duration-700">
+      {/* 1. HEADER SECTION - Solid & Balanced */}
+      <div className="border-b-2 border-neutral-900 pb-12">
+        <div className="flex flex-col md:flex-row md:items-end justify-between gap-8">
+          <div className="space-y-6">
+            <div className="flex items-center gap-4">
+              <div className="w-14 h-14 bg-neutral-900 border-2 border-neutral-800 rounded-3xl flex items-center justify-center text-cyan-500">
+                <Zap size={28} />
+              </div>
+            </div>
+            <h1 className="text-6xl md:text-7xl font-black text-white tracking-tighter leading-none">
+              My <span className="text-neutral-800">Threads</span>
+            </h1>
+            <p className="text-neutral-500 text-[12px] font-black tracking-[0.4em] ml-1">
+              A personal collection of your shared thoughts
+            </p>
           </div>
-          <h1 className="text-4xl text-white tracking-tighter uppercase">
-            My Threads
-          </h1>
         </div>
-        <p className="text-neutral-500 text-[13px] font-medium ml-1">
-          Everything you&apos;ve shared in the threads.
-        </p>
       </div>
 
+      {/* 2. THREADS LIST - Clean & Focused */}
       <div className="space-y-6">
         {flows.length > 0 ? (
-          flows.map((flow: any) => (
-            <div
-              key={flow.id}
-              className="group block p-6 md:p-8 bg-neutral-950 border border-neutral-800 rounded-4xl hover:border-cyan-500/30 transition-all duration-300"
-            >
-              <div className="flex justify-between items-center mb-6">
-                <AuthorBlock
-                  username={flow.author.username}
-                  nickname={flow.author.nickname}
-                  avatarUrl={flow.author.avatar}
-                  role={flow.author.role}
-                />
-                <div className="flex items-center gap-2 px-3 py-1 bg-neutral-900 border border-neutral-800 rounded-full">
-                  <Calendar size={12} className="text-neutral-600" />
-                  <span className="text-[10px] text-neutral-500 uppercase tracking-widest">
-                    {getRelativeTime(flow.createdAt) || "N/A"}
-                  </span>
+          <>
+            {flows.map((flow: any) => (
+              <div
+                key={flow.id}
+                className="group p-8 md:p-10 bg-neutral-950 border-2 border-neutral-900 rounded-[3rem] hover:border-neutral-700 transition-all duration-300 flex flex-col justify-between gap-8"
+              >
+                {/* Top Row: Date Only */}
+                <div className="flex justify-between items-center">
+                  <div className="flex items-center gap-3 px-4 py-1.5 bg-neutral-900 border border-neutral-800 rounded-full">
+                    <Calendar size={14} className="text-neutral-600" />
+                    <span className="text-[10px] font-black text-neutral-400 tracking-widest">
+                      {getRelativeTime(flow.createdAt) || "N/A"}
+                    </span>
+                  </div>
                 </div>
-              </div>
 
-              <p className="text-neutral-200 text-lg md:text-xl font-bold leading-relaxed tracking-tight mb-6 pl-1 line-clamp-4">
-                &quot;{flow.content}&quot;
-              </p>
-
-              <div className="flex items-center justify-between pt-4 border-t border-neutral-900">
+                {/* Content - Large & Bold DNA */}
                 <Link
                   href={`/${ENV.SOCIAL_POST_TYPE}/thread/${flow.slug}`}
-                  className="inline-flex items-center gap-2 text-[10px] uppercase tracking-[0.2em] text-cyan-500 font-bold hover:text-cyan-400 transition-all group/link"
+                  className="block text-xl md:text-2xl font-black text-white leading-tight tracking-tighter hover:text-cyan-500 transition-colors"
                 >
-                  View Thread
-                  <ChevronRight
-                    size={14}
-                    className="group-hover/link:translate-x-1 transition-transform"
-                  />
+                  &quot;{flow.content}&quot;
                 </Link>
-                <div className="text-[9px] uppercase tracking-widest text-neutral-700">
-                  ID: {flow.id.substring(0, 8)}
+
+                {/* Footer: Action Button */}
+                <div className="flex items-center pt-8 border-t-2 border-neutral-900">
+                  <Link
+                    href={`/${ENV.SOCIAL_POST_TYPE}/thread/${flow.slug}`}
+                    className="flex-1 md:flex-none flex items-center justify-center gap-3 px-10 py-5 bg-neutral-900 border-2 border-neutral-800 rounded-full text-[12px] font-black tracking-[0.2em] text-neutral-400 hover:text-white hover:border-white transition-all active:scale-95"
+                  >
+                    View Discussion
+                    <ArrowRight size={18} />
+                  </Link>
                 </div>
               </div>
-            </div>
-          ))
+            ))}
+
+            {meta && meta.totalPages > 1 && (
+              <div className="pt-16 flex justify-center">
+                <PaginationControls meta={meta} />
+              </div>
+            )}
+          </>
         ) : (
-          <div className="flex flex-col items-center justify-center py-24 bg-neutral-950 border border-dashed border-neutral-800 rounded-[2.5rem]">
-            <div className="p-6 bg-neutral-900 rounded-full mb-6 text-neutral-700">
-              <MessageSquareOff size={40} />
+          /* EMPTY STATE - Samimi Dil */
+          <div className="flex flex-col items-center justify-center py-32 bg-neutral-950 border-2 border-dashed border-neutral-900 rounded-[4rem]">
+            <div className="w-20 h-20 bg-neutral-900 rounded-full flex items-center justify-center mb-8 border-2 border-neutral-800">
+              <MessageSquareOff size={32} className="text-neutral-700" />
             </div>
-            <p className="text-neutral-400 uppercase tracking-widest text-xs">
-              No threads detected in the grid.
+            <p className="text-neutral-500 font-black tracking-[0.3em] text-[12px] mb-10 text-center px-6">
+              Your thread archive is currently empty.
             </p>
             <Link
               href={`/${ENV.SOCIAL_POST_TYPE}`}
-              className="mt-6 inline-flex items-center gap-2 px-8 py-3 bg-neutral-900 border border-neutral-800 rounded-full text-[10px] uppercase tracking-[0.2em] text-cyan-500 hover:border-cyan-500/50 transition-all active:scale-95"
+              className="inline-flex items-center gap-4 px-12 py-6 bg-white text-black rounded-full text-[12px] font-black tracking-[0.2em] hover:bg-cyan-500 transition-all active:scale-95"
             >
-              Initialize First Thread
+              Start a Thread
+              <ArrowRight size={18} />
             </Link>
           </div>
         )}
       </div>
-
-      {meta && meta.totalPages > 1 && (
-        <div className="pt-10 flex justify-center">
-          <PaginationControls meta={meta} />
-        </div>
-      )}
     </div>
   );
 }
