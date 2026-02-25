@@ -3,13 +3,12 @@
 import { useState } from "react";
 import api from "@/api/axios";
 import {
-  Key,
   X,
-  CheckCircle,
   AlertTriangle,
   Loader2,
   ShieldCheck,
-  ChevronRight,
+  ArrowRight,
+  CheckCircle2,
 } from "lucide-react";
 import React from "react";
 
@@ -20,7 +19,6 @@ interface PasswordModalProps {
 
 const MIN_LENGTH = 6;
 
-// Tasarım diline uygun input ve label stilleri
 const LABEL_STYLING =
   "text-[10px] uppercase tracking-[0.25em] text-neutral-500 mb-3 block font-black";
 const INPUT_STYLING =
@@ -76,65 +74,62 @@ const PasswordModal = ({ onClose, onSuccess }: PasswordModalProps) => {
   };
 
   return (
-    <div className="fixed inset-0 z-[250] flex items-center justify-center p-4 md:p-6 animate-in fade-in duration-300">
-      {/* Backdrop */}
+    <div className="fixed inset-0 z-250 flex items-center justify-center p-6 animate-in fade-in duration-300">
       <div
-        className="absolute inset-0 bg-neutral-950/80 backdrop-blur-md"
+        className="absolute inset-0 bg-black/90 backdrop-blur-xl"
         onClick={onClose}
       />
 
-      {/* Modal Container */}
       <div
-        className="relative w-full max-w-xl bg-neutral-950 border border-neutral-800 rounded-[3rem] overflow-hidden flex flex-col animate-in zoom-in-95 duration-300"
+        className="relative w-full max-w-xl bg-neutral-950 border-2 border-neutral-900 rounded-[3.5rem] overflow-hidden flex flex-col animate-in zoom-in-95 duration-500"
         onClick={(e) => e.stopPropagation()}
       >
-        {/* Header */}
-        <div className="flex items-center justify-between p-8 border-b border-neutral-900 bg-neutral-950">
-          <div className="flex items-center gap-4">
-            <div className="p-3 bg-neutral-900 rounded-2xl text-cyan-500">
-              <ShieldCheck size={22} />
+        <div className="flex items-center justify-between p-10 pb-6">
+          <div className="flex items-center gap-5">
+            <div className="w-14 h-14 bg-neutral-900 rounded-3xl flex items-center justify-center text-cyan-500 border border-neutral-800">
+              <ShieldCheck size={28} />
             </div>
             <div>
-              <h3 className="font-urbanist text-xl text-white uppercase tracking-tighter font-black">
-                Security Core
+              <h3 className="text-3xl font-black text-white uppercase tracking-tighter">
+                Security
               </h3>
-              <p className="font-mono text-[9px] text-neutral-600 uppercase tracking-widest mt-1">
-                Protocol: Credential_Update
+              <p className="text-[11px] font-bold text-neutral-600 uppercase tracking-widest mt-1">
+                Update your password
               </p>
             </div>
           </div>
           <button
             onClick={onClose}
-            className="p-3 rounded-2xl hover:bg-neutral-900 text-neutral-500 hover:text-white transition-all cursor-pointer"
+            className="w-12 h-12 flex items-center justify-center rounded-2xl hover:bg-neutral-900 text-neutral-600 hover:text-white transition-all"
           >
             <X size={24} />
           </button>
         </div>
 
-        <div className="p-8 md:p-10">
+        <div className="p-10 pt-4">
           {success ? (
-            <div className="text-center py-10 space-y-6 animate-in zoom-in-95 duration-500">
-              <div className="inline-flex p-5 bg-green-500/10 border border-green-500/20 rounded-full text-green-500">
-                <CheckCircle size={40} />
+            <div className="text-center py-12 space-y-8 animate-in zoom-in-95 duration-700">
+              <div className="w-24 h-24 bg-green-500/10 rounded-full flex items-center justify-center text-green-500 mx-auto border-2 border-green-500/20">
+                <CheckCircle2 size={48} />
               </div>
-              <div className="space-y-2">
-                <h3 className="text-xl font-black text-white uppercase tracking-[0.3em]">
-                  Sync_Complete
+              <div className="space-y-3">
+                <h3 className="text-3xl font-black text-white uppercase tracking-tight">
+                  Updated
                 </h3>
-                <p className="text-xs font-mono text-neutral-500 uppercase tracking-widest">
-                  Your identity keys have been updated.
+                <p className="text-sm font-bold text-neutral-500 uppercase tracking-widest leading-relaxed">
+                  Your credentials are now secure.
                 </p>
               </div>
               <button
                 onClick={onClose}
-                className="px-10 py-4 bg-white text-black text-[10px] font-black uppercase tracking-[0.3em] rounded-2xl hover:bg-cyan-400 transition-all cursor-pointer"
+                className="px-12 py-5 bg-white text-black text-[12px] font-black uppercase tracking-[0.2em] rounded-full hover:bg-cyan-500 transition-all active:scale-95"
               >
-                Close_Terminal
+                Back to Settings
               </button>
             </div>
           ) : (
-            <form onSubmit={handleSubmit} className="space-y-6">
-              <div className="space-y-1">
+            <form onSubmit={handleSubmit} className="space-y-8">
+              <div className="space-y-2">
                 <label className={LABEL_STYLING}>Current Password</label>
                 <input
                   name="oldPassword"
@@ -146,20 +141,20 @@ const PasswordModal = ({ onClose, onSuccess }: PasswordModalProps) => {
                 />
               </div>
 
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6 pt-2">
-                <div className="space-y-1">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div className="space-y-2">
                   <label className={LABEL_STYLING}>New Password</label>
                   <input
                     name="newPassword"
                     type="password"
                     required
-                    placeholder="MIN_6_CHARS"
+                    placeholder="MIN 6 CHARS"
                     className={INPUT_STYLING}
                     onChange={handleChange}
                   />
                 </div>
-                <div className="space-y-1">
-                  <label className={LABEL_STYLING}>Confirm New Password</label>
+                <div className="space-y-2">
+                  <label className={LABEL_STYLING}>Confirm</label>
                   <input
                     name="confirmPassword"
                     type="password"
@@ -171,41 +166,42 @@ const PasswordModal = ({ onClose, onSuccess }: PasswordModalProps) => {
                 </div>
               </div>
 
+              <div className="flex items-center gap-3 px-2 text-neutral-600">
+                <ShieldCheck size={14} />
+                <p className="text-[10px] font-black uppercase tracking-widest">
+                  Use a complex password for maximum safety.
+                </p>
+              </div>
+
               {error && (
-                <div className="p-4 rounded-2xl bg-red-500/5 border border-red-500/10 text-red-500 text-[10px] uppercase tracking-widest flex items-center gap-3 animate-in shake duration-300">
-                  <AlertTriangle size={16} />
+                <div className="p-5 rounded-full bg-red-500/10 border-2 border-red-500/20 text-red-500 text-[11px] font-black uppercase tracking-tight flex items-center gap-3 animate-in fade-in">
+                  <AlertTriangle size={18} />
                   <span>{error}</span>
                 </div>
               )}
 
-              {/* Actions */}
-              <div className="flex items-center justify-end gap-6 pt-6 border-t border-neutral-900">
+              <div className="flex items-center justify-between pt-10 border-t border-neutral-900">
                 <button
                   type="button"
                   onClick={onClose}
-                  className="text-[10px] uppercase tracking-[0.2em] text-neutral-600 hover:text-white transition-colors cursor-pointer"
+                  className="text-[12px] font-black uppercase tracking-widest text-neutral-600 hover:text-white transition-all"
                 >
-                  Abort_Change
+                  Cancel
                 </button>
                 <button
                   type="submit"
                   disabled={loading}
-                  className={`
-                    group relative flex items-center gap-3 px-10 py-4 rounded-2xl 
-                    transition-all duration-500 cursor-pointer text-[10px] font-black uppercase tracking-[0.3em]
-                    ${
-                      loading
-                        ? "bg-neutral-900 text-neutral-700 border border-neutral-800 cursor-wait"
-                        : "bg-cyan-500 text-black hover:bg-cyan-400 active:scale-95"
-                    }
-                  `}
+                  className={`px-12 py-5 rounded-full text-[12px] font-black uppercase tracking-[0.2em] transition-all active:scale-95 flex items-center gap-3 ${
+                    loading
+                      ? "bg-neutral-900 text-neutral-700"
+                      : "bg-cyan-500 text-black hover:bg-white"
+                  }`}
                 >
                   {loading ? (
-                    <Loader2 size={16} className="animate-spin" />
+                    <Loader2 size={18} className="animate-spin" />
                   ) : (
                     <>
-                      <Key size={16} />
-                      <span>Execute_Update</span>
+                      Update <ArrowRight size={18} />
                     </>
                   )}
                 </button>

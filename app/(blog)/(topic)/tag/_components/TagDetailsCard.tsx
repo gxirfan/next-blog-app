@@ -37,9 +37,6 @@ const TagDetailsCard = ({ tag, topicCount }: TagDetailsCardProps) => {
 
       <div className="flex flex-wrap items-center justify-between gap-6 py-8 border-y border-neutral-900">
         <div className="flex items-center gap-4">
-          <p className="text-[10px] uppercase tracking-widest text-neutral-600">
-            Established by
-          </p>
           <AuthorBlock
             avatarUrl={tag.authorAvatar}
             nickname={tag.authorNickname}

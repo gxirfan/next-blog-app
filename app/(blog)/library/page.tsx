@@ -78,8 +78,8 @@ export default function LibraryPage() {
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
           {renderLink(
-            "/library/my-streams",
-            "My Streams",
+            "/library/my-threads",
+            "My Threads",
             Zap,
             "text-cyan-500",
           )}
@@ -112,7 +112,7 @@ export default function LibraryPage() {
               My Saved Content
             </h2>
             <p className="text-neutral-500 text-sm max-w-md">
-              Archive of bookmarks and saved data nodes.
+              Archive of bookmarks and saved {ENV.POST_TYPE}s.
             </p>
           </div>
           <Star size={20} className="text-neutral-800 mb-1" />

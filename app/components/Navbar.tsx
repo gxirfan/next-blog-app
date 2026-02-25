@@ -222,6 +222,12 @@ const Navbar = () => {
                 </span>
               )}
             </Link>
+            {/* GREETING */}
+            <div className="hidden md:flex flex-col items-end pr-3 border-r border-neutral-900 mr-1">
+              <span className="text-[10px] font-black uppercase tracking-widest text-neutral-600">
+                {getGreetingTime()}
+              </span>
+            </div>
           </div>
 
           {/* RIGHT SECTION: Intelligence & Profile */}
@@ -235,13 +241,6 @@ const Navbar = () => {
             </button>
             {user ? (
               <>
-                {/* GREETING: Restored personal context */}
-                <div className="hidden md:flex flex-col items-end pr-3 border-r border-neutral-900 mr-1">
-                  <span className="text-[10px] font-black uppercase tracking-widest text-neutral-600">
-                    {getGreetingTime()}
-                  </span>
-                </div>
-
                 <NotificationDropdown />
 
                 <button

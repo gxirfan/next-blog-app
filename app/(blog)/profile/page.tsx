@@ -42,7 +42,11 @@ export default function ProfilePage() {
   ];
 
   const userBirthDate = user.birthDate
-    ? new Date(user.birthDate).toISOString().split("T")[0]
+    ? new Intl.DateTimeFormat("en-GB", {
+        day: "numeric",
+        month: "long",
+        year: "numeric",
+      }).format(new Date(user.birthDate))
     : "";
 
   const apiUrl = ENV.API_IMAGE_URL;
@@ -78,7 +82,7 @@ export default function ProfilePage() {
               Settings
             </h1>
             <p className="text-neutral-500 text-[10px] uppercase tracking-[0.4em]">
-              Identity Management & Logic
+              Manage your account and profile
             </p>
           </div>
         </div>
@@ -88,7 +92,7 @@ export default function ProfilePage() {
             <div className="flex items-center gap-3 mb-4">
               <Shield size={16} className="text-cyan-500/50" />
               <h2 className="text-[11px] uppercase tracking-[0.3em] text-neutral-400">
-                Media Assets
+                Profile Media
               </h2>
             </div>
 
@@ -112,14 +116,14 @@ export default function ProfilePage() {
             <div className="flex items-center gap-3 mb-4">
               <Activity size={16} className="text-cyan-500/50" />
               <h2 className="text-[11px] uppercase tracking-[0.3em] text-neutral-400">
-                Core Configuration
+                Account Info
               </h2>
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               <div className="p-8 bg-neutral-950/40 backdrop-blur-xl border border-white/5 rounded-4xl flex flex-col justify-center">
                 <p className="text-[10px] uppercase tracking-[0.2em] text-neutral-600 mb-4 ml-1">
-                  System Identifier
+                  Username
                 </p>
                 <div className="flex items-center gap-3 text-white font-bold text-lg">
                   <UserCheck size={20} className="text-cyan-500" />
@@ -212,10 +216,20 @@ export default function ProfilePage() {
             </div>
 
             <button
-              className="flex-1 lg:flex-none flex items-center justify-center gap-3 px-8 py-4 bg-neutral-950/50 backdrop-blur-xl border border-white/10 rounded-2xl text-[10px] uppercase tracking-[0.2em] text-neutral-400 hover:border-cyan-500/50 hover:text-cyan-400 transition-all cursor-pointer active:scale-95"
+              className="
+              flex-1 lg:flex-none 
+              flex items-center justify-center gap-4 
+              px-12 py-6 
+              bg-neutral-900 border-2 border-neutral-800 
+              rounded-full 
+              text-[12px] font-black uppercase tracking-[0.2em] text-neutral-400 
+              hover:border-white hover:text-white 
+              transition-all duration-300 cursor-pointer 
+              active:scale-95
+            "
               onClick={() => setIsModalOpen(true)}
             >
-              <Key size={14} />
+              <Key size={18} />
               <span>Change Password</span>
             </button>
           </div>

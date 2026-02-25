@@ -7,12 +7,16 @@ interface AllPostsHeaderProps {
 export default function AllPostsHeader({ totalRecords }: AllPostsHeaderProps) {
   return (
     <header className="relative flex flex-col gap-4 border-b border-neutral-900 pb-10">
-      {/* Decorative Index Indicator */}
-      <div className="flex items-center gap-3">
-        <div className="w-2 h-2 rounded-full bg-cyan-500 animate-pulse" />
-        <span className="text-[10px] font-mono font-bold text-neutral-500 uppercase tracking-[0.4em]">
-          Database Index
-        </span>
+      <div className="flex flex-col gap-2">
+        <div className="flex items-center gap-3 group">
+          <div className="w-1.5 h-1.5 bg-cyan-500 rotate-45 group-hover:rotate-90 transition-transform duration-500" />
+
+          <span className="text-[11px] font-black text-neutral-400 uppercase tracking-[0.3em]">
+            Explore <span className="text-neutral-200">{ENV.POST_TYPE}s</span>
+          </span>
+        </div>
+
+        <div className="h-px w-12 bg-neutral-800" />
       </div>
 
       <div className="flex flex-col md:flex-row md:items-end justify-between gap-6">
@@ -29,7 +33,6 @@ export default function AllPostsHeader({ totalRecords }: AllPostsHeaderProps) {
           </p>
         </div>
 
-        {/* Statistical Telemetry */}
         <div className="flex flex-col items-end border-r-2 border-cyan-500/30 pr-4">
           <span className="text-[10px] font-mono text-neutral-600 uppercase tracking-widest">
             Records

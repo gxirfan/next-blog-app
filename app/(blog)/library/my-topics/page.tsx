@@ -169,7 +169,7 @@ export default async function MyTopicsPage({
                       href={`/topic/${topic.slug}`}
                       className="flex-1 md:flex-none flex items-center justify-center gap-2 px-6 py-4 bg-neutral-900 border border-neutral-800 rounded-xl text-[10px] uppercase tracking-[0.2em] text-neutral-400 hover:text-white hover:border-cyan-500/50 transition-all active:scale-95"
                     >
-                      Modify Node
+                      See
                       <ChevronRight size={14} />
                     </Link>
                   </div>
