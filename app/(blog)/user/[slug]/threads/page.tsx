@@ -1,5 +1,6 @@
-import FlowFeed from "@/app/(blog)/stream/_components/FlowFeed";
+import FlowCard from "@/app/(blog)/stream/_components/FlowCard";
 import PaginationControls from "@/app/components/PaginationControls";
+import { IFlow } from "@/app/types/flow";
 import { ENV } from "@/config/env.config";
 import { Activity, Zap } from "lucide-react";
 
@@ -39,33 +40,40 @@ export default async function UserFlowsPage({
       <header className="mb-10 px-6 md:px-0 border-b border-neutral-900 pb-10">
         <div className="flex items-center gap-3 mb-4">
           <div className="text-cyan-500">
-            <Zap
-              size={20}
-              className="text-cyan-500 group-hover:scale-125 group-hover:rotate-12 transition-transform duration-300"
-            />
+            <Zap size={20} className="text-cyan-500" />
           </div>
-          <span className="text-[14px] font-black font-jetbrains-mono tracking-[0.3em] text-neutral-600">
+          <span className="text-[14px] font-black tracking-[0.3em] text-neutral-600 uppercase">
             / @{paramList.slug}
           </span>
         </div>
 
-        <h1 className="text-5xl font-black text-white tracking-tighter uppercase font-urbanist leading-none">
+        <h1 className="text-5xl font-black text-white tracking-tighter uppercase leading-none">
           User <span className="text-cyan-500">Threads</span>
         </h1>
 
         <div className="flex items-center justify-between mt-8">
-          <div className="flex items-center gap-2 px-3 py-1 bg-neutral-900/50 border border-neutral-800 rounded-md">
-            <Activity size={12} className="text-cyan-950" />
-            <span className="text-[11px] font-black font-jetbrains-mono text-neutral-500 uppercase tracking-widest">
-              Records_Count: {result.data.meta?.total || 0}
+          <div className="flex items-center gap-2 px-4 py-1.5 bg-neutral-900/30 border border-neutral-800 rounded-full">
+            <Activity size={12} className="text-cyan-900" />
+            <span className="text-[10px] font-black text-neutral-500 uppercase tracking-widest">
+              Total_Threads: {result.data.meta?.total || 0}
             </span>
           </div>
           <div className="h-px flex-1 bg-neutral-900/50 mx-4" />
         </div>
       </header>
 
-      <section className="min-h-[500px]">
-        <FlowFeed initialFlows={result.data.data} isDetailsPage={true} />
+      <section className="min-h-[500px] flex flex-col">
+        {result.data.data && result.data.data.length > 0 ? (
+          result.data.data.map((flow: IFlow) => (
+            <FlowCard key={flow.id} flow={flow} />
+          ))
+        ) : (
+          <div className="py-20 text-center border border-dashed border-neutral-900 rounded-[2rem]">
+            <p className="text-neutral-700 font-black uppercase tracking-widest text-xs">
+              No threads broadcasted yet.
+            </p>
+          </div>
+        )}
       </section>
 
       {result.data.meta && result.data.meta.totalPages > 1 && (
