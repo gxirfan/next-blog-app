@@ -130,14 +130,14 @@ const PostList = ({ posts }: PostListProps) => {
               <div className="flex items-center gap-6">
                 {post.score !== 0 && (
                   <div
-                    className={`flex items-center gap-1.5 ${post.score > 0 ? "text-green-600" : "text-red-600"}`}
+                    className={`flex items-center gap-1.5 ${post.score > 0 ? "text-green-400" : "text-red-600"}`}
                   >
                     {post.score > 0 ? (
                       <ArrowBigUp size={14} fill="currentColor" />
                     ) : (
                       <ArrowBigDown size={14} fill="currentColor" />
                     )}
-                    <span className="font-mono">{Math.abs(post.score)}</span>
+                    <span className="font-mono">{post.score}</span>
                   </div>
                 )}
 

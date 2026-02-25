@@ -32,9 +32,13 @@ const VoteButtons = ({
     setUserVote(userCurrentVoteDirection ?? 0);
   }, [score, userCurrentVoteDirection]);
 
-  if (!user) return null;
-
   const handleVote = async (newDirection: 1 | -1) => {
+    if (!user) {
+      const currentPath = window.location.pathname;
+      router.push(`/login?redirect=${encodeURIComponent(currentPath)}`);
+      return;
+    }
+
     if (isPending || loading) return;
     setError(null);
 
@@ -72,80 +76,46 @@ const VoteButtons = ({
 
   return (
     <div className="relative flex flex-col items-center">
-      {error && (
-        <div className="absolute -top-10 left-1/2 -translate-x-1/2 flex items-center gap-2 px-3 py-1 bg-red-500 text-white text-[10px] uppercase tracking-widest rounded-full animate-in slide-in-from-bottom-2 duration-300 z-50">
-          <span>{error}</span>
-          <button onClick={() => setError(null)}>
-            <X size={10} />
-          </button>
-        </div>
-      )}
-
-      {/* 2. MAIN VOTE PILL: A single integrated unit */}
       <div className="flex items-center bg-neutral-900 border border-neutral-800 rounded-full p-1">
-        {/* Upvote */}
         <button
           onClick={() => handleVote(1)}
-          disabled={loading || isPending}
           className={`group relative p-2 rounded-full transition-all duration-300 cursor-pointer ${
             isUp
-              ? "bg-cyan-500 text-black"
+              ? "bg-green-500 text-black"
               : "text-neutral-500 hover:text-white"
-          }`}
+          } ${!user ? "opacity-60 cursor-pointer" : ""}`}
         >
           <ArrowBigUp
             size={20}
-            className={`${
-              isUp
-                ? "fill-current"
-                : "group-hover:scale-110 transition-transform"
-            }`}
+            className={isUp ? "fill-current" : "group-hover:scale-110"}
           />
         </button>
 
-        {/* Score Display */}
         <div className="px-3 min-w-[40px] text-center">
-          {loading ? (
-            <Loader2
-              size={14}
-              className="animate-spin text-neutral-600 mx-auto"
-            />
-          ) : (
-            <span
-              className={`text-sm tracking-tighter ${
-                isUp
-                  ? "text-cyan-400"
-                  : isDown
-                    ? "text-red-400"
-                    : "text-neutral-400"
-              }`}
-            >
-              {optimisticScore === 0
-                ? "0"
-                : optimisticScore > 0
-                  ? `+${optimisticScore}`
-                  : optimisticScore}
-            </span>
-          )}
+          <span
+            className={`text-sm tracking-tighter font-black ${
+              isUp
+                ? "text-green-400"
+                : isDown
+                  ? "text-red-400"
+                  : "text-neutral-400"
+            }`}
+          >
+            {optimisticScore > 0 ? `+${optimisticScore}` : optimisticScore}
+          </span>
         </div>
 
-        {/* Downvote */}
         <button
           onClick={() => handleVote(-1)}
-          disabled={loading || isPending}
           className={`group relative p-2 rounded-full transition-all duration-300 cursor-pointer ${
             isDown
-              ? "bg-red-500 text-white"
+              ? "bg-red-600 text-white"
               : "text-neutral-500 hover:text-white"
-          }`}
+          } ${!user ? "opacity-60 cursor-pointer" : ""}`}
         >
           <ArrowBigDown
             size={20}
-            className={`${
-              isDown
-                ? "fill-current"
-                : "group-hover:scale-110 transition-transform"
-            }`}
+            className={isDown ? "fill-current" : "group-hover:scale-110"}
           />
         </button>
       </div>
