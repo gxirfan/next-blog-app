@@ -1,9 +1,17 @@
 "use client";
 
 import { motion, useScroll, useSpring } from "framer-motion";
+import { RefObject } from "react";
 
-export default function ScrollProgress() {
-  const { scrollYProgress } = useScroll();
+interface ScrollProgressProps {
+  targetRef: RefObject<HTMLElement | null>;
+}
+
+export default function ScrollProgress({ targetRef }: ScrollProgressProps) {
+  const { scrollYProgress } = useScroll({
+    target: targetRef,
+    offset: ["start start", "end end"],
+  });
 
   const scaleX = useSpring(scrollYProgress, {
     stiffness: 100,

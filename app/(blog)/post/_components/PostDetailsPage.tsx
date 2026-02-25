@@ -8,7 +8,7 @@ import Image from "next/image";
 import PostDetailsFooter from "./PostDetailsFooter";
 import PostDetailsHeader from "./PostDetailsHeader";
 import { ENV } from "@/config/env.config";
-import ScrollProgress from "@/app/components/ScrollProgress";
+import PostContentForScrollProgress from "./PostContentForScrollProgress";
 
 interface PostDetailsCardProps {
   postDetails: IPostResponse;
@@ -42,71 +42,72 @@ const PostDetailsCard = async ({ postDetails }: PostDetailsCardProps) => {
   const userCurrentVoteDirection = await fetchUserVoteDirection(postDetails.id);
 
   return (
-    <div className="w-full max-w-4xl mx-auto px-4 md:px-0">
-      <ScrollProgress />
-      {/* HEADER SECTION */}
-      <PostDetailsHeader
-        postDetails={postDetails}
-        userCurrentVoteDirection={userCurrentVoteDirection}
-      />
-
-      {/* MAIN IMAGE */}
-      {postDetails.mainImage && (
-        <div className="relative w-full overflow-hidden rounded-[2.5rem] bg-neutral-900 border border-neutral-800 mb-8">
-          <Image
-            src={ENV.API_IMAGE_URL + postDetails.mainImage}
-            alt={postDetails.title}
-            width={1200}
-            height={675}
-            className="w-full h-auto object-contain block"
-            priority
-          />
-        </div>
-      )}
-
-      {/* CONTENT METRICS BAR */}
-      <div className="flex items-center gap-6 mb-12">
-        <div className="flex items-center gap-3 px-5 py-2 bg-neutral-900 border-2 border-neutral-800 rounded-full shrink-0">
-          <div className="w-2 h-2 rounded-full bg-cyan-500" />
-          <span className="text-[11px] font-black text-white uppercase tracking-[0.2em]">
-            Content
-          </span>
-        </div>
-
-        <div className="h-[2px] flex-1 bg-neutral-900" />
-
-        <div className="flex items-center gap-3 px-5 py-2 bg-neutral-900/30 border-2 border-transparent hover:border-neutral-800 rounded-full transition-all duration-300">
-          <Clock size={14} strokeWidth={2.5} className="text-neutral-500" />
-          <span className="text-[11px] font-bold text-neutral-400 uppercase tracking-widest">
-            {postDetails.readingTime || 1} MIN READ
-          </span>
-        </div>
-      </div>
-
-      {/* CONTENT */}
-      <article className="prose prose-invert max-w-none mb-20 text-xl leading-relaxed">
-        <div
-          dangerouslySetInnerHTML={{
-            __html: prepareContentForImage(postDetails.content)
-              .replace(
-                /<h2/g,
-                '<h2 style="font-size: 40px; font-weight: 900; color: white; margin-top: 50px; margin-bottom: 20px; line-height: 1.1;"',
-              )
-              .replace(
-                /<h3/g,
-                '<h3 style="font-size: 28px; font-weight: 800; color: #e5e5e5; margin-top: 40px; margin-bottom: 16px;"',
-              )
-              .replace(
-                /<p/g,
-                '<p style="font-size: 20px; line-height: 1.8; margin-bottom: 24px; color: #d4d4d4;"',
-              ),
-          }}
+    <PostContentForScrollProgress>
+      <div className="w-full max-w-4xl mx-auto px-4 md:px-0">
+        {/* HEADER SECTION */}
+        <PostDetailsHeader
+          postDetails={postDetails}
+          userCurrentVoteDirection={userCurrentVoteDirection}
         />
-      </article>
 
-      {/* FOOTER SECTION */}
-      <PostDetailsFooter postDetails={postDetails} />
-    </div>
+        {/* MAIN IMAGE */}
+        {postDetails.mainImage && (
+          <div className="relative w-full overflow-hidden rounded-[2.5rem] bg-neutral-900 border border-neutral-800 mb-8">
+            <Image
+              src={ENV.API_IMAGE_URL + postDetails.mainImage}
+              alt={postDetails.title}
+              width={1200}
+              height={675}
+              className="w-full h-auto object-contain block"
+              priority
+            />
+          </div>
+        )}
+
+        {/* CONTENT METRICS BAR */}
+        <div className="flex items-center gap-6 mb-12">
+          <div className="flex items-center gap-3 px-5 py-2 bg-neutral-900 border-2 border-neutral-800 rounded-full shrink-0">
+            <div className="w-2 h-2 rounded-full bg-cyan-500" />
+            <span className="text-[11px] font-black text-white uppercase tracking-[0.2em]">
+              Content
+            </span>
+          </div>
+
+          <div className="h-[2px] flex-1 bg-neutral-900" />
+
+          <div className="flex items-center gap-3 px-5 py-2 bg-neutral-900/30 border-2 border-transparent hover:border-neutral-800 rounded-full transition-all duration-300">
+            <Clock size={14} strokeWidth={2.5} className="text-neutral-500" />
+            <span className="text-[11px] font-bold text-neutral-400 uppercase tracking-widest">
+              {postDetails.readingTime || 1} MIN READ
+            </span>
+          </div>
+        </div>
+
+        {/* CONTENT */}
+        <article className="prose prose-invert max-w-none mb-20 text-xl leading-relaxed">
+          <div
+            dangerouslySetInnerHTML={{
+              __html: prepareContentForImage(postDetails.content)
+                .replace(
+                  /<h2/g,
+                  '<h2 style="font-size: 40px; font-weight: 900; color: white; margin-top: 50px; margin-bottom: 20px; line-height: 1.1;"',
+                )
+                .replace(
+                  /<h3/g,
+                  '<h3 style="font-size: 28px; font-weight: 800; color: #e5e5e5; margin-top: 40px; margin-bottom: 16px;"',
+                )
+                .replace(
+                  /<p/g,
+                  '<p style="font-size: 20px; line-height: 1.8; margin-bottom: 24px; color: #d4d4d4;"',
+                ),
+            }}
+          />
+        </article>
+
+        {/* FOOTER SECTION */}
+        <PostDetailsFooter postDetails={postDetails} />
+      </div>
+    </PostContentForScrollProgress>
   );
 };
 
