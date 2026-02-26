@@ -1,106 +1,107 @@
-import {
-  Layers,
-  Server,
-  Code,
-  Cpu,
-  Terminal,
-  Database,
-  Globe,
-} from "lucide-react";
+"use client";
+import { Code2, Server, User, ArrowRight, Layers, Github } from "lucide-react";
+import Link from "next/link";
 
-export default function AboutPage() {
+const AboutPage = () => {
+  const GITHUB_NEST = "https://github.com/gxirfan/nest-blog-app";
+  const GITHUB_NEXT = "https://github.com/gxirfan/next-blog-app";
+
   return (
-    <div className="max-w-4xl mx-auto py-10 space-y-12 animate-in fade-in duration-700">
-      {/* 1. Page Header */}
-      <div className="space-y-4 border-b border-neutral-900 pb-10">
-        <div className="flex items-center gap-2 text-[10px] tracking-[0.3em] text-cyan-500">
-          <Terminal size={14} />
-          <span>System Specifications</span>
+    <div className="max-w-4xl mx-auto py-16 space-y-20 animate-in fade-in duration-1000 px-6">
+      {/* 1. INTRO SECTION */}
+      <section className="space-y-8 border-b border-neutral-900 pb-16 text-center md:text-left">
+        <div className="flex items-center justify-center md:justify-start gap-3 text-[11px] font-black tracking-[0.4em] text-neutral-500">
+          <User size={14} className="text-neutral-700" />
+          <span>Origin Story</span>
         </div>
-        <h1 className="text-4xl md:text-6xl text-white tracking-tighter flex items-center gap-4">
-          <div className="p-3 bg-neutral-900 border border-neutral-800 rounded-2xl text-cyan-500">
-            <Layers size={32} />
-          </div>
-          About Project
-        </h1>
-      </div>
 
-      {/* 2. Main Architecture Card */}
-      <div className="bg-neutral-950 border border-neutral-900 rounded-[2.5rem] p-8 md:p-12 space-y-10">
         <div className="space-y-6">
-          <h2 className="text-2xl text-white flex items-center gap-3 tracking-tight">
-            <Cpu size={24} className="text-cyan-500" />
-            <span>Architecture Overview</span>
-          </h2>
+          <h1 className="text-5xl md:text-8xl text-white tracking-tighter font-black leading-none">
+            Hi! I'm <span className="text-neutral-500">Irfan.</span>
+          </h1>
+          <p className="text-xl md:text-3xl text-neutral-400 leading-relaxed font-bold tracking-tight max-w-2xl">
+            Grepground is one of the countless projects I've written to improve
+            myself. It represents a journey of constant learning and
+            architectural exploration.
+          </p>
+        </div>
+      </section>
 
-          <div className="space-y-6">
-            <p className="text-neutral-400 text-lg md:text-xl leading-relaxed font-medium">
-              This application is designed to combine the most powerful tools of
-              modern web development with a{" "}
-              <span className="text-white">minimal and dark aesthetic</span>.
-              The project's architecture prioritizes high performance and
-              security.
-            </p>
-            <p className="text-neutral-500 text-base leading-relaxed border-l-2 border-neutral-800 pl-6">
-              The author of this project wrote it solely for self-improvement!
-            </p>
-          </div>
+      {/* 2. ARCHITECTURE / GITHUB SECTION */}
+      <section className="space-y-12">
+        <div className="flex items-center gap-3 text-[11px] font-black tracking-[0.4em] text-neutral-500">
+          <Layers size={14} className="text-neutral-700" />
+          <span>The Stack & Source</span>
         </div>
 
-        {/* 3. Tech Stack Grid */}
-        <div className="space-y-6 pt-10 border-t border-neutral-900">
-          <h3 className="text-[10px] tracking-[0.3em] text-neutral-600 flex items-center gap-2">
-            <Server size={14} />
-            Core Technology Stack
-          </h3>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          {/* NestJS Backend Card */}
+          <Link
+            href={GITHUB_NEST}
+            target="_blank"
+            className="group relative bg-neutral-950 border-2 border-neutral-900 p-8 rounded-[2.5rem] hover:border-white transition-all duration-500"
+          >
+            <div className="flex justify-between items-start mb-10">
+              <div className="p-4 bg-neutral-900 rounded-2xl text-white group-hover:scale-110 transition-transform">
+                <Server size={32} />
+              </div>
+              <Github
+                size={20}
+                className="text-neutral-800 group-hover:text-white"
+              />
+            </div>
+            <h3 className="text-2xl text-white font-black mb-2">
+              Backend Architecture
+            </h3>
+            <p className="text-neutral-500 text-sm font-bold mb-6">
+              Built with NestJS, focused on scalable micro-services and clean
+              API logic.
+            </p>
+            <div className="flex items-center gap-2 text-[10px] font-black tracking-widest text-neutral-400">
+              View Repository <ArrowRight size={12} />
+            </div>
+          </Link>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            <TechItem
-              label="Backend"
-              value="NestJS (TypeScript)"
-              icon={<Terminal size={16} />}
-            />
-            <TechItem
-              label="Database"
-              value="MongoDB (NoSQL)"
-              icon={<Database size={16} />}
-            />
-            <TechItem
-              label="Frontend"
-              value="Next.js 14 (App Router)"
-              icon={<Globe size={16} />}
-            />
-            <TechItem
-              label="Style"
-              value="Tailwind CSS (Flat UI)"
-              icon={<Code size={16} />}
-            />
-          </div>
+          {/* Next.js Frontend Card */}
+          <Link
+            href={GITHUB_NEXT}
+            target="_blank"
+            className="group relative bg-neutral-950 border-2 border-neutral-900 p-8 rounded-[2.5rem] hover:border-white transition-all duration-500"
+          >
+            <div className="flex justify-between items-start mb-10">
+              <div className="p-4 bg-neutral-900 rounded-2xl text-white group-hover:scale-110 transition-transform">
+                <Code2 size={32} />
+              </div>
+              <Github
+                size={20}
+                className="text-neutral-800 group-hover:text-white"
+              />
+            </div>
+            <h3 className="text-2xl text-white font-black mb-2">
+              Frontend Interface
+            </h3>
+            <p className="text-neutral-500 text-sm font-bold mb-6">
+              A high-performance UI crafted with Next.js, Tailwind, and a focus
+              on matte aesthetics.
+            </p>
+            <div className="flex items-center gap-2 text-[10px] font-black tracking-widest text-neutral-400">
+              View Repository <ArrowRight size={12} />
+            </div>
+          </Link>
         </div>
-      </div>
+      </section>
+
+      {/* 3. CORE VALUES FOOTER */}
+      <footer className="pt-10 border-t-2 border-neutral-950 flex flex-col md:flex-row justify-between items-center gap-6">
+        <p className="text-[10px] font-black tracking-[0.5em] text-neutral-800">
+          Open Source Development
+        </p>
+        <div className="text-[11px] font-black text-neutral-600 tracking-widest">
+          Continuous Improvement © 2026
+        </div>
+      </footer>
     </div>
   );
-}
+};
 
-// Reusable Tech Item Component
-const TechItem = ({
-  label,
-  value,
-  icon,
-}: {
-  label: string;
-  value: string;
-  icon: React.ReactNode;
-}) => (
-  <div className="bg-neutral-900/30 border border-neutral-800 p-5 rounded-2xl flex items-center gap-4 group hover:border-cyan-500/30 transition-all">
-    <div className="text-neutral-700 group-hover:text-cyan-500 transition-colors">
-      {icon}
-    </div>
-    <div className="flex flex-col">
-      <span className="text-[9px] tracking-widest text-neutral-600 mb-0.5">
-        {label}
-      </span>
-      <span className="text-sm font-bold text-neutral-300">{value}</span>
-    </div>
-  </div>
-);
+export default AboutPage;
