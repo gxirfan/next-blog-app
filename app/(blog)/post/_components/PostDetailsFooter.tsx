@@ -17,7 +17,7 @@ export default function PostDetailsFooter({
             <div className="flex items-center gap-2 text-neutral-500 text-[10px] font-bold tracking-[0.2em]">
               <MessageSquare size={14} /> Engagements
             </div>
-            <p className="text-2xl font-black text-white tracking-tighter italic">
+            <p className="text-2xl font-black text-white tracking-tighter">
               {postDetails.postCount}
             </p>
           </div>
@@ -37,7 +37,7 @@ export default function PostDetailsFooter({
         <div className="flex items-center gap-6 group/share py-4 px-6 bg-neutral-900/20 border border-white/5 rounded-2xl backdrop-blur-sm transition-all duration-300 hover:border-cyan-500/30">
           <div className="hidden md:flex items-center gap-4 border-r border-white/10 pr-6">
             <div className="flex flex-col items-end">
-              <p className="text-[14px] text-neutral-400 font-jetbrains-mono font-bold leading-tight tracking-[0.2em] group-hover/share:text-white transition-colors">
+              <p className="text-sm text-neutral-400 font-jetbrains-mono font-bold leading-tight tracking-[0.2em] group-hover/share:text-white transition-colors">
                 SHARE
               </p>
             </div>

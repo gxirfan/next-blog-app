@@ -1,6 +1,6 @@
 "use client";
 
-import { Calendar, Info, Globe, MapPin, User, Shield } from "lucide-react";
+import { Info, Globe, MapPin, Shield, User, Calendar } from "lucide-react";
 import { IUserResponse } from "@/app/types/user-response.dto";
 import { getRelativeTime } from "@/app/utils/date";
 
@@ -10,96 +10,77 @@ interface ProfileInfoCardProps {
 
 const ProfileInfoCard = ({ user }: ProfileInfoCardProps) => {
   return (
-    <div className="mx-auto w-full animate-in fade-in slide-in-from-bottom-4 duration-700 px-4 md:px-0 mb-12">
-      <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16">
-        {/* LEFT COLUMN: Identity & Meta (Sidebar) 
-            Now positioned on the left for better visual flow under the avatar.
-        */}
+    <div className="mx-auto w-full animate-in fade-in duration-1000 px-4 md:px-8 mb-20">
+      <div className="grid grid-cols-1 lg:grid-cols-12 gap-12">
+        {/* LEFT COLUMN: BASIC INFO */}
         <div className="lg:col-span-4 space-y-10 order-2 lg:order-1">
-          <section className="space-y-8">
-            <h2 className="text-[12px] tracking-[0.3em] text-neutral-500 flex items-center gap-2">
-              <User size={14} className="text-cyan-500" />
-              Information
+          <section className="space-y-6">
+            <h2 className="text-[11px] font-bold tracking-widest text-neutral-500 border-b border-neutral-900 pb-3 flex items-center gap-2">
+              <User size={14} />
+              Personal Info
             </h2>
 
-            <div className="space-y-8">
-              {/* Username Item */}
-              <div className="group">
-                <p className="text-[12px] text-neutral-600 font-bold mb-2 tracking-tighter">
-                  Handle
+            <div className="space-y-6">
+              {/* Contact Item */}
+              <div className="space-y-1">
+                <p className="text-[10px] text-neutral-600 font-bold tracking-wider">
+                  Email Address
                 </p>
-                <p className="text-white font-bold text-lg flex items-center gap-1.5">
-                  <span className="text-cyan-500/50">@</span>
-                  {user.username}
-                </p>
+                {user.isEmailPublic ? (
+                  <a
+                    href={`mailto:${user.email}`}
+                    className="text-neutral-200 font-medium text-base hover:text-white transition-colors"
+                  >
+                    {user.email}
+                  </a>
+                ) : (
+                  <div className="flex items-center gap-2 text-neutral-500 text-sm">
+                    <Shield size={12} />
+                    <span>Private</span>
+                  </div>
+                )}
               </div>
 
-              {/* Email Item */}
-              <div className="group">
-                <p className="text-[12px] text-neutral-600 font-bold mb-2 tracking-tighter">
-                  Contact
-                </p>
-                <div className="flex items-center gap-2">
-                  {user.isEmailPublic ? (
-                    <a
-                      href={`mailto:${user.email}`}
-                      className="text-neutral-300 font-medium hover:text-cyan-400 transition-colors border-b border-neutral-800 pb-0.5"
-                    >
-                      {user.email}
-                    </a>
-                  ) : (
-                    <div className="flex items-center gap-2 text-neutral-500 bg-neutral-900/50 px-3 py-1.5 rounded-lg border border-neutral-800">
-                      <Shield size={12} />
-                      <span className="text-[12px] font-bold tracking-widest">
-                        Encrypted
-                      </span>
-                    </div>
-                  )}
-                </div>
-              </div>
-
-              {/* Joined Date */}
-              <div className="group">
-                <p className="text-[12px] text-neutral-600 font-bold mb-2 tracking-tighter">
-                  Joined
-                </p>
-                <div className="flex items-center gap-2 text-neutral-300 font-medium">
-                  <Calendar size={16} className="text-neutral-500" />
-                  <span>{getRelativeTime(user.createdAt) || "Unknown"}</span>
+              {/* Dates */}
+              <div className="space-y-3">
+                <div className="flex items-center gap-3 text-neutral-400 text-sm">
+                  <Calendar size={16} className="text-neutral-700" />
+                  <span>Joined {getRelativeTime(user.createdAt)}</span>
                 </div>
               </div>
             </div>
           </section>
         </div>
 
-        {/* RIGHT COLUMN: Biography (Main Content)
-            Takes more space and acts as the "hero" text area.
-        */}
-        <div className="lg:col-span-8 space-y-10 order-1 lg:order-2">
-          <section>
-            <h2 className="text-[12px] tracking-[0.3em] text-neutral-500 mb-6 flex items-center gap-2">
-              <Info size={14} className="text-cyan-500" />
+        {/* RIGHT COLUMN: BIOGRAPHY */}
+        <div className="lg:col-span-8 space-y-12 order-1 lg:order-2">
+          <section className="space-y-6">
+            <h2 className="text-[11px] font-bold tracking-widest text-neutral-500 border-b border-neutral-900 pb-3 flex items-center gap-2">
+              <Info size={14} />
               About Me
             </h2>
-            <div className="max-w-none">
-              <p className="text-xl md:text-2xl text-white leading-relaxed font-bold tracking-tight">
-                {user.bio ||
-                  `This user stays quiet for now. No biography has been written yet.`}
-              </p>
-            </div>
+
+            <p className="text-xl md:text-3xl text-white leading-snug font-bold tracking-tight">
+              {user.bio || "No information shared yet."}
+            </p>
           </section>
 
-          {/* Metadata Badges */}
-          <div className="flex flex-wrap gap-3 pt-4 border-t border-neutral-900">
+          {/* Location & Global Badges */}
+          <div className="flex flex-wrap gap-3">
             {user.location && (
-              <div className="flex items-center gap-2 px-4 py-2 bg-neutral-900/30 border border-neutral-800/50 rounded-2xl text-xs text-neutral-400">
-                <MapPin size={14} className="text-cyan-500" />
-                <span>{user.location}</span>
+              <div className="flex items-center gap-2 px-4 py-2 bg-neutral-900 rounded-xl border border-neutral-800">
+                <MapPin size={14} className="text-neutral-600" />
+                <span className="text-xs font-bold text-neutral-300 tracking-wider">
+                  {user.location}
+                </span>
               </div>
             )}
-            <div className="flex items-center gap-2 px-4 py-2 bg-neutral-900/30 border border-neutral-800/50 rounded-2xl text-xs text-neutral-400">
-              <Globe size={14} className="text-cyan-500" />
-              <span>Personal Space</span>
+
+            <div className="flex items-center gap-2 px-4 py-2 bg-neutral-900 rounded-xl border border-neutral-800">
+              <Globe size={14} className="text-neutral-600" />
+              <span className="text-xs font-bold text-neutral-300 tracking-wider">
+                Public Profile
+              </span>
             </div>
           </div>
         </div>

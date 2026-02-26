@@ -4,6 +4,7 @@ import Image from "next/image";
 import { IUserResponse } from "@/app/types/user-response.dto";
 import { getRelativeTime } from "@/app/utils/date";
 import { ENV } from "@/config/env.config";
+import { Shield, Calendar } from "lucide-react";
 
 interface ProfileHeaderProps {
   user: IUserResponse;
@@ -18,122 +19,108 @@ const ProfileHeader = ({ user }: ProfileHeaderProps) => {
   const coverUrl = user.cover ? apiUrl + user.cover : DEFAULT_COVER;
   const avatarUrl = user.avatar ? apiUrl + user.avatar : DEFAULT_AVATAR;
 
-  const getRoleColor = (role: string): string => {
+  const getRoleClass = (role: string): string => {
     const r = role.toLowerCase();
-    if (r === "admin") return "text-red-400";
-    if (r === "moderator") return "text-yellow-400";
-    return "text-neutral-500";
+    if (r === "admin") return "adminColor";
+    if (r === "moderator") return "moderatorColor";
+    if (r === "writer") return "writerColor";
+    return "userColor";
   };
 
   return (
-    <div className="w-full bg-transparent flex flex-col">
-      {/* 1. COVER IMAGE: Modern Rounded-3xl corners */}
+    <div className="w-full flex flex-col space-y-8 animate-in fade-in duration-700">
+      {/* 1. COVER ARCHIVE */}
       <div
         onContextMenu={(e) => e.preventDefault()}
-        className="relative w-full h-[200px] md:h-[300px] bg-neutral-900 rounded-4xl overflow-hidden border border-neutral-800/30 select-none"
+        className="relative w-full h-[220px] md:h-[350px] bg-neutral-900 rounded-[3rem] overflow-hidden border-2 border-neutral-900 select-none"
       >
         <Image
           src={coverUrl}
-          alt="Cover"
+          alt="Profile Cover"
           fill
           priority
-          className="object-cover select-none"
+          className="object-cover grayscale-[20%] hover:grayscale-0 transition-all duration-700"
           draggable={false}
         />
+        {/* Subtle overlay for depth */}
+        <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent" />
       </div>
 
-      {/* 2. PROFILE SECTION */}
-      <div className="px-6 md:px-10">
-        <div className="flex flex-col items-start">
-          {/* AVATAR: Circular cut-out effect */}
-          <div className="relative -mt-16 md:-mt-24 mb-5 z-20">
-            {/* We use 'aspect-square' and 'rounded-full' on the wrapper 
-                to guarantee a perfect circle regardless of screen size.
-            */}
+      {/* 2. IDENTITY BLOCK */}
+      <div className="px-4 md:px-8 relative">
+        <div className="flex flex-col md:flex-row items-end md:items-center gap-8">
+          {/* AVATAR */}
+          <div className="relative -mt-24 md:-mt-32 z-20 shrink-0">
             <div
               onContextMenu={(e) => e.preventDefault()}
-              className="w-32 h-32 md:w-44 md:h-44 rounded-full border-[6px] border-neutral-950 bg-neutral-900 overflow-hidden aspect-square "
+              className="w-32 h-32 md:w-48 md:h-48 rounded-full border-[8px] border-neutral-950 bg-neutral-900 overflow-hidden"
             >
               <Image
                 src={avatarUrl}
                 alt={user.nickname}
                 fill
-                className="object-cover rounded-full select-none"
+                className="object-cover select-none rounded-full"
                 draggable={false}
               />
             </div>
+            {/* Floating Role Icon */}
+            <div
+              className={`absolute bottom-2 right-2 p-2.5 bg-neutral-950 border-2 border-neutral-900 rounded-2xl ${getRoleClass(user.role)}`}
+            >
+              <Shield size={20} />
+            </div>
           </div>
 
-          {/* INFO SECTION */}
-          <div className="w-full space-y-4">
-            <div className="flex flex-wrap items-center gap-3">
-              <h1 className="text-3xl md:text-4xl text-white tracking-tight">
+          {/* MAIN INFO */}
+          <div className="flex-1 space-y-4 pb-4">
+            <div className="flex flex-wrap items-center gap-4">
+              <h1 className="text-4xl md:text-6xl font-black text-white tracking-tighter leading-none">
                 {user.nickname || user.firstName}
               </h1>
 
               {user.role && user.role.toLowerCase() !== "user" && (
-                <span
-                  className={`px-3 py-1 rounded-full text-[11px] md:text-xs tracking-widest uppercase ${getRoleColor(
-                    user.role,
-                  )} bg-neutral-950 border border-neutral-800`}
+                <div
+                  className={`flex items-center gap-2 px-4 py-1.5 rounded-xl bg-neutral-900 border-2 border-neutral-800 ${getRoleClass(user.role)}`}
                 >
-                  {user.role}
-                </span>
+                  <span className="text-[10px] font-black uppercase tracking-[0.2em]">
+                    {user.role}
+                  </span>
+                </div>
               )}
             </div>
 
-            <div className="flex flex-col space-y-5">
-              <span className="text-neutral-500 text-lg md:text-xl font-medium">
+            <div className="flex flex-wrap items-center gap-6">
+              <span className="text-neutral-500 text-lg md:text-xl font-bold font-mono">
                 @{user.username}
               </span>
 
-              {/* Status Indicator Badge */}
-              <div className="inline-flex items-center gap-2.5 px-4 py-2 bg-neutral-900/40 border border-neutral-800/50 rounded-2xl w-fit">
-                <span className="relative flex h-2 w-2">
-                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
-                  <span className="relative inline-flex rounded-full h-2 w-2 bg-green-500"></span>
-                </span>
-                {/* <span className="text-neutral-300 text-[11px] md:text-xs font-semibold">
-                  Last active:{" "}
-                  {new Date(user.lastLoginAt).toLocaleDateString("en-US", {
-                    month: "long",
-                    day: "numeric",
-                    year: "numeric",
-                  })}
-                </span> */}
-                {(() => {
-                  const lastLoginDate = new Date(user.lastLoginAt);
-                  const now = new Date();
-                  const thirtyDaysInMs = 30 * 24 * 60 * 60 * 1000;
-                  const isInactive =
-                    now.getTime() - lastLoginDate.getTime() > thirtyDaysInMs;
+              {/* VITAL STATUS */}
+              {(() => {
+                const lastLoginDate = new Date(user.lastLoginAt);
+                const now = new Date();
+                const isInactive =
+                  now.getTime() - lastLoginDate.getTime() >
+                  30 * 24 * 60 * 60 * 1000;
 
-                  return (
-                    <div className="flex items-center gap-2.5">
-                      {/* Durum İkonu: Aktifse yeşil, 1 ayı geçmişse yanıp sönen kırmızı */}
-                      <div className="relative flex items-center justify-center">
-                        <div
-                          className={`w-2 h-2 rounded-full ${isInactive ? "bg-red-500" : "bg-emerald-500"}`}
-                        />
-                        <div
-                          className={`absolute w-full h-full rounded-full animate-ping opacity-75 ${
-                            isInactive ? "bg-red-500" : "bg-emerald-500"
-                          }`}
-                        />
-                      </div>
-
-                      <span
-                        className={`text-[11px] md:text-xs font-semibold tracking-wide transition-colors duration-500 ${
-                          isInactive ? "text-red-400" : "text-neutral-300"
-                        }`}
-                      >
-                        Last active:{" "}
-                        {getRelativeTime(lastLoginDate) || "Unknown"}
+                return (
+                  <div className="flex items-center gap-3 px-5 py-2.5 bg-neutral-950 border-2 border-neutral-900 rounded-2xl">
+                    <div className="relative flex h-2.5 w-2.5">
+                      <div
+                        className={`absolute inset-0 rounded-full animate-ping opacity-40 ${isInactive ? "bg-red-500" : "bg-emerald-500"}`}
+                      />
+                      <div
+                        className={`relative rounded-full h-full w-full ${isInactive ? "bg-red-500" : "bg-emerald-500 animate-pulse"}`}
+                      />
+                    </div>
+                    <div className="flex items-center gap-2 text-neutral-400">
+                      <Calendar size={14} className="text-neutral-700" />
+                      <span className="text-[11px] font-black tracking-widest leading-none">
+                        Active {getRelativeTime(lastLoginDate)}
                       </span>
                     </div>
-                  );
-                })()}
-              </div>
+                  </div>
+                );
+              })()}
             </div>
           </div>
         </div>

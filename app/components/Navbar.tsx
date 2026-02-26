@@ -224,13 +224,13 @@ const Navbar = () => {
             </Link>
             {/* GREETING */}
             <div className="hidden md:flex flex-col items-end pr-3 border-r border-neutral-900 mr-1">
-              <span className="text-[12px] font-black tracking-widest text-neutral-600">
+              <span className="text-xs font-black tracking-widest text-neutral-600">
                 {getGreetingTime()}
               </span>
             </div>
           </div>
 
-          {/* RIGHT SECTION: Intelligence & Profile */}
+          {/* RIGHT SECTION */}
           <div className="flex items-center gap-2">
             {/* SEARCH TRIGGER BUTTON */}
             <button
@@ -247,7 +247,7 @@ const Navbar = () => {
                   onClick={() => setIsModalOpen(true)}
                   className="flex items-center gap-3 p-1.5 bg-neutral-950 border-2 border-neutral-900 rounded-full hover:border-neutral-700 cursor-pointer group active:scale-[0.98] transition-all duration-300"
                 >
-                  {/* AVATAR - ALWAYS ROUNDED FULL */}
+                  {/* AVATAR */}
                   <div className="shrink-0">
                     <div className="w-8 h-8 rounded-full overflow-hidden border-2 border-neutral-900 bg-neutral-900 group-hover:border-neutral-800 transition-colors">
                       <Image
@@ -265,15 +265,15 @@ const Navbar = () => {
                   </div>
 
                   <div className="hidden sm:flex items-center gap-3 pr-2">
-                    {/* Nickname - Bold & High Contrast */}
-                    <span className="text-[14px] font-black text-white tracking-tight">
+                    {/* Nickname */}
+                    <span className="text-sm font-black text-white tracking-tight">
                       {user.nickname}
                     </span>
 
-                    {/* Vertical Separator - Solid */}
+                    {/* Vertical Separator */}
                     <div className="h-3 w-0.5 bg-neutral-900" />
 
-                    {/* Role Badge - Using your custom classes */}
+                    {/* Role Badge */}
                     <div
                       className={`flex items-center gap-1.5 ${
                         user.role === "admin"
@@ -293,7 +293,7 @@ const Navbar = () => {
             ) : (
               <Link
                 href="/login"
-                className="px-5 py-2 bg-white text-black rounded-full text-[12px] font-black tracking-widest hover:bg-cyan-500 transition-colors flex items-center gap-1"
+                className="px-5 py-2 bg-white text-black rounded-full text-xs font-black tracking-widest hover:bg-cyan-500 transition-colors flex items-center gap-1"
               >
                 <LogInIcon size={16} />
                 <span>Sign In</span>

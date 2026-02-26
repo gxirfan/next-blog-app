@@ -115,14 +115,14 @@ export default function ProfilePage() {
           <section className="space-y-6">
             <div className="flex items-center gap-3 mb-4">
               <Activity size={16} className="text-cyan-500/50" />
-              <h2 className="text-[12px] tracking-[0.3em] text-neutral-400">
+              <h2 className="text-xs tracking-[0.3em] text-neutral-400">
                 Account Info
               </h2>
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               <div className="p-8 bg-neutral-950/40 backdrop-blur-xl border border-white/5 rounded-4xl flex flex-col justify-center">
-                <p className="text-[12px] tracking-[0.2em] text-neutral-600 mb-4 ml-1 font-black">
+                <p className="text-xs tracking-[0.2em] text-neutral-600 mb-4 ml-1 font-black">
                   Username
                 </p>
                 <div className="flex items-center gap-3 text-white font-bold text-lg">
@@ -222,7 +222,7 @@ export default function ProfilePage() {
               px-12 py-6 
               bg-neutral-900 border-2 border-neutral-800 
               rounded-full 
-              text-[12px] font-black tracking-[0.2em] text-neutral-400 
+              text-xs font-black tracking-[0.2em] text-neutral-400 
               hover:border-white hover:text-white 
               transition-all duration-300 cursor-pointer 
               active:scale-95

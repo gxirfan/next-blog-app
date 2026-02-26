@@ -40,7 +40,7 @@ const TopicList = ({ topics }: TopicListProps) => {
                     role={topic.authorRole}
                   />
                   <span className="text-neutral-500">•</span>
-                  <span className="hidden sm:block text-[12px] text-neutral-500 font-medium">
+                  <span className="hidden sm:block text-xs text-neutral-500 font-medium">
                     {getRelativeTime(topic.createdAt)}
                   </span>
                 </div>

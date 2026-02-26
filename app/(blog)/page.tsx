@@ -90,7 +90,7 @@ export default async function blogHomePage({
         <div className="flex flex-wrap items-center gap-5 mb-16">
           <Link
             href="/post/all"
-            className="group relative inline-flex items-center gap-3 px-10 py-5 bg-white text-black rounded-full font-black text-[12px] tracking-[0.2em] transition-all hover:bg-cyan-500 uppercase active:scale-95"
+            className="group relative inline-flex items-center gap-3 px-10 py-5 bg-white text-black rounded-full font-black text-xs tracking-[0.2em] transition-all hover:bg-cyan-500 uppercase active:scale-95"
           >
             <span>Browse {ENV.POST_TYPE}s</span>
             <ArrowRight
@@ -101,7 +101,7 @@ export default async function blogHomePage({
 
           <Link
             href="/stream"
-            className="group relative inline-flex items-center gap-4 px-10 py-5 bg-neutral-900 border-2 border-neutral-800 text-white rounded-full font-black text-[12px] tracking-[0.2em] transition-all duration-500 hover:border-cyan-500 hover:text-cyan-400 active:scale-95 uppercase overflow-hidden"
+            className="group relative inline-flex items-center gap-4 px-10 py-5 bg-neutral-900 border-2 border-neutral-800 text-white rounded-full font-black text-xs tracking-[0.2em] transition-all duration-500 hover:border-cyan-500 hover:text-cyan-400 active:scale-95 uppercase overflow-hidden"
           >
             <div className="absolute inset-0 w-full h-full bg-linear-to-r from-cyan-500/20 via-transparent to-transparent opacity-0 group-hover:opacity-100 group-hover:animate-[loading-slide_2s_infinite_ease-in-out] transition-opacity duration-500 pointer-events-none" />
 

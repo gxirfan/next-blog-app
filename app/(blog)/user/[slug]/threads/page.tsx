@@ -1,12 +1,13 @@
 import FlowCard from "@/app/(blog)/stream/_components/FlowCard";
 import PaginationControls from "@/app/components/PaginationControls";
+import ScrollProgress from "@/app/components/ScrollProgress";
 import { IFlow } from "@/app/types/flow";
 import { ENV } from "@/config/env.config";
 import { Activity, Zap } from "lucide-react";
 
 async function getUserFlows(username: string, page: string = "1") {
   const res = await fetch(
-    `${ENV.API_URL}/flow/username/${username}?page=${page}&limit=10`,
+    `${ENV.API_URL}/flow/username/${username}?page=${page}&limit=50`,
     { cache: "no-store" },
   );
 
@@ -42,7 +43,7 @@ export default async function UserFlowsPage({
           <div className="text-cyan-500">
             <Zap size={20} className="text-cyan-500" />
           </div>
-          <span className="text-[14px] font-black tracking-[0.3em] text-neutral-600">
+          <span className="text-sm font-black tracking-[0.3em] text-neutral-600">
             / @{paramList.slug}
           </span>
         </div>
@@ -61,6 +62,8 @@ export default async function UserFlowsPage({
           <div className="h-px flex-1 bg-neutral-900/50 mx-4" />
         </div>
       </header>
+
+      <ScrollProgress />
 
       <section className="min-h-[500px] flex flex-col">
         {result.data.data && result.data.data.length > 0 ? (

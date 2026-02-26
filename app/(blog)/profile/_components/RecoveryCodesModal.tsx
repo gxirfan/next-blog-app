@@ -88,7 +88,7 @@ const RecoveryCodesModal = ({ codes, onClose }: RecoveryCodesModalProps) => {
         <div className="flex flex-col sm:flex-row items-center gap-4">
           <button
             onClick={downloadAsText}
-            className="w-full flex items-center justify-center gap-3 px-8 py-5 bg-neutral-900 border-2 border-neutral-800 rounded-full text-[12px] font-black tracking-widest text-white hover:bg-neutral-800 transition-all cursor-pointer"
+            className="w-full flex items-center justify-center gap-3 px-8 py-5 bg-neutral-900 border-2 border-neutral-800 rounded-full text-xs font-black tracking-widest text-white hover:bg-neutral-800 transition-all cursor-pointer"
           >
             <Download size={18} />
             Save .txt
@@ -96,7 +96,7 @@ const RecoveryCodesModal = ({ codes, onClose }: RecoveryCodesModalProps) => {
 
           <button
             onClick={copyToClipboard}
-            className="w-full flex items-center justify-center gap-3 px-8 py-5 bg-neutral-800 border-2 border-neutral-700 rounded-full text-[12px] font-black tracking-widest text-neutral-300 hover:text-white transition-all cursor-pointer"
+            className="w-full flex items-center justify-center gap-3 px-8 py-5 bg-neutral-800 border-2 border-neutral-700 rounded-full text-xs font-black tracking-widest text-neutral-300 hover:text-white transition-all cursor-pointer"
           >
             {copied ? (
               <CheckCircle2 size={18} className="text-green-500" />

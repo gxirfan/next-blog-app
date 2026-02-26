@@ -166,12 +166,23 @@ const NotificationDropdown = () => {
                 );
                 const avatarUrl = notification.senderAvatar
                   ? ENV.API_IMAGE_URL + notification.senderAvatar
-                  : "/images/default-avatar.png";
+                  : ENV.API_IMAGE_URL +
+                    "/images/user/avatars/default-avatar.png";
 
                 return (
                   <Link
                     key={notification.id}
-                    href={notification.targetUrl || "/"}
+                    href={
+                      notification.type === "post_reply"
+                        ? `/post/${notification.targetUrl}`
+                        : notification.type === "vote_up"
+                          ? `/post/${notification.targetUrl}`
+                          : notification.type === "vote_down"
+                            ? `/post/${notification.targetUrl}`
+                            : notification.type === "flow_reply"
+                              ? `/stream/thread/${notification.targetUrl}`
+                              : notification.targetUrl || "/"
+                    }
                     onClick={() => handleNotificationClick(notification)}
                     className={`flex items-start gap-4 p-4 transition-colors hover:bg-neutral-900/50 group relative ${!notification.isRead ? "bg-cyan-500/3" : ""}`}
                   >
@@ -194,7 +205,7 @@ const NotificationDropdown = () => {
 
                     <div className="flex-1 min-w-0">
                       <p
-                        className={`text-[12px] leading-[1.6] ${!notification.isRead ? "text-neutral-200 font-medium" : "text-neutral-500"}`}
+                        className={`text-xs leading-[1.6] ${!notification.isRead ? "text-neutral-200 font-medium" : "text-neutral-500"}`}
                       >
                         {notification.message}
                       </p>
@@ -218,7 +229,7 @@ const NotificationDropdown = () => {
             href="/notification/all"
             className="block p-4 bg-neutral-900/30 hover:bg-neutral-900 text-center border-t border-neutral-900 transition-colors group"
           >
-            <span className="text-[12px] font-bold tracking-[0.2em] text-neutral-600 group-hover:text-cyan-500 transition-colors">
+            <span className="text-xs font-bold tracking-[0.2em] text-neutral-600 group-hover:text-cyan-500 transition-colors">
               Access Full List
             </span>
           </Link>

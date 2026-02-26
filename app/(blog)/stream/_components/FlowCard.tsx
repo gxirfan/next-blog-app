@@ -42,7 +42,7 @@ export default function FlowCard({ flow, actionSlot }: FlowCardProps) {
           )}
 
           <Link href={`/stream/thread/${flow.slug}`} className="block">
-            <p className="text-neutral-400 text-[16px] md:text-[18px] leading-[1.8] font-medium tracking-tight whitespace-pre-wrap group-hover:text-neutral-100 transition-colors duration-300">
+            <p className="text-neutral-400 text-base md:text-[18px] leading-[1.8] font-medium tracking-tight whitespace-pre-wrap group-hover:text-neutral-100 transition-colors duration-300">
               {flow.content}
             </p>
           </Link>
@@ -60,7 +60,7 @@ export default function FlowCard({ flow, actionSlot }: FlowCardProps) {
                   Replying to
                 </span>
               </div>
-              <p className="text-neutral-500 text-[14px] line-clamp-2 leading-relaxed font-medium pl-9">
+              <p className="text-neutral-500 text-sm line-clamp-2 leading-relaxed font-medium pl-9">
                 &quot;{flow.parentContent}&quot;
               </p>
             </Link>

@@ -52,7 +52,7 @@ const PostList = ({ posts }: PostListProps) => {
                     role={post.authorRole}
                   />
                   <span className="text-neutral-800">•</span>
-                  <span className="text-[12px] text-neutral-600 font-medium">
+                  <span className="text-xs text-neutral-600 font-medium">
                     {getRelativeTime(post.createdAt)}
                   </span>
                 </div>
@@ -126,7 +126,7 @@ const PostList = ({ posts }: PostListProps) => {
               )}
             </div>
 
-            <div className="mt-8 pt-6 border-t border-neutral-900 flex items-center justify-between text-[12px] text-neutral-600 font-medium">
+            <div className="mt-8 pt-6 border-t border-neutral-900 flex items-center justify-between text-xs text-neutral-600 font-medium">
               <div className="flex items-center gap-6">
                 {post.score !== 0 && (
                   <div
@@ -156,7 +156,7 @@ const PostList = ({ posts }: PostListProps) => {
                 href={`/post/${post.slug}`}
                 className="flex items-center gap-1 text-cyan-600 hover:text-cyan-400 font-bold tracking-wide transition-all group/read"
               >
-                READ ENTRY
+                Read entry
                 <ChevronRight
                   size={14}
                   className="group-hover/read:translate-x-1 transition-transform"

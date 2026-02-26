@@ -122,7 +122,7 @@ const PasswordModal = ({ onClose, onSuccess }: PasswordModalProps) => {
               </div>
               <button
                 onClick={onClose}
-                className="px-12 py-5 bg-white text-black text-[12px] font-black tracking-[0.2em] rounded-full hover:bg-cyan-500 transition-all active:scale-95"
+                className="px-12 py-5 bg-white text-black text-xs font-black tracking-[0.2em] rounded-full hover:bg-cyan-500 transition-all active:scale-95"
               >
                 Back to Settings
               </button>
@@ -184,14 +184,14 @@ const PasswordModal = ({ onClose, onSuccess }: PasswordModalProps) => {
                 <button
                   type="button"
                   onClick={onClose}
-                  className="text-[12px] font-black tracking-widest text-neutral-600 hover:text-white transition-all"
+                  className="text-xs font-black tracking-widest text-neutral-600 hover:text-white transition-all"
                 >
                   Cancel
                 </button>
                 <button
                   type="submit"
                   disabled={loading}
-                  className={`px-12 py-5 rounded-full text-[12px] font-black tracking-[0.2em] transition-all active:scale-95 flex items-center gap-3 ${
+                  className={`px-12 py-5 rounded-full text-xs font-black tracking-[0.2em] transition-all active:scale-95 flex items-center gap-3 ${
                     loading
                       ? "bg-neutral-900 text-neutral-700"
                       : "bg-cyan-500 text-black hover:bg-white"

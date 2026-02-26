@@ -225,7 +225,7 @@ const PostCreationWrapper = ({
                   <form onSubmit={handleSubmit} className="space-y-10">
                     {/* Media Section */}
                     <div className="space-y-4">
-                      <label className="text-[12px] font-black text-neutral-400 tracking-[0.2em] ml-6 block">
+                      <label className="text-xs font-black text-neutral-400 tracking-[0.2em] ml-6 block">
                         Cover Image
                       </label>
 
@@ -286,7 +286,7 @@ const PostCreationWrapper = ({
                           className="w-full py-8 border-2 border-dashed border-neutral-800 rounded-[2.5rem] flex items-center justify-center gap-4 text-neutral-500 hover:border-cyan-500/30 hover:text-cyan-500 transition-all group"
                         >
                           <ImageIcon size={20} />
-                          <span className="text-[12px] font-black tracking-widest">
+                          <span className="text-xs font-black tracking-widest">
                             Add Media
                           </span>
                         </button>
@@ -295,7 +295,7 @@ const PostCreationWrapper = ({
 
                     {/* Subject Input */}
                     <div className="space-y-3">
-                      <label className="text-[12px] font-black text-neutral-400 tracking-[0.2em] ml-6 block">
+                      <label className="text-xs font-black text-neutral-400 tracking-[0.2em] ml-6 block">
                         Subject
                       </label>
                       <input
@@ -316,7 +316,7 @@ const PostCreationWrapper = ({
 
                     {/* Content Editor */}
                     <div className="space-y-3">
-                      <label className="text-[12px] font-black text-neutral-400 tracking-[0.2em] ml-6 block">
+                      <label className="text-xs font-black text-neutral-400 tracking-[0.2em] ml-6 block">
                         Content
                       </label>
                       <div className="bg-neutral-900/20 rounded-[3rem] border-2 border-neutral-800 overflow-hidden p-2 focus-within:border-cyan-500/30 transition-all">
@@ -397,7 +397,7 @@ const PostCreationWrapper = ({
                   <button
                     type="button"
                     onClick={handleClose}
-                    className="px-10 py-5 rounded-full text-[12px] font-black tracking-widest text-neutral-500 hover:text-red-500 transition-all active:scale-95"
+                    className="px-10 py-5 rounded-full text-xs font-black tracking-widest text-neutral-500 hover:text-red-500 transition-all active:scale-95"
                   >
                     Cancel
                   </button>
@@ -409,7 +409,7 @@ const PostCreationWrapper = ({
                       formData.title.trim().length === 0 ||
                       getContentCharCount() < 1
                     }
-                    className={`flex-1 md:flex-none flex items-center justify-center gap-4 px-16 py-5 rounded-full text-[12px] font-black tracking-widest transition-all ${
+                    className={`flex-1 md:flex-none flex items-center justify-center gap-4 px-16 py-5 rounded-full text-xs font-black tracking-widest transition-all ${
                       loading ||
                       formData.title.trim().length === 0 ||
                       getContentCharCount() < 1

@@ -93,7 +93,7 @@ const PaginationControls = ({ meta }: PaginationProps) => {
               key={`page-${p}`}
               onClick={() => handlePageChange(p as number)}
               className={`
-                relative w-10 h-10 rounded-xl text-[12px] transition-all duration-300 cursor-pointer
+                relative w-10 h-10 rounded-xl text-xs transition-all duration-300 cursor-pointer
                 ${
                   isActive
                     ? "bg-cyan-500 text-black scale-110"

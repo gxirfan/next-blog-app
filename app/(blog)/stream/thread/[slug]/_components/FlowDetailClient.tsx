@@ -26,7 +26,7 @@ export default function FlowDetailClient({ mainFlow }: { mainFlow: IFlow }) {
                 Replying to
               </span>
             </div>
-            <p className="text-neutral-500 text-[14px] leading-relaxed line-clamp-2 pl-9">
+            <p className="text-neutral-500 text-sm leading-relaxed line-clamp-2 pl-9">
               &quot;{mainFlow.parentContent}&quot;
             </p>
           </Link>

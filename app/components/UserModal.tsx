@@ -53,7 +53,7 @@ const UserModal = ({ onClose }: UserModalProps) => {
         onClick={(e) => e.stopPropagation()}
       >
         <div className="p-6 flex justify-between items-center border-b-2 border-neutral-900">
-          <span className="text-[12px] font-black tracking-[0.4em] text-neutral-600">
+          <span className="text-xs font-black tracking-[0.4em] text-neutral-600">
             Account Menu
           </span>
           <button
@@ -93,7 +93,7 @@ const UserModal = ({ onClose }: UserModalProps) => {
           </div>
 
           <div className="text-center">
-            <p className="text-[14px] font-black tracking-[0.3em] text-neutral-700 mb-2">
+            <p className="text-sm font-black tracking-[0.3em] text-neutral-700 mb-2">
               {getGreetingTime()}
             </p>
             <h2 className="text-3xl font-black text-white tracking-tighter leading-none mb-2">
@@ -144,7 +144,7 @@ const UserModal = ({ onClose }: UserModalProps) => {
             >
               <div className="flex items-center gap-4 adminColor">
                 <LayoutDashboard size={20} />
-                <span className="text-[12px] font-black tracking-widest">
+                <span className="text-xs font-black tracking-widest">
                   Admin Panel
                 </span>
               </div>
@@ -163,7 +163,7 @@ const UserModal = ({ onClose }: UserModalProps) => {
             >
               <div className="flex items-center gap-4 moderatorColor">
                 <Shield size={20} />
-                <span className="text-[12px] font-black tracking-widest">
+                <span className="text-xs font-black tracking-widest">
                   Moderator Panel
                 </span>
               </div>
@@ -185,7 +185,7 @@ const UserModal = ({ onClose }: UserModalProps) => {
                 size={20}
                 className="group-hover:-translate-x-1 transition-transform"
               />
-              <span className="text-[12px] font-black tracking-widest">
+              <span className="text-xs font-black tracking-widest">
                 Sign Out
               </span>
             </div>
@@ -207,7 +207,7 @@ const MenuLink = ({ href, icon, label, onClick }: any) => (
       <span className="text-neutral-800 group-hover:text-cyan-500 transition-colors">
         {icon}
       </span>
-      <span className="text-[12px] font-black tracking-[0.2em]">{label}</span>
+      <span className="text-xs font-black tracking-[0.2em]">{label}</span>
     </div>
     <ChevronRight
       size={20}

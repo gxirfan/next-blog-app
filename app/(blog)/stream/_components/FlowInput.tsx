@@ -32,7 +32,7 @@ export default function FlowInput({
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!user) {
-      router.push("/login");
+      router.push("/login?redirect=" + encodeURIComponent(pathname || ""));
       return;
     }
     if (!content.trim() || status !== "idle") return;
@@ -120,7 +120,7 @@ export default function FlowInput({
           {status === "success" ? (
             <div className="w-full py-10 flex flex-col items-center justify-center space-y-3 animate-in zoom-in-95 duration-500">
               <CheckCircle2 className="text-green-500" size={36} />
-              <p className="text-green-500 font-black text-[12px] tracking-[0.2em]">
+              <p className="text-green-500 font-black text-xs tracking-[0.2em]">
                 Thread Broadcasted
               </p>
             </div>
