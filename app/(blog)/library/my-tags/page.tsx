@@ -1,4 +1,3 @@
-// app/library/my-tags/page.tsx
 import { Metadata } from "next";
 import { cookies } from "next/headers";
 import Link from "next/link";
@@ -16,9 +15,6 @@ interface MyTagsPageProps {
   searchParams: Promise<{ page?: string; limit?: string }>;
 }
 
-/**
- * Server-side fetch for user's created tags
- */
 async function getMyTags(
   page: number = 1,
   limit: number = 10,
@@ -132,7 +128,7 @@ export default async function MyTagsPage({ searchParams }: MyTagsPageProps) {
 
                     <Link
                       href={`/tag/${tag.slug}`}
-                      className="flex-1 md:flex-none flex items-center justify-center gap-3 px-10 py-5 bg-neutral-900 border-2 border-neutral-800 rounded-full text-[12px] font-black tracking-[0.2em] text-neutral-400 hover:text-white hover:border-white transition-all active:scale-95"
+                      className="flex-1 md:flex-none flex items-center justify-center gap-3 px-10 py-5 bg-neutral-900 border-2 border-neutral-800 rounded-full text-xs font-black tracking-[0.2em] text-neutral-400 hover:text-white hover:border-white transition-all active:scale-95"
                     >
                       View Topics
                       <ArrowRight size={18} />
@@ -159,7 +155,7 @@ export default async function MyTagsPage({ searchParams }: MyTagsPageProps) {
             </p>
             <Link
               href="/library"
-              className="inline-flex items-center gap-4 px-12 py-6 bg-white text-black rounded-full text-[12px] font-black tracking-[0.2em] hover:bg-cyan-500 transition-all active:scale-95"
+              className="inline-flex items-center gap-4 px-12 py-6 bg-white text-black rounded-full text-xs font-black tracking-[0.2em] hover:bg-cyan-500 transition-all active:scale-95"
             >
               Back to Library
               <ArrowRight size={18} />

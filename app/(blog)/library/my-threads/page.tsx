@@ -1,12 +1,5 @@
 import { Metadata } from "next";
-import {
-  Zap,
-  MessageSquareOff,
-  ChevronRight,
-  Calendar,
-  ArrowRight,
-} from "lucide-react";
-import AuthorBlock from "@/app/components/AuthorBlock";
+import { Zap, MessageSquareOff, Calendar, ArrowRight } from "lucide-react";
 import Link from "next/link";
 import { IBaseResponse } from "@/app/types/common";
 import PaginationControls from "@/app/components/PaginationControls";
@@ -67,7 +60,7 @@ export default async function MyFlowsPage({ searchParams }: MyFlowsPageProps) {
             <h1 className="text-6xl md:text-7xl font-black text-white tracking-tighter leading-none">
               My <span className="text-neutral-800">Threads</span>
             </h1>
-            <p className="text-neutral-500 text-[12px] font-black tracking-[0.4em] ml-1">
+            <p className="text-neutral-500 text-xs font-black tracking-[0.4em] ml-1">
               A personal collection of your shared thoughts
             </p>
           </div>
@@ -105,7 +98,7 @@ export default async function MyFlowsPage({ searchParams }: MyFlowsPageProps) {
                 <div className="flex items-center pt-8 border-t-2 border-neutral-900">
                   <Link
                     href={`/${ENV.SOCIAL_POST_TYPE}/thread/${flow.slug}`}
-                    className="flex-1 md:flex-none flex items-center justify-center gap-3 px-10 py-5 bg-neutral-900 border-2 border-neutral-800 rounded-full text-[12px] font-black tracking-[0.2em] text-neutral-400 hover:text-white hover:border-white transition-all active:scale-95"
+                    className="flex-1 md:flex-none flex items-center justify-center gap-3 px-10 py-5 bg-neutral-900 border-2 border-neutral-800 rounded-full text-xs font-black tracking-[0.2em] text-neutral-400 hover:text-white hover:border-white transition-all active:scale-95"
                   >
                     View Discussion
                     <ArrowRight size={18} />
@@ -126,12 +119,12 @@ export default async function MyFlowsPage({ searchParams }: MyFlowsPageProps) {
             <div className="w-20 h-20 bg-neutral-900 rounded-full flex items-center justify-center mb-8 border-2 border-neutral-800">
               <MessageSquareOff size={32} className="text-neutral-700" />
             </div>
-            <p className="text-neutral-500 font-black tracking-[0.3em] text-[12px] mb-10 text-center px-6">
+            <p className="text-neutral-500 font-black tracking-[0.3em] text-xs mb-10 text-center px-6">
               Your thread archive is currently empty.
             </p>
             <Link
               href={`/${ENV.SOCIAL_POST_TYPE}`}
-              className="inline-flex items-center gap-4 px-12 py-6 bg-white text-black rounded-full text-[12px] font-black tracking-[0.2em] hover:bg-cyan-500 transition-all active:scale-95"
+              className="inline-flex items-center gap-4 px-12 py-6 bg-white text-black rounded-full text-xs font-black tracking-[0.2em] hover:bg-cyan-500 transition-all active:scale-95"
             >
               Start a Thread
               <ArrowRight size={18} />

@@ -51,7 +51,7 @@ export default function LibraryPage() {
       <header className="space-y-6 border-b-2 border-neutral-900 pb-12">
         <div className="flex items-center gap-4">
           <div className="w-12 h-1.5 bg-cyan-500 rounded-full" />
-          <span className="text-[12px] font-black tracking-[0.4em] text-neutral-600">
+          <span className="text-xs font-black tracking-[0.4em] text-neutral-600">
             Personal Archive
           </span>
         </div>
@@ -67,7 +67,7 @@ export default function LibraryPage() {
             <h2 className="text-3xl font-black text-white tracking-tighter">
               My Creations
             </h2>
-            <p className="text-neutral-600 text-[12px] font-black tracking-widest">
+            <p className="text-neutral-600 text-xs font-black tracking-widest">
               Manage your authored topics, {ENV.POST_TYPE}s and shared threads.
             </p>
           </div>
@@ -115,7 +115,7 @@ export default function LibraryPage() {
             <h2 className="text-3xl font-black text-white tracking-tighter">
               Collections
             </h2>
-            <p className="text-neutral-600 text-[12px] font-black tracking-widest">
+            <p className="text-neutral-600 text-xs font-black tracking-widest">
               Saved items and bookmarks for future reference.
             </p>
           </div>
@@ -128,7 +128,7 @@ export default function LibraryPage() {
               size={32}
               className="text-neutral-900 group-hover:text-cyan-500/50 transition-all duration-500 mb-6"
             />
-            <p className="text-[12px] font-black tracking-[0.4em] text-neutral-700">
+            <p className="text-xs font-black tracking-[0.4em] text-neutral-700">
               No bookmarks archived yet
             </p>
           </div>

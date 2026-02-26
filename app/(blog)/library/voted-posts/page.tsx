@@ -1,10 +1,4 @@
-import {
-  ArrowBigUp,
-  ArrowBigDown,
-  ListChecks,
-  Hash,
-  ArrowRight,
-} from "lucide-react";
+import { ListChecks, Hash, ArrowRight } from "lucide-react";
 import Link from "next/link";
 import { fetchUserVotedPosts } from "./fetcher";
 import { IVoteStatusResponse } from "@/app/types/vote";
@@ -29,10 +23,10 @@ export default async function VotedPostsPage() {
           </h1>
           <div className="flex items-center gap-4 px-1">
             <div className="flex items-center gap-2">
-              <span className="text-[12px] font-black text-neutral-600 tracking-[0.3em]">
+              <span className="text-xs font-black text-neutral-600 tracking-[0.3em]">
                 Total Interactions:
               </span>
-              <span className="text-[12px] font-black text-white tracking-widest bg-neutral-900 px-3 py-1 rounded-full border border-neutral-800">
+              <span className="text-xs font-black text-white tracking-widest bg-neutral-900 px-3 py-1 rounded-full border border-neutral-800">
                 {votedPosts.length}
               </span>
             </div>
@@ -50,12 +44,12 @@ export default async function VotedPostsPage() {
           <div className="inline-flex w-24 h-24 items-center justify-center bg-neutral-900 border-2 border-neutral-800 rounded-full text-neutral-800">
             <Hash size={48} />
           </div>
-          <p className="text-[12px] font-black tracking-[0.3em] text-neutral-500">
+          <p className="text-xs font-black tracking-[0.3em] text-neutral-500">
             You haven't voted for any posts yet.
           </p>
           <Link
             href="/"
-            className="inline-flex px-12 py-5 bg-white text-black rounded-full text-[12px] font-black tracking-[0.3em] hover:bg-cyan-500 transition-all active:scale-95"
+            className="inline-flex px-12 py-5 bg-white text-black rounded-full text-xs font-black tracking-[0.3em] hover:bg-cyan-500 transition-all active:scale-95"
           >
             Start Browsing
           </Link>
@@ -99,14 +93,14 @@ const PostListItem = ({ vote }: PostListItemProps) => {
             } flex items-center gap-2`}
           >
             <span
-              className={`text-[12px] font-black tracking-widest ${
+              className={`text-xs font-black tracking-widest ${
                 isUpvote ? "text-cyan-500" : "text-red-500"
               }`}
             >
               {isUpvote ? "Upvoted" : "Downvoted"}
             </span>
           </div>
-          <span className="text-[12px] font-black text-neutral-700 tracking-[0.2em]">
+          <span className="text-xs font-black text-neutral-700 tracking-[0.2em]">
             Added to archive
           </span>
         </div>
@@ -122,10 +116,10 @@ const PostListItem = ({ vote }: PostListItemProps) => {
         {/* Feedback Row */}
         <div className="flex items-center gap-4">
           <div className="flex items-center gap-2 bg-neutral-900 px-4 py-2 rounded-full border border-neutral-800">
-            <span className="text-[12px] font-black text-neutral-600 tracking-widest">
+            <span className="text-xs font-black text-neutral-600 tracking-widest">
               Action:
             </span>
-            <span className="text-[12px] font-black text-neutral-300">
+            <span className="text-xs font-black text-neutral-300">
               {isUpvote ? "Positive Feedback" : "Negative Feedback"}
             </span>
           </div>
@@ -136,7 +130,7 @@ const PostListItem = ({ vote }: PostListItemProps) => {
       <div className="flex items-center gap-4 w-full md:w-auto pt-8 md:pt-0 border-t-2 md:border-t-0 border-neutral-900">
         <Link
           href={`/post/${slug}`}
-          className="flex-1 md:flex-none flex items-center justify-center gap-3 px-10 py-5 bg-neutral-900 border-2 border-neutral-800 rounded-full text-[12px] font-black tracking-[0.2em] text-neutral-400 hover:text-white hover:border-white transition-all active:scale-95"
+          className="flex-1 md:flex-none flex items-center justify-center gap-3 px-10 py-5 bg-neutral-900 border-2 border-neutral-800 rounded-full text-xs font-black tracking-[0.2em] text-neutral-400 hover:text-white hover:border-white transition-all active:scale-95"
         >
           View Content
           <ArrowRight size={18} />
