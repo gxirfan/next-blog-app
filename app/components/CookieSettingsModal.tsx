@@ -159,102 +159,117 @@ export const CookieSettingsModal = ({
   const isSettingsView = isSettingsModalActive;
 
   const ModalContent = (
-    <div className="bg-neutral-950 rounded-xl max-w-lg w-full p-8 space-y-6 transform transition-all duration-300 scale-100 border border-neutral-700">
-      <h2
-        id="cookie-consent-title"
-        className="text-2xl font-bold text-white border-b border-neutral-700 pb-3 flex items-center space-x-3"
-      >
-        <Settings size={28} className={ACCENT_COLOR_CLASS} />
-        <span>
-          {isSettingsView ? "Cookie Preferences" : "Your Privacy Matters"}
-        </span>
-      </h2>
+    <div className="bg-neutral-950 rounded-[3rem] max-w-lg w-full p-10 space-y-8 transform transition-all duration-300 scale-100 border-2 border-neutral-900 relative overflow-hidden">
+      <div className="absolute -top-24 -right-24 w-48 h-48 bg-neutral-900/20 rounded-full blur-3xl pointer-events-none" />
 
-      <p className="text-neutral-400 leading-relaxed text-sm">
+      <header className="space-y-4 relative z-10">
+        <div className="flex items-center gap-3 text-[10px] font-black tracking-[0.4em] text-neutral-600">
+          <Settings size={14} />
+          <span>Privacy Protocol</span>
+        </div>
+        <h2
+          id="cookie-consent-title"
+          className="text-3xl md:text-4xl font-black text-white tracking-tighter leading-none"
+        >
+          {isSettingsView ? "Cookie Preferences" : "Your Privacy Matters"}
+        </h2>
+        <div className="h-1.5 w-12 bg-cyan-600 rounded-full" />
+      </header>
+
+      <p className="text-neutral-500 font-bold leading-relaxed text-sm relative z-10">
         {isSettingsView
           ? "Adjust your preferences below. Your choices help us improve our service and content delivery."
-          : `We use cookies and similar technologies for advertising, project development, and internal analytics to ensure legal compliance and project stability.`}
+          : `We use cookies and similar technologies for advertising, project development, and internal analytics to ensure legal compliance.`}
       </p>
 
-      {/* Essential Cookies */}
-      <div className={`bg-neutral-900 p-4 rounded-lg border ${BORDER_COLOR}`}>
+      <div className="bg-neutral-950 p-6 rounded-[2rem] border-2 border-neutral-900 flex flex-col gap-2">
         <div className="flex justify-between items-center">
-          <p className="font-semibold text-white flex items-center space-x-2">
-            <CheckCircle size={18} className="text-green-500" />
+          <p className="font-black text-white text-xs tracking-widest flex items-center gap-2">
+            <CheckCircle size={16} className="text-emerald-500" />
             <span>Essential Cookies</span>
           </p>
-          <span className="text-xs font-medium text-green-500">
-            Always Required
+          <span className="text-[10px] font-black text-emerald-500 tracking-tighter bg-emerald-500/5 px-3 py-1 rounded-lg border border-emerald-500/10">
+            Required
           </span>
         </div>
-        <p className="text-sm text-neutral-500 mt-1">
-          Required for the basic functionality of the site (session management,
-          security) and cannot be disabled.
+        <p className="text-[13px] text-neutral-600 font-medium">
+          Necessary for session management and core security protocols.
         </p>
       </div>
 
-      {/* Toggleable Categories */}
-      {COOKIE_CATEGORIES.map((category) => {
-        const key = category.key as "analytics" | "marketing";
-        const isChecked = preferences[key];
+      <div className="space-y-2">
+        {COOKIE_CATEGORIES.map((category) => {
+          const key = category.key as "analytics" | "marketing";
+          const isChecked = preferences[key];
 
-        return (
-          <div key={key} className={`p-4 border-b ${BORDER_COLOR}`}>
-            <div className="flex justify-between items-center">
-              <p className="font-semibold text-white">{category.title}</p>
-              <label className="relative inline-flex items-center cursor-pointer">
-                <input
-                  type="checkbox"
-                  checked={isChecked}
-                  onChange={() => handleToggle(key)}
-                  className="sr-only peer"
-                />
-                {/* Toggle Switch Design (Using Cyan) */}
-                <div
-                  className={`w-11 h-6 bg-neutral-800 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-neutral-900 after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-neutral-300 after:border after:border-neutral-700 after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-cyan-600`}
-                ></div>
-              </label>
+          return (
+            <div
+              key={key}
+              className="p-6 bg-neutral-900/20 border-b-2 border-neutral-900 last:border-0"
+            >
+              <div className="flex justify-between items-center mb-2">
+                <p className="font-black text-white text-xs tracking-widest">
+                  {category.title}
+                </p>
+                <label className="relative inline-flex items-center cursor-pointer scale-110">
+                  <input
+                    type="checkbox"
+                    checked={isChecked}
+                    onChange={() => handleToggle(key)}
+                    className="sr-only peer"
+                  />
+                  <div className="w-12 h-6 bg-neutral-900 rounded-full border-2 border-neutral-800 peer-checked:bg-cyan-600 peer-checked:border-cyan-500 transition-all after:content-[''] after:absolute after:top-[4px] after:left-[4px] after:bg-neutral-700 peer-checked:after:bg-white after:rounded-full after:h-3.5 after:w-3.5 after:transition-all peer-checked:after:translate-x-6"></div>
+                </label>
+              </div>
+              <p className="text-[13px] text-neutral-600 font-medium leading-snug">
+                {category.description}
+              </p>
             </div>
-            <p className="text-sm text-neutral-500 mt-1">
-              {category.description}
-            </p>
-          </div>
-        );
-      })}
-
-      {/* Legal Links */}
-      <div className="flex space-x-4 pt-2 justify-center">
-        <Link href="/terms-of-use" className={LINK_CLASS} target="_blank">
-          Terms
-        </Link>
-        <Link href="/privacy-policy" className={LINK_CLASS} target="_blank">
-          Privacy
-        </Link>
-        <Link href="/cookie-policy" className={LINK_CLASS} target="_blank">
-          Cookie Policy
-        </Link>
+          );
+        })}
       </div>
 
-      {/* Button Actions */}
-      <div className="flex flex-col space-y-3 pt-4 border-t border-neutral-700">
+      <div className="flex space-x-6 justify-center">
+        {["Terms", "Privacy", "Cookie Policy"].map((item, idx) => (
+          <Link
+            key={idx}
+            href={
+              item === "Terms"
+                ? "/terms-of-use"
+                : item === "Privacy"
+                  ? "/privacy-policy"
+                  : "/cookie-policy"
+            }
+            className="text-[10px] font-black text-neutral-700 hover:text-white tracking-[0.2em] transition-colors"
+            target="_blank"
+          >
+            {item}
+          </Link>
+        ))}
+      </div>
+
+      <div className="flex flex-col gap-3 pt-6 border-t-2 border-neutral-900">
         {isSettingsView && (
           <>
-            <button onClick={handleAcceptAll} className={PRIMARY_BUTTON_CLASS}>
-              <CheckCircle size={16} className="mr-2" />
+            <button
+              onClick={handleAcceptAll}
+              className="w-full h-14 bg-cyan-600 hover:bg-cyan-500 text-black font-black text-[11px] tracking-[0.2em] rounded-full transition-all active:scale-95 flex items-center justify-center gap-2"
+            >
+              <CheckCircle size={16} />
               Accept All and Save
             </button>
-            <div className="flex justify-between space-x-3">
+            <div className="grid grid-cols-2 gap-3">
               <button
                 onClick={handleDeclineAll}
-                className={SECONDARY_BUTTON_CLASS}
+                className="h-12 border-2 border-neutral-900 text-neutral-400 font-black text-[10px] tracking-widest rounded-full hover:bg-neutral-900 transition-all"
               >
                 Decline All
               </button>
               <button
                 onClick={() => handleSaveAndClose()}
-                className={SECONDARY_BUTTON_CLASS}
+                className="h-12 bg-neutral-900 text-white font-black text-[10px] tracking-widest rounded-full hover:bg-neutral-800 transition-all"
               >
-                Save Preferences
+                Save Choices
               </button>
             </div>
           </>
@@ -262,22 +277,24 @@ export const CookieSettingsModal = ({
 
         {isBlockingModalVisible && (
           <>
-            <button onClick={handleAcceptAll} className={PRIMARY_BUTTON_CLASS}>
-              <CheckCircle size={16} className="mr-2" />
-              Accept All and Continue
+            <button
+              onClick={handleAcceptAll}
+              className="w-full h-14 bg-white hover:bg-neutral-200 text-black font-black text-[11px] tracking-[0.3em] rounded-full transition-all active:scale-95 flex items-center justify-center gap-2"
+            >
+              Accept All Protocol
             </button>
-            <div className="flex justify-between space-x-3">
+            <div className="grid grid-cols-2 gap-3">
               <button
                 onClick={handleDeclineAll}
-                className={SECONDARY_BUTTON_CLASS}
+                className="h-12 border-2 border-neutral-900 text-neutral-500 font-black text-[10px] tracking-widest rounded-full hover:bg-neutral-900 transition-all"
               >
-                Decline All
+                Reject
               </button>
               <button
                 onClick={handleEditSettings}
-                className={SECONDARY_BUTTON_CLASS}
+                className="h-12 bg-neutral-900 text-white font-black text-[10px] tracking-widest rounded-full hover:bg-neutral-800 transition-all"
               >
-                Edit Settings
+                Preferences
               </button>
             </div>
           </>
