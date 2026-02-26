@@ -1,4 +1,5 @@
 "use client";
+
 import { useState } from "react";
 import api from "@/api/axios";
 import Link from "next/link";
@@ -7,8 +8,11 @@ import {
   Mail,
   ArrowLeft,
   ShieldCheck,
-  ChevronRight,
   Check,
+  ArrowRight,
+  Loader2,
+  Lock,
+  AlertCircle,
 } from "lucide-react";
 
 const MIN_PASSWORD_LENGTH = 6;
@@ -21,10 +25,7 @@ export default function ForgotPasswordPage() {
   const [loading, setLoading] = useState(false);
   const [status, setStatus] = useState("");
   const [isSuccess, setIsSuccess] = useState(false);
-
-  // Design tokens aligned with your shared layout components
-  const inputStyles =
-    "w-full px-6 py-4 rounded-2xl bg-neutral-900/50 border border-neutral-800 text-white placeholder-neutral-600 focus:outline-none focus:border-cyan-500/50 focus:bg-neutral-900 transition-all duration-300 font-medium";
+  const [passwordResetSuccess, setPasswordResetSuccess] = useState(false);
 
   const handleCodeRequest = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -42,8 +43,6 @@ export default function ForgotPasswordPage() {
       setLoading(false);
     }
   };
-
-  const [passwordResetSuccess, setPasswordResetSuccess] = useState(false);
 
   const handlePasswordReset = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -76,180 +75,181 @@ export default function ForgotPasswordPage() {
     }
   };
 
-  return (
-    <div className="flex justify-center items-center min-h-screen bg-neutral-950 px-4">
-      {/* Background Decorative Element */}
-      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-lg h-64 bg-cyan-500/5 blur-[120px] pointer-events-none" />
+  const INPUT_STYLING =
+    "w-full h-16 pl-16 pr-6 bg-neutral-900/40 border-2 border-neutral-800 rounded-full text-[15px] text-white font-semibold placeholder-neutral-600 focus:outline-none focus:border-cyan-500/50 focus:bg-neutral-900 transition-all duration-300 appearance-none";
 
-      <div className="w-full max-w-[440px] relative">
-        <div className="bg-neutral-950 border border-neutral-800/50 p-8 md:p-10 rounded-[2.5rem] backdrop-blur-xl">
+  const LABEL_STYLING =
+    "text-[13px] font-black text-neutral-400 tracking-[0.15em] ml-6 mb-2 block";
+
+  return (
+    <div className="flex min-h-screen items-center justify-center p-6 bg-neutral-950 relative overflow-hidden">
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(6,182,212,0.03),transparent)] pointer-events-none" />
+
+      <div className="w-full max-w-[480px] relative z-10 animate-in fade-in zoom-in-95 duration-700">
+        <div className="bg-[#050505] border-2 border-neutral-900 p-10 md:p-16 rounded-[4rem]">
           {/* Header Section */}
-          <div className="mb-10">
-            <div className="w-12 h-12 bg-cyan-500/10 border border-cyan-500/20 rounded-2xl flex items-center justify-center mb-6">
+          <div className="flex flex-col items-center gap-6 mb-14">
+            <div className="w-20 h-20 flex items-center justify-center bg-neutral-900 border-2 border-neutral-800 rounded-full text-cyan-500">
               {isSuccess ? (
-                <ShieldCheck className="text-cyan-400" size={24} />
+                <ShieldCheck size={36} strokeWidth={1.5} />
               ) : (
-                <KeyRound className="text-cyan-400" size={24} />
+                <KeyRound size={36} strokeWidth={1.5} />
               )}
             </div>
-            <h1 className="text-3xl text-white tracking-tighter leading-tight mb-2">
-              {isSuccess ? "Reset Password" : "Forgot Password"}
-            </h1>
-            <p className="text-sm font-medium text-neutral-500 leading-relaxed">
-              {isSuccess
-                ? "Enter the 6-digit code sent to your email and choose a new secure password."
-                : "No worries, it happens. Enter your details and we'll send you a recovery code."}
-            </p>
+            <div className="text-center space-y-2">
+              <h1 className="text-4xl font-black text-white tracking-tighter leading-none">
+                {isSuccess ? "Reset" : "Forgot"}
+              </h1>
+              <p className="text-xs font-bold text-neutral-500 tracking-[0.3em] uppercase">
+                {isSuccess ? "Set new password" : "Recover account"}
+              </p>
+            </div>
           </div>
 
           <form
             onSubmit={isSuccess ? handlePasswordReset : handleCodeRequest}
-            className="space-y-4"
+            className="space-y-8"
           >
+            {/* Step 1: Login Field */}
             <div className="space-y-2">
-              <label className="text-[10px] tracking-[0.2em] text-neutral-600 ml-2">
-                Identity Information
-              </label>
+              <label className={LABEL_STYLING}>Identity Info</label>
               <div className="relative group">
+                <Mail
+                  size={20}
+                  className={`absolute left-6 top-1/2 -translate-y-1/2 transition-colors ${isSuccess ? "text-neutral-800" : "text-neutral-600 group-focus-within:text-cyan-500"}`}
+                />
                 <input
                   type="text"
-                  placeholder="Email or username"
+                  placeholder="Username or Email"
                   value={loginField}
                   onChange={(e) => setLoginField(e.target.value)}
+                  disabled={isSuccess || loading}
                   required
-                  className={`${inputStyles} ${
-                    isSuccess
-                      ? "opacity-50 cursor-not-allowed bg-neutral-950"
-                      : ""
-                  }`}
-                  disabled={loading || isSuccess}
+                  className={`${INPUT_STYLING} ${isSuccess ? "opacity-40 cursor-not-allowed border-neutral-900" : ""}`}
                 />
-                {!isSuccess && (
-                  <Mail
-                    className="absolute right-5 top-1/2 -translate-y-1/2 text-neutral-700 group-focus-within:text-cyan-500/50 transition-colors"
-                    size={18}
-                  />
-                )}
               </div>
             </div>
 
+            {/* Step 2: Verification & Password Fields */}
             {isSuccess && (
-              <div className="space-y-4 pt-2 animate-in fade-in slide-in-from-top-4 duration-500">
+              <div className="space-y-6 animate-in fade-in slide-in-from-top-4 duration-500">
                 <div className="space-y-2">
-                  <label className="text-[10px] tracking-[0.2em] text-neutral-600 ml-2">
-                    Verification Code
-                  </label>
+                  <label className={LABEL_STYLING}>Security Code</label>
                   <input
                     type="text"
-                    placeholder="6-digit code"
+                    placeholder="6-DIGIT CODE"
                     value={token}
                     onChange={(e) => setToken(e.target.value)}
                     required
-                    className={`${inputStyles} text-center tracking-[0.5em] font-mono text-cyan-400`}
                     maxLength={6}
+                    className={`${INPUT_STYLING} text-center tracking-[0.5em] font-mono pl-6`}
                   />
                 </div>
 
                 <div className="space-y-2">
-                  <label className="text-[10px] tracking-[0.2em] text-neutral-600 ml-2">
-                    New Password
-                  </label>
-                  <input
-                    type="password"
-                    placeholder="Min 6 characters"
-                    value={newPassword}
-                    onChange={(e) => setNewPassword(e.target.value)}
-                    required
-                    className={inputStyles}
-                  />
+                  <label className={LABEL_STYLING}>New Password</label>
+                  <div className="relative group">
+                    <Lock
+                      size={20}
+                      className="absolute left-6 top-1/2 -translate-y-1/2 text-neutral-600 group-focus-within:text-cyan-500"
+                    />
+                    <input
+                      type="password"
+                      placeholder="••••••••"
+                      value={newPassword}
+                      onChange={(e) => setNewPassword(e.target.value)}
+                      required
+                      className={INPUT_STYLING}
+                    />
+                  </div>
                 </div>
 
                 <div className="space-y-2">
-                  <label className="text-[10px] tracking-[0.2em] text-neutral-600 ml-2">
-                    Confirm Password
-                  </label>
-                  <input
-                    type="password"
-                    placeholder="Repeat new password"
-                    value={confirmPassword}
-                    onChange={(e) => setConfirmPassword(e.target.value)}
-                    required
-                    className={inputStyles}
-                  />
+                  <label className={LABEL_STYLING}>Confirm Password</label>
+                  <div className="relative group">
+                    <Lock
+                      size={20}
+                      className="absolute left-6 top-1/2 -translate-y-1/2 text-neutral-600 group-focus-within:text-cyan-500"
+                    />
+                    <input
+                      type="password"
+                      placeholder="••••••••"
+                      value={confirmPassword}
+                      onChange={(e) => setConfirmPassword(e.target.value)}
+                      required
+                      className={INPUT_STYLING}
+                    />
+                  </div>
                 </div>
               </div>
             )}
 
-            {/* Dynamic Status Message */}
+            {/* Status Message */}
             {status && (
               <div
-                className={`p-4 rounded-2xl text-xs font-bold tracking-tight border animate-in zoom-in-95 duration-200 ${
+                className={`flex items-center gap-3 p-5 border-2 rounded-[2.5rem] text-xs font-black tracking-tight animate-in zoom-in-95 duration-200 ${
                   status.startsWith("✅")
-                    ? "bg-green-500/5 border-green-500/20 text-green-400"
-                    : "bg-red-500/5 border-red-500/20 text-red-400"
+                    ? "bg-emerald-500/10 border-emerald-500/20 text-emerald-500"
+                    : "bg-red-500/10 border-red-500/20 text-red-500"
                 }`}
               >
-                {status}
+                {status.startsWith("✅") ? (
+                  <Check size={18} className="shrink-0" />
+                ) : (
+                  <AlertCircle size={18} className="shrink-0" />
+                )}
+                <span>{status}</span>
               </div>
             )}
 
+            {/* Action Button */}
             <button
               type="submit"
               disabled={loading || passwordResetSuccess}
-              className="relative w-full group overflow-hidden cursor-pointer"
+              className="w-full pt-4 outline-none group"
             >
-              {/* Outer Container with Glow effect on hover */}
               <div
-                className="relative flex items-center justify-center gap-2 px-6 py-4 
-    bg-neutral-900 border border-neutral-800 
-    text-white tracking-widest text-[12px] 
-    rounded-2xl transition-all duration-300
-    group-hover:border-cyan-500/50 group-hover:bg-neutral-900/80 active:scale-[0.98] disabled:opacity-50 disabled:cursor-not-allowed"
+                className={`
+                flex items-center justify-center gap-4 h-16 rounded-full text-sm font-black tracking-[0.2em] transition-all duration-300 active:scale-95 uppercase
+                ${
+                  loading || passwordResetSuccess
+                    ? "bg-neutral-900 text-neutral-700 border-2 border-neutral-800"
+                    : "bg-cyan-500 text-black hover:bg-white cursor-pointer"
+                }
+              `}
               >
                 {loading ? (
-                  <div className="flex items-center gap-3">
-                    <div className="w-3 h-3 border-2 border-cyan-500/30 border-t-cyan-500 rounded-full animate-spin" />
-                    <span className="text-neutral-500">Processing...</span>
-                  </div>
+                  <Loader2 className="animate-spin" size={20} />
                 ) : passwordResetSuccess ? (
-                  <div className="flex items-center gap-3 text-cyan-500 animate-in fade-in zoom-in duration-300">
-                    <Check size={14} strokeWidth={3} />
-                    <span className="font-bold tracking-widest text-[12px]">
-                      Password Reset Successful
-                    </span>
-                  </div>
+                  <Check size={20} strokeWidth={3} />
                 ) : (
                   <>
-                    <span className="group-hover:text-cyan-400 transition-colors">
-                      Send Recovery Code
-                    </span>
-                    <ChevronRight
-                      size={14}
-                      className="text-neutral-600 group-hover:text-cyan-400 group-hover:translate-x-1 transition-all"
+                    <span>{isSuccess ? "Update Access" : "Send Code"}</span>
+                    <ArrowRight
+                      size={20}
+                      className="group-hover:translate-x-1 transition-transform"
                     />
                   </>
                 )}
               </div>
             </button>
-
-            <Link
-              href="/recover-password"
-              className="flex items-center justify-center text-[12px] tracking-[0.2em] text-neutral-500 hover:text-cyan-400 transition-colors pt-2 hover:underline cursor-pointer"
-            >
-              <span>Try another method</span>
-            </Link>
-
-            <Link
-              href="/login"
-              className="flex items-center justify-center gap-2 text-[12px] tracking-[0.2em] text-neutral-500 hover:text-cyan-400 transition-colors pt-4 group"
-            >
-              <ArrowLeft
-                size={12}
-                className="group-hover:-translate-x-1 transition-transform"
-              />
-              Back to login
-            </Link>
           </form>
+
+          {/* Footer */}
+          <div className="mt-14 space-y-8 text-center">
+            <div className="flex flex-col items-center gap-6 pt-6 border-t border-neutral-900">
+              <Link
+                href="/login"
+                className="text-sm font-black tracking-[0.2em] text-neutral-700 hover:text-white transition-colors flex items-center gap-2 group uppercase"
+              >
+                <ArrowLeft
+                  size={14}
+                  className="group-hover:-translate-x-1 transition-transform"
+                />
+                Back to login
+              </Link>
+            </div>
+          </div>
         </div>
       </div>
     </div>

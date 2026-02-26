@@ -17,13 +17,11 @@ import {
   Mail,
   ShieldCheck,
   UserPlus,
-  LogIn,
 } from "lucide-react";
 import api from "@/api/axios";
 import { useAuth } from "@/app/context/AuthContext";
 import { getMinAgeDate } from "@/app/types/validators/min-age-custom.validator";
 
-// DTO Interface (Preserved)
 interface UserResponseWithRecoveryCodesDto {
   id: string;
   username: string;
@@ -51,7 +49,6 @@ export default function RegisterPage() {
   const router = useRouter();
   const { user, isLoading } = useAuth();
 
-  // Linear Step Logic: 1: Handle, 2: Email, 3: Identity, 4: Optional, 5: Security
   const [step, setStep] = useState(1);
   const [isUsernameValid, setIsUsernameValid] = useState(false);
   const [isChecking, setIsChecking] = useState(false);
@@ -210,9 +207,9 @@ export default function RegisterPage() {
   const INPUT_STYLING =
     "w-full h-16 px-8 bg-neutral-900/40 border-2 border-neutral-800 rounded-full text-[15px] text-white font-semibold placeholder-neutral-500 focus:outline-none focus:border-cyan-500/50 focus:bg-neutral-900 transition-all duration-300 appearance-none";
   const LABEL_STYLING =
-    "text-[12px] font-black text-neutral-500 tracking-[0.15em] ml-6 mb-2 block";
+    "text-xs font-black text-neutral-500 tracking-[0.15em] ml-6 mb-2 block";
   const BUTTON_STYLING =
-    "w-full h-16 bg-white text-black rounded-full text-[14px] font-black tracking-[0.2em] transition-all hover:bg-cyan-500 disabled:opacity-10 active:scale-95 flex items-center justify-center gap-2";
+    "w-full h-16 bg-white text-black rounded-full text-sm font-black tracking-[0.2em] transition-all hover:bg-cyan-500 disabled:opacity-10 active:scale-95 flex items-center justify-center gap-2";
 
   return (
     <div className="min-h-screen bg-neutral-950 flex items-center justify-center py-20 px-6 relative overflow-hidden">
@@ -226,7 +223,7 @@ export default function RegisterPage() {
                 Step <span className="text-cyan-500">{step}</span>
               </h1>
               <div className="flex justify-center gap-2 mt-6">
-                {[1, 2, 3, 4, 5].map((s) => (
+                {[1, 2, 3, 4, 5, 6].map((s) => (
                   <div
                     key={s}
                     className={`h-1 rounded-full transition-all duration-500 ${step >= s ? "w-8 bg-cyan-500" : "w-4 bg-neutral-900"}`}
@@ -279,7 +276,7 @@ export default function RegisterPage() {
 
                     {usernameMessage && (
                       <p
-                        className={`text-[12px] font-black tracking-widest ${isUsernameValid ? "text-green-500" : "text-red-500"}`}
+                        className={`text-xs font-black tracking-widest ${isUsernameValid ? "text-green-500" : "text-red-500"}`}
                       >
                         {usernameMessage}
                       </p>
@@ -341,25 +338,27 @@ export default function RegisterPage() {
                   <ShieldCheck className="mx-auto text-cyan-500" size={48} />
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                     <div className="space-y-2">
-                      <label className={LABEL_STYLING}>First Name</label>
+                      <label className={LABEL_STYLING}>
+                        First Name (Optional)
+                      </label>
                       <input
                         name="firstName"
                         value={formData.firstName}
-                        placeholder="John"
+                        placeholder="e.g. John"
                         className={INPUT_STYLING}
                         onChange={handleChange}
-                        required
                       />
                     </div>
                     <div className="space-y-2">
-                      <label className={LABEL_STYLING}>Last Name</label>
+                      <label className={LABEL_STYLING}>
+                        Last Name (Optional)
+                      </label>
                       <input
                         name="lastName"
                         value={formData.lastName}
-                        placeholder="Doe"
+                        placeholder="e.g. Doe"
                         className={INPUT_STYLING}
                         onChange={handleChange}
-                        required
                       />
                     </div>
                   </div>
@@ -374,10 +373,11 @@ export default function RegisterPage() {
                     <button
                       type="button"
                       onClick={() => setStep(4)}
-                      disabled={!formData.firstName || !formData.lastName}
                       className={BUTTON_STYLING}
                     >
-                      Continue
+                      {!formData.firstName && !formData.lastName
+                        ? "Skip"
+                        : "Continue"}
                     </button>
                   </div>
                 </div>
@@ -527,13 +527,13 @@ export default function RegisterPage() {
                         <>
                           <div className="flex items-center gap-2 text-neutral-600 animate-in fade-in duration-500">
                             <ShieldCheck size={14} />
-                            <p className="text-[12px] font-black tracking-widest">
+                            <p className="text-xs font-black tracking-widest">
                               Must be at least 6 characters.
                             </p>
                           </div>
                           <div className="flex items-center gap-2 text-neutral-600 animate-in fade-in duration-500">
                             <ShieldCheck size={14} />
-                            <p className="text-[12px] font-black tracking-widest">
+                            <p className="text-xs font-black tracking-widest">
                               No strict rules, but a complex password is highly
                               recommended.
                             </p>
@@ -544,7 +544,7 @@ export default function RegisterPage() {
                       {formData.password &&
                         confirmPassword &&
                         formData.password !== confirmPassword && (
-                          <p className="text-red-500 text-[12px] font-black tracking-widest text-center animate-in zoom-in-95">
+                          <p className="text-red-500 text-xs font-black tracking-widest text-center animate-in zoom-in-95">
                             Passwords do not match
                           </p>
                         )}
@@ -564,7 +564,7 @@ export default function RegisterPage() {
                     {/* Legal Links Label */}
                     <label
                       htmlFor="terms"
-                      className="text-[12px] font-black text-neutral-500 tracking-widest leading-relaxed cursor-pointer select-none"
+                      className="text-xs font-black text-neutral-500 tracking-widest leading-relaxed cursor-pointer select-none"
                     >
                       I HAVE READ AND AGREE TO THE{" "}
                       <Link
@@ -595,7 +595,7 @@ export default function RegisterPage() {
                   </div>
 
                   {error && (
-                    <div className="text-red-500 text-[12px] font-black tracking-widest text-center">
+                    <div className="text-red-500 text-xs font-black tracking-widest text-center">
                       {error}
                     </div>
                   )}
@@ -626,12 +626,12 @@ export default function RegisterPage() {
             </form>
             {step === 1 && (
               <div className="mt-10 text-center animate-in fade-in slide-in-from-bottom-4 duration-700">
-                <p className="text-[14px] font-black text-neutral-600 tracking-[0.3em] mb-4">
+                <p className="text-sm font-black text-neutral-600 tracking-[0.3em] mb-4">
                   Already have an account?
                 </p>
                 <Link
                   href="/login"
-                  className="inline-flex items-center gap-2 px-8 py-3 border border-neutral-900 rounded-full text-[14px] font-black tracking-[0.2em] text-neutral-500 hover:text-white hover:border-neutral-700 transition-all active:scale-95"
+                  className="inline-flex items-center gap-2 px-8 py-3 border border-neutral-900 rounded-full text-sm font-black tracking-[0.2em] text-neutral-500 hover:text-white hover:border-neutral-700 transition-all active:scale-95"
                 >
                   <ArrowLeft size={12} className="opacity-50" />
                   Return to Login

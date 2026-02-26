@@ -114,7 +114,7 @@ export default function LoginPage({
               <h1 className="text-4xl font-black text-white tracking-tighter leading-none">
                 Welcome
               </h1>
-              <p className="text-[12px] font-bold text-neutral-500 tracking-[0.3em]">
+              <p className="text-xs font-bold text-neutral-500 tracking-[0.3em]">
                 Sign in to your account
               </p>
             </div>
@@ -159,7 +159,7 @@ export default function LoginPage({
             </div>
 
             {error && (
-              <div className="flex items-center gap-3 p-5 bg-red-500/10 border-2 border-red-500/20 rounded-[2.5rem] text-red-500 text-[12px] font-black tracking-tight">
+              <div className="flex items-center gap-3 p-5 bg-red-500/10 border-2 border-red-500/20 rounded-[2.5rem] text-red-500 text-xs font-black tracking-tight">
                 <AlertCircle size={18} className="shrink-0" />
                 <span>{error}</span>
               </div>
@@ -172,7 +172,7 @@ export default function LoginPage({
             >
               <div
                 className={`
-                flex items-center justify-center gap-4 h-16 rounded-full text-[14px] font-black tracking-[0.2em] transition-all duration-300 active:scale-95
+                flex items-center justify-center gap-4 h-16 rounded-full text-sm font-black tracking-[0.2em] transition-all duration-300 active:scale-95
                 ${
                   loading
                     ? "bg-neutral-900 text-neutral-700 border-2 border-neutral-800"
@@ -198,7 +198,7 @@ export default function LoginPage({
           <div className="mt-14 space-y-8 text-center">
             <Link
               href="/register"
-              className="block text-[14px] text-neutral-500 hover:text-white transition-all font-bold tracking-widest"
+              className="block text-sm text-neutral-500 hover:text-white transition-all font-bold tracking-widest"
             >
               New here? <span className="text-cyan-500">Create account</span>
             </Link>
@@ -206,14 +206,14 @@ export default function LoginPage({
             <div className="flex items-center justify-center gap-6 pt-6 border-t border-neutral-900">
               <Link
                 href="/forgot-password"
-                className="text-[14px] font-black tracking-[0.2em] text-neutral-700 hover:text-cyan-500 transition-colors"
+                className="text-sm font-black tracking-[0.2em] text-neutral-700 hover:text-cyan-500 transition-colors"
               >
                 Recover
               </Link>
               <span className="w-1.5 h-1.5 bg-neutral-900 rounded-full" />
               <Link
                 href={redirectPath}
-                className="text-[14px] font-black tracking-[0.2em] text-neutral-700 hover:text-neutral-400 transition-colors"
+                className="text-sm font-black tracking-[0.2em] text-neutral-700 hover:text-neutral-400 transition-colors"
               >
                 Resume without login
               </Link>
