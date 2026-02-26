@@ -1,6 +1,6 @@
 "use client";
 
-import { X, CheckCircle2, AlertCircle, Loader2 } from "lucide-react";
+import { CheckCircle2, AlertCircle, Loader2 } from "lucide-react";
 
 interface StatusModalProps {
   isOpen: boolean;
@@ -20,42 +20,44 @@ export default function StatusModal({
   if (!isOpen) return null;
 
   return (
-    <div className="fixed inset-0 z-[110] flex items-center justify-center p-4">
+    <div className="fixed inset-0 z-[110] flex items-center justify-center p-6">
       <div
-        className="absolute inset-0 bg-black/90 backdrop-blur-md"
+        className="absolute inset-0 bg-black/95 backdrop-blur-md"
         onClick={type !== "loading" ? onClose : undefined}
       />
 
-      <div className="relative border border-neutral-800 w-full max-w-sm rounded-4xl p-8 text-center animate-in fade-in zoom-in-95 duration-300">
-        <div className="flex justify-center mb-6">
+      <div className="relative border-2 border-neutral-900 w-full max-w-md bg-neutral-950 rounded-[3rem] p-12 text-center animate-in zoom-in-95 duration-500">
+        <div className="flex justify-center mb-8">
           {type === "success" && (
-            <div className="p-4 bg-emerald-500/10 rounded-2xl border border-emerald-500/20 text-emerald-500">
-              <CheckCircle2 size={32} />
+            <div className="p-5 bg-emerald-500/10 rounded-3xl border-2 border-emerald-500/20 text-emerald-500">
+              <CheckCircle2 size={40} />
             </div>
           )}
           {type === "error" && (
-            <div className="p-4 bg-red-500/10 rounded-2xl border border-red-500/20 text-red-500">
-              <AlertCircle size={32} />
+            <div className="p-5 bg-red-500/10 rounded-3xl border-2 border-red-500/20 text-red-500">
+              <AlertCircle size={40} />
             </div>
           )}
           {type === "loading" && (
-            <div className="p-4 bg-cyan-500/10 rounded-2xl border border-cyan-500/20 text-cyan-500">
-              <Loader2 size={32} className="animate-spin" />
+            <div className="p-5 bg-neutral-900 rounded-3xl border-2 border-neutral-800 text-white">
+              <Loader2 size={40} className="animate-spin duration-[1500ms]" />
             </div>
           )}
         </div>
 
-        <h3 className="text-lg font-black text-white tracking-tight mb-2">
-          {title}
-        </h3>
-        <p className="text-sm text-neutral-500 mb-8 leading-relaxed font-medium">
-          {message}
-        </p>
+        <div className="space-y-3 mb-10">
+          <h3 className="text-2xl font-black text-white tracking-tighter leading-none">
+            {title}
+          </h3>
+          <p className="text-sm text-neutral-500 font-bold leading-relaxed tracking-wide">
+            {message}
+          </p>
+        </div>
 
         {type !== "loading" && (
           <button
             onClick={onClose}
-            className="w-full py-3 bg-neutral-900 border border-neutral-800 text-neutral-200 rounded-xl text-xs font-black tracking-widest hover:bg-neutral-800 transition-all active:scale-95"
+            className="w-full py-5 bg-white text-black rounded-full text-[11px] font-black tracking-[0.3em] hover:bg-neutral-200 transition-all active:scale-95"
           >
             Acknowledge
           </button>

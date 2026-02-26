@@ -1,17 +1,20 @@
-import { Terminal } from "lucide-react";
-
+import { Terminal, Activity } from "lucide-react";
 import { ENV } from "@/config/env.config";
 
 export default function UserFooter() {
   return (
-    <footer className="pt-6 flex justify-between items-center text-[10px] font-mono text-neutral-700 tracking-[0.4em] px-2">
-      <p>
-        {ENV.PROJECT_NAME}_Identity_Audit_v{ENV.APP_VERSION}
-      </p>
-      <div className="flex items-center gap-2">
-        <Terminal size={10} />
-        <div className="h-1.5 w-1.5 bg-cyan-500 rounded-full animate-pulse" />
-        <span>Root_Session_Encrypted</span>
+    <footer className="pt-10 flex flex-col md:flex-row justify-between items-center gap-6 border-t-2 border-neutral-950 px-4">
+      <div className="flex items-center gap-3 text-[10px] font-black text-neutral-800 tracking-[0.4em]">
+        <Activity size={14} />
+        {ENV.PROJECT_NAME} Identity Audit v{ENV.APP_VERSION}
+      </div>
+      <div className="flex items-center gap-6 text-[10px] font-black text-neutral-700 tracking-widest">
+        <div className="flex items-center gap-2">
+          <Terminal size={12} />
+          <span>Session Secure</span>
+        </div>
+        <div className="h-4 w-0.5 bg-neutral-900" />
+        <div className="h-2 w-2 bg-emerald-500 rounded-full animate-pulse" />
       </div>
     </footer>
   );

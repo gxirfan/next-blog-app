@@ -22,19 +22,13 @@ export default function UserTable({
   const authUser = useAuth();
   const authUserRole = authUser.user?.role;
 
-  const [status, setStatus] = useState<{
-    open: boolean;
-    type: "loading" | "success" | "error";
-    title: string;
-    message: string;
-  }>({
+  const [status, setStatus] = useState<any>({
     open: false,
     type: "loading",
     title: "",
     message: "",
   });
 
-  // Dinamik Rol Renkleri ve Stilleri
   const getRoleStyle = (role: string) => {
     switch (role.toLowerCase()) {
       case "admin":
@@ -79,8 +73,8 @@ export default function UserTable({
     setStatus({
       open: true,
       type: "loading",
-      title: "Kernel Update",
-      message: "Patching identity data across distributed network...",
+      title: "Updating Data",
+      message: "Synchronizing identity parameters...",
     });
 
     try {
@@ -92,143 +86,106 @@ export default function UserTable({
         setUsers((prev) =>
           prev.map((u) => (u.id === userId ? { ...u, ...updatedData } : u)),
         );
-
         setStatus({
           open: true,
           type: "success",
           title: "Update Verified",
-          message: "Data synchronized.",
+          message: "Identity registry updated successfully.",
         });
-
         router.refresh();
-
-        setTimeout(() => setStatus((prev) => ({ ...prev, open: false })), 1500);
-
-        setStatus({
-          open: true,
-          type: "success",
-          title: "Update Verified",
-          message: "Node updated successfully. Global registry re-indexing...",
-        });
+        setTimeout(() => setStatus((p: any) => ({ ...p, open: false })), 1500);
       }
     } catch (err: any) {
       setStatus({
         open: true,
         type: "error",
-        title: "Protocol Violation",
-        message: err.response?.data?.message || "An error occurred.",
+        title: "Update Failed",
+        message: err.response?.data?.message || "Protocol error.",
       });
     }
   };
 
-  const handleRefresh = () => {
-    router.refresh();
-    setStatus({ ...status, open: false });
-  };
-
   return (
-    <div className="space-y-8 animate-in fade-in duration-700">
-      <div className="relative max-w-md group">
+    <div className="space-y-10">
+      <div className="relative max-w-md group px-2">
         <Search
-          className="absolute left-4 top-1/2 -translate-y-1/2 text-neutral-600 group-focus-within:text-cyan-500 transition-colors"
-          size={16}
+          className="absolute left-6 top-1/2 -translate-y-1/2 text-neutral-800 group-focus-within:text-white transition-colors"
+          size={18}
         />
         <input
           type="text"
-          placeholder="Search users..."
-          className="w-full border border-neutral-800/60 rounded-2xl pl-12 pr-6 py-3 text-sm text-neutral-200 focus:border-cyan-500/40 focus:outline-none transition-all placeholder:text-neutral-700 font-medium"
+          placeholder="SEARCH IDENTITY..."
+          className="w-full bg-neutral-950 border-2 border-neutral-900 rounded-2xl pl-14 pr-6 py-4 text-[11px] font-black tracking-widest text-white focus:border-neutral-700 transition-all placeholder:text-neutral-800"
           onChange={(e) => setSearch(e.target.value)}
         />
       </div>
 
-      <div className="border border-neutral-900 rounded-[2.5rem] overflow-hidden overflow-x-auto">
+      <div className="border-2 border-neutral-900 rounded-[3rem] overflow-hidden bg-neutral-950 overflow-x-auto">
         <table className="w-full text-left border-separate border-spacing-0">
           <thead>
-            <tr className="bg-neutral-900/30 text-neutral-600 text-[10px] tracking-[0.25em] font-black">
-              <th className="px-10 py-6 border-b border-neutral-800/50">
-                Entity Identity
+            <tr className="bg-neutral-950 text-neutral-700 text-[10px] font-black tracking-[0.3em]">
+              <th className="px-10 py-7 border-b-2 border-neutral-900">
+                Identity Details
               </th>
-              <th className="px-10 py-6 border-b border-neutral-800/50 text-center">
-                Authorization Level
+              <th className="px-10 py-7 border-b-2 border-neutral-900 text-center">
+                Clearance
               </th>
-              <th className="px-10 py-6 border-b border-neutral-800/50 text-right">
-                Operations
+              <th className="px-10 py-7 border-b-2 border-neutral-900 text-right">
+                Actions
               </th>
             </tr>
           </thead>
-          <tbody className="divide-y divide-neutral-900/40">
+          <tbody className="divide-y-2 divide-neutral-900">
             {filteredUsers.map((user) => {
-              const roleStyle = getRoleStyle(user.role);
-              {
-                if (
-                  (user.role === "admin" || user.role === "moderator") &&
-                  authUserRole === "moderator"
-                ) {
-                  return null;
-                }
+              if (
+                (user.role === "admin" || user.role === "moderator") &&
+                authUserRole === "moderator"
+              )
+                return null;
+              if (authUserRole === "user") return null;
+              const style = getRoleStyle(user.role);
 
-                if (authUserRole === "user") {
-                  return null;
-                }
-              }
               return (
                 <tr
                   key={user.id}
-                  className="hover:bg-white/[0.015] transition-all duration-300 group"
+                  className="hover:bg-neutral-900/40 transition-all duration-300 group"
                 >
-                  {/* Entity Column */}
-                  <td className="px-10 py-7">
-                    <div className="flex items-center space-x-5">
-                      <div
-                        className={`h-12 w-12 rounded-2xl bg-neutral-900 border border-neutral-800 flex items-center justify-center text-neutral-400 font-bold group-hover:border-cyan-500/40 transition-all duration-500`}
-                      >
+                  <td className="px-10 py-8">
+                    <div className="flex items-center gap-6">
+                      <div className="h-14 w-14 rounded-2xl bg-neutral-900 border-2 border-neutral-800 flex items-center justify-center text-white font-black text-xl group-hover:border-white transition-all">
                         {user.username[0].toUpperCase()}
                       </div>
                       <div className="min-w-0">
-                        <div className="text-[15px] font-bold text-neutral-200 group-hover:text-cyan-400 transition-colors tracking-tight truncate">
+                        <div className="text-lg font-black text-white tracking-tighter leading-none group-hover:pl-1 transition-all">
                           {user.username}
                         </div>
-                        <div className="text-[11px] text-neutral-600 font-mono tracking-tighter truncate opacity-60 mt-0.5">
+                        <div className="text-[10px] text-neutral-600 font-bold tracking-wider mt-2">
                           {user.email}
                         </div>
                       </div>
                     </div>
                   </td>
-
-                  {/* Auth Column */}
-                  <td className="px-10 py-7 text-center">
+                  <td className="px-10 py-8 text-center">
                     <span
-                      className={`inline-flex items-center px-4 py-1.5 rounded-xl text-[10px] font-black border tracking-widest leading-none ${roleStyle.border} ${roleStyle.bg} ${roleStyle.text}`}
+                      className={`inline-flex items-center px-5 py-2 rounded-xl text-[10px] font-black border-2 tracking-widest ${style.border} ${style.bg} ${style.text}`}
                     >
-                      <Shield
-                        size={12}
-                        className={`mr-2 ${roleStyle.icon} opacity-70`}
-                      />
+                      <Shield size={12} className="mr-2 opacity-70" />
                       {user.role}
                     </span>
                   </td>
-
-                  {/* Actions Column */}
-                  <td className="px-10 py-7 text-right">
-                    <div className="flex justify-end space-x-3 opacity-0 group-hover:opacity-100 transition-all duration-300 translate-x-2 group-hover:translate-x-0">
-                      <button
-                        disabled={
-                          user.role === "admin" ||
-                          authUserRole === "user" ||
-                          user.role === authUserRole
-                        }
-                        onClick={() => {
-                          setSelectedUser(user);
-                          setIsEditModalOpen(true);
-                        }}
-                        className={`p-3 bg-neutral-900 border border-neutral-800 rounded-xl transition-all ${user.role === "admin" || authUserRole === "user" || user.role === authUserRole ? "opacity-20 cursor-not-allowed" : "text-neutral-400 hover:text-cyan-400 hover:border-cyan-500/40 active:scale-90"}`}
-                      >
-                        <Edit3 size={16} />
-                      </button>
-                      {/* <button className="p-3 bg-neutral-900 border border-neutral-800 text-neutral-500 hover:text-red-500 hover:border-red-500/40 rounded-xl transition-all active:scale-90">
-                        <Trash2 size={16} />
-                      </button> */}
-                    </div>
+                  <td className="px-10 py-8 text-right">
+                    <button
+                      disabled={
+                        user.role === "admin" || user.role === authUserRole
+                      }
+                      onClick={() => {
+                        setSelectedUser(user);
+                        setIsEditModalOpen(true);
+                      }}
+                      className="p-4 bg-neutral-900 border-2 border-neutral-800 text-neutral-500 hover:text-white hover:border-white rounded-2xl transition-all active:scale-90 disabled:opacity-10"
+                    >
+                      <Edit3 size={18} />
+                    </button>
                   </td>
                 </tr>
               );
@@ -239,9 +196,8 @@ export default function UserTable({
 
       {authUser.user && selectedUser && (
         <UserEditModal
-          key={selectedUser.id}
-          authUser={authUser.user}
           user={selectedUser}
+          authUser={authUser.user}
           isOpen={isEditModalOpen}
           onClose={() => setSelectedUser(null)}
           onSave={handleSaveUser}
@@ -249,14 +205,8 @@ export default function UserTable({
       )}
 
       <StatusModal
-        isOpen={status.open}
-        type={status.type}
-        title={status.title}
-        message={status.message}
-        onClose={() => {
-          setStatus((prev: any) => ({ ...prev, open: false }));
-          handleRefresh();
-        }}
+        {...status}
+        onClose={() => setStatus({ ...status, open: false })}
       />
     </div>
   );

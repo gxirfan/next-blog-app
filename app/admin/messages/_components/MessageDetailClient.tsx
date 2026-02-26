@@ -1,91 +1,92 @@
 "use client";
 
-import React from "react";
+import { useState } from "react";
 import { Mail, Clock, User, MessageSquare, ShieldCheck } from "lucide-react";
 import { IContactResponse } from "@/app/types/contact-response";
 import { IBaseResponse } from "@/app/types/common";
 import { getRelativeTime } from "@/app/utils/date";
 
-/**
- * A minimalist, data-focused view for contact message analysis.
- * Removes heavy decorative elements to prioritize readability.
- */
 export default function MessageDetailClient({
   message,
 }: {
   message: IBaseResponse<IContactResponse>;
 }) {
   const { data: msg } = message;
+  const [searchQuery, setSearchQuery] = useState("");
 
   return (
-    <div className="max-w-5xl mx-auto space-y-6 animate-in fade-in duration-500">
-      <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 border-b border-neutral-900 pb-8">
-        <div className="space-y-1">
-          <div className="flex items-center gap-2 text-[9px] font-mono font-black text-cyan-500 tracking-[0.3em]">
-            <ShieldCheck size={12} /> Signal_Verified
+    <div className="max-w-5xl mx-auto space-y-10 animate-in fade-in duration-700 px-6 py-10">
+      {/* 2. HEADER */}
+      <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 border-b-4 border-neutral-950 pb-10">
+        <div className="space-y-4">
+          <div className="flex items-center gap-2 text-[10px] font-black text-neutral-600 tracking-[0.3em]">
+            <ShieldCheck size={14} />
+            Security Verified
           </div>
-          <h1 className="text-3xl font-black text-white tracking-tight">
+          <h1 className="text-4xl md:text-6xl font-black text-white tracking-tighter leading-none">
             {msg.subject}
           </h1>
         </div>
 
         <div
-          className={`px-3 py-1.5 rounded-lg border font-mono text-[9px] font-bold tracking-widest ${
+          className={`px-6 py-2 rounded-full border-2 font-black text-[10px] tracking-[0.2em] ${
             msg.isRead
-              ? "bg-neutral-900/50 border-neutral-800 text-neutral-600"
-              : "bg-cyan-500/5 border-cyan-500/20 text-cyan-500"
+              ? "border-neutral-900 text-neutral-600"
+              : "border-white text-white"
           }`}
         >
-          {msg.isRead ? "PROCESSED" : "UNREAD_STREAM"}
+          {msg.isRead ? "Processed" : "New Message"}
         </div>
       </div>
 
-      <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
-        <aside className="lg:col-span-4">
-          <div className="bg-neutral-950 border border-neutral-900 rounded-3xl p-6 space-y-6">
-            <p className="text-[9px] font-mono text-neutral-700 tracking-widest font-black">
-              // Source_Metadata
-            </p>
+      {/* 3. CONTENT GRID */}
+      <div className="grid grid-cols-1 lg:grid-cols-12 gap-10">
+        {/* SIDEBAR */}
+        <aside className="lg:col-span-4 space-y-6">
+          <div className="bg-neutral-950 border-2 border-neutral-900 rounded-[2rem] p-8 space-y-8">
+            <h2 className="text-[10px] font-black text-neutral-700 tracking-[0.3em] border-b border-neutral-900 pb-4">
+              Sender Details
+            </h2>
 
-            <div className="space-y-4">
-              <div className="flex items-center gap-3">
-                <div className="text-neutral-600">
-                  <User size={16} />
+            <div className="space-y-8">
+              <div className="flex items-center gap-4">
+                <div className="p-3 bg-neutral-900 rounded-xl text-neutral-500">
+                  <User size={18} />
                 </div>
                 <div className="min-w-0">
-                  <p className="text-[10px] text-neutral-500 font-bold tracking-tighter">
-                    Sender
+                  <p className="text-[9px] text-neutral-700 font-black tracking-widest">
+                    Full Name
                   </p>
-                  <p className="text-sm text-neutral-200 font-semibold truncate">
+                  <p className="text-base text-white font-bold truncate">
                     {msg.name}
                   </p>
                 </div>
               </div>
 
-              <div className="flex items-center gap-3">
-                <div className="text-neutral-600">
-                  <Mail size={16} />
+              <div className="flex items-center gap-4">
+                <div className="p-3 bg-neutral-900 rounded-xl text-neutral-500">
+                  <Mail size={18} />
                 </div>
                 <div className="min-w-0">
-                  <p className="text-[10px] text-neutral-500 font-bold tracking-tighter">
-                    Address
+                  <p className="text-[9px] text-neutral-700 font-black tracking-widest">
+                    Email Address
                   </p>
-                  <p className="text-sm text-neutral-200 font-mono truncate">
+                  <p className="text-sm text-neutral-300 font-bold truncate">
                     {msg.email}
                   </p>
                 </div>
               </div>
 
-              <div className="flex items-center gap-3">
-                <div className="text-neutral-600">
-                  <Clock size={16} />
+              <div className="flex items-center gap-4">
+                <div className="p-3 bg-neutral-900 rounded-xl text-neutral-500">
+                  <Clock size={18} />
                 </div>
                 <div className="min-w-0">
-                  <p className="text-[10px] text-neutral-500 font-bold tracking-tighter">
-                    Timestamp
+                  <p className="text-[9px] text-neutral-700 font-black tracking-widest">
+                    Received At
                   </p>
-                  <p className="text-sm text-neutral-200 font-mono">
-                    {getRelativeTime(msg.createdAt) || "Unknown"}
+                  <p className="text-sm text-neutral-300 font-bold">
+                    {getRelativeTime(msg.createdAt)}
                   </p>
                 </div>
               </div>
@@ -93,18 +94,20 @@ export default function MessageDetailClient({
           </div>
         </aside>
 
+        {/* MAIN */}
         <main className="lg:col-span-8">
-          <div className="bg-neutral-950 border border-neutral-900 rounded-3xl p-8 md:p-10 min-h-[300px] flex flex-col">
-            <div className="flex items-center gap-2 mb-6 text-[9px] font-mono text-neutral-700 tracking-[0.3em] font-black">
-              <MessageSquare size={12} /> Payload_Data
+          <div className="bg-neutral-950 border-2 border-neutral-900 rounded-[2.5rem] p-8 md:p-12 min-h-[400px] flex flex-col relative overflow-hidden">
+            <div className="flex items-center gap-3 mb-10 text-[10px] font-black text-neutral-700 tracking-[0.3em]">
+              <MessageSquare size={16} />
+              Message Content
             </div>
 
-            <div className="flex-1 text-neutral-400 text-base leading-relaxed font-medium whitespace-pre-wrap selection:bg-cyan-500/30">
+            <div className="flex-1 text-neutral-200 text-lg md:text-xl leading-relaxed font-bold tracking-tight whitespace-pre-wrap selection:bg-white selection:text-black">
               {msg.message}
             </div>
 
-            <div className="mt-8 pt-6 border-t border-neutral-900/50 text-[9px] font-mono text-neutral-800 tracking-widest">
-              End_of_Signal_Log
+            <div className="mt-12 pt-6 border-t-2 border-neutral-900 text-[9px] font-black text-neutral-800 tracking-[0.4em]">
+              Archive Reference: {msg._id}
             </div>
           </div>
         </main>

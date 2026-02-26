@@ -62,18 +62,26 @@ export default async function AdminFlowPage({
     flowResponse.data.data.length > 0;
 
   return (
-    <div className="space-y-10 animate-in fade-in duration-700">
+    <div className="max-w-7xl mx-auto space-y-16 animate-in fade-in duration-1000 px-6 py-10">
       <FlowHeader count={flowResponse?.data?.meta?.total || 0} />
 
-      {!hasData ? (
-        <div className="py-32 text-center border border-neutral-900 rounded-[2.5rem]">
-          <p className="text-neutral-600 text-[10px] font-black tracking-[0.4em]">
-            No Threads Detected In Stream
-          </p>
-        </div>
-      ) : (
-        <FlowTableClient paginationData={flowResponse} />
-      )}
+      <div className="min-h-[500px]">
+        {!hasData ? (
+          <div className="bg-neutral-950 border-2 border-neutral-900 py-48 text-center rounded-[3rem]">
+            <div className="space-y-6">
+              <p className="text-neutral-800 text-[11px] font-black tracking-[0.6em]">
+                Inventory Empty
+              </p>
+              <p className="text-neutral-500 text-sm font-bold tracking-widest max-w-xs mx-auto leading-relaxed">
+                There are currently no active threads recorded in the archive.
+              </p>
+            </div>
+          </div>
+        ) : (
+          <FlowTableClient paginationData={flowResponse} />
+        )}
+      </div>
+
       <FlowFooter />
     </div>
   );

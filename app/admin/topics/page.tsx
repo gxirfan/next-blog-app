@@ -25,18 +25,25 @@ export default async function AdminTopicsListPage() {
   const topics = await fetchTopics();
 
   return (
-    <div className="space-y-8 animate-in fade-in duration-700">
+    <div className="space-y-12 animate-in fade-in duration-1000 px-4 md:px-0">
       <TopicHeader count={topics.length} />
 
-      {topics.length === 0 ? (
-        <div className="bg-neutral-950/10 border border-neutral-800/60 py-20 text-center rounded-4xl">
-          <p className="text-neutral-600 text-xs font-mono tracking-widest font-bold">
-            Null_Data_Detected
-          </p>
-        </div>
-      ) : (
-        <TopicTableClient topics={topics} />
-      )}
+      <div className="min-h-[450px]">
+        {topics.length === 0 ? (
+          <div className="bg-neutral-950 border-2 border-neutral-900 py-40 text-center rounded-[3rem]">
+            <div className="space-y-4">
+              <p className="text-neutral-800 text-[10px] font-black tracking-[0.6em]">
+                Null Data Partition
+              </p>
+              <p className="text-neutral-600 text-xs font-bold tracking-widest">
+                No resources recorded in the inventory.
+              </p>
+            </div>
+          </div>
+        ) : (
+          <TopicTableClient topics={topics} />
+        )}
+      </div>
 
       <TopicFooter />
     </div>

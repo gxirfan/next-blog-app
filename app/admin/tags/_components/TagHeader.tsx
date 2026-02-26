@@ -1,42 +1,43 @@
-import { Tag } from "lucide-react";
+import { Database, Tag } from "lucide-react";
 
 interface TagHeaderProps {
   count: number;
 }
 
 export default function TagHeader({ count }: TagHeaderProps) {
-  const BORDER_STYLE = "border border-neutral-800/60";
-  const CARD_BG = "bg-neutral-950";
-
   return (
-    <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 border-b border-neutral-800/50 pb-8">
-      <div className="space-y-2">
-        <div className="flex items-center gap-2 text-cyan-500 font-mono text-xs tracking-[0.2em]">
-          <Tag size={14} />
-          Taxonomy Management
+    <div className="flex flex-col md:flex-row md:items-end justify-between gap-10 border-b-4 border-neutral-950 pb-14 px-4 md:px-0">
+      <div className="space-y-6">
+        <div className="flex items-center gap-4 text-neutral-800 font-black text-[10px] tracking-[0.5em]">
+          <Database size={16} strokeWidth={3} />
+          Taxonomy Registry Control
         </div>
-        <h1 className="text-3xl font-semibold text-white tracking-tight leading-none">
-          Tag{" "}
-          <span className="text-neutral-500 font-light text-2xl tracking-tighter">
-            Registry
-          </span>
+
+        <h1 className="text-6xl md:text-8xl font-black text-white tracking-tighter leading-none select-none">
+          Global <span className="text-neutral-900">Labels</span>
         </h1>
-        <p className="text-sm text-neutral-500 max-w-md mt-1">
-          Manage system-wide labels and categorization logic.
+
+        <p className="text-sm font-bold text-neutral-600 max-w-sm tracking-wide leading-relaxed">
+          Structural classification and management of the global data indexing
+          framework.
         </p>
       </div>
 
-      <div
-        className={`${CARD_BG} ${BORDER_STYLE} flex items-center gap-4 px-5 py-3 rounded-2xl`}
-      >
-        <div className="text-right leading-none">
-          <p className="text-[10px] text-neutral-600 font-bold tracking-widest">
-            Global Tags
+      <div className="bg-neutral-950 border-4 border-neutral-900 flex items-center gap-8 px-10 py-6 rounded-[2.5rem]">
+        <div className="text-right space-y-2 leading-none">
+          <p className="text-[10px] text-neutral-700 font-black tracking-[0.3em]">
+            Registered Tags
           </p>
-          <p className="text-xl font-medium text-neutral-200">{count}</p>
+          <p className="text-4xl font-black text-white tracking-tighter">
+            {count.toLocaleString()}
+          </p>
         </div>
-        <div className="h-8 w-[1px] bg-neutral-800" />
-        <Tag className="text-cyan-500/30" size={24} />
+
+        <div className="h-12 w-1 bg-neutral-900 rounded-full" />
+
+        <div className="p-4 bg-neutral-900/50 rounded-2xl border-2 border-neutral-800 text-white/10 group-hover:text-white/30 transition-colors">
+          <Tag size={32} strokeWidth={2.5} />
+        </div>
       </div>
     </div>
   );

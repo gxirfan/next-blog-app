@@ -31,18 +31,25 @@ export default async function AdminTagsListPage() {
   const tags = await fetchTags();
 
   return (
-    <div className="space-y-10 animate-in fade-in duration-700">
+    <div className="space-y-12 animate-in fade-in duration-1000 px-4 md:px-0">
       <TagHeader count={tags.length} />
 
-      {tags.length === 0 ? (
-        <div className="py-32 text-center border border-neutral-900 rounded-4xl">
-          <p className="text-neutral-600 text-sm font-light font-mono tracking-widest">
-            Null_Data_Partition: No tags detected.
-          </p>
-        </div>
-      ) : (
-        <TagTableClient tags={tags} />
-      )}
+      <div className="min-h-[450px]">
+        {tags.length === 0 ? (
+          <div className="bg-neutral-950 border-2 border-neutral-900 py-40 text-center rounded-[3rem]">
+            <div className="space-y-4">
+              <p className="text-neutral-800 text-[10px] font-black tracking-[0.6em]">
+                Null Taxonomy Partition
+              </p>
+              <p className="text-neutral-600 text-xs font-bold tracking-widest leading-relaxed">
+                No taxonomy nodes detected in the global registry.
+              </p>
+            </div>
+          </div>
+        ) : (
+          <TagTableClient tags={tags} />
+        )}
+      </div>
 
       <TagFooter />
     </div>

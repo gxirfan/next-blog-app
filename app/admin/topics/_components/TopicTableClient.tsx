@@ -1,8 +1,8 @@
 "use client";
 
-import React, { useState } from "react";
+import { useState } from "react";
 import Link from "next/link";
-import { Eye, User, Layers, Search } from "lucide-react";
+import { Eye, User, Layers, Search, Clock } from "lucide-react";
 import { ITopicResponse } from "@/app/types/topic";
 import { getRelativeTime } from "@/app/utils/date";
 
@@ -20,97 +20,91 @@ export default function TopicTableClient({
   );
 
   return (
-    <div className="space-y-6">
-      {/* Search Bar */}
-      <div className="relative group max-w-md">
+    <div className="space-y-10 animate-in fade-in duration-1000">
+      <div className="relative group max-w-md px-2">
         <Search
-          className="absolute left-4 top-1/2 -translate-y-1/2 text-neutral-600 group-focus-within:text-cyan-500 transition-colors"
-          size={16}
+          className="absolute left-6 top-1/2 -translate-y-1/2 text-neutral-800 group-focus-within:text-white transition-colors"
+          size={18}
         />
         <input
           type="text"
-          placeholder="Filter data nodes..."
+          placeholder="SEARCH RESOURCE NODES..."
           value={searchTerm}
           onChange={(e) => setSearchTerm(e.target.value)}
-          className="w-full border border-neutral-800/60 rounded-2xl pl-12 pr-6 py-3 text-sm text-neutral-200 focus:border-cyan-500/40 focus:outline-none transition-all placeholder:text-neutral-700"
+          className="w-full bg-neutral-950 border-2 border-neutral-900 rounded-2xl pl-14 pr-6 py-4 text-[11px] font-black tracking-widest text-white focus:border-neutral-700 focus:outline-none transition-all placeholder:text-neutral-800"
         />
       </div>
 
       {filteredTopics.length === 0 ? (
-        <div className="border border-neutral-900 py-20 text-center rounded-4xl">
-          <p className="text-neutral-600 text-xs font-mono tracking-widest font-bold">
-            Null_Search_Results
+        <div className="border-2 border-neutral-900 py-40 text-center rounded-[3rem] bg-neutral-950/50">
+          <p className="text-neutral-700 text-[10px] font-black tracking-[0.5em]">
+            No Search Matches Found
           </p>
         </div>
       ) : (
-        <div className="border border-neutral-900 rounded-4xl overflow-hidden">
-          <table className="w-full text-left border-separate border-spacing-0 table-fixed">
+        <div className="border-2 border-neutral-900 rounded-[3rem] overflow-hidden bg-neutral-950 overflow-x-auto">
+          <table className="w-full text-left border-separate border-spacing-0">
             <thead>
-              <tr className="bg-neutral-900/30 text-neutral-600 text-[10px] tracking-widest font-black">
-                <th className="px-6 py-4 border-b border-neutral-800/50 w-[45%]">
-                  Resource
+              <tr className="bg-neutral-950 text-neutral-700 text-[10px] font-black tracking-[0.3em]">
+                <th className="px-10 py-7 border-b-2 border-neutral-900 w-[45%]">
+                  Resource Title
                 </th>
-                <th className="px-6 py-4 border-b border-neutral-800/50 w-[30%] text-center">
+                <th className="px-10 py-7 border-b-2 border-neutral-900 w-[30%] text-center">
                   Attributes
                 </th>
-                <th className="px-6 py-4 border-b border-neutral-800/50 text-right w-[25%]">
+                <th className="px-10 py-7 border-b-2 border-neutral-900 text-right w-[25%]">
                   Access
                 </th>
               </tr>
             </thead>
-            <tbody className="divide-y divide-neutral-900/40">
+            <tbody className="divide-y-2 divide-neutral-900">
               {filteredTopics.map((topic) => (
                 <tr
                   key={topic.id}
-                  className="group hover:bg-white/[0.015] transition-all duration-200"
+                  className="group hover:bg-neutral-900/40 transition-all duration-300"
                 >
-                  <td className="px-6 py-6">
-                    <div className="flex items-center gap-4">
-                      <div className="h-10 w-10 rounded-xl bg-neutral-900 border border-neutral-800 flex items-center justify-center text-cyan-500">
-                        <Layers size={16} />
+                  <td className="px-10 py-8">
+                    <div className="flex items-center gap-6">
+                      <div className="h-14 w-14 rounded-2xl bg-neutral-900 border-2 border-neutral-800 flex items-center justify-center text-white group-hover:border-white transition-all duration-500">
+                        <Layers size={22} strokeWidth={2.5} />
                       </div>
-                      <div className="min-w-0">
-                        <div className="text-sm font-bold text-neutral-200 truncate group-hover:text-cyan-400 tracking-tight">
+                      <div className="min-w-0 space-y-1">
+                        <div className="text-lg font-black text-white tracking-tighter group-hover:pl-1 transition-all">
                           {topic.title}
                         </div>
-                        <div className="text-[10px] text-neutral-600 font-mono flex items-center gap-1.5 mt-0.5">
-                          <User size={10} className="opacity-50" />
-                          <span className="truncate">
-                            @{topic.authorUsername}
-                          </span>
+                        <div className="text-[10px] text-neutral-600 font-bold tracking-wider flex items-center gap-2">
+                          <User size={12} className="text-neutral-800" />
+                          <span>@{topic.authorUsername}</span>
                         </div>
                       </div>
                     </div>
                   </td>
-                  <td className="px-6 py-6 text-center">
-                    <div className="flex flex-col items-center gap-1.5">
-                      <span className="inline-flex items-center px-2 py-0.5 rounded-md text-[9px] font-black bg-cyan-500/5 border border-cyan-500/20 text-cyan-400/80 tracking-widest">
+                  <td className="px-10 py-8 text-center">
+                    <div className="flex flex-col items-center gap-3">
+                      <span className="px-4 py-1.5 rounded-xl text-[9px] font-black border-2 border-neutral-900 bg-neutral-900 text-neutral-400 tracking-widest">
                         {topic.tagTitle}
                       </span>
-                      <div className="flex items-center gap-1.5">
+                      <div className="flex items-center gap-2 text-[9px] font-black text-neutral-700 tracking-tighter">
                         <div
-                          className={`h-1 w-1 rounded-full ${topic.status ? "bg-emerald-500" : "bg-neutral-800"}`}
+                          className={`h-2 w-2 rounded-full ${topic.status ? "bg-emerald-500" : "bg-neutral-800"}`}
                         />
-                        <span
-                          className={`text-[9px] font-bold ${topic.status ? "text-emerald-500/80" : "text-neutral-700"}`}
-                        >
-                          {topic.status ? "Live" : "Idle"}
-                        </span>
+                        {topic.status ? "Live" : "Idle"}
                       </div>
                     </div>
                   </td>
-                  <td className="px-6 py-6 text-right">
-                    <div className="flex items-center justify-end gap-3">
-                      <div className="hidden sm:flex flex-col items-end opacity-40">
-                        <span className="text-[9px] font-mono text-neutral-600">
-                          {getRelativeTime(topic.createdAt) || "Unknown"}
-                        </span>
+                  <td className="px-10 py-8 text-right">
+                    <div className="flex items-center justify-end gap-8">
+                      <div className="hidden lg:flex flex-col items-end gap-1">
+                        <div className="flex items-center text-[10px] font-black text-neutral-500 tracking-widest">
+                          <Clock size={12} className="mr-2 text-neutral-800" />
+                          {getRelativeTime(topic.createdAt)}
+                        </div>
                       </div>
                       <Link
                         href={`/topic/${topic.slug}`}
-                        className="inline-flex items-center justify-center h-10 w-10 rounded-xl bg-neutral-900 border border-neutral-800 text-neutral-500 hover:text-cyan-400 hover:border-cyan-500/40 transition-all active:scale-90"
+                        className="p-4 bg-neutral-900 border-2 border-neutral-800 text-neutral-500 hover:text-white hover:border-white rounded-2xl transition-all active:scale-95 group/btn"
                       >
-                        <Eye size={16} />
+                        <Eye size={18} />
                       </Link>
                     </div>
                   </td>

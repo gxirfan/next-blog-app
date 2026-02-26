@@ -1,7 +1,16 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
-import { X, Shield, ChevronDown, Calendar, Mail, AtSign } from "lucide-react";
+import {
+  X,
+  Shield,
+  ChevronDown,
+  Calendar,
+  Mail,
+  Fingerprint,
+  Activity,
+  User,
+} from "lucide-react";
 import { IUserResponse } from "@/app/types/user-response.dto";
 
 enum UserStatus {
@@ -84,9 +93,7 @@ export default function UserEditModal({
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-
     const updatedFields: any = {};
-
     Object.keys(formData).forEach((key) => {
       const originalValue =
         key === "birthDate" && user[key]
@@ -102,7 +109,6 @@ export default function UserEditModal({
       onClose();
       return;
     }
-
     onSave(user.id, updatedFields);
   };
 
@@ -115,59 +121,57 @@ export default function UserEditModal({
   });
 
   const SELECT_STYLE =
-    "w-full border border-neutral-800 rounded-xl px-4 py-2.5 text-sm text-neutral-200 focus:border-cyan-500/40 focus:outline-none appearance-none cursor-pointer transition-all font-medium";
+    "w-full bg-neutral-900 border-2 border-neutral-800 rounded-2xl px-6 py-4 text-[11px] font-black text-white focus:outline-none focus:border-white appearance-none cursor-pointer transition-all tracking-[0.2em]";
   const INPUT_STYLE =
-    "w-full bg-neutral-950 border border-neutral-800 rounded-xl px-4 py-2.5 text-[13px] text-white font-medium placeholder-neutral-700 focus:outline-none focus:border-cyan-500/50 transition-all";
+    "w-full bg-neutral-900 border-2 border-neutral-800 rounded-2xl px-6 py-4 text-sm text-white font-black placeholder-neutral-800 focus:outline-none focus:border-white transition-all tracking-widest";
   const LABEL_STYLE =
-    "text-[10px] font-black text-neutral-500 tracking-[0.2em] mb-2 block";
+    "text-[10px] font-black text-neutral-600 tracking-[0.3em] mb-3 block ml-2";
+
   const authUserRole = authUser.role;
+
   return (
-    <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 overflow-hidden">
-      {/* Background Overlay */}
+    <div className="fixed inset-0 z-[100] flex items-center justify-center p-6 overflow-hidden">
       <div
-        className="absolute inset-0 bg-black/90 backdrop-blur-sm"
+        className="absolute inset-0 bg-black/95 backdrop-blur-md"
         onClick={onClose}
       />
 
-      {/* Modal Container */}
-      <div className="relative border border-neutral-800 w-full max-w-3xl rounded-[2.5rem] flex flex-col max-h-[90vh] animate-in fade-in zoom-in-95 duration-300">
-        {/* Header - Fixed */}
-        <div className="px-10 py-8 border-b border-neutral-900 flex justify-between items-center bg-neutral-900/10">
-          <div className="flex items-center gap-5">
-            <div className="p-4 bg-neutral-900 border border-neutral-800 text-cyan-400 rounded-2xl">
-              <Shield size={24} />
+      <div className="relative bg-neutral-950 border-2 border-neutral-900 w-full max-w-3xl rounded-[3rem] flex flex-col max-h-[90vh] overflow-hidden animate-in zoom-in-95 duration-500">
+        <div className="px-12 py-10 border-b-2 border-neutral-900 flex justify-between items-center bg-neutral-950">
+          <div className="flex items-center gap-6">
+            <div className="p-5 bg-neutral-900 border-2 border-neutral-800 text-white rounded-[1.5rem]">
+              <Shield size={32} />
             </div>
-            <div>
-              <h3 className="text-xl font-black text-white tracking-tighter leading-none">
+            <div className="space-y-1">
+              <h3 className="text-3xl font-black text-white tracking-tighter leading-none">
                 Identity Override
               </h3>
-              <p className="text-[10px] text-neutral-600 font-mono tracking-[0.3em] mt-2">
+              <p className="text-[10px] text-neutral-700 font-black tracking-[0.4em]">
                 Modifying Node:{" "}
-                <span className="text-cyan-500/80">{user.username}</span>
+                <span className="text-white">{user.username}</span>
               </p>
             </div>
           </div>
           <button
             onClick={onClose}
-            className="p-2 text-neutral-700 hover:text-white transition-colors"
+            className="p-3 text-neutral-800 hover:text-white transition-colors bg-neutral-900 rounded-full border border-neutral-800"
           >
             <X size={24} />
           </button>
         </div>
 
-        {/* Scrollable Form Content */}
         <form
           onSubmit={handleSubmit}
-          className="p-10 space-y-10 overflow-y-auto scrollbar-hide"
+          className="p-12 space-y-16 overflow-y-auto scrollbar-hide flex-1"
         >
-          {/* Section: System Access */}
-          <div className="space-y-6">
-            <div className="flex items-center gap-3 text-neutral-400 border-l-2 border-cyan-500/40 pl-4">
-              <h4 className="text-[11px] font-black tracking-widest">
-                System Privileges
+          <div className="space-y-10">
+            <header className="flex items-center gap-4 border-l-4 border-neutral-800 pl-6">
+              <Activity size={16} className="text-neutral-700" />
+              <h4 className="text-[11px] font-black tracking-[0.4em] text-neutral-500">
+                Clearance & Status
               </h4>
-            </div>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            </header>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
               <div className="relative">
                 <label className={LABEL_STYLE}>Authorization Level</label>
                 <select
@@ -191,12 +195,12 @@ export default function UserEditModal({
                   )}
                 </select>
                 <ChevronDown
-                  className="absolute right-4 bottom-3 text-neutral-600 pointer-events-none"
-                  size={14}
+                  className="absolute right-6 bottom-4 text-neutral-600 pointer-events-none"
+                  size={16}
                 />
               </div>
               <div className="relative">
-                <label className={LABEL_STYLE}>Node Connectivity</label>
+                <label className={LABEL_STYLE}>Connection Status</label>
                 <select
                   name="status"
                   value={formData.status}
@@ -210,65 +214,81 @@ export default function UserEditModal({
                   ))}
                 </select>
                 <ChevronDown
-                  className="absolute right-4 bottom-3 text-neutral-600 pointer-events-none"
-                  size={14}
+                  className="absolute right-6 bottom-4 text-neutral-600 pointer-events-none"
+                  size={16}
                 />
               </div>
             </div>
           </div>
 
-          {/* Section: Core Identity */}
-          <div className="space-y-6">
-            <div className="flex items-center gap-3 text-neutral-400 border-l-2 border-cyan-500/40 pl-4">
-              <h4 className="text-[11px] font-black tracking-widest">
+          <div className="space-y-10">
+            <header className="flex items-center gap-4 border-l-4 border-neutral-800 pl-6">
+              <Fingerprint size={16} className="text-neutral-700" />
+              <h4 className="text-[11px] font-black tracking-[0.4em] text-neutral-500">
                 Network Identifiers
               </h4>
-            </div>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              <div className="space-y-2">
+            </header>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+              {/* <div className="space-y-3">
                 <label className={LABEL_STYLE}>Username Handle</label>
                 <div className="relative">
                   <AtSign
-                    className="absolute left-4 top-1/2 -translate-y-1/2 text-neutral-700"
-                    size={14}
+                    className="absolute left-6 top-1/2 -translate-y-1/2 text-neutral-800"
+                    size={16}
                   />
                   <input
                     name="username"
                     type="text"
                     value={formData.username}
                     onChange={handleChange}
-                    className={`${INPUT_STYLE} pl-10`}
+                    className={`${INPUT_STYLE} pl-14`}
+                  />
+                </div>
+              </div> */}
+              <div className="space-y-3">
+                <label className={LABEL_STYLE}>Nickname</label>
+                <div className="relative">
+                  <User
+                    className="absolute left-6 top-1/2 -translate-y-1/2 text-neutral-800"
+                    size={16}
+                  />
+                  <input
+                    name="nickname"
+                    type="text"
+                    value={formData.nickname}
+                    onChange={handleChange}
+                    className={`${INPUT_STYLE} pl-14`}
                   />
                 </div>
               </div>
-              <div className="space-y-2">
+              <div className="space-y-3">
                 <label className={LABEL_STYLE}>Registry Email</label>
                 <div className="relative">
                   <Mail
-                    className="absolute left-4 top-1/2 -translate-y-1/2 text-neutral-700"
-                    size={14}
+                    className="absolute left-6 top-1/2 -translate-y-1/2 text-neutral-800"
+                    size={16}
                   />
                   <input
                     name="email"
                     type="email"
                     value={formData.email}
                     onChange={handleChange}
-                    className={`${INPUT_STYLE} pl-10`}
+                    className={`${INPUT_STYLE} pl-14`}
                   />
                 </div>
               </div>
             </div>
           </div>
 
-          {/* Section: Personal Data */}
-          <div className="space-y-6">
-            <div className="flex items-center gap-3 text-neutral-400 border-l-2 border-cyan-500/40 pl-4">
-              <h4 className="text-[11px] font-black tracking-widest">
-                Biological & Social Data
+          <div className="space-y-10">
+            <header className="flex items-center gap-4 border-l-4 border-neutral-800 pl-6">
+              <Shield size={16} className="text-neutral-700" />
+              <h4 className="text-[11px] font-black tracking-[0.4em] text-neutral-500">
+                Metadata Profile
               </h4>
-            </div>
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-              <div className="space-y-2">
+            </header>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+              <div className="space-y-3">
                 <label className={LABEL_STYLE}>First Name</label>
                 <input
                   name="firstName"
@@ -278,7 +298,7 @@ export default function UserEditModal({
                   className={INPUT_STYLE}
                 />
               </div>
-              <div className="space-y-2">
+              <div className="space-y-3">
                 <label className={LABEL_STYLE}>Last Name</label>
                 <input
                   name="lastName"
@@ -288,33 +308,34 @@ export default function UserEditModal({
                   className={INPUT_STYLE}
                 />
               </div>
-              <div className="space-y-2">
+              <div className="space-y-3">
                 <label className={LABEL_STYLE}>Birth Epoch</label>
                 <div className="relative">
                   <Calendar
-                    className="absolute left-4 top-1/2 -translate-y-1/2 text-neutral-700"
-                    size={14}
+                    className="absolute left-6 top-1/2 -translate-y-1/2 text-neutral-800"
+                    size={16}
                   />
                   <input
                     name="birthDate"
                     type="date"
                     value={formData.birthDate}
                     onChange={handleChange}
-                    className={`${INPUT_STYLE} pl-10 text-[11px]`}
+                    className={`${INPUT_STYLE} pl-14`}
                   />
                 </div>
               </div>
             </div>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              <div className="space-y-2">
-                <label className={LABEL_STYLE}>Location String</label>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+              <div className="space-y-3">
+                <label className={LABEL_STYLE}>Location Node</label>
                 <input
                   name="location"
                   type="text"
                   value={formData.location}
                   onChange={handleChange}
                   className={INPUT_STYLE}
-                  placeholder="City, Node"
+                  placeholder="CITY, REGION"
                 />
               </div>
               <div className="relative">
@@ -332,32 +353,33 @@ export default function UserEditModal({
                   ))}
                 </select>
                 <ChevronDown
-                  className="absolute right-4 bottom-3 text-neutral-600 pointer-events-none"
-                  size={14}
+                  className="absolute right-6 bottom-4 text-neutral-600 pointer-events-none"
+                  size={16}
                 />
               </div>
             </div>
-            <div className="space-y-2">
+
+            <div className="space-y-3">
               <label className={LABEL_STYLE}>Biography Fragment</label>
               <textarea
                 name="bio"
-                rows={3}
+                rows={4}
                 value={formData.bio}
                 onChange={handleChange}
-                className={`${INPUT_STYLE} h-24 resize-none pt-4`}
+                className={`${INPUT_STYLE} h-32 resize-none pt-6 leading-relaxed`}
+                placeholder="RECORDS NOT INITIALIZED..."
               />
             </div>
           </div>
 
-          {/* Section: Protocols */}
-          <div className="pt-4">
-            <div className="flex items-center justify-between p-6 bg-neutral-900/20 border border-neutral-800 rounded-3xl group transition-all hover:border-neutral-700">
-              <div className="space-y-1">
-                <p className="text-[11px] font-black text-white tracking-wider">
+          <div className="pt-6">
+            <div className="flex items-center justify-between p-8 bg-neutral-900 border-2 border-neutral-800 rounded-[2rem] hover:border-neutral-700 transition-all group">
+              <div className="space-y-2">
+                <p className="text-[11px] font-black text-white tracking-widest">
                   Public Email Protocol
                 </p>
-                <p className="text-[10px] text-neutral-500 font-mono tracking-tight">
-                  Broadcast email to other network nodes
+                <p className="text-[10px] text-neutral-600 font-bold tracking-tighter">
+                  Broadcast identity to network nodes
                 </p>
               </div>
               <input
@@ -365,25 +387,24 @@ export default function UserEditModal({
                 name="isEmailPublic"
                 checked={formData.isEmailPublic}
                 onChange={handleChange}
-                className="w-5 h-5 rounded-md border-neutral-800 bg-neutral-950 text-cyan-500 focus:ring-0 cursor-pointer"
+                className="w-6 h-6 rounded-lg border-2 border-neutral-800 bg-neutral-950 text-white focus:ring-0 cursor-pointer transition-all checked:bg-white"
               />
             </div>
           </div>
         </form>
 
-        {/* Footer Actions - Fixed */}
-        <div className="px-10 py-8 border-t border-neutral-900 bg-neutral-900/10 flex justify-end items-center gap-6">
+        <div className="px-12 py-10 border-t-2 border-neutral-900 bg-neutral-950 flex justify-end items-center gap-10">
           <button
             type="button"
             onClick={onClose}
-            className="text-[10px] font-black tracking-[0.3em] text-neutral-600 hover:text-white transition-all"
+            className="text-[10px] font-black tracking-[0.4em] text-neutral-700 hover:text-white transition-all"
           >
             Abort_Changes
           </button>
           <button
             disabled={!isDirty}
             onClick={() => onSave(user.id, formData)}
-            className="px-12 py-4 bg-white text-black rounded-2xl text-[11px] font-black tracking-[0.3em] hover:bg-cyan-400 active:scale-95 transition-all"
+            className="px-16 py-5 bg-white text-black rounded-full text-[11px] font-black tracking-[0.4em] hover:bg-neutral-200 active:scale-95 disabled:opacity-10 transition-all"
           >
             Commit_Override
           </button>
