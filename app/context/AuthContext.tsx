@@ -31,10 +31,24 @@ export const AuthProvider = ({
   const [isLoading, setIsLoading] = useState(!initialUser);
 
   const checkAuthStatus = useCallback(async () => {
+    const hasHelperCookie = document.cookie
+      .split("; ")
+      .find((row) => row.startsWith("isLoggedIn="));
+
+    if (!hasHelperCookie) {
+      setUser(null);
+      setIsLoading(false);
+      return;
+    }
+
     try {
       const { data } = await api.get("/auth/status");
-      if (data?.data?.user) setUser(data.data.user);
-    } catch {
+      if (data?.data?.user) {
+        setUser(data.data.user);
+      } else {
+        setUser(null);
+      }
+    } catch (error) {
       setUser(null);
     } finally {
       setIsLoading(false);
@@ -44,15 +58,21 @@ export const AuthProvider = ({
   useEffect(() => {
     if (!initialUser) {
       checkAuthStatus();
+    } else {
+      setIsLoading(false);
     }
   }, [initialUser, checkAuthStatus]);
 
-  const login = (userData: IUserResponse) => setUser(userData);
+  const login = (userData: IUserResponse) => {
+    setUser(userData);
+  };
+
   const logout = async () => {
     try {
       await api.post("/auth/logout");
     } finally {
       setUser(null);
+      setIsLoading(false);
     }
   };
 
@@ -67,6 +87,8 @@ export const AuthProvider = ({
 
 export const useAuth = () => {
   const context = useContext(AuthContext);
-  if (!context) throw new Error("useAuth must be used within AuthProvider");
+  if (!context) {
+    throw new Error("useAuth must be used within AuthProvider");
+  }
   return context;
 };
