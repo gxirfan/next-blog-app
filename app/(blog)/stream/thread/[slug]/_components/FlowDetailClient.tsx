@@ -48,7 +48,7 @@ export default function FlowDetailClient({ mainFlow }: { mainFlow: IFlow }) {
               <FlowActions
                 slug={mainFlow.slug}
                 initialContent={mainFlow.content}
-                authorId={author?.id || ""}
+                authorId={author?.id}
               />
             </div>
           </div>

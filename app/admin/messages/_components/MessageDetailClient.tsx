@@ -107,7 +107,7 @@ export default function MessageDetailClient({
             </div>
 
             <div className="mt-12 pt-6 border-t-2 border-neutral-900 text-[9px] font-black text-neutral-800 tracking-[0.4em]">
-              Archive Reference: {msg._id}
+              Archive Reference: {msg.id}
             </div>
           </div>
         </main>

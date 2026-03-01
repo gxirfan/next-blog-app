@@ -42,7 +42,7 @@ export default function UserEditModal({
   authUser: IUserResponse;
   isOpen: boolean;
   onClose: () => void;
-  onSave: (id: string, data: any) => void;
+  onSave: (id: number, data: any) => void;
 }) {
   const [formData, setFormData] = useState<any>({
     username: "",

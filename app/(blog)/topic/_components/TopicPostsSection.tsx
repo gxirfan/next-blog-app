@@ -5,7 +5,7 @@ import PaginationControls from "@/app/components/PaginationControls";
 import { ENV } from "@/config/env.config";
 
 async function fetchTopicPosts(
-  topicId: string,
+  topicId: number,
   page: number,
   limit: number,
 ): Promise<IBaseResponse<{ data: IPostResponse[]; meta: IMeta }>> {
@@ -33,7 +33,7 @@ async function fetchTopicPosts(
 }
 
 interface TopicPostsSectionProps {
-  topicId: string;
+  topicId: number;
   page: number;
   limit: number;
 }

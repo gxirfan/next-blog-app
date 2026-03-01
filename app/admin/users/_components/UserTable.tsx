@@ -68,7 +68,7 @@ export default function UserTable({
       u.email.toLowerCase().includes(search.toLowerCase()),
   );
 
-  const handleSaveUser = async (userId: string, updatedData: any) => {
+  const handleSaveUser = async (userId: number, updatedData: any) => {
     setIsEditModalOpen(false);
     setStatus({
       open: true,

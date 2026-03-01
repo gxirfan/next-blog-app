@@ -24,7 +24,7 @@ const MAX_TITLE = 100;
 const MIN_CONTENT = 20;
 
 interface TopicCreationWrapperProps {
-  tagId: string;
+  tagId: number;
   tagTitle: string;
 }
 
