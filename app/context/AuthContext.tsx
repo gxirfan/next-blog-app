@@ -16,7 +16,7 @@ interface AuthContextType {
   isLoading: boolean;
   login: (userData: IUserResponse) => void;
   logout: () => Promise<void>;
-  checkAuthStatus: () => Promise<void>;
+  checkAuthStatus: (forceRefresh?: boolean) => Promise<void>;
 }
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
@@ -35,7 +35,8 @@ export const AuthProvider = ({
 
   const checkAuthStatus = useCallback(
     async (forceRefresh = false) => {
-      if (isChecking.current || (!forceRefresh && initialUser)) return;
+      if (isChecking.current) return;
+      if (!forceRefresh && initialUser && user) return;
 
       if (!forceRefresh) {
         const hasCookie =
@@ -51,7 +52,8 @@ export const AuthProvider = ({
 
       isChecking.current = true;
       try {
-        const response = await api.get("/auth/status");
+        const response = await api.get(`/auth/status?t=${Date.now()}`);
+
         const userData =
           response.data?.data?.user ||
           response.data?.user ||
@@ -64,13 +66,13 @@ export const AuthProvider = ({
         }
       } catch (error) {
         console.error("Auth check failed:", error);
-        setUser(null);
+        if (forceRefresh) setUser(null);
       } finally {
         setIsLoading(false);
         isChecking.current = false;
       }
     },
-    [initialUser],
+    [initialUser, user],
   );
 
   useEffect(() => {
@@ -78,7 +80,6 @@ export const AuthProvider = ({
       setIsLoading(false);
       return;
     }
-
     checkAuthStatus();
   }, [initialUser, checkAuthStatus]);
 

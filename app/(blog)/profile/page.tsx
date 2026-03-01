@@ -36,7 +36,7 @@ export default function ProfilePage() {
 
   const handleRefresh = useCallback(async () => {
     if (typeof checkAuthStatus === "function") {
-      await checkAuthStatus();
+      await checkAuthStatus(true);
     }
 
     setRefreshKey(Date.now());
