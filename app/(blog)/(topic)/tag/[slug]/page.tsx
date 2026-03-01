@@ -7,13 +7,17 @@ import { ITagResponse } from "@/app/types/tag";
 import PaginationControls from "@/app/components/PaginationControls";
 import TagManagementActions from "../_components/TagManagementActions";
 import { ENV } from "@/config/env.config";
+import { cookies } from "next/headers";
 
 async function fetchTagDetails(
   slug: string,
 ): Promise<IBaseResponse<ITagResponse> | null> {
+  const cookie = await cookies();
   try {
     const url = `${ENV.API_URL}/tags/${slug}`;
-    const response = await fetch(url);
+    const response = await fetch(url, {
+      headers: { Cookie: cookie.toString() },
+    });
     if (response.status === 404) return null;
     if (!response.ok) throw new Error(`Error: ${response.status}`);
     const result = await response.json();
@@ -23,13 +27,16 @@ async function fetchTagDetails(
   }
 }
 async function fetchTopicsByTagId(
-  tagId: string,
+  tagId: number,
   page: number,
   limit: number,
 ): Promise<IBaseResponse<{ data: ITopicResponse[]; meta: IMeta }>> {
+  const cookie = await cookies();
   try {
     const url = `${ENV.API_URL}/topics/all/${tagId}?page=${page}&limit=${limit}`;
-    const response = await fetch(url);
+    const response = await fetch(url, {
+      headers: { Cookie: cookie.toString() },
+    });
     if (!response.ok) throw new Error(`Error: ${response.status}`);
     const result = await response.json();
     return result;
