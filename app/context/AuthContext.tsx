@@ -6,6 +6,7 @@ import React, {
   useState,
   useEffect,
   useCallback,
+  useRef,
 } from "react";
 import api from "@/api/axios";
 import { IUserResponse } from "@/app/types/user-response.dto";
@@ -30,37 +31,55 @@ export const AuthProvider = ({
   const [user, setUser] = useState<IUserResponse | null>(initialUser);
   const [isLoading, setIsLoading] = useState(!initialUser);
 
-  const checkAuthStatus = useCallback(async () => {
-    const hasHelperCookie = document.cookie
-      .split("; ")
-      .find((row) => row.startsWith("isLoggedIn="));
+  const isChecking = useRef(false);
 
-    if (!hasHelperCookie) {
-      setUser(null);
+  const checkAuthStatus = useCallback(
+    async (forceRefresh = false) => {
+      if (isChecking.current || (!forceRefresh && initialUser)) return;
+
+      if (!forceRefresh) {
+        const hasCookie =
+          typeof document !== "undefined" &&
+          document.cookie.includes("connect.sid");
+
+        if (!hasCookie) {
+          setUser(null);
+          setIsLoading(false);
+          return;
+        }
+      }
+
+      isChecking.current = true;
+      try {
+        const response = await api.get("/auth/status");
+        const userData =
+          response.data?.data?.user ||
+          response.data?.user ||
+          response.data?.data;
+
+        if (userData) {
+          setUser(userData);
+        } else {
+          setUser(null);
+        }
+      } catch (error) {
+        console.error("Auth check failed:", error);
+        setUser(null);
+      } finally {
+        setIsLoading(false);
+        isChecking.current = false;
+      }
+    },
+    [initialUser],
+  );
+
+  useEffect(() => {
+    if (initialUser) {
       setIsLoading(false);
       return;
     }
 
-    try {
-      const { data } = await api.get("/auth/status");
-      if (data?.data?.user) {
-        setUser(data.data.user);
-      } else {
-        setUser(null);
-      }
-    } catch (error) {
-      setUser(null);
-    } finally {
-      setIsLoading(false);
-    }
-  }, []);
-
-  useEffect(() => {
-    if (!initialUser) {
-      checkAuthStatus();
-    } else {
-      setIsLoading(false);
-    }
+    checkAuthStatus();
   }, [initialUser, checkAuthStatus]);
 
   const login = (userData: IUserResponse) => {

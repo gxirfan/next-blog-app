@@ -1,14 +1,8 @@
 "use client";
 
-import React, { useState, useRef, useEffect } from "react";
+import React, { useState, useRef } from "react";
 import Image from "next/image";
-import {
-  Camera,
-  Upload,
-  XCircle,
-  Loader,
-  Image as ImageIcon,
-} from "lucide-react";
+import { Camera, Upload, XCircle, Loader } from "lucide-react";
 import api from "@/api/axios";
 import { ENV } from "@/config/env.config";
 
@@ -29,11 +23,6 @@ const ProfileMediaPreview = ({
   const [selectedCover, setSelectedCover] = useState<File | null>(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
-  const [previewUrls, setPreviewUrls] = useState({
-    avatar: avatarUrl,
-    cover: coverUrl,
-  });
-  const [isParentRefreshing, setIsParentRefreshing] = useState(false);
 
   const avatarInputRef = useRef<HTMLInputElement>(null);
   const coverInputRef = useRef<HTMLInputElement>(null);
@@ -43,25 +32,18 @@ const ProfileMediaPreview = ({
   const DEFAULT_AVATAR =
     ENV.API_IMAGE_URL + "/images/user/avatars/default-avatar.png";
 
-  const finalCoverUrl = selectedCover
-    ? URL.createObjectURL(selectedCover)
-    : previewUrls.cover || DEFAULT_COVER;
-  const finalAvatarUrl = selectedAvatar
+  const displayAvatar = selectedAvatar
     ? URL.createObjectURL(selectedAvatar)
-    : previewUrls.avatar || DEFAULT_AVATAR;
-
-  useEffect(() => {
-    if (avatarUrl !== previewUrls.avatar || coverUrl !== previewUrls.cover) {
-      setPreviewUrls({ avatar: avatarUrl, cover: coverUrl });
-      setIsParentRefreshing(false);
-    }
-  }, [avatarUrl, coverUrl, previewUrls.avatar, previewUrls.cover]);
+    : avatarUrl || DEFAULT_AVATAR;
+  const displayCover = selectedCover
+    ? URL.createObjectURL(selectedCover)
+    : coverUrl || DEFAULT_COVER;
 
   const handleFileChange = (
     e: React.ChangeEvent<HTMLInputElement>,
     type: "avatar" | "cover",
   ) => {
-    const file = e.target.files ? e.target.files[0] : null;
+    const file = e.target.files?.[0];
     setError(null);
     if (file) {
       if (type === "avatar") setSelectedAvatar(file);
@@ -70,38 +52,31 @@ const ProfileMediaPreview = ({
   };
 
   const handleUpload = async () => {
-    if (!selectedAvatar && !selectedCover) {
-      setError("Please select an image first.");
-      return;
-    }
+    if (!selectedAvatar && !selectedCover) return;
+
     const formData = new FormData();
     if (selectedAvatar) formData.append("avatar", selectedAvatar);
     if (selectedCover) formData.append("cover", selectedCover);
 
     setLoading(true);
-    setError(null);
-
     try {
-      const response = await api.patch("/user/me/media", formData, {
+      await api.patch("/user/me/media", formData, {
         withCredentials: true,
+        headers: { "Content-Type": "multipart/form-data" },
       });
-      setPreviewUrls({
-        avatar: response.data.avatarUrl,
-        cover: response.data.coverUrl,
-      });
+
       setSelectedAvatar(null);
       setSelectedCover(null);
-      setIsParentRefreshing(true);
-      onUploadSuccess();
+
+      await onUploadSuccess();
     } catch (err: any) {
       setError(err.response?.data?.message || "Upload failed.");
-      setIsParentRefreshing(false);
     } finally {
       setLoading(false);
     }
   };
 
-  const isImageUpdating = loading || isParentRefreshing;
+  const isUpdating = loading;
 
   return (
     <div className="w-full bg-transparent space-y-6">
@@ -122,30 +97,30 @@ const ProfileMediaPreview = ({
 
       <div className="relative w-full h-48 md:h-64 bg-neutral-900 rounded-2rem overflow-hidden group border border-neutral-800/50">
         <Image
-          src={finalCoverUrl}
+          key={displayCover}
+          src={displayCover}
           alt="Cover preview"
           fill
           className={`object-cover transition-all duration-500 ${
-            isImageUpdating
+            isUpdating
               ? "blur-sm opacity-50"
               : "opacity-80 group-hover:opacity-100"
           }`}
         />
-
         <div
-          onClick={() => !isImageUpdating && coverInputRef.current?.click()}
+          onClick={() => !isUpdating && coverInputRef.current?.click()}
           className={`absolute inset-0 flex items-center justify-center transition-all duration-300 ${
-            isImageUpdating
+            isUpdating
               ? "bg-black/20"
               : "bg-black/0 group-hover:bg-black/40 cursor-pointer"
           }`}
         >
-          {!isImageUpdating && (
+          {!isUpdating && (
             <div className="bg-white/10 backdrop-blur-md p-3 rounded-full border border-white/20 opacity-0 group-hover:opacity-100 transition-all scale-75 group-hover:scale-100">
               <Camera size={24} className="text-white" />
             </div>
           )}
-          {isImageUpdating && (
+          {isUpdating && (
             <Loader className="animate-spin text-cyan-400" size={32} />
           )}
         </div>
@@ -156,17 +131,16 @@ const ProfileMediaPreview = ({
           <div className="relative -mt-12 md:-mt-16 z-10">
             <div className="w-28 h-28 md:w-36 md:h-36 rounded-full border-[6px] border-neutral-950 bg-neutral-900 overflow-hidden relative group">
               <Image
-                src={finalAvatarUrl}
+                key={displayAvatar}
+                src={displayAvatar}
                 alt="Avatar preview"
                 fill
                 className={`object-cover transition-opacity ${
-                  isImageUpdating ? "opacity-30" : "opacity-100"
+                  isUpdating ? "opacity-30" : "opacity-100"
                 }`}
               />
               <div
-                onClick={() =>
-                  !isImageUpdating && avatarInputRef.current?.click()
-                }
+                onClick={() => !isUpdating && avatarInputRef.current?.click()}
                 className="absolute inset-0 bg-black/0 group-hover:bg-black/40 flex items-center justify-center transition-all cursor-pointer"
               >
                 <Camera
@@ -174,14 +148,13 @@ const ProfileMediaPreview = ({
                   className="text-white opacity-0 group-hover:opacity-100"
                 />
               </div>
-              {isImageUpdating && (
+              {isUpdating && (
                 <div className="absolute inset-0 flex items-center justify-center">
                   <Loader className="animate-spin text-cyan-400" size={20} />
                 </div>
               )}
             </div>
           </div>
-
           <div className="pb-2">
             <h3 className="text-white font-bold text-lg">Media Assets</h3>
             <p className="text-neutral-500 text-xs">
@@ -196,23 +169,22 @@ const ProfileMediaPreview = ({
               <XCircle size={14} /> {error}
             </span>
           )}
-
           <button
             onClick={handleUpload}
-            disabled={(!selectedAvatar && !selectedCover) || isImageUpdating}
+            disabled={(!selectedAvatar && !selectedCover) || isUpdating}
             className={`px-6 py-2.5 rounded-2xl text-xs tracking-widest transition-all duration-300 flex items-center gap-2
               ${
-                (selectedAvatar || selectedCover) && !isImageUpdating
+                (selectedAvatar || selectedCover) && !isUpdating
                   ? "bg-white text-black hover:scale-105 active:scale-95"
                   : "bg-neutral-900 text-neutral-600 border border-neutral-800"
               }`}
           >
-            {isImageUpdating ? (
+            {isUpdating ? (
               <Loader size={16} className="animate-spin" />
             ) : (
               <Upload size={16} />
             )}
-            {isImageUpdating ? "Updating..." : "Save Changes"}
+            {isUpdating ? "Updating..." : "Save Changes"}
           </button>
         </div>
       </div>
