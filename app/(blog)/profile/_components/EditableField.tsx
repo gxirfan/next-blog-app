@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect, useMemo } from "react";
 import api from "@/api/axios";
 import { IUpdateMeDto } from "@/app/types/update-me.dto";
 import {
@@ -11,20 +11,19 @@ import {
   Save,
   XCircle,
   Info,
-  Hash,
   Calendar,
   ChevronRight,
   Smile,
-  X,
   Mars,
   Venus,
   Transgender,
+  Loader2,
 } from "lucide-react";
 
 interface EditableFieldProps {
   label: string;
   fieldKey: keyof IUpdateMeDto;
-  initialValue: string;
+  initialValue: string | null | undefined;
   isTextArea?: boolean;
   type?: "text" | "email" | "password" | "username" | "date";
   selectOptions?: { value: string; label: string }[];
@@ -41,12 +40,17 @@ const EditableField = ({
   onSuccess,
 }: EditableFieldProps) => {
   const [isEditing, setIsEditing] = useState(false);
-  const [value, setValue] = useState(initialValue);
+  const [value, setValue] = useState(initialValue ?? "");
   const [isSaving, setIsSaving] = useState(false);
+  const [isSyncing, setIsSyncing] = useState(false);
   const [error, setError] = useState("");
 
-  const getFieldIcon = (fieldType: string | undefined) => {
-    switch (fieldType) {
+  useEffect(() => {
+    setValue(initialValue ?? "");
+  }, [initialValue]);
+
+  const CurrentIcon = useMemo(() => {
+    switch (type) {
       case "email":
         return Mail;
       case "username":
@@ -58,21 +62,20 @@ const EditableField = ({
       default:
         return selectOptions ? Smile : Info;
     }
-  };
-
-  const CurrentIcon = getFieldIcon(type);
+  }, [type, selectOptions]);
 
   const handleSave = async () => {
-    // Basic validations
-    if (type === "email" && !/\S+@\S+\.\S+/.test(value)) {
+    if (type === "email" && !/\S+@\S+\.\S+/.test(value as string)) {
       setError("Enter a valid email address.");
       return;
     }
-    if (type === "password" && value.length < 6) {
+    if (type === "password" && (value as string).length < 6) {
       setError("Password must be at least 6 characters.");
       return;
     }
-    if (!value && fieldKey !== "gender") {
+
+    const requiredFields = ["email", "username"];
+    if (!value && requiredFields.includes(fieldKey as string)) {
       setError("Field cannot be empty.");
       return;
     }
@@ -81,97 +84,90 @@ const EditableField = ({
     setError("");
 
     try {
-      const payload: IUpdateMeDto = { [fieldKey]: value };
+      const payload: IUpdateMeDto = { [fieldKey]: value === "" ? null : value };
       await api.patch("/user/update", payload);
+
+      setIsSaving(false);
       setIsEditing(false);
+      setIsSyncing(true);
       onSuccess();
-    } catch (err: unknown) {
-      setError("Update failed. Please try again.");
+    } catch (err: any) {
+      setError(err.response?.data?.message || "Update failed.");
     } finally {
       setIsSaving(false);
+      setIsSyncing(false);
     }
   };
 
   const displayValue = initialValue || "Not specified.";
 
   const inputBaseStyles =
-    "w-full pl-11 pr-4 py-3 bg-neutral-950 border border-neutral-800 rounded-2xl text-[13px] text-white font-bold placeholder-neutral-700 focus:outline-none focus:border-cyan-500/50 transition-all appearance-none";
+    "w-full pl-4 pr-4 py-3 bg-black border border-neutral-800 rounded-lg text-[13px] text-white font-medium focus:outline-none focus:border-cyan-500/50 transition-all appearance-none";
 
   return (
     <div
-      className={`p-6 border rounded-[2rem] transition-all duration-300 ${
-        isEditing
-          ? "bg-neutral-900/30 border-neutral-700"
-          : "bg-neutral-950 border-neutral-800"
-      }`}
+      className={`rounded-2xl relative p-6 border transition-all duration-300 overflow-hidden ${isEditing ? "bg-neutral-900/20 border-neutral-700" : "bg-black border-neutral-900"}`}
     >
-      {/* Label & Header */}
-      <div className="flex items-center justify-between mb-4 group/header">
-        <div className="flex items-center gap-2.5">
-          <CurrentIcon
-            size={14}
-            className="text-neutral-600 group-hover/header:text-cyan-500 transition-colors duration-300"
-          />
-          <span className="text-[11px] font-black font-jetbrains-mono tracking-[0.2em] text-neutral-500">
+      {isSyncing && (
+        <div className="absolute inset-0 z-20 bg-black/80 flex flex-col items-center justify-center backdrop-blur-sm">
+          <Loader2 size={20} className="text-cyan-500 animate-spin mb-2" />
+          <span className="text-[10px] font-black font-jetbrains-mono tracking-widest text-neutral-400">
+            SYNCING DATA
+          </span>
+        </div>
+      )}
+
+      <div className="flex items-center justify-between mb-5">
+        <div className="flex items-center gap-3">
+          <div
+            className={`p-2 border rounded-md ${isEditing ? "border-cyan-500/30 text-cyan-500" : "border-neutral-800 text-neutral-600"}`}
+          >
+            <CurrentIcon size={14} />
+          </div>
+          <span className="text-xs font-black font-jetbrains-mono tracking-[0.25em] text-neutral-500">
             {label}
           </span>
         </div>
-
         {!isEditing && (
           <button
-            onClick={() => {
-              setIsEditing(true);
-              setError("");
-            }}
-            className="flex items-center gap-1.5 px-2 py-1 rounded hover:bg-neutral-900 transition-all duration-200 cursor-pointer group/btn"
+            onClick={() => setIsEditing(true)}
+            className="p-2 text-neutral-600 hover:text-white hover:bg-neutral-900 border border-transparent hover:border-neutral-800 rounded transition-all cursor-pointer"
           >
-            <Edit
-              size={12}
-              className="text-neutral-700 group-hover/btn:text-cyan-500 transition-colors"
-            />
-            <span className="text-[11px] font-black font-jetbrains-mono tracking-widest text-neutral-700 group-hover/btn:text-neutral-300 transition-colors">
-              Edit
-            </span>
+            <Edit size={14} />
           </button>
         )}
       </div>
 
       {!isEditing ? (
-        /* Static View */
-        <p className="text-sm font-bold text-white tracking-tight break-all">
-          {type === "password" && fieldKey !== "gender" ? (
-            "••••••••"
-          ) : type !== "password" && fieldKey === "gender" ? (
-            <span className="flex items-center gap-2">
-              {displayValue === "male" && (
-                <Mars size={16} className="text-cyan-400" />
-              )}
-              {displayValue === "female" && (
-                <Venus size={16} className="text-pink-400" />
-              )}
-              {displayValue === "other" && (
-                <Transgender size={16} className="text-neutral-400" />
-              )}
-
-              <span className="capitalize">{displayValue as string}</span>
-            </span>
-          ) : (
-            displayValue
-          )}
-        </p>
+        <div className="flex items-center justify-between group">
+          <div className="text-sm font-bold text-neutral-200 tracking-tight">
+            {type === "password" ? (
+              "••••••••"
+            ) : fieldKey === "gender" ? (
+              <span className="flex items-center gap-2">
+                {displayValue === "male" && (
+                  <Mars size={16} className="text-cyan-400" />
+                )}
+                {displayValue === "female" && (
+                  <Venus size={16} className="text-pink-400" />
+                )}
+                {displayValue === "other" && (
+                  <Transgender size={16} className="text-neutral-400" />
+                )}
+                <span className="capitalize">{displayValue as string}</span>
+              </span>
+            ) : (
+              displayValue
+            )}
+          </div>
+        </div>
       ) : (
-        /* Edit Mode */
-        <div className="space-y-4 animate-in fade-in duration-300">
-          <div className="relative group">
-            <CurrentIcon
-              size={16}
-              className="absolute left-4 top-1/2 -translate-y-1/2 text-neutral-700 group-focus-within:text-cyan-500 transition-colors z-10"
-            />
-
+        <div className="space-y-4 animate-in slide-in-from-bottom-2 duration-300">
+          <div className="relative">
             {selectOptions ? (
-              <>
+              <div className="relative">
                 <select
-                  value={value}
+                  value={value ?? ""}
                   onChange={(e) => setValue(e.target.value)}
                   className={inputBaseStyles}
                 >
@@ -192,13 +188,14 @@ const EditableField = ({
                   size={14}
                   className="absolute right-4 top-1/2 -translate-y-1/2 rotate-90 text-neutral-600 pointer-events-none"
                 />
-              </>
+              </div>
             ) : isTextArea ? (
               <textarea
-                value={value}
+                value={value ?? ""}
                 onChange={(e) => setValue(e.target.value)}
                 rows={3}
-                className={`${inputBaseStyles} resize-none py-4`}
+                className={`${inputBaseStyles} resize-none py-3 pl-4`}
+                placeholder={`Enter your ${label.toLowerCase()}...`}
               />
             ) : (
               <input
@@ -209,45 +206,45 @@ const EditableField = ({
                       ? "password"
                       : "text"
                 }
-                value={value}
+                value={value ?? ""}
                 onChange={(e) => setValue(e.target.value)}
                 className={inputBaseStyles}
+                autoFocus
               />
             )}
           </div>
 
           {error && (
-            <div className="flex items-center gap-2 text-[11px] tracking-widest text-red-500 px-2">
-              <XCircle size={12} /> <span>{error}</span>
+            <div className="flex items-center gap-2 text-[10px] font-bold text-red-500 px-1">
+              <XCircle size={12} />{" "}
+              <span className="tracking-tighter">{error}</span>
             </div>
           )}
 
-          {/* Action Buttons: Flat & Sharp */}
-          <div className="flex justify-end items-center gap-3 pt-2">
+          <div className="flex justify-end items-center gap-2">
             <button
               onClick={() => {
-                setValue(initialValue);
+                setValue(initialValue ?? "");
                 setIsEditing(false);
+                setError("");
               }}
-              className="px-4 py-2 text-[11px] tracking-widest text-neutral-600 hover:text-white transition-colors cursor-pointer flex items-center gap-1"
+              className="px-3 py-2 text-[10px] font-black font-jetbrains-mono tracking-widest text-neutral-600 hover:text-white transition-colors cursor-pointer"
             >
-              <X size={12} /> Cancel
+              CANCEL
             </button>
-
             <button
               onClick={handleSave}
-              disabled={isSaving || value === initialValue}
-              className="px-5 py-2.5 bg-neutral-950 border border-neutral-800 rounded-xl text-[11px] tracking-widest text-neutral-400 hover:border-cyan-500/50 hover:text-cyan-400 transition-all disabled:opacity-30 active:scale-95 cursor-pointer"
+              disabled={
+                isSaving || (value === initialValue && type !== "password")
+              }
+              className="flex items-center gap-2 px-4 py-2 bg-white text-black rounded font-black text-[10px] font-jetbrains-mono tracking-widest hover:bg-cyan-500 transition-all disabled:opacity-20 active:scale-95 cursor-pointer"
             >
               {isSaving ? (
-                <span className="flex items-center gap-2">
-                  <Hash size={12} className="animate-spin" /> Updating...
-                </span>
+                <Loader2 size={12} className="animate-spin" />
               ) : (
-                <span className="flex items-center gap-2">
-                  <Save size={12} /> Save
-                </span>
-              )}
+                <Save size={12} />
+              )}{" "}
+              SAVE
             </button>
           </div>
         </div>

@@ -75,7 +75,7 @@ export default function RecoveryPage() {
     "w-full h-16 pl-16 pr-6 bg-neutral-900/40 border-2 border-neutral-800 rounded-full text-[15px] text-white font-semibold placeholder-neutral-600 focus:outline-none focus:border-cyan-500/50 focus:bg-neutral-900 transition-all duration-300 appearance-none";
 
   const LABEL_STYLING =
-    "text-[13px] font-black text-neutral-400 tracking-[0.15em] ml-6 mb-2 block uppercase";
+    "text-[13px] font-black text-neutral-400 tracking-[0.15em] ml-6 mb-2 block";
 
   return (
     <div className="flex min-h-screen items-center justify-center p-6 bg-neutral-950 relative overflow-hidden">
@@ -88,10 +88,10 @@ export default function RecoveryPage() {
               <KeyRound size={36} strokeWidth={1.5} />
             </div>
             <div className="text-center space-y-2">
-              <h1 className="text-4xl font-black text-white tracking-tighter leading-none uppercase">
+              <h1 className="text-4xl font-black text-white tracking-tighter leading-none">
                 Recover
               </h1>
-              <p className="text-xs font-bold text-neutral-500 tracking-[0.3em] uppercase">
+              <p className="text-xs font-bold text-neutral-500 tracking-[0.3em]">
                 Account Restoration Protocol
               </p>
             </div>
@@ -199,7 +199,7 @@ export default function RecoveryPage() {
               className="w-full pt-4 outline-none group"
             >
               <div
-                className={`flex items-center justify-center gap-4 h-16 rounded-full text-sm font-black tracking-[0.2em] transition-all duration-300 active:scale-95 uppercase ${
+                className={`flex items-center justify-center gap-4 h-16 rounded-full text-sm font-black tracking-[0.2em] transition-all duration-300 active:scale-95 ${
                   loading
                     ? "bg-neutral-900 text-neutral-700 border-2 border-neutral-800"
                     : "bg-cyan-500 text-black hover:bg-white cursor-pointer"
@@ -224,7 +224,7 @@ export default function RecoveryPage() {
             <div className="flex items-center justify-center gap-6 pt-6 border-t border-neutral-900">
               <Link
                 href="/login"
-                className="text-sm font-black tracking-[0.2em] text-neutral-700 hover:text-white transition-colors flex items-center gap-2 group uppercase"
+                className="text-sm font-black tracking-[0.2em] text-neutral-700 hover:text-white transition-colors flex items-center gap-2 group"
               >
                 <ArrowLeft
                   size={14}

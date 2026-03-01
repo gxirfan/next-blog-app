@@ -100,7 +100,7 @@ export default function ForgotPasswordPage() {
               <h1 className="text-4xl font-black text-white tracking-tighter leading-none">
                 {isSuccess ? "Reset" : "Forgot"}
               </h1>
-              <p className="text-xs font-bold text-neutral-500 tracking-[0.3em] uppercase">
+              <p className="text-xs font-bold text-neutral-500 tracking-[0.3em]">
                 {isSuccess ? "Set new password" : "Recover account"}
               </p>
             </div>
@@ -210,7 +210,7 @@ export default function ForgotPasswordPage() {
             >
               <div
                 className={`
-                flex items-center justify-center gap-4 h-16 rounded-full text-sm font-black tracking-[0.2em] transition-all duration-300 active:scale-95 uppercase
+                flex items-center justify-center gap-4 h-16 rounded-full text-sm font-black tracking-[0.2em] transition-all duration-300 active:scale-95
                 ${
                   loading || passwordResetSuccess
                     ? "bg-neutral-900 text-neutral-700 border-2 border-neutral-800"
@@ -240,7 +240,7 @@ export default function ForgotPasswordPage() {
             <div className="flex flex-col items-center gap-6 pt-6 border-t border-neutral-900">
               <Link
                 href="/login"
-                className="text-sm font-black tracking-[0.2em] text-neutral-700 hover:text-white transition-colors flex items-center gap-2 group uppercase"
+                className="text-sm font-black tracking-[0.2em] text-neutral-700 hover:text-white transition-colors flex items-center gap-2 group"
               >
                 <ArrowLeft
                   size={14}

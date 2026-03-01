@@ -82,7 +82,7 @@ const ProfileHeader = ({ user }: ProfileHeaderProps) => {
                 <div
                   className={`flex items-center gap-2 px-4 py-1.5 rounded-xl bg-neutral-900 border-2 border-neutral-800 ${getRoleClass(user.role)}`}
                 >
-                  <span className="text-[10px] font-black uppercase tracking-[0.2em]">
+                  <span className="text-[10px] font-black tracking-[0.2em]">
                     {user.role}
                   </span>
                 </div>

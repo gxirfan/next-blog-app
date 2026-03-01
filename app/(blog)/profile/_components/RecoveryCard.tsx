@@ -41,23 +41,31 @@ const RecoveryCard = () => {
 
   return (
     <>
-      <div className="bg-neutral-950 p-8 md:p-10 rounded-[2.5rem] border border-neutral-800 relative overflow-hidden">
-        <div className="flex flex-col md:flex-row md:items-center justify-between gap-8">
-          <div className="flex-1 space-y-4">
-            <div className="flex items-center gap-3">
-              <div className="p-2.5 bg-neutral-900 border border-neutral-800 rounded-xl text-red-500/80">
-                <ShieldAlert size={20} strokeWidth={1.5} />
+      <div className="bg-neutral-950 p-8 border border-neutral-900 rounded-2xl relative overflow-hidden group transition-all duration-300 hover:border-neutral-800">
+        <div className="absolute top-0 right-0 w-32 h-32 bg-red-500/5 blur-[80px] pointer-events-none" />
+
+        <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-10">
+          <div className="flex-1 space-y-5">
+            <div className="flex items-center gap-4">
+              <div className="p-3 bg-black border border-neutral-800 rounded-xl text-red-500">
+                <ShieldAlert size={22} strokeWidth={1.5} />
               </div>
-              <h3 className="text-xl text-white tracking-tighter">
-                Account Recovery Codes
-              </h3>
+              <div>
+                <h3 className="text-lg font-bold text-white tracking-tight">
+                  Account Recovery Keys
+                </h3>
+                <p className="text-[10px] font-black text-neutral-600 tracking-[0.2em] mt-0.5">
+                  Emergency Access System
+                </p>
+              </div>
             </div>
 
-            <p className="text-sm font-medium text-neutral-500 leading-relaxed max-w-xl">
-              In case you lose access to your primary identity keys, these
-              one-time codes allow emergency portal access.{" "}
-              <span className="text-neutral-400">
-                Generating new ones will immediately revoke all previous codes.
+            <p className="text-sm font-medium text-neutral-400 leading-relaxed max-w-2xl">
+              If you lose access to your primary account, these one-time codes
+              will be your only way to recover your profile.
+              <span className="block mt-2 text-neutral-500 text-xs">
+                Note: Generating new keys will permanently invalidate any
+                existing ones.
               </span>
             </p>
           </div>
@@ -66,7 +74,17 @@ const RecoveryCard = () => {
             <button
               onClick={handleGenerateCodes}
               disabled={isLoading}
-              className="group relative flex items-center gap-3 px-8 py-4 bg-neutral-950 border border-neutral-800 rounded-2xl text-[10px] tracking-[0.2em] text-neutral-400 hover:border-cyan-500/50 hover:text-cyan-400 transition-all cursor-pointer active:scale-95 disabled:opacity-30"
+              className="
+              w-full md:w-auto
+              flex items-center justify-center gap-4 
+              px-10 py-5 
+              bg-neutral-900 border border-neutral-800 
+              rounded-xl 
+              text-[11px] font-black tracking-widest text-neutral-300
+              hover:bg-white hover:text-black hover:border-white
+              transition-all duration-300 cursor-pointer 
+              active:scale-95 disabled:opacity-20
+            "
             >
               {isLoading ? (
                 <>
@@ -75,11 +93,8 @@ const RecoveryCard = () => {
                 </>
               ) : (
                 <>
-                  <span>Renew Recovery Grid</span>
-                  <ChevronRight
-                    size={14}
-                    className="group-hover:translate-x-1 transition-transform"
-                  />
+                  <span>Renew Recovery Keys</span>
+                  <ChevronRight size={14} />
                 </>
               )}
             </button>
@@ -87,7 +102,7 @@ const RecoveryCard = () => {
         </div>
 
         {error && (
-          <div className="mt-6 flex items-center gap-3 p-4 bg-red-500/5 border border-red-500/10 rounded-2xl text-red-500 text-[10px] tracking-widest animate-in fade-in zoom-in-95">
+          <div className="mt-8 flex items-center gap-3 p-4 bg-red-500/5 border border-red-500/10 rounded-lg text-red-400 text-[10px] font-bold tracking-widest animate-in slide-in-from-top-2">
             <AlertCircle size={14} />
             <span>{error}</span>
           </div>
