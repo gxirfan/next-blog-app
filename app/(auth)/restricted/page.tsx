@@ -10,14 +10,14 @@ export default function RestrictedPage() {
   const router = useRouter();
 
   useEffect(() => {
-    if (!isLoading && (!user || user.status === "active")) {
+    if (!isLoading && (!user || user.status.toLowerCase() === "active")) {
       router.push("/");
     }
   }, [user, isLoading, router]);
 
   if (isLoading || !user) return null;
 
-  const isBanned = user.status === "banned";
+  const isBanned = user.status.toLowerCase() === "banned";
 
   return (
     <div className="min-h-screen bg-neutral-950 flex items-center justify-center p-6 font-mono">

@@ -23,8 +23,8 @@ const TopicManagementActions = ({ topic }: TopicManagementActionsProps) => {
   const canManage =
     user &&
     (topic.userId === user.id ||
-      user.role === "admin" ||
-      user.role === "moderator");
+      user.role.toLowerCase() === "admin" ||
+      user.role.toLowerCase() === "moderator");
   if (!canManage) return null;
 
   const isCurrentlyActive = topic.status !== false;

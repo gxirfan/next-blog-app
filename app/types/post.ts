@@ -1,12 +1,12 @@
 import { IAuditFields } from "./common";
 
 export interface IPostResponse extends IAuditFields {
-  id: string;
+  id: number;
   title: string;
   slug: string;
   mainImage: string | null;
   content: string;
-  userId: string;
+  userId: number;
   score: number;
   readingTime: number;
 
@@ -17,16 +17,16 @@ export interface IPostResponse extends IAuditFields {
   authorRole: string;
   authorAvatar: string;
 
-  topicId: string;
+  topicId: number;
   topicTitle: string;
   topicSlug: string;
-  topicTagId: string;
+  topicTagId: number;
 
-  parentId: string | null;
+  parentId: number | null;
   parentTitle: string | null;
   parentSlug: string | null;
   parentContent: string | null;
-  parentUserId: string | null;
+  parentUserId: number | null;
   parentAuthor: string | null;
   parentAuthorUsername: string | null;
   parentAuthorNickname: string | null;
@@ -45,7 +45,7 @@ export interface IPostResponse extends IAuditFields {
 export interface ICreatePostDto {
   title: string;
   content: string;
-  topicId: string;
-  parentId: string | null;
+  topicId: number;
+  parentId: number | null;
   mainImage: string | null;
 }

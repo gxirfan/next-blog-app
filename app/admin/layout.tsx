@@ -40,8 +40,8 @@ export default async function AdminLayout({
   const session = await getCurrentUser();
   if (
     !session?.data?.user ||
-    (session.data.user.role !== "admin" &&
-      session.data.user.role !== "moderator")
+    (session.data.user.role.toLowerCase() !== "admin" &&
+      session.data.user.role.toLowerCase() !== "moderator")
   ) {
     redirect("/login?returnUrl=/admin");
   }

@@ -42,12 +42,12 @@ const NotificationListItem = ({ notification }: NotificationListItemProps) => {
   return (
     <Link
       href={
-        notification.type === "flow_reply"
+        notification.type.toLowerCase() === "flow_reply"
           ? "/stream/thread/" + notification.targetUrl
-          : notification.type === "post_reply"
+          : notification.type.toLowerCase() === "post_reply"
             ? "/post/" + notification.targetUrl
-            : notification.type === "vote_up" ||
-                notification.type === "vote_down"
+            : notification.type.toLowerCase() === "vote_up" ||
+                notification.type.toLowerCase() === "vote_down"
               ? "/post/" + notification.targetUrl
               : notification.targetUrl
       }

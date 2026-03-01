@@ -1,5 +1,5 @@
 export interface SearchResult {
-  id: string;
+  id: number;
   type: "user" | "post" | "flow" | "tag" | "topic";
   title: string;
   description?: string;

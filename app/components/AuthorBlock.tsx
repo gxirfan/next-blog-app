@@ -10,9 +10,9 @@ interface AuthorBlockProps {
 }
 
 const getRoleColor = (role: string): string => {
-  if (role === "admin") return "adminColor";
-  if (role === "moderator") return "moderatorColor";
-  if (role === "writer") return "writerColor";
+  if (role.toLowerCase() === "admin") return "adminColor";
+  if (role.toLowerCase() === "moderator") return "moderatorColor";
+  if (role.toLowerCase() === "writer") return "writerColor";
   return "userColor";
 };
 

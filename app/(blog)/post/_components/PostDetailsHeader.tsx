@@ -39,9 +39,9 @@ export default function PostDetailsHeader({
           </span>
         </Link>
 
-        {postDetails.parentId && (
+        {!!postDetails.parentId && (
           <>
-            <div className="h-4 w-[1px] bg-neutral-800 rotate-12 mx-1" />{" "}
+            <div className="h-4 w-px bg-neutral-800 rotate-12 mx-1" />{" "}
             <Link
               href={`/post/${postDetails.parentSlug}`}
               className="group flex items-center gap-2 px-2 py-1 hover:text-neutral-200 transition-all"
@@ -88,9 +88,7 @@ export default function PostDetailsHeader({
               <Eye size={14} />
             </div>
             <div className="flex flex-col">
-              <span className="text-neutral-400">
-                {postDetails.viewCount.toLocaleString()}
-              </span>
+              <span className="text-neutral-400">{postDetails.viewCount}</span>
             </div>
           </div>
         </div>

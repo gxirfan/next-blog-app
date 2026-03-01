@@ -1,7 +1,7 @@
 import { IAuditFields } from "./common";
 
 export interface IUserResponse extends IAuditFields {
-  id: string;
+  id: number;
   username: string;
   nickname: string;
   firstName: string;

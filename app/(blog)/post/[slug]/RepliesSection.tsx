@@ -4,12 +4,13 @@ import { MessageSquare } from "lucide-react";
 import PostList from "../../topic/_components/PostList";
 import PaginationControls from "@/app/components/PaginationControls";
 import { ENV } from "@/config/env.config";
+import { IPaginationResponse } from "@/app/types/pagination-response";
 
 async function fetchLevel2Posts(
-  parentId: string,
+  parentId: number,
   page: number,
   limit: number,
-): Promise<IBaseResponse<{ data: IPostResponse[]; meta: IMeta }>> {
+): Promise<IBaseResponse<IPaginationResponse<IPostResponse>>> {
   try {
     const url = `${ENV.API_URL}/posts/all/parent/${parentId}?page=${page}&limit=${limit}`;
     const response = await fetch(url);
@@ -33,7 +34,7 @@ export async function RepliesSection({
   page,
   limit,
 }: {
-  parentId: string;
+  parentId: number;
   page: number;
   limit: number;
 }) {

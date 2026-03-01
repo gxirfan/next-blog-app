@@ -22,7 +22,9 @@ const CreateTagCard = () => {
   const router = useRouter();
 
   const isAuthorized =
-    user && (user.role === "admin" || user.role === "moderator");
+    user &&
+    (user.role.toLowerCase() === "admin" ||
+      user.role.toLowerCase() === "moderator");
 
   if (isLoading || !isAuthorized) return null;
 
@@ -72,8 +74,8 @@ const CreateTagCard = () => {
     }
   };
 
-  return ((user && user.role === "admin") ||
-    (user && user.role === "moderator")) &&
+  return ((user && user.role.toLowerCase() === "admin") ||
+    (user && user.role.toLowerCase() === "moderator")) &&
     !isLoading ? (
     <>
       {/* 1. Industrial Trigger Button */}

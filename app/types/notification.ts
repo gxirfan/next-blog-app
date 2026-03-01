@@ -1,8 +1,8 @@
 import { IAuditFields } from "./common";
 
 export interface INotification extends IAuditFields {
-  id: string;
-  senderId: string;
+  id: number;
+  senderId: number;
   senderUsername: string;
   senderAvatar: string;
   senderNickname: string;

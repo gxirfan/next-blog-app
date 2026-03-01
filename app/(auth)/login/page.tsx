@@ -36,7 +36,7 @@ export default function LoginPage({
 
   useEffect(() => {
     if (user && !isLoading) {
-      if (user.status !== "active") {
+      if (user.status.toLowerCase() !== "active") {
         router.push("/restricted");
         return;
       }

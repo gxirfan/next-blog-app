@@ -27,8 +27,8 @@ const MIN_LENGTH = 1;
 const MAX_LENGTH = 100;
 
 interface PostCreationWrapperProps {
-  topicId: string;
-  parentId: string | null;
+  topicId: number;
+  parentId: number | null;
   onClose?: () => void;
   buttonLabel: string;
 }
@@ -152,9 +152,9 @@ const PostCreationWrapper = ({
   };
 
   return (
-    (user.role === "writer" ||
-      user.role === "moderator" ||
-      user.role === "admin") && (
+    (user.role.toLowerCase() === "writer" ||
+      user.role.toLowerCase() === "moderator" ||
+      user.role.toLowerCase() === "admin") && (
       <>
         {/* --- Main Action Button: Bold Capsule --- */}
         <button

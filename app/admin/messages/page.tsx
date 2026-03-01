@@ -64,7 +64,7 @@ export default async function AdminMessagesPage({
               Total Messages
             </p>
             <p className="text-4xl font-black text-white tracking-tighter">
-              {(paginationData?.data?.meta?.total || 0).toLocaleString()}
+              {(paginationData?.data?.meta?.total || 0).toString()}
             </p>
           </div>
           <div className="h-12 w-1 bg-neutral-900 rounded-full" />

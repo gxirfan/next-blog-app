@@ -14,11 +14,10 @@ interface PostDetailsCardProps {
   postDetails: IPostResponse;
 }
 
-async function fetchUserVoteDirection(postId: string): Promise<number | null> {
+async function fetchUserVoteDirection(postId: number): Promise<number | null> {
   const headersList = await cookies();
   const cookieHeader = headersList.toString();
   if (!cookieHeader) return null;
-
   try {
     const url = `${ENV.API_URL}/vote?postId=${postId}&type=post`;
 

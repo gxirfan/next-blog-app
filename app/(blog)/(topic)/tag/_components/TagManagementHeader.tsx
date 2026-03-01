@@ -10,7 +10,9 @@ const TagManagementHeader = () => {
   const [isFormVisible, setIsFormVisible] = useState(false);
 
   const isAuthorized =
-    user && (user.role === "admin" || user.role === "moderator");
+    user &&
+    (user.role.toLowerCase() === "admin" ||
+      user.role.toLowerCase() === "moderator");
 
   if (isLoading || !isAuthorized) {
     return null;

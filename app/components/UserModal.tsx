@@ -80,11 +80,11 @@ const UserModal = ({ onClose }: UserModalProps) => {
               <Shield
                 size={20}
                 className={
-                  user.role === "admin"
+                  user.role.toLowerCase() === "admin"
                     ? "adminColor"
-                    : user.role === "moderator"
+                    : user.role.toLowerCase() === "moderator"
                       ? "moderatorColor"
-                      : user.role === "writer"
+                      : user.role.toLowerCase() === "writer"
                         ? "writerColor"
                         : "userColor"
                 }
@@ -107,12 +107,12 @@ const UserModal = ({ onClose }: UserModalProps) => {
 
         <div className="px-10 pb-6 flex items-center justify-center">
           <span
-            className={`flex items-center px-4 py-2 bg-neutral-900 border-2 border-neutral-800 rounded-xl text-[10px] uppercase font-black tracking-widest ${
-              user.role === "admin"
+            className={`flex items-center px-4 py-2 bg-neutral-900 border-2 border-neutral-800 rounded-xl text-[10px] font-black tracking-widest ${
+              user.role.toLowerCase() === "admin"
                 ? "adminColor"
-                : user.role === "moderator"
+                : user.role.toLowerCase() === "moderator"
                   ? "moderatorColor"
-                  : user.role === "writer"
+                  : user.role.toLowerCase() === "writer"
                     ? "writerColor"
                     : "userColor"
             }`}
@@ -136,7 +136,7 @@ const UserModal = ({ onClose }: UserModalProps) => {
             onClick={onClose}
           />
 
-          {user.role === "admin" && (
+          {user.role.toLowerCase() === "admin" && (
             <Link
               href="/admin"
               onClick={onClose}
@@ -155,7 +155,7 @@ const UserModal = ({ onClose }: UserModalProps) => {
             </Link>
           )}
 
-          {user.role === "moderator" && (
+          {user.role.toLowerCase() === "moderator" && (
             <Link
               href="/admin"
               onClick={onClose}

@@ -276,11 +276,11 @@ const Navbar = () => {
                     {/* Role Badge */}
                     <div
                       className={`flex items-center gap-1.5 ${
-                        user.role === "admin"
+                        user.role.toLowerCase() === "admin"
                           ? "adminColor"
-                          : user.role === "moderator"
+                          : user.role.toLowerCase() === "moderator"
                             ? "moderatorColor"
-                            : user.role === "writer"
+                            : user.role.toLowerCase() === "writer"
                               ? "writerColor"
                               : "userColor"
                       }`}

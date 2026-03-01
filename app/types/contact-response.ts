@@ -1,7 +1,7 @@
 import { IAuditFields } from "./common";
 
 export interface IContactResponse extends IAuditFields {
-  id: string;
+  id: number;
   name: string;
   email: string;
   subject: string;

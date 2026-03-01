@@ -18,14 +18,18 @@ export default function StatusGuard({
     if (
       !isLoading &&
       user &&
-      user.status !== "active" &&
+      user.status.toLowerCase() !== "active" &&
       pathname !== "/restricted"
     ) {
       router.replace("/restricted");
     }
   }, [user, isLoading, pathname, router]);
 
-  if (user && user.status !== "active" && pathname !== "/restricted") {
+  if (
+    user &&
+    user.status.toLowerCase() !== "active" &&
+    pathname !== "/restricted"
+  ) {
     return (
       <div className="min-h-screen bg-neutral-950 flex items-center justify-center font-mono text-[10px] text-neutral-600 tracking-[0.4em]">
         <Loader2 className="animate-spin mr-3 text-cyan-500" size={18} />

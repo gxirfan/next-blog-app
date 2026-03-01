@@ -74,7 +74,7 @@ const PostList = ({ posts }: PostListProps) => {
                       </span>
                     </Link>
 
-                    {post.parentId && (
+                    {!!post.parentId && (
                       <div className="flex items-center gap-3">
                         <div className="h-3 w-px bg-neutral-800 rotate-12" />
                         <Link

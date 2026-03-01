@@ -17,7 +17,9 @@ const AuthChecker = ({ children }: AuthCheckerProps) => {
     if (isLoading) return;
 
     const isAuthorized =
-      user && (user.role === "admin" || user.role === "moderator");
+      user &&
+      (user.role.toLowerCase() === "admin" ||
+        user.role.toLowerCase() === "moderator");
 
     if (isAuthorized) {
       setIsClientAuthorized(true);

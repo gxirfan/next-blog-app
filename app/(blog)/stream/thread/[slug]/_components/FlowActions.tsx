@@ -17,7 +17,7 @@ import { useAuth } from "@/app/context/AuthContext";
 interface FlowActionsProps {
   slug: string;
   initialContent: string;
-  authorId: string;
+  authorId: number;
 }
 
 export default function FlowActions({
@@ -36,7 +36,9 @@ export default function FlowActions({
   const [loading, setLoading] = useState(false);
 
   const isOwner = user?.id === authorId;
-  const isAdminOrMod = user?.role === "admin" || user?.role === "moderator";
+  const isAdminOrMod =
+    user?.role.toLowerCase() === "admin" ||
+    user?.role.toLowerCase() === "moderator";
   const canAction = isOwner || isAdminOrMod;
 
   if (!user || !canAction) return null;

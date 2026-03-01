@@ -29,7 +29,7 @@ export default function TagHeader({ count }: TagHeaderProps) {
             Registered Tags
           </p>
           <p className="text-4xl font-black text-white tracking-tighter">
-            {count.toLocaleString()}
+            {count}
           </p>
         </div>
 

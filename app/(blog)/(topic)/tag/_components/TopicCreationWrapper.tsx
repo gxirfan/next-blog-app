@@ -96,9 +96,9 @@ const TopicCreationWrapper = ({
   };
 
   return (
-    ((user && user.role === "admin") ||
-      (user && user.role === "moderator") ||
-      (user && user.role === "writer")) && (
+    ((user && user.role.toLowerCase() === "admin") ||
+      (user && user.role.toLowerCase() === "moderator") ||
+      (user && user.role.toLowerCase() === "writer")) && (
       <>
         <div className="flex justify-end mb-6">
           {/* <button

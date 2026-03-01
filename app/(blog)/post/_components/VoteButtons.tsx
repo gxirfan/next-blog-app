@@ -2,12 +2,12 @@
 
 import { useState, useEffect, useTransition } from "react";
 import { useRouter } from "next/navigation";
-import { ArrowBigUp, ArrowBigDown, X, Loader2 } from "lucide-react";
+import { ArrowBigUp, ArrowBigDown } from "lucide-react";
 import api from "@/api/axios";
 import { useAuth } from "@/app/context/AuthContext";
 
 interface VoteButtonProps {
-  postId: string;
+  postId: number;
   score: number;
   userCurrentVoteDirection: number | null;
 }

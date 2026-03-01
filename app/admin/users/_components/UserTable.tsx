@@ -138,7 +138,8 @@ export default function UserTable({
           <tbody className="divide-y-2 divide-neutral-900">
             {filteredUsers.map((user) => {
               if (
-                (user.role === "admin" || user.role === "moderator") &&
+                (user.role.toLowerCase() === "admin" ||
+                  user.role.toLowerCase() === "moderator") &&
                 authUserRole === "moderator"
               )
                 return null;
@@ -176,7 +177,8 @@ export default function UserTable({
                   <td className="px-10 py-8 text-right">
                     <button
                       disabled={
-                        user.role === "admin" || user.role === authUserRole
+                        user.role.toLowerCase() === "admin" ||
+                        user.role.toLowerCase() === authUserRole
                       }
                       onClick={() => {
                         setSelectedUser(user);
