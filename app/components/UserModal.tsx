@@ -45,7 +45,7 @@ const UserModal = ({ onClose }: UserModalProps) => {
 
   return (
     <div
-      className="fixed inset-0 w-screen h-screen bg-black/95 z-[9999] flex items-center justify-center p-4 animate-in fade-in duration-300"
+      className="fixed inset-0 w-screen h-screen bg-black/95 z-[9999] flex items-start md:items-center justify-center p-4 overflow-y-auto animate-in fade-in duration-300"
       onClick={onClose}
     >
       <div

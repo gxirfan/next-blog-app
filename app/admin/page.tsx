@@ -86,7 +86,7 @@ export default function AdminPage() {
       </header>
 
       {/* 2. MODULES ARCHIVE */}
-      <div className="border-2 border-neutral-900 rounded-[3rem] overflow-hidden bg-neutral-950">
+      <div className="border-2 border-neutral-900 rounded-[3rem] overflow-hidden bg-neutral-950 overflow-x-auto">
         <table className="w-full text-left border-separate border-spacing-0">
           <thead>
             <tr className="bg-neutral-950 text-neutral-700 text-[10px] tracking-[0.3em] font-black">

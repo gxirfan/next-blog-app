@@ -57,7 +57,7 @@ export default async function FlowPage({ searchParams }: FlowPageProps) {
 
   return (
     <div className="container mx-auto">
-      <div className="flex items-center space-x-2 mb-6 px-2">
+      <div className="flex items-center space-x-2 mb-6">
         <Sparkles className="text-cyan-400" size={24} />
         <h1 className="text-2xl font-bold text-white tracking-tight">
           The Stream

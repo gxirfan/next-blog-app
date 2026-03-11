@@ -8,6 +8,7 @@ import PaginationControls from "@/app/components/PaginationControls";
 import TagManagementActions from "../_components/TagManagementActions";
 import { ENV } from "@/config/env.config";
 import { cookies } from "next/headers";
+import { createCleanDescription } from "@/app/utils/seo-helper";
 
 async function fetchTagDetails(
   slug: string,
@@ -73,7 +74,7 @@ export const generateMetadata = async ({
 
   return {
     title: `${tagDetails.data.title}`,
-    description: tagDetails.data.description,
+    description: createCleanDescription(tagDetails.data.description),
     robots: {
       index: true,
       follow: true,

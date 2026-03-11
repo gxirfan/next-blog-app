@@ -131,7 +131,7 @@ export default function LoginPage({
                 <input
                   name="username"
                   type="text"
-                  placeholder="Your username or email"
+                  placeholder="Your Username or Email"
                   onChange={handleChange}
                   required
                   autoFocus

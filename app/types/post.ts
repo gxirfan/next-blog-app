@@ -4,6 +4,7 @@ export interface IPostResponse extends IAuditFields {
   id: number;
   title: string;
   slug: string;
+  seoTags: string[];
   mainImage: string | null;
   content: string;
   userId: number;
@@ -48,4 +49,5 @@ export interface ICreatePostDto {
   topicId: number;
   parentId: number | null;
   mainImage: string | null;
+  seoTags: string[];
 }

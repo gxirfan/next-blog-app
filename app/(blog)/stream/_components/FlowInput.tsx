@@ -116,7 +116,7 @@ export default function FlowInput({
           </div>
         )}
 
-        <div className="p-8 min-h-[140px] flex items-start">
+        <div className="p-4 pt-6 min-h-[140px] flex items-start">
           {status === "success" ? (
             <div className="w-full py-10 flex flex-col items-center justify-center space-y-3 animate-in zoom-in-95 duration-500">
               <CheckCircle2 className="text-green-500" size={36} />
@@ -140,7 +140,7 @@ export default function FlowInput({
           )}
         </div>
 
-        <div className="flex items-center justify-between gap-4 px-8 py-6 border-t border-neutral-900/80 bg-neutral-950">
+        <div className="flex items-center justify-between gap-4 px-4 py-6 border-t border-neutral-900/80 bg-neutral-950">
           <div className="flex items-center gap-5">
             <div className="relative w-10 h-10 flex items-center justify-center">
               <svg className="w-full h-full transform -rotate-90">

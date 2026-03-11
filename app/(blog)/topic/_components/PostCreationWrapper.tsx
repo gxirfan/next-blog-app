@@ -63,7 +63,31 @@ const PostCreationWrapper = ({
   const [formData, setFormData] = useState({
     title: "",
     contentHTML: "<p></p>",
+    seoTags: [] as string[],
   });
+
+  const [tagInput, setTagInput] = useState("");
+
+  const addTag = (tag: string) => {
+    const cleaned = tag
+      .trim()
+      .toLowerCase()
+      .replace(/[^a-z0-9]/g, " ");
+    if (cleaned && !formData.seoTags.includes(cleaned)) {
+      setFormData((prev) => ({
+        ...prev,
+        seoTags: [...prev.seoTags, cleaned],
+      }));
+    }
+    setTagInput("");
+  };
+
+  const removeTag = (indexToRemove: number) => {
+    setFormData((prev) => ({
+      ...prev,
+      seoTags: prev.seoTags.filter((_, index) => index !== indexToRemove),
+    }));
+  };
 
   const [showImageUpload, setShowImageUpload] = useState(false);
 
@@ -122,6 +146,7 @@ const PostCreationWrapper = ({
         topicId,
         parentId,
         mainImage,
+        seoTags: formData.seoTags,
       };
 
       await api.post("/posts", payload);
@@ -129,7 +154,7 @@ const PostCreationWrapper = ({
         type: "success",
         msg: `${ENV.POST_TYPE} successfully published!`,
       });
-      setFormData({ title: "", contentHTML: "<p></p>" });
+      setFormData({ title: "", contentHTML: "<p></p>", seoTags: [] });
 
       // setTimeout(() => {
       //   handleClose();
@@ -324,6 +349,48 @@ const PostCreationWrapper = ({
                           initialContent={formData.contentHTML}
                           onUpdate={handleEditorUpdate}
                           showImageOption={true}
+                        />
+                      </div>
+                    </div>
+
+                    {/* SEO Tags Section */}
+                    <div className="space-y-4">
+                      <label className="text-xs font-black text-neutral-400 tracking-[0.2em] ml-6 block">
+                        SEO Keywords (Press Enter or Comma)
+                      </label>
+                      <div className="flex flex-wrap gap-3 p-4 bg-neutral-900/40 border-2 border-neutral-800 rounded-[2.5rem] focus-within:border-cyan-500/30 transition-all">
+                        {formData.seoTags.map((tag, index) => (
+                          <div
+                            key={index}
+                            className="flex items-center gap-2 px-4 py-2 bg-cyan-500/10 border border-cyan-500/20 rounded-full text-cyan-500 text-[10px] font-black tracking-widest animate-in zoom-in-95"
+                          >
+                            <span>{tag}</span>
+                            <button
+                              type="button"
+                              onClick={() => removeTag(index)}
+                              className="hover:text-white transition-colors"
+                            >
+                              <X size={12} />
+                            </button>
+                          </div>
+                        ))}
+
+                        <input
+                          type="text"
+                          value={tagInput}
+                          onChange={(e) => setTagInput(e.target.value)}
+                          onKeyDown={(e) => {
+                            if (e.key === "Enter" || e.key === ",") {
+                              e.preventDefault();
+                              addTag(tagInput);
+                            }
+                          }}
+                          placeholder={
+                            formData.seoTags.length < 5
+                              ? "Add discovery keywords..."
+                              : ""
+                          }
+                          className="flex-1 min-w-[150px] bg-transparent border-none outline-none text-sm text-white placeholder-neutral-700 px-2"
                         />
                       </div>
                     </div>

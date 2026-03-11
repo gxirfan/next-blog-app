@@ -13,7 +13,7 @@ export default function FlowCard({ flow, actionSlot }: FlowCardProps) {
   const { author } = flow;
 
   return (
-    <div className="group relative bg-transparent p-6 md:p-10 border-b border-neutral-900 transition-all duration-300 hover:bg-neutral-900/40">
+    <div className="group relative bg-transparent p-3 md:p-10 border-b border-neutral-900 transition-all duration-300 hover:bg-neutral-900/40">
       <div className="absolute left-0 top-0 bottom-0 w-[2px] bg-cyan-500 scale-y-0 group-hover:scale-y-100 transition-transform duration-500 origin-top" />
 
       <div className="flex flex-col">

@@ -239,6 +239,12 @@ export default function ForgotPasswordPage() {
           <div className="mt-14 space-y-8 text-center">
             <div className="flex flex-col items-center gap-6 pt-6 border-t border-neutral-900">
               <Link
+                href="/recover-password"
+                className="text-sm font-black tracking-[0.2em] mb-2 text-neutral-400 hover:text-white transition-colors flex items-center gap-2 group"
+              >
+                Try another method
+              </Link>
+              <Link
                 href="/login"
                 className="text-sm font-black tracking-[0.2em] text-neutral-700 hover:text-white transition-colors flex items-center gap-2 group"
               >

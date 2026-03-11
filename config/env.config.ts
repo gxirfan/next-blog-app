@@ -50,4 +50,6 @@ export const ENV = {
   IS_PROD: process.env.NODE_ENV === "production",
   POST_TYPE: process.env.NEXT_PUBLIC_POST_TYPE || "post",
   SOCIAL_POST_TYPE: process.env.NEXT_PUBLIC_SOCIAL_POST_TYPE || "flow",
+  GOOGLE_VERIFICATION: process.env.NEXT_PUBLIC_GOOGLE_VERIFICATION || "",
+  PINTEREST_VERIFICATION: process.env.NEXT_PUBLIC_PINTEREST_VERIFICATION || "",
 };

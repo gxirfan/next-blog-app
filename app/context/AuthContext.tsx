@@ -38,21 +38,33 @@ export const AuthProvider = ({
       if (isChecking.current) return;
       if (!forceRefresh && initialUser && user) return;
 
-      if (!forceRefresh) {
-        const hasCookie =
-          typeof document !== "undefined" &&
-          document.cookie.includes("connect.sid");
+      // if (!forceRefresh) {
+      //   const hasCookie =
+      //     typeof document !== "undefined" &&
+      //     document.cookie.includes("connect.sid");
 
-        if (!hasCookie) {
-          setUser(null);
-          setIsLoading(false);
-          return;
-        }
+      //   if (!hasCookie) {
+      //     setUser(null);
+      //     setIsLoading(false);
+      //     return;
+      //   }
+      // }
+      const hasSessionHint =
+        typeof window !== "undefined" &&
+        localStorage.getItem("auth-active") === "true";
+
+      if (!forceRefresh && user) {
+        setIsLoading(false);
+        return;
+      }
+      if (!forceRefresh && !hasSessionHint && !user) {
+        setIsLoading(false);
+        return;
       }
 
       isChecking.current = true;
       try {
-        const response = await api.get(`/auth/status?t=${Date.now()}`);
+        const response = await api.get(`/auth/status?refresh=${Date.now()}`);
 
         const userData =
           response.data?.data?.user ||
@@ -66,17 +78,26 @@ export const AuthProvider = ({
         }
       } catch (error) {
         console.error("Auth check failed:", error);
+        if ((error as any).response?.status === 401) {
+          setUser(null);
+          localStorage.removeItem("auth-active");
+        } else {
+          console.error("Auth check failed:", error);
+        }
         if (forceRefresh) setUser(null);
       } finally {
         setIsLoading(false);
         isChecking.current = false;
       }
     },
-    [initialUser, user],
+    [user],
   );
 
   useEffect(() => {
-    if (initialUser) {
+    const hasSessionHint =
+      typeof window !== "undefined" &&
+      localStorage.getItem("auth-active") === "true";
+    if (initialUser && hasSessionHint) {
       setIsLoading(false);
       return;
     }
@@ -84,15 +105,20 @@ export const AuthProvider = ({
   }, [initialUser, checkAuthStatus]);
 
   const login = (userData: IUserResponse) => {
+    localStorage.setItem("auth-active", "true");
     setUser(userData);
   };
 
   const logout = async () => {
     try {
       await api.post("/auth/logout");
+    } catch (error) {
+      console.error("Logout failed:", error);
     } finally {
       setUser(null);
       setIsLoading(false);
+      isChecking.current = false;
+      localStorage.removeItem("auth-active");
     }
   };
 

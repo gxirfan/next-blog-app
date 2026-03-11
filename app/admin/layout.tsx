@@ -6,7 +6,7 @@ import { cookies } from "next/headers";
 import { ENV } from "@/config/env.config";
 import { redirect } from "next/navigation";
 export const metadata: Metadata = {
-  title: "Admin Pannel",
+  title: "Admin",
   description: "Administration area for managing blog content.",
   robots: {
     index: false,

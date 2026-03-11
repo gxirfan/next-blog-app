@@ -14,6 +14,9 @@ const globalSeoOpenGraphDescription: string =
   ENV.SEO_OPENGRAPH_DESCRIPTION ||
   "A modern blog application for sharing ideas and thoughts.";
 
+const googleVerification: string = ENV.GOOGLE_VERIFICATION || "";
+const pinterestVerification: string = ENV.PINTEREST_VERIFICATION || "";
+
 // functions
 export const getSeoKeywords = (): string[] => {
   return globalSeoKeywords;
@@ -33,4 +36,12 @@ export const getSeoAuthors = (): string[] => {
 
 export const getSeoOpenGraphDescription = (): string => {
   return globalSeoOpenGraphDescription;
+};
+
+export const getGoogleVerification = (): string => {
+  return googleVerification;
+};
+
+export const getPinterestVerification = (): string => {
+  return pinterestVerification;
 };

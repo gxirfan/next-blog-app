@@ -59,7 +59,7 @@ export default function FlowFeed({
     <div className="w-full mx-auto">
       <ScrollProgress />
       {!isDetailsPage && (
-        <div className="px-4 md:px-0 mb-8">
+        <div className="md:px-0 mb-8">
           <FlowInput
             replyingTo={replyingTo}
             onCancelReply={handleCancelReply}
@@ -69,7 +69,7 @@ export default function FlowFeed({
 
       <div className="flex flex-col min-h-[400px]">
         {flows && flows.length === 0 ? (
-          <div className="flex flex-col items-center justify-center py-20 px-4 text-center animate-in fade-in duration-700">
+          <div className="flex flex-col items-center justify-center py-20 text-center animate-in fade-in duration-700">
             <div className="w-16 h-16 bg-neutral-900 rounded-full flex items-center justify-center mb-4 border border-neutral-800">
               <Wind size={28} className="text-neutral-700" />
             </div>

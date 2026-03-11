@@ -9,6 +9,7 @@ import { RepliesSection } from "./RepliesSection";
 import PostManagementActions from "../_components/PostManagementActions";
 import { ENV } from "@/config/env.config";
 import { cookies } from "next/headers";
+import { createCleanDescription } from "../../../utils/seo-helper";
 
 async function fetchPostDetail(slug: string): Promise<IPostResponse | null> {
   const headersList = await cookies();
@@ -62,12 +63,6 @@ export async function generateMetadata({
     "software development",
   ];
 
-  // 2. Clean Content for Description
-  const cleanDescription = postDetails.content
-    .replace(/<[^>]*>/g, "") // Remove HTML tags
-    .substring(0, 160) // Standard SEO length
-    .trim();
-
   // Construct the full image URL
   const coverImage = postDetails.mainImage
     ? `${ENV.API_IMAGE_URL}${postDetails.mainImage}`
@@ -75,16 +70,24 @@ export async function generateMetadata({
 
   const fullTitle = `${postDetails.title} | ${postDetails.topicTitle}`;
 
+  const keywords = [
+    ...new Set(
+      postDetails?.seoTags?.length > 0
+        ? postDetails.seoTags
+        : (generatedKeywords ?? []),
+    ),
+  ];
+
   return {
     title: fullTitle,
-    description: cleanDescription,
-    keywords: [...new Set(generatedKeywords)], // Remove duplicates
+    description: createCleanDescription(postDetails.content),
+    keywords: keywords.join(", "),
     authors: [{ name: postDetails.authorNickname || postDetails.author }],
 
     // Open Graph (Facebook, LinkedIn, Discord)
     openGraph: {
       title: fullTitle,
-      description: cleanDescription,
+      description: createCleanDescription(postDetails.content),
       url: `${ENV.SITE_URL}/post/${postDetails.slug}`,
       siteName: ENV.PROJECT_NAME,
       type: "article",
@@ -104,7 +107,7 @@ export async function generateMetadata({
     twitter: {
       card: "summary_large_image",
       title: fullTitle,
-      description: cleanDescription,
+      description: createCleanDescription(postDetails.content),
       images: [coverImage],
       creator: `@${postDetails.authorUsername}`,
     },
@@ -144,7 +147,6 @@ export default async function PostDetailPage({
   return (
     <div className="mx-auto space-y-8 ">
       <PostManagementActions post={postDetails} />
-
       <PostDetailsCard postDetails={postDetails} />
 
       <PostCreationWrapper
@@ -152,7 +154,6 @@ export default async function PostDetailPage({
         parentId={postDetails.id}
         buttonLabel="Post a Reply"
       />
-
       <Suspense
         fallback={
           <div className="flex flex-col items-center justify-center py-12 bg-neutral-950 border border-neutral-900 rounded-4xl space-y-4">

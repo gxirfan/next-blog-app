@@ -22,6 +22,7 @@ interface PostEditModalProps {
 interface UpdatePostDto {
   title?: string;
   content?: string;
+  seoTags?: string[];
   mainImage?: string | null;
 }
 
@@ -39,6 +40,7 @@ const PostEditModal = ({ post, onClose }: PostEditModalProps) => {
   const [formData, setFormData] = useState<UpdatePostDto>({
     title: post.title,
     content: post.content,
+    seoTags: post.seoTags,
     mainImage: initialImage,
   });
 
@@ -81,6 +83,7 @@ const PostEditModal = ({ post, onClose }: PostEditModalProps) => {
       const response = await api.patch(`/posts/${post.id}`, {
         title: formData.title,
         content: formData.content,
+        seoTags: formData.seoTags,
         mainImage: finalMainImage,
       });
 
@@ -264,6 +267,68 @@ const PostEditModal = ({ post, onClose }: PostEditModalProps) => {
                 />
               </div>
             </div>
+          </div>
+
+          {/* --- SEO Keywords Section --- */}
+          <div className="space-y-3">
+            <label className="text-[10px] font-mono tracking-[0.3em] text-neutral-500 ml-4">
+              SEO DISCOVERY KEYWORDS
+            </label>
+            <div className="flex flex-wrap gap-3 p-5 bg-neutral-900/30 border border-neutral-800 rounded-4xl focus-within:border-cyan-500/30 transition-all">
+              {/* Render Existing Tags */}
+              {formData.seoTags?.map((tag, idx) => (
+                <div
+                  key={idx}
+                  className="flex items-center gap-2 px-4 py-2 bg-cyan-500/10 border border-cyan-500/20 rounded-xl text-cyan-500 text-[10px] font-mono tracking-widest animate-in zoom-in-95"
+                >
+                  <span>{tag}</span>
+                  <button
+                    type="button"
+                    onClick={() => {
+                      const newTags = formData.seoTags?.filter(
+                        (_, i) => i !== idx,
+                      );
+                      setFormData({ ...formData, seoTags: newTags });
+                    }}
+                    className="hover:text-white transition-colors cursor-pointer"
+                  >
+                    <X size={12} />
+                  </button>
+                </div>
+              ))}
+
+              {/* Inline Tag Input */}
+              <input
+                type="text"
+                placeholder={
+                  formData.seoTags && formData.seoTags.length > 0
+                    ? ""
+                    : "Type & Press Enter..."
+                }
+                className="flex-1 min-w-[150px] bg-transparent border-none outline-none text-white text-sm placeholder-neutral-800 px-2 font-mono"
+                onKeyDown={(e) => {
+                  if (e.key === "Enter" || e.key === ",") {
+                    e.preventDefault();
+                    const target = e.target as HTMLInputElement;
+                    const val = target.value
+                      .trim()
+                      .toLowerCase()
+                      .replace(/[^a-z0-9]/g, "-");
+
+                    if (val && !formData.seoTags?.includes(val)) {
+                      setFormData({
+                        ...formData,
+                        seoTags: [...(formData.seoTags || []), val],
+                      });
+                      target.value = ""; // Clear input
+                    }
+                  }
+                }}
+              />
+            </div>
+            <p className="text-[9px] text-neutral-600 ml-4 tracking-widest">
+              Separate keywords with Enter or Comma
+            </p>
           </div>
 
           <div className="flex items-center justify-end gap-4 mt-12 pb-4">

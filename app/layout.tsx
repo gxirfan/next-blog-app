@@ -19,6 +19,8 @@ import {
   getSeoAuthors,
   getSeoKeywords,
   getSeoOpenGraphDescription,
+  getGoogleVerification,
+  getPinterestVerification,
 } from "./constants/seo";
 import { ENV } from "@/config/env.config";
 import { getSSRUser } from "./services/auth-server";
@@ -59,7 +61,12 @@ export const metadata: Metadata = {
   authors: getSeoAuthors().map((name) => ({ name })),
   creator: getSeoCreator(),
   keywords: getSeoKeywords(),
-
+  verification: {
+    google: getGoogleVerification(),
+    other: {
+      "p:domain_verify": getPinterestVerification(),
+    },
+  },
   openGraph: {
     type: "website",
     locale: "en_US",

@@ -5,9 +5,8 @@ import { ENV } from "@/config/env.config";
 const BLOG_NAME = ENV.PROJECT_NAME;
 const EFFECTIVE_DATE = "November 24, 2025";
 
-// Sayfa meta verileri (SEO)
 export const metadata: Metadata = {
-  title: `Cookie Policy - ${BLOG_NAME}`,
+  title: "Cookie Policy",
   description: `Read the Cookie Policy for ${BLOG_NAME}. Last updated ${EFFECTIVE_DATE}.`,
 };
 

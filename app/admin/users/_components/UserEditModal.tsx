@@ -58,24 +58,26 @@ export default function UserEditModal({
   });
 
   useEffect(() => {
-    if (user && isOpen) {
-      setFormData({
-        role: user.role,
-        status: user.status,
-        username: user.username || "",
-        email: user.email || "",
-        nickname: user.nickname || "",
-        firstName: user.firstName || "",
-        lastName: user.lastName || "",
-        gender: user.gender || UserGender.PreferNotToSay,
-        birthDate: user.birthDate
-          ? new Date(user.birthDate).toISOString().split("T")[0]
-          : "",
-        location: user.location || "",
-        bio: user.bio || "",
-        isEmailPublic: user.isEmailPublic || false,
-      });
-    }
+    if (!user || !isOpen) return;
+
+    if (formData.username === user.username) return;
+
+    setFormData({
+      role: user.role.toLowerCase(),
+      status: user.status.toLowerCase(),
+      username: user.username || "",
+      email: user.email || "",
+      nickname: user.nickname || "",
+      firstName: user.firstName || "",
+      lastName: user.lastName || "",
+      gender: user.gender || UserGender.PreferNotToSay,
+      birthDate: user.birthDate
+        ? new Date(user.birthDate).toISOString().split("T")[0]
+        : "",
+      location: user.location || "",
+      bio: user.bio || "",
+      isEmailPublic: user.isEmailPublic || false,
+    });
   }, [user, isOpen]);
 
   if (!isOpen || !user) return null;
@@ -139,7 +141,7 @@ export default function UserEditModal({
       <div className="relative bg-neutral-950 border-2 border-neutral-900 w-full max-w-3xl rounded-[3rem] flex flex-col max-h-[90vh] overflow-hidden animate-in zoom-in-95 duration-500">
         <div className="px-12 py-10 border-b-2 border-neutral-900 flex justify-between items-center bg-neutral-950">
           <div className="flex items-center gap-6">
-            <div className="p-5 bg-neutral-900 border-2 border-neutral-800 text-white rounded-[1.5rem]">
+            <div className="p-5 bg-neutral-900 border-2 border-neutral-800 text-white rounded-3xl">
               <Shield size={32} />
             </div>
             <div className="space-y-1">
@@ -174,15 +176,17 @@ export default function UserEditModal({
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
               <div className="relative">
                 <label className={LABEL_STYLE}>Authorization Level</label>
+
                 <select
                   name="role"
                   value={formData.role}
                   onChange={handleChange}
-                  className={SELECT_STYLE}
+                  className={`${SELECT_STYLE} ${authUser.username === user.username ? "opacity-50 cursor-not-allowed" : ""}`}
+                  disabled={authUser.username === user.username}
                 >
                   {Object.values(UserRole).map((r) =>
-                    r === "admin" || r === "moderator" ? (
-                      authUserRole === "moderator" ? null : (
+                    r === "admin" ? (
+                      authUserRole.toLowerCase() === "moderator" ? null : (
                         <option key={r} value={r}>
                           {r.toUpperCase()}
                         </option>
@@ -194,6 +198,7 @@ export default function UserEditModal({
                     ),
                   )}
                 </select>
+
                 <ChevronDown
                   className="absolute right-6 bottom-4 text-neutral-600 pointer-events-none"
                   size={16}
@@ -205,7 +210,8 @@ export default function UserEditModal({
                   name="status"
                   value={formData.status}
                   onChange={handleChange}
-                  className={SELECT_STYLE}
+                  className={`${SELECT_STYLE} ${authUser.username === user.username ? "opacity-50 cursor-not-allowed" : ""}`}
+                  disabled={authUser.username === user.username}
                 >
                   {Object.values(UserStatus).map((s) => (
                     <option key={s} value={s}>

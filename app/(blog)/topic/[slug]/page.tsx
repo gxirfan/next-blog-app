@@ -9,6 +9,7 @@ import { Loader } from "lucide-react";
 import TopicDetailsCard from "../_components/TopicDetailsCard";
 import { ENV } from "@/config/env.config";
 import { cookies } from "next/headers";
+import { createCleanDescription } from "@/app/utils/seo-helper";
 
 async function fetchTopicDetails(slug: string): Promise<ITopicResponse | null> {
   const headersList = await cookies();
@@ -59,7 +60,7 @@ export async function generateMetadata({
 
   return {
     title: `${topicDetails.title}`,
-    description: topicDetails.content.substring(0, 150) + "...",
+    description: createCleanDescription(topicDetails.content),
     robots: {
       index: true,
       follow: true,

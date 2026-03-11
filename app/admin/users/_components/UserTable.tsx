@@ -168,7 +168,7 @@ export default function UserTable({
                   </td>
                   <td className="px-10 py-8 text-center">
                     <span
-                      className={`inline-flex items-center px-5 py-2 rounded-xl text-[10px] font-black border-2 tracking-widest ${style.border} ${style.bg} ${style.text}`}
+                      className={`inline-flex items-center px-5 py-2 rounded-xl text-[10px] font-black border-2 tracking-widest ${style.border} ${style.bg} ${style.text} uppercase`}
                     >
                       <Shield size={12} className="mr-2 opacity-70" />
                       {user.role}

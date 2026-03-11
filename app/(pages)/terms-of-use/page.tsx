@@ -6,7 +6,7 @@ const BLOG_NAME = ENV.PROJECT_NAME;
 const LAST_UPDATED = "November 24, 2025";
 
 export const metadata: Metadata = {
-  title: `Terms of Use - ${BLOG_NAME}`,
+  title: "Terms of Use",
   description: `Read the Terms of Use for ${BLOG_NAME}. Last updated ${LAST_UPDATED}.`,
 };
 
