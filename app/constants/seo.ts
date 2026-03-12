@@ -16,6 +16,7 @@ const globalSeoOpenGraphDescription: string =
 
 const googleVerification: string = ENV.GOOGLE_VERIFICATION || "";
 const pinterestVerification: string = ENV.PINTEREST_VERIFICATION || "";
+const aiName: string = ENV.AI_NAME || "Default AI Name";
 
 // functions
 export const getSeoKeywords = (): string[] => {
@@ -44,4 +45,8 @@ export const getGoogleVerification = (): string => {
 
 export const getPinterestVerification = (): string => {
   return pinterestVerification;
+};
+
+export const getAiName = (): string => {
+  return aiName;
 };

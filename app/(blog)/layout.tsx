@@ -10,6 +10,7 @@ import {
   getSeoOpenGraphDescription,
 } from "../constants/seo";
 import { ENV } from "@/config/env.config";
+import ChatWidget from "../components/ChatWidget";
 
 export const metadata: Metadata = {
   title: {
@@ -51,6 +52,7 @@ export default function blogLayout({
           {children}
         </div>
       </main>
+      <ChatWidget />
       <Footer />
     </div>
   );
