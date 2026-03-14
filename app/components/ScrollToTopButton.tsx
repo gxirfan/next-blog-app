@@ -6,13 +6,13 @@ import { ChevronUp } from "lucide-react";
 const ScrollToTopButton = () => {
   const [isVisible, setIsVisible] = useState(false);
 
-  const SCROLL_THRESHOLD = 400;
+  const SCROLL_THRESHOLD = 300;
 
   const BASE_CLASS =
-    "fixed bottom-24 right-8 z-40 p-2.5 rounded-xl cursor-pointer transition-all duration-300 shadow-2xl";
+    "fixed bottom-22 right-6 z-40 p-3 rounded-xl cursor-pointer transition-all duration-300 border-2";
 
   const THEME_CLASS =
-    "bg-neutral-950 border-2 border-neutral-800 text-neutral-400 hover:border-cyan-500/50 hover:text-cyan-500";
+    "bg-neutral-950 border-neutral-800 text-neutral-400 hover:text-cyan-500 hover:border-cyan-500/50";
 
   const handleScroll = () => {
     setIsVisible(window.scrollY > SCROLL_THRESHOLD);
