@@ -91,7 +91,7 @@ export default async function PostAllPage({
   const meta = postsData.data.meta;
 
   return (
-    <div className="mx-auto max-w-5xl px-4 py-12 space-y-12">
+    <div className="mx-auto py-12 space-y-12">
       <AllPostsHeader totalRecords={meta?.total || 0} />
 
       <main className="min-h-[60vh]">

@@ -93,7 +93,7 @@ export default async function TopicAllPage({
   const topicsData = await fetchTopics(currentPage, currentLimit);
 
   return (
-    <div className="mx-auto max-w-6xl px-6 py-16 space-y-16">
+    <div className="mx-auto py-16 space-y-16">
       {/* Section Header: Provides context and statistical metadata */}
       <AllTopicsHeader totalTopics={topicsData.data.meta.total || 0} />
 

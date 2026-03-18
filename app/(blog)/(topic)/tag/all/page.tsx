@@ -91,7 +91,7 @@ export default async function TagAllPage({
   const ACCENT_COLOR = "text-[#00bcd4]";
 
   return (
-    <div className="mx-auto max-w-6xl px-6 py-16 space-y-16">
+    <div className="mx-auto py-16 space-y-16">
       <AllTagsHeader totalTags={meta?.total || 0} />
       <CreateTagCard />
 
