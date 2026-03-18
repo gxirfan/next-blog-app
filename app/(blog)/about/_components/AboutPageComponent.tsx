@@ -8,7 +8,7 @@ const AboutPage = () => {
   const GITHUB_NEXT = "https://github.com/gxirfan/next-blog-app";
 
   return (
-    <div className="max-w-4xl mx-auto py-16 space-y-20 animate-in fade-in duration-1000 px-6">
+    <div className="mx-auto py-16 space-y-20 animate-in fade-in duration-1000">
       {/* 1. INTRO SECTION */}
       <section className="space-y-8 border-b border-neutral-900 pb-16 text-center md:text-left">
         <div className="flex items-center justify-center md:justify-start gap-3 text-[11px] font-black tracking-[0.4em] text-neutral-500">

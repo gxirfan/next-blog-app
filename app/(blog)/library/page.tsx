@@ -46,7 +46,7 @@ export default function LibraryPage() {
   );
 
   return (
-    <div className="max-w-6xl mx-auto px-6 pt-32 pb-32 space-y-24 animate-in fade-in duration-700">
+    <div className="mx-auto pt-32 pb-32 space-y-24 animate-in fade-in duration-700">
       {/* HEADER - Solid & Massive */}
       <header className="space-y-6 border-b-2 border-neutral-900 pb-12">
         <div className="flex items-center gap-4">

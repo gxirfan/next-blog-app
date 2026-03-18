@@ -85,7 +85,7 @@ export default function ProfilePage() {
         </div>
       )}
 
-      <div className="relative z-10 w-full max-w-5xl mx-auto space-y-12 pb-20 pt-8 px-4">
+      <div className="relative z-10 w-full mx-auto space-y-12 pb-20 pt-8">
         <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 border-b border-white/5 pb-10">
           <div className="space-y-2">
             <div className="flex items-center gap-3 text-cyan-500 mb-2">

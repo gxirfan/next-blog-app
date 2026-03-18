@@ -14,6 +14,8 @@ import {
   Shield,
   LogInIcon,
   Search,
+  Info,
+  Mail,
 } from "lucide-react";
 import NotificationDropdown from "./NotificationDropdown";
 import { ENV } from "@/config/env.config";
@@ -184,6 +186,18 @@ const Navbar = () => {
                         href="/tag/all"
                         icon={<Tag size={16} />}
                         label="Tags"
+                        onClick={() => setIsStaticMenuOpen(false)}
+                      />
+                      <MenuLink
+                        href="/contact"
+                        icon={<Mail size={16} />}
+                        label="Contact"
+                        onClick={() => setIsStaticMenuOpen(false)}
+                      />
+                      <MenuLink
+                        href="/about"
+                        icon={<Info size={16} />}
+                        label="About"
                         onClick={() => setIsStaticMenuOpen(false)}
                       />
                     </div>

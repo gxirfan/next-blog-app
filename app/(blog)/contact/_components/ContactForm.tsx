@@ -56,7 +56,7 @@ export default function ContactForm() {
   };
 
   return (
-    <div className="max-w-4xl mx-auto py-12 space-y-12 animate-in fade-in duration-700 px-6">
+    <div className="mx-auto py-12 space-y-12 animate-in fade-in duration-700">
       {/* 1. HEADER */}
       <div className="space-y-4 border-b border-neutral-900 pb-8">
         <div className="flex items-center gap-2 text-[11px] font-bold tracking-widest text-neutral-500">
