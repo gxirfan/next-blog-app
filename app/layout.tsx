@@ -99,6 +99,13 @@ export default async function RootLayout({
         </AuthProvider>
         <CookieConsentModal blogName={ENV.PROJECT_NAME} />
         <ScrollToTopButton />
+        {ENV.INFOLINK_SCRIPT && (
+          <script
+            dangerouslySetInnerHTML={{
+              __html: ENV.INFOLINK_SCRIPT,
+            }}
+          />
+        )}
       </body>
     </html>
   );
