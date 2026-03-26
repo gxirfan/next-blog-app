@@ -21,11 +21,9 @@ import {
   getSeoOpenGraphDescription,
   getGoogleVerification,
   getPinterestVerification,
-  getInfolinksPID,
 } from "./constants/seo";
 import { ENV } from "@/config/env.config";
 import { getSSRUser } from "./services/auth-server";
-import Script from "next/script";
 
 const inter = Inter({ subsets: ["latin"], variable: "--font-inter" });
 const spaceMono = Space_Mono({

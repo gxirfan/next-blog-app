@@ -57,7 +57,7 @@ export default function blogLayout({
       <ChatWidget />
       <Footer />
 
-      <Script id="infolinks-config" strategy="afterInteractive">
+      {/* <Script id="infolinks-config" strategy="afterInteractive">
         {`
             window.infolinks_pid = ${getInfolinksPID()};
             window.infolinks_wsid = 0;
@@ -68,7 +68,23 @@ export default function blogLayout({
         id="infolinks-main"
         src="https://resources.infolinks.com/js/infolinks_main.js"
         strategy="lazyOnload"
-      />
+      /> */}
+
+      {getInfolinksPID() && (
+        <>
+          <Script id="infolinks-config" strategy="afterInteractive">
+            {`
+                window.infolinks_pid = "${getInfolinksPID()}"; // Tırnak içine aldık, boş kalsa bile syntax bozulmaz
+                window.infolinks_wsid = 0;
+              `}
+          </Script>
+          <Script
+            id="infolinks-main"
+            src="https://resources.infolinks.com/js/infolinks_main.js"
+            strategy="lazyOnload"
+          />
+        </>
+      )}
     </div>
   );
 }
