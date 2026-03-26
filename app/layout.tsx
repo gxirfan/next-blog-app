@@ -21,9 +21,11 @@ import {
   getSeoOpenGraphDescription,
   getGoogleVerification,
   getPinterestVerification,
+  getInfolinksPID,
 } from "./constants/seo";
 import { ENV } from "@/config/env.config";
 import { getSSRUser } from "./services/auth-server";
+import Script from "next/script";
 
 const inter = Inter({ subsets: ["latin"], variable: "--font-inter" });
 const spaceMono = Space_Mono({
@@ -99,13 +101,19 @@ export default async function RootLayout({
         </AuthProvider>
         <CookieConsentModal blogName={ENV.PROJECT_NAME} />
         <ScrollToTopButton />
-        {ENV.INFOLINK_SCRIPT && (
-          <script
-            dangerouslySetInnerHTML={{
-              __html: ENV.INFOLINK_SCRIPT,
-            }}
-          />
-        )}
+
+        <Script id="infolinks-config" strategy="afterInteractive">
+          {`
+            window.infolinks_pid = ${getInfolinksPID()};
+            window.infolinks_wsid = 0;
+          `}
+        </Script>
+
+        <Script
+          id="infolinks-main"
+          src="https://resources.infolinks.com/js/infolinks_main.js"
+          strategy="lazyOnload"
+        />
       </body>
     </html>
   );

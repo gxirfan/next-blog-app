@@ -17,7 +17,7 @@ const globalSeoOpenGraphDescription: string =
 const googleVerification: string = ENV.GOOGLE_VERIFICATION || "";
 const pinterestVerification: string = ENV.PINTEREST_VERIFICATION || "";
 const aiName: string = ENV.AI_NAME || "Default AI Name";
-const infolinkScript: string = ENV.INFOLINK_SCRIPT || "";
+const infolinksPID: string = ENV.INFOLINKS_PID || "";
 
 // functions
 export const getSeoKeywords = (): string[] => {
@@ -52,6 +52,6 @@ export const getAiName = (): string => {
   return aiName;
 };
 
-export const getInfolinkScript = (): string => {
-  return infolinkScript;
+export const getInfolinksPID = (): string => {
+  return infolinksPID;
 };

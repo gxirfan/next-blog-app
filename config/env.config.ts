@@ -49,9 +49,9 @@ export const ENV = {
       ? process.env.NEXT_PUBLIC_AI_NAME
       : "Default AI name",
 
-  INFOLINK_SCRIPT:
+  INFOLINKS_PID:
     process.env.NODE_ENV === "production"
-      ? process.env.NEXT_PUBLIC_INFOLINK_SCRIPT
+      ? process.env.NEXT_PUBLIC_INFOLINKS_PID
       : "",
 
   PROJECT_NAME: process.env.NEXT_PUBLIC_PROJECT_NAME || "Blog App",
