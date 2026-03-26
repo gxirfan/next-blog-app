@@ -8,9 +8,11 @@ import {
   getSeoDescription,
   getSeoKeywords,
   getSeoOpenGraphDescription,
+  getInfolinksPID,
 } from "../constants/seo";
 import { ENV } from "@/config/env.config";
 import ChatWidget from "../components/ChatWidget";
+import Script from "next/script";
 
 export const metadata: Metadata = {
   title: {
@@ -54,6 +56,19 @@ export default function blogLayout({
       </main>
       <ChatWidget />
       <Footer />
+
+      <Script id="infolinks-config" strategy="afterInteractive">
+        {`
+            window.infolinks_pid = ${getInfolinksPID()};
+            window.infolinks_wsid = 0;
+          `}
+      </Script>
+
+      <Script
+        id="infolinks-main"
+        src="https://resources.infolinks.com/js/infolinks_main.js"
+        strategy="lazyOnload"
+      />
     </div>
   );
 }

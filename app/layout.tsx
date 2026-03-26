@@ -101,19 +101,6 @@ export default async function RootLayout({
         </AuthProvider>
         <CookieConsentModal blogName={ENV.PROJECT_NAME} />
         <ScrollToTopButton />
-
-        <Script id="infolinks-config" strategy="afterInteractive">
-          {`
-            window.infolinks_pid = ${getInfolinksPID()};
-            window.infolinks_wsid = 0;
-          `}
-        </Script>
-
-        <Script
-          id="infolinks-main"
-          src="https://resources.infolinks.com/js/infolinks_main.js"
-          strategy="lazyOnload"
-        />
       </body>
     </html>
   );
