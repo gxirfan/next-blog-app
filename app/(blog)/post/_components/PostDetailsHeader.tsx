@@ -1,9 +1,7 @@
 import Link from "next/link";
-import { CornerDownRight, Calendar, Eye, FolderOpen } from "lucide-react";
-import VoteButtons from "./VoteButtons";
+import { CornerDownRight, FolderOpen } from "lucide-react";
 import { IPostResponse } from "@/app/types/post";
-import AuthorBlock from "@/app/components/AuthorBlock";
-import { getRelativeTime } from "@/app/utils/date";
+import PostMetaBar from "./PostMetaBar";
 
 interface HeaderProps {
   postDetails: IPostResponse;
@@ -14,13 +12,6 @@ export default function PostDetailsHeader({
   postDetails,
   userCurrentVoteDirection,
 }: HeaderProps) {
-  const authorProps = {
-    username: postDetails.authorUsername,
-    nickname: postDetails.authorNickname,
-    role: postDetails.authorRole,
-    avatarUrl: postDetails.authorAvatar,
-  };
-
   return (
     <>
       <div className="flex flex-wrap items-center gap-3 mb-8 text-[13px] text-neutral-400 font-medium">
@@ -62,37 +53,10 @@ export default function PostDetailsHeader({
         {postDetails.title}
       </h1>
 
-      <div className="flex flex-col md:flex-row md:items-center justify-between gap-6 pb-10 border-b border-neutral-900 mb-12">
-        <div className="flex items-center gap-6">
-          <AuthorBlock {...authorProps} />
-          <div className="h-10 w-px bg-neutral-800 hidden md:block" />
-          <VoteButtons
-            postId={postDetails.id}
-            score={postDetails.score}
-            userCurrentVoteDirection={userCurrentVoteDirection}
-          />
-        </div>
-
-        <div className="flex items-center gap-8 text-[11px] font-bold tracking-widest text-neutral-600 font-mono">
-          <div className="flex items-center gap-3 group">
-            <div className="p-2 bg-neutral-900 rounded-lg border border-neutral-800">
-              <Calendar size={14} />
-            </div>
-            <span className="text-neutral-400">
-              {getRelativeTime(postDetails.createdAt)}
-            </span>
-          </div>
-
-          <div className="flex items-center gap-3 group">
-            <div className="p-2 bg-neutral-900 rounded-lg border border-neutral-800 text-right">
-              <Eye size={14} />
-            </div>
-            <div className="flex flex-col">
-              <span className="text-neutral-400">{postDetails.viewCount}</span>
-            </div>
-          </div>
-        </div>
-      </div>
+      <PostMetaBar
+        postDetails={postDetails}
+        userCurrentVoteDirection={userCurrentVoteDirection}
+      />
     </>
   );
 }

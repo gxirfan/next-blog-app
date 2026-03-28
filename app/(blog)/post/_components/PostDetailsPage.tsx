@@ -104,7 +104,10 @@ const PostDetailsCard = async ({ postDetails }: PostDetailsCardProps) => {
         </article>
 
         {/* FOOTER SECTION */}
-        <PostDetailsFooter postDetails={postDetails} />
+        <PostDetailsFooter
+          postDetails={postDetails}
+          userCurrentVoteDirection={userCurrentVoteDirection}
+        />
       </div>
     </PostContentForScrollProgress>
   );
