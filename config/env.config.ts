@@ -59,6 +59,11 @@ export const ENV = {
       ? process.env.NEXT_PUBLIC_DOMAIN
       : "http://localhost:3000",
 
+  GOOGLE_ADSENSE_PUB_ID:
+    process.env.NODE_ENV === "production"
+      ? process.env.NEXT_PUBLIC_GOOGLE_ADSENSE_PUB_ID
+      : "",
+
   PROJECT_NAME: process.env.NEXT_PUBLIC_PROJECT_NAME || "Blog App",
   VERSION_TEST: process.env.NEXT_PUBLIC_VERSION_TEST || "stable",
   APP_VERSION: process.env.NEXT_PUBLIC_APP_VERSION || "1.0.0",

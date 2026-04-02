@@ -19,6 +19,7 @@ const pinterestVerification: string = ENV.PINTEREST_VERIFICATION || "";
 const aiName: string = ENV.AI_NAME || "Default AI Name";
 const infolinksPID: string = ENV.INFOLINKS_PID || "";
 const domain: string = ENV.DOMAIN || "http://localhost:3000";
+const googleAdSensePubId: string = ENV.GOOGLE_ADSENSE_PUB_ID || "";
 
 // functions
 export const getSeoKeywords = (): string[] => {
@@ -59,4 +60,8 @@ export const getInfolinksPID = (): string => {
 
 export const getDomain = (): string => {
   return domain;
+};
+
+export const getGoogleAdSensePubId = (): string => {
+  return googleAdSensePubId;
 };
