@@ -8,7 +8,6 @@ import {
   getSeoDescription,
   getSeoKeywords,
   getSeoOpenGraphDescription,
-  getGoogleAdSensePubId,
 } from "../constants/seo";
 import { ENV } from "@/config/env.config";
 import ChatWidget from "../components/ChatWidget";
@@ -44,11 +43,6 @@ export default function blogLayout({
 }>) {
   return (
     <div className="app-layout min-h-screen pt-16 w-full flex flex-col">
-      <script
-        async
-        src={`https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-${getGoogleAdSensePubId()}`}
-        crossOrigin="anonymous"
-      ></script>
       <Navbar />
 
       <main className="main-content pt-6 w-full md:w-3/4 lg:w-2/3 xl:w-2/4 2xl:w-2/4 3xl:w-2/5 p-4 grow">

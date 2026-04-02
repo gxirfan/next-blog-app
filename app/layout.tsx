@@ -21,6 +21,7 @@ import {
   getSeoOpenGraphDescription,
   getGoogleVerification,
   getPinterestVerification,
+  getGoogleAdSensePubId,
 } from "./constants/seo";
 import { ENV } from "@/config/env.config";
 import { getSSRUser } from "./services/auth-server";
@@ -92,6 +93,11 @@ export default async function RootLayout({
       className={`${inter.variable} ${spaceMono.variable} ${urbanistFont.variable} ${jetBrainsMono.variable} ${spaceGrotesk.variable} ${poppins.variable} bg-neutral-950 text-white`}
       suppressHydrationWarning
     >
+      <script
+        async
+        src={`https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-${getGoogleAdSensePubId()}`}
+        crossOrigin="anonymous"
+      ></script>
       <body className="text-white antialiased">
         <NextTopLoader color="#00bcd4" showSpinner={false} />
         <AuthProvider initialUser={user}>
