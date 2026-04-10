@@ -11,7 +11,6 @@ import {
 } from "../constants/seo";
 import { ENV } from "@/config/env.config";
 import ChatWidget from "../components/ChatWidget";
-import Script from "next/script";
 
 export const metadata: Metadata = {
   title: {

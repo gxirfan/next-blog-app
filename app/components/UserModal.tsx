@@ -7,11 +7,12 @@ import Image from "next/image";
 import {
   LogOut,
   Settings,
-  LayoutDashboard,
   X,
   BookOpen,
   ChevronRight,
   Shield,
+  Users,
+  UserPlus,
 } from "lucide-react";
 import { ENV } from "@/config/env.config";
 
@@ -45,151 +46,147 @@ const UserModal = ({ onClose }: UserModalProps) => {
 
   return (
     <div
-      className="fixed inset-0 w-screen h-screen bg-black/95 z-[9999] flex items-start md:items-center justify-center p-4 overflow-y-auto animate-in fade-in duration-300"
+      className="fixed inset-0 w-screen h-screen bg-black/90 z-[9999] flex items-center justify-center p-4 backdrop-blur-sm animate-in fade-in duration-300"
       onClick={onClose}
     >
       <div
-        className="relative w-full max-w-[400px] bg-neutral-950 border-2 border-neutral-900 rounded-[3rem] overflow-hidden animate-in zoom-in-95 duration-200"
+        className="relative w-full max-w-[360px] bg-neutral-950 border border-neutral-900 rounded-[2.5rem] overflow-hidden animate-in zoom-in-95 duration-200"
         onClick={(e) => e.stopPropagation()}
       >
-        <div className="p-6 flex justify-between items-center border-b-2 border-neutral-900">
-          <span className="text-xs font-black tracking-[0.4em] text-neutral-600">
-            Account Menu
-          </span>
+        <div className="p-4 flex justify-between items-center border-b border-neutral-900">
+          <span className="text-[9px] font-black tracking-[0.3em] text-neutral-600 pl-2"></span>
           <button
             onClick={onClose}
-            className="w-10 h-10 flex items-center justify-center bg-neutral-900 border-2 border-neutral-800 rounded-full text-neutral-500 hover:text-white hover:border-white transition-all"
+            className="w-8 h-8 flex items-center justify-center bg-neutral-900 border border-neutral-800 rounded-full text-neutral-500 hover:text-white transition-all cursor-pointer"
           >
-            <X size={18} />
+            <X size={16} />
           </button>
         </div>
 
-        <div className="p-10 flex flex-col items-center">
-          <div className="relative w-28 h-28 mb-6">
-            <div className="relative w-full h-full rounded-full overflow-hidden border-2 border-neutral-800 p-1 bg-neutral-900">
+        <div className="p-6 pb-4 flex flex-col items-center">
+          <div className="relative w-20 h-20 mb-4">
+            <div className="relative w-full h-full rounded-full overflow-hidden border border-neutral-800 p-1 bg-neutral-900">
               <div className="relative w-full h-full rounded-full overflow-hidden">
                 <Image
                   src={avatarUrl}
                   fill
                   className="object-cover"
-                  alt="Identity avatar"
+                  alt={user.nickname}
                 />
               </div>
             </div>
-            <div className="absolute -bottom-2 -right-2 bg-neutral-950 border-2 border-neutral-900 p-2 rounded-2xl">
+            <div className="absolute -bottom-1 -right-1 bg-neutral-950 border border-neutral-900 p-1.5 rounded-xl">
               <Shield
-                size={20}
+                size={14}
                 className={
                   user.role.toLowerCase() === "admin"
-                    ? "adminColor"
-                    : user.role.toLowerCase() === "moderator"
-                      ? "moderatorColor"
-                      : user.role.toLowerCase() === "writer"
-                        ? "writerColor"
-                        : "userColor"
+                    ? "text-red-500"
+                    : "text-cyan-500"
                 }
               />
             </div>
           </div>
 
           <div className="text-center">
-            <p className="text-sm font-black tracking-[0.3em] text-neutral-700 mb-2">
+            <p className="text-[10px] font-black tracking-[0.2em] text-neutral-700 mb-1">
               {getGreetingTime()}
             </p>
-            <h2 className="text-3xl font-black text-white tracking-tighter leading-none mb-2">
+            <h2 className="text-2xl font-black text-white tracking-tighter leading-none mb-1">
               {user.nickname}
             </h2>
-            <span className="text-neutral-500 text-[11px] font-black tracking-widest bg-neutral-900 px-4 py-1 rounded-full border border-neutral-800">
+            <span className="text-neutral-500 text-[10px] font-bold">
               @{user.username}
             </span>
           </div>
         </div>
 
-        <div className="px-10 pb-6 flex items-center justify-center">
-          <span
-            className={`flex items-center px-4 py-2 bg-neutral-900 border-2 border-neutral-800 rounded-xl text-[10px] font-black tracking-widest ${
-              user.role.toLowerCase() === "admin"
-                ? "adminColor"
-                : user.role.toLowerCase() === "moderator"
-                  ? "moderatorColor"
-                  : user.role.toLowerCase() === "writer"
-                    ? "writerColor"
-                    : "userColor"
-            }`}
-          >
-            <Shield size={16} className="mr-2" /> {user.role}
-          </span>
+        <div className="px-6 mb-6">
+          <div className="grid grid-cols-2 divide-x divide-neutral-900 bg-neutral-900/30 border border-neutral-900 rounded-2xl overflow-hidden">
+            <Link
+              href={"/profile/?tab=followers"}
+              onClick={onClose}
+              className="flex flex-col items-center py-3 hover:bg-neutral-900 transition-colors"
+            >
+              <span className="text-lg font-black text-white">
+                {user.followers || 0}
+              </span>
+              <span className="text-[8px] font-black text-neutral-600 tracking-widest">
+                Followers
+              </span>
+            </Link>
+            <Link
+              href={"/profile/?tab=following"}
+              onClick={onClose}
+              className="flex flex-col items-center py-3 hover:bg-neutral-900 transition-colors"
+            >
+              <span className="text-lg font-black text-white">
+                {user.following || 0}
+              </span>
+              <span className="text-[8px] font-black text-neutral-600 tracking-widest">
+                Following
+              </span>
+            </Link>
+          </div>
         </div>
 
-        <div className="px-4 pb-8 flex flex-col gap-2">
+        <div className="px-3 pb-6 flex flex-col gap-1.5">
           <MenuLink
-            href="/profile"
-            icon={<Settings size={20} />}
-            label="Profile Settings"
+            href={"/profile"}
+            icon={<Settings size={18} />}
+            label="Account Settings"
             onClick={onClose}
           />
 
           <MenuLink
             href="/library"
-            icon={<BookOpen size={20} />}
+            icon={<BookOpen size={18} />}
             label="Personal Library"
             onClick={onClose}
           />
 
-          {user.role.toLowerCase() === "admin" && (
+          {(user.role.toLowerCase() === "admin" ||
+            user.role.toLowerCase() === "moderator") && (
             <Link
               href="/admin"
               onClick={onClose}
-              className="flex items-center justify-between px-8 py-6 rounded-4xl bg-neutral-950 border-2 border-neutral-900 hover:border-red-500 transition-all group"
+              className="flex items-center justify-between px-6 py-4 rounded-2xl bg-neutral-950 border border-neutral-900 hover:border-red-500/50 transition-all group"
             >
-              <div className="flex items-center gap-4 adminColor">
-                <LayoutDashboard size={20} />
-                <span className="text-xs font-black tracking-widest">
-                  Admin Panel
+              <div className="flex items-center gap-3">
+                <Shield
+                  size={18}
+                  className={
+                    user.role.toLowerCase() === "admin"
+                      ? "text-red-500"
+                      : "text-yellow-500"
+                  }
+                />
+                <span className="text-xs font-black tracking-widest text-neutral-400 group-hover:text-white">
+                  {user.role} Panel
                 </span>
               </div>
               <ChevronRight
-                size={20}
-                className="text-neutral-800 group-hover:text-red-500 group-hover:translate-x-1 transition-all"
+                size={16}
+                className="text-neutral-800 group-hover:text-white group-hover:translate-x-1 transition-all"
               />
             </Link>
           )}
 
-          {user.role.toLowerCase() === "moderator" && (
-            <Link
-              href="/admin"
-              onClick={onClose}
-              className="flex items-center justify-between px-8 py-6 rounded-4xl bg-neutral-950 border-2 border-neutral-900 hover:border-yellow-500 transition-all group"
-            >
-              <div className="flex items-center gap-4 moderatorColor">
-                <Shield size={20} />
-                <span className="text-xs font-black tracking-widest">
-                  Moderator Panel
-                </span>
-              </div>
-              <ChevronRight
-                size={20}
-                className="text-neutral-800 group-hover:text-yellow-500 group-hover:translate-x-1 transition-all"
-              />
-            </Link>
-          )}
-
-          <div className="h-px bg-neutral-900 my-4 mx-6" />
+          <div className="h-px bg-neutral-900 my-2 mx-4" />
 
           <button
             onClick={handleLogout}
-            className="flex items-center justify-between px-8 py-6 rounded-4xl text-neutral-600 hover:text-white hover:bg-red-600/10 transition-all group"
+            className="flex items-center justify-between px-6 py-4 rounded-2xl text-neutral-600 hover:text-red-500 hover:bg-red-500/5 transition-all group cursor-pointer"
           >
-            <div className="flex items-center gap-4">
+            <div className="flex items-center gap-3">
               <LogOut
-                size={20}
-                className="group-hover:-translate-x-1 transition-transform"
+                size={18}
+                className="group-hover:-translate-x-0.5 transition-transform"
               />
               <span className="text-xs font-black tracking-widest">
                 Sign Out
               </span>
             </div>
-            <div className="w-2 h-2 rounded-full bg-red-600 animate-pulse" />
+            <div className="w-1.5 h-1.5 rounded-full bg-red-600 animate-pulse" />
           </button>
         </div>
       </div>
@@ -201,16 +198,16 @@ const MenuLink = ({ href, icon, label, onClick }: any) => (
   <Link
     href={href}
     onClick={onClick}
-    className="group flex items-center justify-between px-8 py-6 rounded-4xl bg-neutral-950 border-2 border-neutral-900 hover:border-white transition-all"
+    className="group flex items-center justify-between px-6 py-4 rounded-2xl bg-neutral-950 border border-neutral-900 hover:border-neutral-700 transition-all"
   >
-    <div className="flex items-center gap-4 text-neutral-500 group-hover:text-white transition-colors">
-      <span className="text-neutral-800 group-hover:text-cyan-500 transition-colors">
+    <div className="flex items-center gap-3 text-neutral-500 group-hover:text-white transition-colors">
+      <span className="text-neutral-700 group-hover:text-cyan-500 transition-colors">
         {icon}
       </span>
-      <span className="text-xs font-black tracking-[0.2em]">{label}</span>
+      <span className="text-xs font-black tracking-widest">{label}</span>
     </div>
     <ChevronRight
-      size={20}
+      size={18}
       className="text-neutral-900 group-hover:text-white group-hover:translate-x-1 transition-all"
     />
   </Link>

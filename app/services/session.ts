@@ -2,7 +2,7 @@ import { ENV } from "@/config/env.config";
 import { redirect } from "next/navigation";
 import { cookies } from "next/headers";
 
-async function getCurrentUser() {
+export async function getCurrentUser() {
   try {
     const headerList = await cookies();
     const cookieString = headerList.toString();

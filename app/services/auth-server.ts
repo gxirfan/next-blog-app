@@ -1,4 +1,3 @@
-// lib/auth-server.ts
 import { cookies } from "next/headers";
 import { ENV } from "@/config/env.config";
 import { IUserResponse } from "@/app/types/user-response.dto";

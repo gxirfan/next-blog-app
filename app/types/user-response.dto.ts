@@ -20,4 +20,10 @@ export interface IUserResponse extends IAuditFields {
   cover?: string;
   location?: string;
   gender?: string;
+  followers: number;
+  following: number;
+}
+
+export interface IProfileResponse extends IUserResponse {
+  isFollowing: boolean;
 }

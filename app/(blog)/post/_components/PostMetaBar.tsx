@@ -43,7 +43,7 @@ export default function PostMetaBar({
           <div className="p-2 bg-neutral-900 rounded-lg border border-neutral-800">
             <Calendar size={14} />
           </div>
-          <span className="text-neutral-400 uppercase">
+          <span className="text-neutral-400">
             {getRelativeTime(postDetails.createdAt)}
           </span>
         </div>

@@ -2,16 +2,17 @@ import { notFound } from "next/navigation";
 import ProfileHeader from "../_components/ProfileHeader";
 import ProfileInfoCard from "../_components/ProfileInfoCard";
 import { IBaseResponse } from "@/app/types/common";
-import { IUserResponse } from "@/app/types/user-response.dto";
+import { IProfileResponse } from "@/app/types/user-response.dto";
 import { Suspense } from "react";
 import { Loader } from "lucide-react";
 import PostsSection from "../_components/PostsSection";
 import { ENV } from "@/config/env.config";
 import { cookies } from "next/headers";
+import { getCurrentUser } from "@/app/services/session";
 
 async function fetchUserProfile(
   username: string,
-): Promise<IBaseResponse<IUserResponse> | null> {
+): Promise<IBaseResponse<IProfileResponse> | null> {
   const headersList = await cookies();
   const cookieHeader = headersList.toString();
 
@@ -29,7 +30,7 @@ async function fetchUserProfile(
       throw new Error(`Failed to fetch profile: ${response.status}`);
 
     const result = await response.json();
-    return result as IBaseResponse<IUserResponse>;
+    return result as IBaseResponse<IProfileResponse>;
   } catch (error) {
     // console.error(`Profile fetching error: ${error}`);
     return null;
@@ -75,7 +76,10 @@ export default async function PublicProfilePage({
   const userSlugData = await params;
   const userSlug = userSlugData.slug;
 
-  const userProfile = await fetchUserProfile(userSlug);
+  const [userProfile, currentUser] = await Promise.all([
+    fetchUserProfile(userSlug),
+    getCurrentUser(),
+  ]);
 
   if (!userProfile) {
     return notFound();
@@ -121,7 +125,10 @@ export default async function PublicProfilePage({
           <div className="mx-auto space-y-8 max-w-4xl">
             <ProfileHeader user={userProfile.data} />
             <div className="pt-0 mt-24">
-              <ProfileInfoCard user={userProfile.data} />
+              <ProfileInfoCard
+                user={userProfile.data}
+                currentUserId={currentUser?.data.user.id}
+              />
             </div>
 
             <Suspense fallback={postsFallback}>

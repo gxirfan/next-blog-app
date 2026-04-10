@@ -76,7 +76,7 @@ const PostDetailsCard = async ({ postDetails }: PostDetailsCardProps) => {
 
           <div className="flex items-center gap-2 md:gap-3 px-4 md:px-5 py-2 bg-neutral-900/30 border-2 border-transparent hover:border-neutral-800 rounded-full transition-all duration-300">
             <Clock size={12} strokeWidth={2.5} className="text-neutral-500" />
-            <span className="text-[10px] md:text-[11px] font-bold text-neutral-400 tracking-widest uppercase">
+            <span className="text-[10px] md:text-[11px] font-bold text-neutral-400 tracking-widest">
               {postDetails.readingTime || 1} Min Read
             </span>
           </div>
