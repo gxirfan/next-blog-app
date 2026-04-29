@@ -87,6 +87,7 @@ export default async function RootLayout({
   children: React.ReactNode;
 }) {
   const user = await getSSRUser();
+  const infolinksPid = ENV.INFOLINKS_PID;
   return (
     <html
       lang="en"
@@ -105,6 +106,22 @@ export default async function RootLayout({
         </AuthProvider>
         <CookieConsentModal blogName={ENV.PROJECT_NAME} />
         <ScrollToTopButton />
+
+        {/* Infolinks Configuration */}
+        {infolinksPid && (
+          <Script id="infolinks-config" strategy="afterInteractive">
+            {`
+              var infolinks_pid = ${infolinksPid};
+              var infolinks_wsid = 0;
+            `}
+          </Script>
+        )}
+
+        {/* Infolinks Main Script */}
+        <Script
+          src="https://resources.infolinks.com/js/infolinks_main.js"
+          strategy="afterInteractive"
+        />
       </body>
     </html>
   );
