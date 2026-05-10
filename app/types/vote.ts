@@ -4,11 +4,14 @@ export interface IVoteStatusResponse {
   username: string;
   nickname: string;
   postId: number;
-  title: string;
-  content: string;
-  slug: string;
   type: string;
   direction: number;
+  post: {
+    title: string;
+    slug: string;
+    content: string;
+    score: number;
+  };
   createdAt: Date;
   updatedAt: Date;
 }

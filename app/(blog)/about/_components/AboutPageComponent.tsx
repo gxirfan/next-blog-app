@@ -64,15 +64,15 @@ const AboutPage = () => {
           <span>
             {" "}
             Transparency is at our core. {ENV.PROJECT_NAME} is an open-source
-            project. If you’re curious about the architecture, want to
+            project. If you're curious about the architecture, want to
             contribute, or just want to see how things work under the hood, the
             gates are always open.
           </span>
           <span>
-            We are committed to sharing our journey. As we grow, we’ll be
+            We are committed to sharing our journey. As we grow, we'll be
             publishing Dev-logs—detailed blog posts covering every development
-            stage, the challenges we face, and the solutions we build. It’s not
-            just a platform; it’s a living case study and a shared learning
+            stage, the challenges we face, and the solutions we build. It's not
+            just a platform; it's a living case study and a shared learning
             experience.
           </span>
         </div>

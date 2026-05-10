@@ -77,8 +77,8 @@ interface PostListItemProps {
 const PostListItem = ({ vote }: PostListItemProps) => {
   const isUpvote = vote.direction === 1;
   const isDownvote = vote.direction === -1;
-  const title = vote.title || "Untitled Content";
-  const slug = vote.slug || "#";
+  const title = vote.post.title || "Untitled Content";
+  const slug = vote.post.slug || "#";
 
   return (
     <div className="group relative p-8 md:p-10 bg-neutral-950 border-2 border-neutral-900 rounded-[3rem] hover:border-neutral-700 transition-all duration-300 flex flex-col md:flex-row justify-between items-start md:items-center gap-10">
@@ -129,7 +129,7 @@ const PostListItem = ({ vote }: PostListItemProps) => {
       {/* Action Button */}
       <div className="flex items-center gap-4 w-full md:w-auto pt-8 md:pt-0 border-t-2 md:border-t-0 border-neutral-900">
         <Link
-          href={`/post/${slug}`}
+          href={`/post/${vote.post.slug}`}
           className="flex-1 md:flex-none flex items-center justify-center gap-3 px-10 py-5 bg-neutral-900 border-2 border-neutral-800 rounded-full text-xs font-black tracking-[0.2em] text-neutral-400 hover:text-white hover:border-white transition-all active:scale-95"
         >
           View Content
