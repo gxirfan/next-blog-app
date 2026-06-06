@@ -18,7 +18,7 @@ const BackButton = () => {
   return (
     <button
       onClick={handleBack}
-      className="group flex items-center gap-6 px-10 py-5 rounded-full bg-neutral-900/40 border-2 border-neutral-800 hover:border-cyan-500/50 hover:bg-neutral-900 transition-all duration-300 active:scale-95 cursor-pointer"
+      className="group flex items-center gap-3 px-5 py-3 rounded-full bg-neutral-900/40 border-2 border-neutral-800 hover:border-cyan-500/50 hover:bg-neutral-900 transition-all duration-300 active:scale-95 cursor-pointer"
     >
       <ArrowLeft
         size={20}
